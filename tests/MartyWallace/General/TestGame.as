@@ -24,6 +24,7 @@
 		
 		public override function update():void
 		{
+			trace(ticks);
 			_thing.update();
 		}
 		

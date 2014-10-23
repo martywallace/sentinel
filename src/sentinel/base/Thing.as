@@ -50,11 +50,58 @@ package sentinel.base
 		
 		public function add(thing:Thing):void
 		{
-			//
+			if (thing.parent !== null)
+			{
+				if (thing.parent === this) return;
+				
+				thing.parent.remove(thing);
+			}
+			
+			_children.push(thing);
+			thing.__added(this);
 		}
 		
 		
 		public function remove(thing:Thing):void
+		{
+			if (thing.parent === this)
+			{
+				var index:int = _children.indexOf(thing);
+				
+				if (index >= 0) _children.splice(index, 1);
+				
+				thing.__removed(this);
+			}
+		}
+		
+		
+		public function removeFromParent():void
+		{
+			if (parent !== null) parent.remove(this);
+		}
+		
+		
+		internal function __added(to:Thing):void
+		{
+			_parent = to;
+			added(to);
+		}
+		
+		
+		protected function added(to:Thing):void
+		{
+			//
+		}
+		
+		
+		internal function __removed(from:Thing):void
+		{
+			_parent = null;
+			removed(from);
+		}
+		
+		
+		protected function removed(from:Thing):void
 		{
 			//
 		}

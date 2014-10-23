@@ -18,6 +18,7 @@ package sentinel.base
 		private var _viewport:Viewport;
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
+		private var _ticks:uint;
 		
 		
 		public function Game()
@@ -39,6 +40,7 @@ package sentinel.base
 		private function _update(event:EnterFrameEvent):void
 		{
 			update();
+			_ticks ++;
 		}
 		
 		
@@ -51,7 +53,8 @@ package sentinel.base
 		public function get starling():Starling{ return Starling.current; }
 		public function get viewport():Viewport{ return _viewport; }
 		public function get keyboard():Keyboard{ return _keyboard; }
-		public function get mouse():Mouse{ return _mouse; }
+		public function get mouse():Mouse { return _mouse; }
+		public function get ticks():uint { return _ticks; }
 		
 	}
 	

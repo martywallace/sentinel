@@ -12,6 +12,8 @@ package
 		
 		public override function construct():void
 		{
+			add(new Thing());
+			
 			mouse.addEventListener(MouseEvent.LEFT_DOWN, _leftDown);
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _keyPressed);
 			
