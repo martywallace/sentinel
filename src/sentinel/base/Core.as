@@ -24,7 +24,7 @@ package sentinel.base
 		
 		private function _ready(event:Event):void
 		{
-			main.initialize();
+			main.construct();
 			
 			_starling.start();
 			_starling.removeEventListener(Event.ROOT_CREATED, _ready);

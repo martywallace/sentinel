@@ -2,6 +2,7 @@ package sentinel.events
 {
 	
 	import starling.events.Event;
+	import sentinel.user.Mouse;
 	
 	
 	public class MEvent extends Event
@@ -15,8 +16,11 @@ package sentinel.events
 		
 		public function MEvent(type:String)
 		{
-			super(type, false);
+			super(type);
 		}
+		
+		
+		public function get mouse():Mouse{ return target as Mouse; }
 		
 	}
 	

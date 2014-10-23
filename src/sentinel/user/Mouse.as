@@ -34,7 +34,6 @@ package sentinel.user
 		
 		private function _mouseEventHandler(event:Event):void
 		{
-			trace(event.type);
 			if(event.type === MouseEvent.MOUSE_DOWN || event.type === MouseEvent.MOUSE_UP)
 			{
 				_left = event.type === MouseEvent.MOUSE_DOWN;

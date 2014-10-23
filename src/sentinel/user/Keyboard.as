@@ -5,9 +5,12 @@ package sentinel.user
 	
 	import sentinel.base.Game;
 	import sentinel.util.ObjectUtil;
+	import sentinel.events.KEvent;
+	
+	import starling.events.EventDispatcher;
 	
 	
-	public class Keyboard
+	public class Keyboard extends EventDispatcher
 	{
 		
 		public static const NUM_0:uint = 48;
@@ -108,8 +111,16 @@ package sentinel.user
 		
 		private function _keyboard(event:KeyboardEvent):void
 		{
-			if(event.type === KeyboardEvent.KEY_DOWN) _keys[event.keyCode] = true;
-			else delete _keys[event.keyCode];
+			if(event.type === KeyboardEvent.KEY_DOWN)
+			{
+				_keys[event.keyCode] = true;
+				dispatchEvent(new KEvent(KEvent.KEY_PRESSED, event.keyCode));
+			}
+			else
+			{
+				delete _keys[event.keyCode];
+				dispatchEvent(new KEvent(KEvent.KEY_RELEASED, event.keyCode));
+			}
 		}
 		
 		

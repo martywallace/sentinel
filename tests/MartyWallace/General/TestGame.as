@@ -15,7 +15,7 @@
 		private var _thing:Thing;
 		
 
-		public override function initialize():void
+		public override function construct():void
 		{
 			_thing = new MyThing();
 		}

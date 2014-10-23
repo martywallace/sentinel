@@ -1,7 +1,7 @@
 package sentinel.base
 {
 	
-	import sentinel.contracts.IInitializes;
+	import sentinel.contracts.IConstructs;
 	import sentinel.contracts.IUpdates;
 	import sentinel.user.Keyboard;
 	import sentinel.user.Mouse;
@@ -12,7 +12,7 @@ package sentinel.base
 	import starling.events.EnterFrameEvent;
 	
 	
-	public class Game extends Sprite implements IInitializes, IUpdates
+	public class Game extends Sprite implements IConstructs, IUpdates
 	{
 		
 		private var _viewport:Viewport;
@@ -30,7 +30,7 @@ package sentinel.base
 		}
 		
 		
-		public function initialize():void
+		public function construct():void
 		{
 			//
 		}
