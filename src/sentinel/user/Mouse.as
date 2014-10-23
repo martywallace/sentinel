@@ -6,7 +6,7 @@ package sentinel.user
 	import flash.geom.Point;
 	
 	import sentinel.base.Game;
-	import sentinel.events.MEvent;
+	import sentinel.events.MouseEvent;
 	
 	import starling.events.EventDispatcher;
 	
@@ -24,31 +24,31 @@ package sentinel.user
 		{
 			_game = game;
 			
-			_game.starling.nativeStage.addEventListener(MouseEvent.MOUSE_DOWN, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(MouseEvent.MOUSE_UP, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_UP, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_DOWN, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_UP, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
 		}
 		
 		
-		private function _mouseEventHandler(event:Event):void
+		private function _mouseEventHandler(event:flash.events.MouseEvent):void
 		{
-			if(event.type === MouseEvent.MOUSE_DOWN || event.type === MouseEvent.MOUSE_UP)
+			if(event.type === flash.events.MouseEvent.MOUSE_DOWN || event.type === flash.events.MouseEvent.MOUSE_UP)
 			{
-				_left = event.type === MouseEvent.MOUSE_DOWN;
-				dispatchEvent(new MEvent(event.type === MouseEvent.MOUSE_DOWN ? MEvent.LEFT_DOWN : MEvent.LEFT_UP));
+				_left = event.type === flash.events.MouseEvent.MOUSE_DOWN;
+				dispatchEvent(new sentinel.events.MouseEvent(event.type === flash.events.MouseEvent.MOUSE_DOWN ? sentinel.events.MouseEvent.LEFT_DOWN : sentinel.events.MouseEvent.LEFT_UP));
 			}
 			
-			if(event.type === MouseEvent.RIGHT_MOUSE_DOWN || event.type === MouseEvent.RIGHT_MOUSE_UP)
+			if(event.type === flash.events.MouseEvent.RIGHT_MOUSE_DOWN || event.type === flash.events.MouseEvent.RIGHT_MOUSE_UP)
 			{
-				_right = event.type === MouseEvent.RIGHT_MOUSE_DOWN;
-				dispatchEvent(new MEvent(event.type === MouseEvent.RIGHT_MOUSE_DOWN ? MEvent.RIGHT_DOWN : MEvent.RIGHT_UP));
+				_right = event.type === flash.events.MouseEvent.RIGHT_MOUSE_DOWN;
+				dispatchEvent(new sentinel.events.MouseEvent(event.type === flash.events.MouseEvent.RIGHT_MOUSE_DOWN ? sentinel.events.MouseEvent.RIGHT_DOWN : sentinel.events.MouseEvent.RIGHT_UP));
 			}
 			
-			if(event.type === MouseEvent.MOUSE_MOVE)
+			if(event.type === flash.events.MouseEvent.MOUSE_MOVE)
 			{
-				_game.starling.nativeStage.removeEventListener(MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+				_game.starling.nativeStage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
 				_game.starling.nativeStage.addEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
 				
 				_available = true;
@@ -59,7 +59,7 @@ package sentinel.user
 		private function _mouseLeaveHandler(event:Event):void
 		{
 			_game.starling.nativeStage.removeEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
-			_game.starling.nativeStage.addEventListener(MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
 			
 			_available = false;
 		}

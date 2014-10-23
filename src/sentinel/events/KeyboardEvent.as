@@ -6,7 +6,7 @@ package sentinel.events
 	import starling.events.Event;
 	
 	
-	public class KEvent extends Event
+	public class KeyboardEvent extends Event
 	{
 		
 		public static const KEY_PRESSED:String = 'KeyPressed';
@@ -16,7 +16,7 @@ package sentinel.events
 		private var _keyCode:uint;
 		
 		
-		public function KEvent(type:String, keyCode:uint)
+		public function KeyboardEvent(type:String, keyCode:uint)
 		{
 			_keyCode = keyCode;
 			

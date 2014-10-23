@@ -2,8 +2,8 @@ package
 {
 	
 	import sentinel.base.Thing;
-	import sentinel.events.MEvent;
-	import sentinel.events.KEvent;
+	import sentinel.events.MouseEvent;
+	import sentinel.events.KeyboardEvent;
 	import sentinel.user.Keyboard;
 	
 	
@@ -12,25 +12,25 @@ package
 		
 		public override function construct():void
 		{
-			mouse.addEventListener(MEvent.LEFT_DOWN, _leftDown);
-			keyboard.addEventListener(KEvent.KEY_PRESSED, _keyPressed);
+			mouse.addEventListener(MouseEvent.LEFT_DOWN, _leftDown);
+			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _keyPressed);
 		}
 		
 		
 		public override function deconstruct():void
 		{
-			mouse.removeEventListener(MEvent.LEFT_DOWN, _leftDown);
-			keyboard.removeEventListener(KEvent.KEY_PRESSED, _keyPressed);
+			mouse.removeEventListener(MouseEvent.LEFT_DOWN, _leftDown);
+			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _keyPressed);
 		}
 		
 		
-		private function _keyPressed(e:KEvent):void
+		private function _keyPressed(e:KeyboardEvent):void
 		{
 			trace(e.keyChar);
 		}
 		
 		
-		private function _leftDown(e:MEvent):void
+		private function _leftDown(e:MouseEvent):void
 		{
 			trace(e.mouse.getState());
 		}

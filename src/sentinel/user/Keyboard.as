@@ -5,7 +5,7 @@ package sentinel.user
 	
 	import sentinel.base.Game;
 	import sentinel.util.ObjectUtil;
-	import sentinel.events.KEvent;
+	import sentinel.events.KeyboardEvent;
 	
 	import starling.events.EventDispatcher;
 	
@@ -104,22 +104,22 @@ package sentinel.user
 		{
 			_game = game;
 			
-			_game.starling.nativeStage.addEventListener(KeyboardEvent.KEY_DOWN, _keyboard);
-			_game.starling.nativeStage.addEventListener(KeyboardEvent.KEY_UP, _keyboard);
+			_game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
+			_game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
 		}
 		
 		
-		private function _keyboard(event:KeyboardEvent):void
+		private function _keyboard(event:flash.events.KeyboardEvent):void
 		{
-			if(event.type === KeyboardEvent.KEY_DOWN)
+			if(event.type === flash.events.KeyboardEvent.KEY_DOWN)
 			{
 				_keys[event.keyCode] = true;
-				dispatchEvent(new KEvent(KEvent.KEY_PRESSED, event.keyCode));
+				dispatchEvent(new sentinel.events.KeyboardEvent(sentinel.events.KeyboardEvent.KEY_PRESSED, event.keyCode));
 			}
 			else
 			{
 				delete _keys[event.keyCode];
-				dispatchEvent(new KEvent(KEvent.KEY_RELEASED, event.keyCode));
+				dispatchEvent(new sentinel.events.KeyboardEvent(sentinel.events.KeyboardEvent.KEY_RELEASED, event.keyCode));
 			}
 		}
 		

@@ -5,7 +5,7 @@ package sentinel.events
 	import sentinel.user.Mouse;
 	
 	
-	public class MEvent extends Event
+	public class MouseEvent extends Event
 	{
 		
 		public static const LEFT_DOWN:String = 'LeftDown';
@@ -14,7 +14,7 @@ package sentinel.events
 		public static const RIGHT_UP:String = 'RightUp';
 		
 		
-		public function MEvent(type:String)
+		public function MouseEvent(type:String)
 		{
 			super(type);
 		}
