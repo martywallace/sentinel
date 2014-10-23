@@ -2,6 +2,7 @@ package sentinel.user
 {
 	
 	import sentinel.util.ObjectUtil;
+	import sentinel.util.StringUtil;
 	
 	
 	public class KeyboardState
@@ -13,6 +14,12 @@ package sentinel.user
 		public function KeyboardState(keys:Object)
 		{
 			_keys = keys;
+		}
+		
+		
+		public function toString():String
+		{
+			return StringUtil.toDebugString(["keysDown"], [keysDown]);
 		}
 		
 		

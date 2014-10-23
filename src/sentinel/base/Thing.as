@@ -94,6 +94,22 @@ package sentinel.base
 		}
 		
 		
+		public function removeAll():void
+		{
+			while (_children.length > 0)
+			{
+				remove(_children[_children.length - 1]);
+			}
+		}
+		
+		
+		public function at(index:int):Thing
+		{
+			if (index >= _children.length) return null;
+			return _children[index];
+		}
+		
+		
 		internal function __added(to:Thing):void
 		{
 			_parent = to;
@@ -137,7 +153,7 @@ package sentinel.base
 		public function get keyboard():Keyboard{ return game.keyboard; }
 		public function get starling():Starling { return Starling.current; }
 		public function get parent():Thing { return _parent; }
-		public function get numChildren():int { return _children.length; }
+		public function get numThings():int { return _children.length; }
 		
 	}
 	

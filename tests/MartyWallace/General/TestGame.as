@@ -25,19 +25,13 @@
 			
 			_thing.add(t);
 			_thing.add(innerThing);
-			innerThing.add(t);
 			
-			t.addEventListener(ThingEvent.DECONSTRUCTED, _innerDecon);
+			_thing.removeAll();
 			
-			trace(t.parent);
-			
-			_thing.deconstruct();
-		}
-		
-		
-		private function _innerDecon(event:ThingEvent):void
-		{
-			trace('deconstruct chain working');
+			for (var i:int = 0; i < _thing.numThings; i++)
+			{
+				trace(_thing.at(i));
+			}
 		}
 		
 		
