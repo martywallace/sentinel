@@ -1,14 +1,17 @@
 package sentinel.user
 {
 	
-	import flash.geom.Point;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	import sentinel.base.Game;
+	import sentinel.events.MEvent;
+	
+	import starling.events.EventDispatcher;
 	
 	
-	public class Mouse
+	public class Mouse extends EventDispatcher
 	{
 		
 		private var _game:Game;
@@ -31,14 +34,17 @@ package sentinel.user
 		
 		private function _mouseEventHandler(event:Event):void
 		{
+			trace(event.type);
 			if(event.type === MouseEvent.MOUSE_DOWN || event.type === MouseEvent.MOUSE_UP)
 			{
 				_left = event.type === MouseEvent.MOUSE_DOWN;
+				dispatchEvent(new MEvent(event.type === MouseEvent.MOUSE_DOWN ? MEvent.LEFT_DOWN : MEvent.LEFT_UP));
 			}
 			
 			if(event.type === MouseEvent.RIGHT_MOUSE_DOWN || event.type === MouseEvent.RIGHT_MOUSE_UP)
 			{
 				_right = event.type === MouseEvent.RIGHT_MOUSE_DOWN;
+				dispatchEvent(new MEvent(event.type === MouseEvent.RIGHT_MOUSE_DOWN ? MEvent.RIGHT_DOWN : MEvent.RIGHT_UP));
 			}
 			
 			if(event.type === MouseEvent.MOUSE_MOVE)

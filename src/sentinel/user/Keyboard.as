@@ -1,7 +1,6 @@
 package sentinel.user
 {
 	
-	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	
 	import sentinel.base.Game;
@@ -116,7 +115,7 @@ package sentinel.user
 		
 		public function getState():KeyboardState
 		{
-			return new KeyboardState(ObjectUtil.copy(_keys));
+			return new KeyboardState(ObjectUtil.shallowCopy(_keys));
 		}
 		
 	}

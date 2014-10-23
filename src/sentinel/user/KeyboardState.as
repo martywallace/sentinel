@@ -1,6 +1,9 @@
 package sentinel.user
 {
 	
+	import sentinel.util.ObjectUtil;
+	
+	
 	public class KeyboardState
 	{
 		
@@ -30,7 +33,7 @@ package sentinel.user
 		}
 		
 		
-		public function xAreDown(keys:Vector.<uint>, x:int):Boolean
+		public function xAreDown(keys:Vector.<uint>, x:int = 1):Boolean
 		{
 			var total:int = 0;
 			
@@ -41,6 +44,9 @@ package sentinel.user
 			
 			return total >= x;
 		}
+		
+		
+		public function get keysDown():int{ return ObjectUtil.countProperties(_keys); }
 		
 	}
 	
