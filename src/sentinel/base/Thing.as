@@ -28,28 +28,39 @@ package sentinel.base
 		
 		public function construct():void
 		{
-			dispatchEvent(new ThingEvent(ThingEvent.CONSTRUCTED));
+			_dispatchEvent(ThingEvent.CONSTRUCTED);
 		}
 		
 		
 		public function update():void
 		{
-			for each(var thing:IUpdates in _children) thing.update();
+			for each(var thing:IUpdates in _children)
+			{
+				thing.update();
+			}
 			
-			dispatchEvent(new ThingEvent(ThingEvent.UPDATED));
+			_dispatchEvent(ThingEvent.UPDATED);
 		}
 		
 		
 		public function deconstruct():void
 		{
-			for each(var thing:IDeconstructs in _children) thing.deconstruct();
+			for each(var thing:IDeconstructs in _children)
+			{
+				thing.deconstruct();
+			}
 			
-			dispatchEvent(new ThingEvent(ThingEvent.DECONSTRUCTED));
+			_dispatchEvent(ThingEvent.DECONSTRUCTED);
+			
+			removeFromParent();
+			removeEventListeners();
 		}
 		
 		
 		public function add(thing:Thing):void
 		{
+			if (thing === this) return;
+			
 			if (thing.parent !== null)
 			{
 				if (thing.parent === this) return;
@@ -64,6 +75,8 @@ package sentinel.base
 		
 		public function remove(thing:Thing):void
 		{
+			if (thing === this) return;
+			
 			if (thing.parent === this)
 			{
 				var index:int = _children.indexOf(thing);
@@ -84,6 +97,8 @@ package sentinel.base
 		internal function __added(to:Thing):void
 		{
 			_parent = to;
+			_dispatchEvent(ThingEvent.ADDED);
+			
 			added(to);
 		}
 		
@@ -97,6 +112,8 @@ package sentinel.base
 		internal function __removed(from:Thing):void
 		{
 			_parent = null;
+			_dispatchEvent(ThingEvent.REMOVED);
+			
 			removed(from);
 		}
 		
@@ -104,6 +121,13 @@ package sentinel.base
 		protected function removed(from:Thing):void
 		{
 			//
+		}
+		
+		
+		private function _dispatchEvent(type:String):void
+		{
+			if (hasEventListener(type))
+				dispatchEvent(new ThingEvent(type));
 		}
 		
 		
