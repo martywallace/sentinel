@@ -14,6 +14,8 @@ package
 		{
 			mouse.addEventListener(MouseEvent.LEFT_DOWN, _leftDown);
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _keyPressed);
+			
+			super.construct();
 		}
 		
 		

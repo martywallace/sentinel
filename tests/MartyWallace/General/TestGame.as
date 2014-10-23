@@ -2,6 +2,7 @@
 {
 	
 	import sentinel.base.Thing;
+	import sentinel.events.ThingEvent;
 	import sentinel.user.Keyboard;
 	import sentinel.user.KeyboardState;
 	import starling.core.Starling;
