@@ -23,6 +23,22 @@ package
 				_heroes.push(hero);
 				addChild(hero.graphics);
 			}
+			
+			var t:Thing = new Thing();
+			
+			t.add(new Thing());
+			t.add(new Thing());
+			t.add(new Thing());
+			
+			t.children[0].add( new Thing());
+			
+			t.removeAll(true);
+			trace(t.children);
+			
+			for each(var thing:Thing in _heroes)
+			{
+				thing.removeFromParent(true);
+			}
 		}
 		
 		

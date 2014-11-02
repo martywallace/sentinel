@@ -29,6 +29,14 @@ package
 		}
 		
 		
+		public override function deconstruct():void
+		{
+			_graphics.removeFromParent(true);
+			
+			super.deconstruct();
+		}
+		
+		
 		private function _touch(event:TouchEvent):void
 		{
 			removeFromParent();
