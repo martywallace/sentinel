@@ -1,25 +1,28 @@
 package sentinel.geom
 {
 	
+	import flash.geom.Point;
+	
+	
 	public class Vector2D
 	{
 		
-		private var _x:Number;
-		private var _y:Number;
+		private var _base:Point;
 		
 		
 		public function Vector2D(x:Number, y:Number)
 		{
-			_x = x;
-			_y = y;
+			_base = new Point(x, y);
 		}
 		
 		
-		public function get x():Number { return _x; }
-		public function set x(value:Number):void { _x = x; }
-		public function get y():Number { return _y; }
-		public function set y(value:Number):void { _y = y; }
-		
+		public function get base():Point { return _base; }
+		public function get x():Number { return _base.x; }
+		public function set x(value:Number):void { _base.x = value; }
+		public function get y():Number { return _base.y; }
+		public function set y(value:Number):void { _base.y = value; }
+		public function get angle():Number { return Math.atan2(y, x); }
+		public function get length():Number { return Math.sqrt(x * x + y * y); }
 	}
 	
 }

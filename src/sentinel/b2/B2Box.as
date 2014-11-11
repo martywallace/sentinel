@@ -5,6 +5,11 @@ package sentinel.b2
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
+	/**
+	 * A rectangular shape.
+	 * 
+	 * @author Marty Wallace.
+	 */
 	public class B2Box implements IB2Shape
 	{
 		

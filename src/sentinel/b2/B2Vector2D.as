@@ -11,6 +11,12 @@ package sentinel.b2
 		private var _base:b2Vec2;
 		
 		
+		public static function fromVector2d(vector2d:Vector2D):B2Vector2D
+		{
+			return new B2Vector2D(vector2d.x, vector2d.y);
+		}
+		
+		
 		public function B2Vector2D(x:Number = 0, y:Number = 0)
 		{
 			_base = new b2Vec2(x / B2World.scale, y / B2World.scale);
