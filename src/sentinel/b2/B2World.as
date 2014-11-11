@@ -4,10 +4,8 @@ package sentinel.b2
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2World;
-	import Box2D.Dynamics.b2DebugDraw;
-	import Box2D.Dynamics.b2ContactListener;
-	import flash.display.Sprite;
-	import sentinel.base.Game;
+	import sentinel.contracts.IUpdates;
+	import sentinel.contracts.IDeconstructs;
 	
 	
 	/**
@@ -15,7 +13,7 @@ package sentinel.b2
 	 * 
 	 * @author Marty Wallace.
 	 */
-	public class B2World
+	public class B2World implements IUpdates, IDeconstructs
 	{
 		
 		private static var _scale:int = 30;
@@ -28,18 +26,16 @@ package sentinel.b2
 		public static function set scale(value:int):void { _scale = value; }
 		
 		
-		private var _game:Game;
 		private var _base:b2World;
 		private var _def:B2WorldDef;
 		private var _debug:B2Debug;
 		
 		
 		/**
-		 * TODO: Allow providing of a B2Debug instance to specify the colors etc.
+		 * Constructor.
 		 * 
-		 * @param game
-		 * @param def
-		 * @param debug
+		 * @param def An optional world definition.
+		 * @param debug An optional debug definition.
 		 */
 		public function B2World(def:B2WorldDef = null, debug:B2Debug = null)
 		{
@@ -47,11 +43,34 @@ package sentinel.b2
 			_base = new b2World(_def.gravity.base, _def.sleep);
 			_debug = debug;
 			
-			if (debug !== null) _base.SetDebugDraw(debug.base);
+			if (debug !== null)
+			{
+				_base.SetDebugDraw(debug.base);
+			}
 		}
 		
 		
-		public function createBody(type:int = 1):B2Body
+		public function deconstruct():void
+		{
+			if (_debug !== null)
+			{
+				_debug.deconstruct();
+			}
+			
+			// TODO:
+			// Destroy child bodies & call deconstruct on each.
+			// ...
+		}
+		
+		
+		/**
+		 * Creates a new B2Body within this world.
+		 * 
+		 * @param type The body type. Defaults to B2Body.DYNAMIC.
+		 * 
+		 * @return The new B2Body.
+		 */
+		public function createBody(type:int = 2):B2Body
 		{
 			var def:b2BodyDef = new b2BodyDef();
 			def.type = type;
@@ -84,7 +103,7 @@ package sentinel.b2
 		public function get base():b2World{ return _base; }
 		public function get sleeps():Boolean{ return _def.sleep; }
 		public function get gravity():B2Vector2D { return _def.gravity; }
-		public function get debug():B2Debug { return _debug; }
+		public function get debugging():Boolean { return _debug !== null; }
 		
 	}
 	

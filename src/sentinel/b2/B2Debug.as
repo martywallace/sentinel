@@ -4,9 +4,15 @@ package sentinel.b2
 	import Box2D.Dynamics.b2DebugDraw;
 	import flash.display.Sprite;
 	import sentinel.base.Game;
+	import sentinel.contracts.IDeconstructs;
 	
 	
-	public class B2Debug
+	/**
+	 * Defines and encapsulates debug drawing for Box2D.
+	 * 
+	 * @author Marty Wallace.
+	 */
+	public class B2Debug implements IDeconstructs
 	{
 		
 		public static const AABB:int = b2DebugDraw.e_aabbBit;
@@ -22,6 +28,15 @@ package sentinel.b2
 		private var _graphics:Sprite;
 		
 		
+		/**
+		 * Constructor.
+		 * 
+		 * @param game A reference to the core Game class.
+		 * @param lineThickness Line thickness of debug graphics.
+		 * @param lineAlpha Line alpha of debug graphics.
+		 * @param fillAlpha Fill alpha of debug graphics.
+		 * @param flags List of drawing flags. If null or empty, <code>B2Debug.SHAPE</code> will be used.
+		 */
 		public function B2Debug(game:Game, lineThickness:int = 1, lineAlpha:Number = 1, fillAlpha:Number = 0.2, flags:Vector.<int> = null)
 		{
 			_game = game;
@@ -35,16 +50,36 @@ package sentinel.b2
 			_base.SetAlpha(lineAlpha);
 			_base.SetFillAlpha(fillAlpha);
 			
-			for each(var i:int in flags)
+			if (flags !== null && flags.length > 0)
 			{
-				_base.AppendFlags(i);
+				for each(var i:int in flags)
+				{
+					_base.AppendFlags(i);
+				}
+			}
+			else
+			{
+				_base.AppendFlags(B2Debug.SHAPE);
 			}
 			
 			game.starling.nativeOverlay.addChild(_graphics);
 		}
 		
 		
+		public function deconstruct():void
+		{
+			_graphics.parent && _graphics.parent.removeChild(_graphics);
+		}
+		
+		
+		/**
+		 * The native Sprite used to render the debug graphics.
+		 */
 		public function get graphics():Sprite { return _graphics; }
+		
+		/**
+		 * The base b2DebugDraw instance wrapped by this class.
+		 */
 		public function get base():b2DebugDraw { return _base; }
 		
 	}
