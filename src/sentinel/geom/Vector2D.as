@@ -16,7 +16,6 @@ package sentinel.geom
 		}
 		
 		
-		public function get base():Point { return _base; }
 		public function get x():Number { return _base.x; }
 		public function set x(value:Number):void { _base.x = value; }
 		public function get y():Number { return _base.y; }
