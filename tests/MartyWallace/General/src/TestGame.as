@@ -1,6 +1,7 @@
 package  
 {
 	
+	import sentinel.b2.B2Debug;
 	import sentinel.b2.B2Fixture;
 	import sentinel.base.Game;
 	import sentinel.base.Thing;
@@ -20,7 +21,7 @@ package
 		
 		public override function construct():void
 		{
-			_world = new B2World(this, null, true);
+			_world = new B2World(null, new B2Debug(this, 1, 1, 0.5, new <int>[B2Debug.SHAPE]));
 			
 			for (var i:int = 0; i < 20; i++)
 			{

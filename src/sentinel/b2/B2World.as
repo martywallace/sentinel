@@ -31,9 +31,7 @@ package sentinel.b2
 		private var _game:Game;
 		private var _base:b2World;
 		private var _def:B2WorldDef;
-		private var _debugContainer:Sprite;
-		private var _debugContent:Sprite;
-		private var _debugDraw:b2DebugDraw;
+		private var _debug:B2Debug;
 		
 		
 		/**
@@ -43,30 +41,13 @@ package sentinel.b2
 		 * @param def
 		 * @param debug
 		 */
-		public function B2World(game:Game, def:B2WorldDef = null, debug:Boolean = false)
+		public function B2World(def:B2WorldDef = null, debug:B2Debug = null)
 		{
-			_game = game;
 			_def = def === null ? new B2WorldDef(new B2Vector2D()) : def;
 			_base = new b2World(_def.gravity.base, _def.sleep);
+			_debug = debug;
 			
-			if (debug)
-			{
-				_debugContent = new Sprite();
-				_debugContainer = new Sprite();
-				_debugContainer.addChild(_debugContent);
-				
-				_debugDraw = new b2DebugDraw();
-				_debugDraw.SetSprite(_debugContent);
-				_debugDraw.SetDrawScale(_scale);
-				_debugDraw.SetLineThickness(1);
-				_debugDraw.SetAlpha(0.3);
-				_debugDraw.SetFillAlpha(0.15);
-				_debugDraw.SetFlags(b2DebugDraw.e_shapeBit);
-				
-				_base.SetDebugDraw(_debugDraw);
-				
-				game.starling.nativeOverlay.addChild(_debugContainer);
-			}
+			if (debug !== null) _base.SetDebugDraw(debug.base);
 		}
 		
 		
@@ -93,7 +74,7 @@ package sentinel.b2
 			_base.Step(1 / 60, _def.velocityIterations, _def.positionIterations);
 			_base.ClearForces();
 			
-			if (debugMode)
+			if (_debug !== null)
 			{
 				_base.DrawDebugData();
 			}
@@ -102,10 +83,8 @@ package sentinel.b2
 		
 		public function get base():b2World{ return _base; }
 		public function get sleeps():Boolean{ return _def.sleep; }
-		public function get gravity():B2Vector2D{ return _def.gravity; }
-		public function get debugContainer():Sprite{ return _debugContainer; }
-		public function get debugContent():Sprite{ return _debugContent; }
-		public function get debugMode():Boolean{ return _debugContainer !== null; }
+		public function get gravity():B2Vector2D { return _def.gravity; }
+		public function get debug():B2Debug { return _debug; }
 		
 	}
 	
