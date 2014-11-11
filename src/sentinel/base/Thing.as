@@ -12,7 +12,8 @@ package sentinel.base
 	
 	
 	/**
-	 * The core object within Sentienl, a Thing is able to access all of the core game components. Things are also able to be added to parent Things and contain their own children Things.
+	 * The core object within Sentienl, a Thing is able to access all of the core game components.
+	 * Things are also able to be added to parent Things and contain their own children Things.
 	 *
 	 * @author Marty Wallace.
 	 */
@@ -21,12 +22,6 @@ package sentinel.base
 		
 		private var _parent:Thing;
 		private var _children:Vector.<Thing> = new <Thing>[];
-		
-		
-		public function Thing()
-		{
-			// Constructor.
-		}
 		
 		
 		/**
@@ -63,6 +58,7 @@ package sentinel.base
 		
 		/**
 		 * Add a child Thing to this Thing.
+		 * 
 		 * @param thing The Thing to add.
 		 */
 		public function add(thing:Thing):void
@@ -91,6 +87,7 @@ package sentinel.base
 		
 		/**
 		 * Remove a child Thing from this Thing.
+		 * 
 		 * @param thing The Thing to remove.
 		 * @param destroy Whether to also <code>deconstruct()</code> the target Thing.
 		 */
@@ -130,6 +127,7 @@ package sentinel.base
 		
 		/**
 		 * Remove this Thing from its parent, if it has one.
+		 * 
 		 * @param destroy Whether to also <code>deconstruct()</code> this Thing.
 		 */
 		public function removeFromParent(destroy:Boolean = false):void
@@ -141,6 +139,7 @@ package sentinel.base
 		
 		/**
 		 * Remove all children from this Thing.
+		 * 
 		 * @param destroy Whether to also <code>deconstruct()</code> all removed Things.
 		 */
 		public function removeAll(destroy:Boolean = false):void
@@ -154,6 +153,7 @@ package sentinel.base
 		
 		/**
 		 * Returns a child Thing at a given index.
+		 * 
 		 * @param index The index to check.
 		 */
 		public function getChildAt(index:int):Thing
@@ -172,6 +172,11 @@ package sentinel.base
 		}
 		
 		
+		/**
+		 * Called when this Thing is added to another Thing.
+		 * 
+		 * @param to The Thing this Thing was added to.
+		 */
 		protected function added(to:Thing):void
 		{
 			//
@@ -187,6 +192,11 @@ package sentinel.base
 		}
 		
 		
+		/**
+		 * Called when this Thing is removed from another Thing.
+		 * 
+		 * @param from The Thing this Thing was removed from.
+		 */
 		protected function removed(from:Thing):void
 		{
 			//

@@ -23,17 +23,17 @@ package sentinel.user
 		}
 		
 		
-		public function keyIsDown(keyCode:uint):Boolean
+		public function isDown(keyCode:uint):Boolean
 		{
 			return _keys[keyCode];
 		}
 		
 		
-		public function keysAreDown(keys:Vector.<uint>):Boolean
+		public function areDown(keys:Vector.<uint>):Boolean
 		{
 			for each(var i:uint in keys)
 			{
-				if(!keyIsDown(i)) return false;
+				if(!isDown(i)) return false;
 			}
 			
 			return true;
@@ -46,7 +46,7 @@ package sentinel.user
 			
 			for each(var i:uint in keys)
 			{
-				if(keyIsDown(i)) total ++;
+				if(isDown(i)) total ++;
 			}
 			
 			return total >= x;

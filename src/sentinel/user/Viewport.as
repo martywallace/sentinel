@@ -1,6 +1,8 @@
 package sentinel.user
 {
 	
+	import flash.display.Stage;
+	import starling.display.Stage;
 	import sentinel.base.Game;
 	
 	
