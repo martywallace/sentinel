@@ -3,7 +3,6 @@ package sentinel.events
 	
 	import Box2D.Dynamics.Contacts.b2Contact;
 	import sentinel.b2.B2Body;
-	import sentinel.b2.B2BodyData;
 	import sentinel.b2.B2Fixture;
 	import starling.events.Event;
 	
