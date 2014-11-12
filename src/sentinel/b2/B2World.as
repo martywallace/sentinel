@@ -29,6 +29,7 @@ package sentinel.b2
 		private var _base:b2World;
 		private var _def:B2WorldDef;
 		private var _debug:B2Debug;
+		private var _destroyed:Vector.<B2Body> = new <B2Body>[];
 		
 		
 		/**
@@ -47,6 +48,8 @@ package sentinel.b2
 			{
 				_base.SetDebugDraw(debug.base);
 			}
+			
+			_base.SetContactListener(new B2ContactListener());
 		}
 		
 		
@@ -56,10 +59,6 @@ package sentinel.b2
 			{
 				_debug.deconstruct();
 			}
-			
-			// TODO:
-			// Destroy child bodies & call deconstruct on each.
-			// ...
 		}
 		
 		
@@ -77,19 +76,26 @@ package sentinel.b2
 			
 			var body:b2Body = _base.CreateBody(def);
 			
-			return new B2Body(body, def);
+			return new B2Body(this, body, def);
 		}
 		
 		
-		public function destroyBody(body:B2Body):void
+		internal function __destroyBody(body:B2Body):void
 		{
-			body.destroyAllFixtures();
-			_base.DestroyBody(body.base);
+			if(_destroyed.indexOf(body) < 0) _destroyed.push(body);
 		}
 		
 		
 		public function update():void
 		{
+			while (_destroyed.length > 0)
+			{
+				var d:B2Body = _destroyed.pop();
+				_base.DestroyBody(d.base);
+				
+				d.deconstruct();
+			}
+			
 			_base.Step(1 / 60, _def.velocityIterations, _def.positionIterations);
 			_base.ClearForces();
 			
@@ -104,6 +110,26 @@ package sentinel.b2
 		public function get sleeps():Boolean{ return _def.sleep; }
 		public function get gravity():B2Vector2D { return _def.gravity; }
 		public function get debugging():Boolean { return _debug !== null; }
+		public function get numBodies():int { return _base.GetBodyCount(); }
+		
+		
+		public function get bodies():Vector.<B2Body>
+		{
+			var result:Vector.<B2Body> = new <B2Body>[];
+			var start:b2Body = _base.GetBodyList();
+			
+			while (start !== null)
+			{
+				if (start.GetUserData() !== null && start.GetUserData() is B2BodyData)
+				{
+					result.push((start.GetUserData() as B2BodyData).body);
+				}
+				
+				start = start.GetNext();
+			}
+			
+			return result;
+		}
 		
 	}
 	

@@ -5,10 +5,13 @@ package sentinel.b2
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+	import Box2D.Dynamics.b2World;
+	import sentinel.contracts.IDeconstructs;
+	import starling.events.EventDispatcher;
 	import sentinel.base.Thing;
 	
 	
-	public class B2Body
+	public class B2Body extends EventDispatcher implements IDeconstructs
 	{
 		
 		public static const STATIC:int = b2Body.b2_staticBody;
@@ -17,7 +20,9 @@ package sentinel.b2
 		
 		
 		private var _base:b2Body;
+		private var _world:B2World;
 		private var _def:b2BodyDef;
+		private var _data:B2BodyData;
 		private var _position:B2Vector2D;
 		private var _fixtures:Vector.<B2Fixture>;
 		private var _linearVelocity:B2Vector2D;
@@ -27,14 +32,45 @@ package sentinel.b2
 		/**
 		 * Internal - Use <code>B2World.createBody()</code>.
 		 */
-		public function B2Body(body:b2Body, def:b2BodyDef)
+		public function B2Body(world:B2World, body:b2Body, def:b2BodyDef)
 		{
 			_base = body;
 			_def = def;
+			_world = world;
+			_data = new B2BodyData(this);
 			_position = new B2Vector2D();
 			_fixtures = new <B2Fixture>[];
 			_linearVelocity = new B2Vector2D();
 			_internalForce = new B2Vector2D();
+			
+			_base.SetUserData(_data);
+		}
+		
+		
+		public function deconstruct():void
+		{
+			if (_world !== null)
+			{
+				destroy();
+			}
+			
+			destroyAllFixtures();
+			removeEventListeners();
+			
+			// TODO: More?
+			// ...
+		}
+		
+		
+		public function destroy():void
+		{
+			if (_world !== null)
+			{
+				_world.__destroyBody(this);
+				_world = null;
+				
+				deconstruct();
+			}
 		}
 		
 		
@@ -63,6 +99,7 @@ package sentinel.b2
 		public function destroyFixture(fixture:B2Fixture):void
 		{
 			var i:int = _fixtures.indexOf(fixture);
+			
 			if(i >= 0)
 			{
 				_fixtures.splice(i, 1);
@@ -81,24 +118,34 @@ package sentinel.b2
 		}
 		
 		
-		public function get base():b2Body{ return _base; }
-		public function get fixtures():Vector.<B2Fixture>{ return _fixtures; }
+		public function get base():b2Body { return _base; }
+		public function get world():B2World { return _world; }
+		public function get fixtures():Vector.<B2Fixture> { return _fixtures; }
+		public function get numFixtures():int { return _fixtures.length; }
+		
 		public function get awake():Boolean{ return _base.IsAwake(); }
 		public function set awake(value:Boolean):void{ _base.SetAwake(value); }
-		public function get bullet():Boolean{ return _base.IsBullet(); }
-		public function set bullet(value:Boolean):void{ _base.SetBullet(value); }
+		
+		public function get isBullet():Boolean{ return _base.IsBullet(); }
+		public function set isBullet(value:Boolean):void{ _base.SetBullet(value); }
+		
 		public function get rotation():Number{ return _base.GetAngle(); }
 		public function set rotation(value:Number):void{ _base.SetAngle(value); }
+		
 		public function get fixedRotation():Boolean{ return _base.IsFixedRotation(); }
 		public function set fixedRotation(value:Boolean):void{ _base.SetFixedRotation(value); }
+		
 		public function get angularDamping():Number{ return _base.GetAngularDamping(); }
 		public function set angularDamping(value:Number):void{ _base.SetAngularDamping(value); }
+		
 		public function get linearDamping():Number{ return _base.GetLinearDamping(); }
 		public function set linearDamping(value:Number):void{ _base.SetLinearDamping(value); }
+		
 		public function get linearVelocity():B2Vector2D{ return _linearVelocity; }
-		public function set linearVelocity(value:B2Vector2D):void{ _linearVelocity = value; }
-		public function get owner():Thing{ return _base.GetUserData(); }
-		public function set owner(value:Thing):void{ _base.SetUserData(value); }
+		public function set linearVelocity(value:B2Vector2D):void { _linearVelocity = value; }
+		
+		public function get owner():Thing{ return _data.owner }
+		public function set owner(value:Thing):void { _data.owner = value; }
 		
 		
 		public function get angularVelocity():Number{ return _base.GetAngularVelocity(); }

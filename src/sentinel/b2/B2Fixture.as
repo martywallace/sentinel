@@ -46,8 +46,8 @@ package sentinel.b2
 		public function get density():Number{ return _base.GetDensity(); }
 		public function get friction():Number{ return _base.GetFriction(); }
 		public function get restitution():Number{ return _base.GetRestitution(); }
-		public function get sensor():Boolean{ return _base.IsSensor(); }
-		public function set sensor(value:Boolean):void{ _base.SetSensor(value); }
+		public function get isSensor():Boolean{ return _base.IsSensor(); }
+		public function set isSensor(value:Boolean):void{ _base.SetSensor(value); }
 		
 	}
 	

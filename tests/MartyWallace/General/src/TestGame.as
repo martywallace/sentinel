@@ -1,8 +1,6 @@
 package  
 {
 	
-	import sentinel.b2.B2Debug;
-	import sentinel.b2.B2Fixture;
 	import sentinel.base.Game;
 	import sentinel.base.Thing;
 	import sentinel.b2.B2Body;
@@ -10,6 +8,9 @@ package
 	import sentinel.b2.B2WorldDef;
 	import sentinel.b2.B2World;
 	import sentinel.b2.B2Box;
+	import sentinel.b2.B2Debug;
+	import sentinel.b2.B2Fixture;
+	import sentinel.events.B2ContactEvent;
 	
 	
 	public class TestGame extends Game
@@ -21,9 +22,9 @@ package
 		
 		public override function construct():void
 		{
-			_world = new B2World(null, new B2Debug(this, 1, 1, 0.1, new <int>[B2Debug.SHAPE]));
+			_world = new B2World(null, new B2Debug(this, 1, 0.2, 0.1, new <int>[B2Debug.SHAPE]));
 			
-			for (var i:int = 0; i < 100; i++)
+			for (var i:int = 0; i < 10; i++)
 			{
 				var t:B2Body = _world.createBody(B2Body.DYNAMIC);
 				var s:B2Box = new B2Box(30, 30);
@@ -32,9 +33,17 @@ package
 				t.x = Math.random() * viewport.width;
 				t.y = Math.random() * viewport.height;
 				t.angularVelocity = Math.random();
+				
+				t.addEventListener(B2ContactEvent.BEGIN, _beginContact);
 			}
 			
-			//
+			trace(_world.bodies);
+		}
+		
+		
+		private function _beginContact(event:B2ContactEvent):void
+		{
+			event.localBody.destroy();
 		}
 		
 		
