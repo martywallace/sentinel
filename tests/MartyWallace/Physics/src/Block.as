@@ -1,9 +1,11 @@
 package
 {
+	
 	import sentinel.b2.B2Box;
 	import sentinel.b2.B2FixtureDef;
 	import sentinel.base.Thing;
-	import starling.display.Quad;
+	import sentinel.graphics.Quad;
+	
 	
 	public class Block extends Being
 	{
