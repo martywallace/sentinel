@@ -6,9 +6,9 @@ package sentinel.b2
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.b2World;
-	import sentinel.contracts.IDeconstructs;
 	import starling.events.EventDispatcher;
 	import sentinel.base.Thing;
+	import sentinel.base.IDeconstructs;
 	
 	
 	public class B2Body extends EventDispatcher implements IDeconstructs

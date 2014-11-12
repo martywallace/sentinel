@@ -4,8 +4,8 @@ package sentinel.b2
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2World;
-	import sentinel.contracts.IUpdates;
-	import sentinel.contracts.IDeconstructs;
+	import sentinel.base.IUpdates;
+	import sentinel.base.IDeconstructs;
 	
 	
 	/**
@@ -77,9 +77,7 @@ package sentinel.b2
 		
 		/**
 		 * Creates a new B2Body within this world.
-		 * 
 		 * @param type The body type. Defaults to B2Body.DYNAMIC.
-		 * 
 		 * @return The new B2Body.
 		 */
 		public function createBody(type:int = 2):B2Body

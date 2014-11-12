@@ -4,6 +4,10 @@ package sentinel.b2
 	import sentinel.base.Thing;
 	
 	
+	/**
+	 * Used to bind a native b2Body to a Sentinel B2Body.
+	 * @author Marty Wallace.
+	 */
 	public class B2BodyData
 	{
 		

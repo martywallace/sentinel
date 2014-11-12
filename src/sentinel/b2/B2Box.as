@@ -6,8 +6,7 @@ package sentinel.b2
 	
 	
 	/**
-	 * A rectangular shape.
-	 * 
+	 * A box shape.
 	 * @author Marty Wallace.
 	 */
 	public class B2Box implements IB2Shape

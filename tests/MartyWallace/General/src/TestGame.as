@@ -2,6 +2,7 @@ package
 {
 	
 	import sentinel.base.Game;
+	import sentinel.base.State;
 	import sentinel.base.Thing;
 	import sentinel.b2.B2Body;
 	import sentinel.b2.B2Vector2D;
@@ -20,11 +21,13 @@ package
 		private var _world:B2World;
 		
 		
-		public override function construct():void
+		public function TestGame()
 		{
-			_world = new B2World(null, new B2Debug(this, 1, 0.2, 0.1, new <int>[B2Debug.SHAPE]));
+			super();
 			
-			for (var i:int = 0; i < 10; i++)
+			_world = new B2World(null, new B2Debug(this, 1, 1, 0.1, new <int>[B2Debug.SHAPE, B2Debug.CENTER_OF_MASS]));
+			
+			for (var i:int = 0; i < 100; i++)
 			{
 				var t:B2Body = _world.createBody(B2Body.DYNAMIC);
 				var s:B2Box = new B2Box(30, 30);
@@ -36,15 +39,12 @@ package
 				
 				t.addEventListener(B2ContactEvent.BEGIN, _beginContact);
 			}
-			
-			_world.deconstruct();
 		}
 		
 		
 		private function _beginContact(event:B2ContactEvent):void
 		{
-			event.localBody.destroy();
-			trace('still going');
+			//
 		}
 		
 		

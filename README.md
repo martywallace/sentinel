@@ -1,3 +1,3 @@
 # Sentinel
 
-A small framework for developing ActionScript 3 games with [Starling](http://gamua.com/starling/).
+A modern ActionScript 3 game framework aimed at developing games using Starling and Box2D.

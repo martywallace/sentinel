@@ -1,10 +1,10 @@
 package sentinel.b2
 {
 	
-	import Box2D.Dynamics.b2DebugDraw;
 	import flash.display.Sprite;
+	import Box2D.Dynamics.b2DebugDraw;
 	import sentinel.base.Game;
-	import sentinel.contracts.IDeconstructs;
+	import sentinel.base.IDeconstructs;
 	
 	
 	/**

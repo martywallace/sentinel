@@ -1,14 +1,12 @@
 package sentinel.base
 {
 	
-	import sentinel.contracts.IUpdates;
-	import sentinel.contracts.IDeconstructs;
+	import starling.core.Starling;
+	import starling.events.EventDispatcher;
 	import sentinel.user.Viewport;
 	import sentinel.user.Mouse;
 	import sentinel.user.Keyboard;
 	import sentinel.events.ThingEvent;
-	import starling.core.Starling;
-	import starling.events.EventDispatcher;
 	
 	
 	/**
@@ -20,6 +18,7 @@ package sentinel.base
 	public class Thing extends EventDispatcher implements IUpdates, IDeconstructs
 	{
 		
+		private var _id:int = 0;
 		private var _parent:Thing;
 		private var _children:Vector.<Thing> = new <Thing>[];
 		
@@ -214,6 +213,15 @@ package sentinel.base
 		 * A reference to the core Game class.
 		 */
 		public function get game():Game { return Starling.current.root as Game; }
+		
+		/**
+		 * A unique ID assigned to this Thing by the core game.
+		 */
+		public function get id():int
+		{
+			if (_id === 0) _id = game.nextId;
+			return _id;
+		}
 		
 		/**
 		 * A reference to the game Viewport class.

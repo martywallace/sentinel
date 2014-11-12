@@ -2,6 +2,7 @@ package sentinel.geom
 {
 	
 	import flash.geom.Point;
+	import sentinel.util.StringUtil;
 	
 	
 	public class Vector2D
@@ -13,6 +14,12 @@ package sentinel.geom
 		public function Vector2D(x:Number, y:Number)
 		{
 			_base = new Point(x, y);
+		}
+		
+		
+		public function toString():String
+		{
+			return StringUtil.toDebugString(['x', 'y'], [x, y]);
 		}
 		
 		
