@@ -58,7 +58,20 @@ package sentinel.b2
 			if (_debug !== null)
 			{
 				_debug.deconstruct();
+				_debug = null;
 			}
+			
+			for each(var body:B2Body in bodies)
+			{
+				body.deconstruct();
+			}
+			
+			// Update is required to iterate over the destroyed bodies above and actually
+			// destroy them.
+			update();
+			
+			// TODO: Anything with forces? Etc?
+			// ...
 		}
 		
 		

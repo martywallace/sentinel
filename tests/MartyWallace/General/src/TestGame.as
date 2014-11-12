@@ -37,13 +37,14 @@ package
 				t.addEventListener(B2ContactEvent.BEGIN, _beginContact);
 			}
 			
-			trace(_world.bodies);
+			_world.deconstruct();
 		}
 		
 		
 		private function _beginContact(event:B2ContactEvent):void
 		{
 			event.localBody.destroy();
+			trace('still going');
 		}
 		
 		
