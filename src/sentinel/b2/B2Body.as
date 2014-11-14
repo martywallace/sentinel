@@ -79,7 +79,7 @@ package sentinel.b2
 			var nativeFixtureDef:b2FixtureDef = new b2FixtureDef();
 			nativeFixtureDef.shape = shape.base;
 			
-			if(fixtureDef !== null)
+			if (fixtureDef !== null)
 			{
 				nativeFixtureDef.density = fixtureDef.density;
 				nativeFixtureDef.friction = fixtureDef.friction;
@@ -100,7 +100,7 @@ package sentinel.b2
 		{
 			var i:int = _fixtures.indexOf(fixture);
 			
-			if(i >= 0)
+			if (i >= 0)
 			{
 				_fixtures.splice(i, 1);
 				_base.DestroyFixture(fixture.base);
@@ -110,7 +110,7 @@ package sentinel.b2
 		
 		public function destroyAllFixtures():void
 		{
-			while(_fixtures.length > 0)
+			while (_fixtures.length > 0)
 			{
 				var f:B2Fixture = _fixtures.pop();
 				_base.DestroyFixture(f.base);
@@ -120,6 +120,7 @@ package sentinel.b2
 		
 		public function get base():b2Body { return _base; }
 		public function get world():B2World { return _world; }
+		
 		public function get fixtures():Vector.<B2Fixture> { return _fixtures; }
 		public function get numFixtures():int { return _fixtures.length; }
 		

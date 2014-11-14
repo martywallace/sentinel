@@ -25,7 +25,7 @@ package
 		{
 			super();
 			
-			_world = new B2World(null, new B2Debug(this, 1, 1, 0.1, new <int>[B2Debug.SHAPE, B2Debug.CENTER_OF_MASS]));
+			_world = new B2World(null, new B2Debug(this, 1, 1, 0.1, new <int>[B2Debug.SHAPE]));
 			
 			for (var i:int = 0; i < 100; i++)
 			{
@@ -35,16 +35,23 @@ package
 				
 				t.x = Math.random() * viewport.width;
 				t.y = Math.random() * viewport.height;
-				t.angularVelocity = Math.random();
 				
-				t.addEventListener(B2ContactEvent.BEGIN, _beginContact);
+				t.angularVelocity = Math.random();
+				t.linearVelocityX = -100 + Math.random() * 200;
+				t.linearVelocityY = -100 + Math.random() * 200;
+				
+				t.addEventListener(B2ContactEvent.BEGIN, _contact);
+				t.addEventListener(B2ContactEvent.END, _contact);
 			}
 		}
 		
 		
-		private function _beginContact(event:B2ContactEvent):void
+		private function _contact(event:B2ContactEvent):void
 		{
-			//
+			if (event.type === B2ContactEvent.BEGIN)
+			{
+				//
+			}
 		}
 		
 		

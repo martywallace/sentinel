@@ -5,7 +5,6 @@ package sentinel.events
 	import sentinel.b2.B2Body;
 	import sentinel.b2.B2Fixture;
 	import starling.events.Event;
-	import flash.events.Event;
 	
 	
 	/**
@@ -16,12 +15,12 @@ package sentinel.events
 	{
 		
 		/**
-		 * The <code>B2ContactEvent.BEGIN</code> event is dispatched by <code>B2Body</code> instances who have begun a collision with another.
+		 * The <code>B2ContactEvent.BEGIN</code> event is dispatched by <code>B2Body</code> instances who have begun a collision with another body.
 		 */
 		public static const BEGIN:String = 'Begin';
 		
 		/**
-		 * The <code>B2ContactEvent.END</code> event is dispatched by <code>B2Body</code> instances who have ended a collision with another.
+		 * The <code>B2ContactEvent.END</code> event is dispatched by <code>B2Body</code> instances who have ended a collision with another body.
 		 */
 		public static const END:String = 'End';
 		

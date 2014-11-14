@@ -9,7 +9,7 @@ package sentinel.base
 	import sentinel.user.Viewport;
 	
 	
-	public class Game extends Sprite implements IUpdates
+	public class Game extends Sprite implements IConstructs, IUpdates
 	{
 		
 		private var _state:State;
@@ -27,6 +27,12 @@ package sentinel.base
 			_keyboard = new Keyboard(this);
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
+		}
+		
+		
+		public function construct():void
+		{
+			//
 		}
 		
 		
@@ -51,7 +57,10 @@ package sentinel.base
 		
 		public function update():void
 		{
-			//
+			if (_state !== null)
+			{
+				_state.update();
+			}
 		}
 		
 		

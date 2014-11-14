@@ -6,22 +6,28 @@ package
 	import sentinel.b2.B2World;
 	import sentinel.b2.B2WorldDef;
 	import sentinel.base.Game;
+	import sentinel.base.State;
 	import sentinel.base.Thing;
-	import starling.display.Sprite;
 	
 	
-	public class World extends Thing
+	public class World extends State
 	{
 		
-		private var _graphics:Sprite;
 		private var _physics:B2World;
 		private var _cooldown:int = 0;
 		
 		
-		public function World(game:Game)
+		public function World()
 		{
+			super();
+			
 			_physics = new B2World(new B2WorldDef(new B2Vector2D(0, 500)));
-			_graphics = new Sprite();
+			
+			var platform:Platform = new Platform();
+			add(platform);
+			
+			platform.body.x = viewport.width / 2;
+			platform.body.y = viewport.height - 60;
 		}
 		
 		
@@ -30,7 +36,7 @@ package
 			if (being is Thing)
 			{
 				var b:Being = being as Being;
-				_graphics.addChild(b.graphics);
+				graphics.addChild(b.graphics);
 			
 				super.add(being);
 			}
@@ -57,7 +63,6 @@ package
 		}
 		
 		
-		public function get graphics():Sprite { return _graphics; }
 		public function get physics():B2World { return _physics; }
 	}
 	

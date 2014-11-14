@@ -16,6 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="..\..\..\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -48,7 +49,8 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <element path="..\..\..\bin\Sentinel.swc" />
+    <element path="..\..\..\bin\starling.swc" />
+    <element path="..\..\..\bin\Box2D.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
