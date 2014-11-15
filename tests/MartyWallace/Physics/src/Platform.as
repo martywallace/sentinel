@@ -1,10 +1,10 @@
 package
 {
 	
-	import sentinel.b2.B2Box;
-	import sentinel.base.Thing;
+	import sentinel.framework.b2.B2Box;
+	import sentinel.framework.Thing;
 	import starling.display.Quad;
-	import sentinel.b2.B2Body;
+	import sentinel.framework.b2.B2Body;
 	
 	
 	public class Platform extends Being

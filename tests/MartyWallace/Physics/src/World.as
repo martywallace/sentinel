@@ -1,13 +1,11 @@
 package
 {
 	
-	import sentinel.b2.B2Debug;
-	import sentinel.b2.B2Vector2D;
-	import sentinel.b2.B2World;
-	import sentinel.b2.B2WorldDef;
-	import sentinel.base.Game;
-	import sentinel.base.State;
-	import sentinel.base.Thing;
+	import sentinel.framework.b2.B2Vector2D;
+	import sentinel.framework.b2.B2World;
+	import sentinel.framework.b2.B2WorldDef;
+	import sentinel.framework.State;
+	import sentinel.framework.Thing;
 	
 	
 	public class World extends State

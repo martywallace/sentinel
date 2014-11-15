@@ -1,7 +1,7 @@
 package
 {
 	
-	import sentinel.base.State;
+	import sentinel.framework.State;
 	
 	
 	public class Menu extends State

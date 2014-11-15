@@ -1,7 +1,7 @@
 package
 {
 	
-	import sentinel.base.Game;
+	import sentinel.framework.Game;
 	
 	
 	public class PhysicsTest extends Game

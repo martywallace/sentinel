@@ -1,8 +1,8 @@
 package
 {
 	
-	import sentinel.b2.B2Body;
-	import sentinel.base.Thing;
+	import sentinel.framework.b2.B2Body;
+	import sentinel.framework.Thing;
 	import starling.display.Quad;
 	
 	

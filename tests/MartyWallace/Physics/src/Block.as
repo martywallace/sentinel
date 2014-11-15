@@ -1,10 +1,10 @@
 package
 {
 	
-	import sentinel.b2.B2Box;
-	import sentinel.b2.B2FixtureDef;
-	import sentinel.base.Thing;
-	import sentinel.graphics.Quad;
+	import sentinel.framework.b2.B2Box;
+	import sentinel.framework.b2.B2FixtureDef;
+	import sentinel.framework.Thing;
+	import sentinel.framework.graphics.Quad;
 	
 	
 	public class Block extends Being
