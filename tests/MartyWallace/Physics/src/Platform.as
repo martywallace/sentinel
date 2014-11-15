@@ -1,7 +1,7 @@
 package
 {
 	
-	import sentinel.environment.Being;
+	import sentinel.gameplay.environment.Being;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
 	import sentinel.framework.b2.B2World;
@@ -23,7 +23,7 @@ package
 		
 		protected override function defineBody(physics:B2World):B2Body
 		{
-			var body:B2Body = physics.createBody(B2Body.STATIC);
+			var body:B2Body = physics.createBody(B2Body.STATIC, this);
 			body.createFixture(new B2Box(graphics.width, graphics.height));
 			
 			return body;

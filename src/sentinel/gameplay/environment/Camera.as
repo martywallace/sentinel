@@ -1,6 +1,10 @@
-package sentinel.environment
+package sentinel.gameplay.environment
 {
 	
+	/**
+	 * The Camera used to view a World, typically centred on the main character.
+	 * @author Marty Wallace.
+	 */
 	public class Camera
 	{
 		
@@ -37,14 +41,15 @@ package sentinel.environment
 			}
 		}
 		
-		public function get rotation():Number { return _world.graphics.rotation; }
-		public function set rotation(value:Number):void { _world.graphics.rotation = value; }
+		public function get rotation():Number { return -_world.graphics.rotation; }
+		public function set rotation(value:Number):void { _world.graphics.rotation = -value; }
 		
-		public function get scale():Number { return _world.graphics.scaleX; }
-		public function set scale(value:Number):void
+		public function get zoom():Number { return 1 + _world.graphics.scaleX; }
+		
+		public function set zoom(value:Number):void
 		{
-			_world.graphics.scaleX = value;
-			_world.graphics.scaleY = value;
+			_world.graphics.scaleX = 1 + value;
+			_world.graphics.scaleY = 1 + value;
 		}
 		
 	}

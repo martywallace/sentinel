@@ -1,4 +1,4 @@
-package sentinel.environment
+package sentinel.gameplay.environment
 {
 	
 	import sentinel.framework.b2.B2Debug;
@@ -122,9 +122,9 @@ package sentinel.environment
 		{
 			var output:Vector.<Being> = new <Being>[];
 			
-			for each(var being:Thing in _children)
+			for (var i:int = 0; i < numChildren; i++)
 			{
-				output.push(being as Being);
+				output.push(getChildAt(i) as Being);
 			}
 			
 			return output;

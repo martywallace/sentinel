@@ -19,12 +19,7 @@ package sentinel.framework
 		
 		private var _id:int = 0;
 		private var _parent:Thing;
-		
-		
-		/**
-		 * List of child Things added to this Thing.
-		 */
-		protected var _children:Vector.<Thing> = new <Thing>[];
+		private var _children:Vector.<Thing> = new <Thing>[];
 		
 		
 		/**

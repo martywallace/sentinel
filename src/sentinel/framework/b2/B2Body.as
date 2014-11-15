@@ -32,12 +32,12 @@ package sentinel.framework.b2
 		/**
 		 * Internal - Use <code>B2World.createBody()</code>.
 		 */
-		public function B2Body(world:B2World, body:b2Body, def:b2BodyDef)
+		public function B2Body(world:B2World, body:b2Body, def:b2BodyDef, owner:Thing)
 		{
 			_base = body;
 			_def = def;
 			_world = world;
-			_data = new B2BodyData(this);
+			_data = new B2BodyData(this, owner);
 			_position = new B2Vector2D();
 			_fixtures = new <B2Fixture>[];
 			_linearVelocity = new B2Vector2D();
@@ -120,6 +120,7 @@ package sentinel.framework.b2
 		
 		public function get base():b2Body { return _base; }
 		public function get world():B2World { return _world; }
+		public function get owner():Thing{ return _data.owner }
 		
 		public function get fixtures():Vector.<B2Fixture> { return _fixtures; }
 		public function get numFixtures():int { return _fixtures.length; }
@@ -144,10 +145,6 @@ package sentinel.framework.b2
 		
 		public function get linearVelocity():B2Vector2D{ return _linearVelocity; }
 		public function set linearVelocity(value:B2Vector2D):void { _linearVelocity = value; }
-		
-		public function get owner():Thing{ return _data.owner }
-		public function set owner(value:Thing):void { _data.owner = value; }
-		
 		
 		public function get angularVelocity():Number{ return _base.GetAngularVelocity(); }
 		

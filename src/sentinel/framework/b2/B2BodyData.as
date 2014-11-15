@@ -5,7 +5,7 @@ package sentinel.framework.b2
 	
 	
 	/**
-	 * Used to bind a native b2Body to a Sentinel B2Body.
+	 * Used to bind a native b2Body to a Sentinel B2Body and an owner.
 	 * @author Marty Wallace.
 	 */
 	public class B2BodyData
@@ -15,17 +15,15 @@ package sentinel.framework.b2
 		private var _owner:Thing;
 		
 		
-		public function B2BodyData(body:B2Body)
+		public function B2BodyData(body:B2Body, owner:Thing)
 		{
 			_body = body;
+			_owner = owner;
 		}
 		
 		
 		public function get body():B2Body { return _body; }
-		
-		
-		internal function get owner():Thing { return _owner; }
-		internal function set owner(value:Thing):void { _owner = value; }
+		public function get owner():Thing { return _owner; }
 		
 	}
 	

@@ -1,7 +1,7 @@
 package
 {
 	
-	import sentinel.environment.World;
+	import sentinel.gameplay.environment.World;
 	import sentinel.framework.b2.B2Vector2D;
 	import sentinel.framework.b2.B2WorldDef;
 	import sentinel.framework.client.Keyboard;
@@ -35,12 +35,14 @@ package
 			_world.camera.y = viewport.middleY;
 			
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
+			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _quit);
 		}
 		
 		
 		public override function deconstruct():void
 		{
 			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
+			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _quit);
 			
 			super.deconstruct();
 		}
@@ -55,14 +57,18 @@ package
 		}
 		
 		
-		public override function update():void
+		private function _quit(event:KeyboardEvent):void
 		{
-			var kbd:KeyboardState = keyboard.getState();
-			
-			if (kbd.isDown(Keyboard.ESC))
+			if (event.keyCode === Keyboard.ESC)
 			{
 				game.loadState(new Menu());
 			}
+		}
+		
+		
+		public override function update():void
+		{
+			var kbd:KeyboardState = keyboard.getState();
 			
 			if (kbd.isDown(Keyboard.A)) _world.camera.x -= 3;
 			if (kbd.isDown(Keyboard.D)) _world.camera.x += 3;
@@ -72,8 +78,8 @@ package
 			if (kbd.isDown(Keyboard.LEFT_ARROW)) _world.camera.rotation -= 0.01;
 			if (kbd.isDown(Keyboard.RIGHT_ARROW)) _world.camera.rotation += 0.01;
 			
-			if (kbd.isDown(Keyboard.UP_ARROW)) _world.camera.scale += 0.01;
-			if (kbd.isDown(Keyboard.DOWN_ARROW)) _world.camera.scale -= 0.01;
+			if (kbd.isDown(Keyboard.UP_ARROW)) _world.camera.zoom += 0.01;
+			if (kbd.isDown(Keyboard.DOWN_ARROW)) _world.camera.zoom -= 0.01;
 			
 			if (!_paused)
 			{

@@ -4,6 +4,7 @@ package sentinel.framework.events
 	import Box2D.Dynamics.Contacts.b2Contact;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Fixture;
+	import sentinel.framework.Thing;
 	import starling.events.Event;
 	
 	
@@ -58,6 +59,11 @@ package sentinel.framework.events
 		public function get localBody():B2Body { return _localBody; }
 		
 		/**
+		 * The Thing that owns the body listening for a contact event.
+		 */
+		public function get localOwner():Thing { return _localBody.owner; }
+		
+		/**
 		 * The fixture associated with the body coming into contact with the listening body.
 		 */
 		public function get externalFixture():B2Fixture { return _externalFixture; }
@@ -66,6 +72,11 @@ package sentinel.framework.events
 		 * The body coming into contact with the listening body.
 		 */
 		public function get externalBody():B2Body { return _externalBody; }
+		
+		/**
+		 * The Thing that owns the body coming into contact with the listening body.
+		 */
+		public function get externalOwner():Thing { return _externalBody.owner; }
 		
 	}
 	

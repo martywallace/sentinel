@@ -1,4 +1,4 @@
-package sentinel.environment
+package sentinel.gameplay.environment
 {
 	
 	import sentinel.framework.b2.B2Body;
@@ -12,6 +12,15 @@ package sentinel.environment
 		
 		private var _graphics:IGraphics;
 		private var _body:B2Body;
+		
+		
+		public override function deconstruct():void
+		{
+			_graphics.deconstruct();
+			_body.deconstruct();
+			
+			super.deconstruct();
+		}
 		
 		
 		public override function update():void

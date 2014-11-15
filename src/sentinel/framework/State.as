@@ -4,9 +4,10 @@ package sentinel.framework
 	import sentinel.framework.graphics.Sprite;
 	
 	
-	// TODO: Ignore key presses until released from previous state.
-	
-	
+	/**
+	 * A State is used to define a game state e.g. the main menu, settings screen, game over screen, or the gameplay itself.
+	 * @author Marty Wallace.
+	 */
 	public class State extends Thing
 	{
 		

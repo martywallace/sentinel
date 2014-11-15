@@ -6,6 +6,7 @@ package sentinel.framework.b2
 	import Box2D.Dynamics.b2World;
 	import sentinel.framework.IUpdates;
 	import sentinel.framework.IDeconstructs;
+	import sentinel.framework.Thing;
 	
 	
 	/**
@@ -77,16 +78,17 @@ package sentinel.framework.b2
 		/**
 		 * Creates a new B2Body within this world.
 		 * @param type The body type. Defaults to B2Body.DYNAMIC.
+		 * @param owner An optional owner of the B2Body.
 		 * @return The new B2Body.
 		 */
-		public function createBody(type:int = 2):B2Body
+		public function createBody(type:int = 2, owner:Thing = null):B2Body
 		{
 			var def:b2BodyDef = new b2BodyDef();
 			def.type = type;
 			
-			var body:b2Body = _base.CreateBody(def);
+			var baseBody:b2Body = _base.CreateBody(def);
 			
-			return new B2Body(this, body, def);
+			return new B2Body(this, baseBody, def, owner);
 		}
 		
 		
