@@ -26,8 +26,8 @@ package
 			
 			var platform:Platform = _world.add(new Platform()) as Platform;
 			
-			platform.body.x = viewport.middleX;
-			platform.body.y = viewport.height - 60;
+			platform.x = viewport.middleX;
+			platform.y = viewport.height - 60;
 			
 			graphics.addChild(_world.graphics);
 			
@@ -84,8 +84,8 @@ package
 					var block:Block = new Block();
 					_world.add(block);
 					
-					block.body.x = Math.random() * viewport.width;
-					block.body.y = -50;
+					block.x = Math.random() * viewport.width;
+					block.y = -50;
 				}
 				
 				super.update();
