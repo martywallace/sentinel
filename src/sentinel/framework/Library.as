@@ -17,19 +17,32 @@ package sentinel.framework
 		
 		public function addTexture(name:String, texture:Texture):void
 		{
-			_textures[name] = texture;
+			if (!hasTexture(name))
+			{
+				_textures[name] = texture;
+			}
+			else
+			{
+				throw new Error('Texture named "' + name + '" already exists within the Library.');
+			}
 		}
 		
 		
 		public function addTextureFromBitmap(name:String, bitmap:Bitmap):void
 		{
-			_textures[name] = Texture.fromBitmap(bitmap);
+			addTexture(name, Texture.fromBitmap(bitmap));
 		}
 		
 		
 		public function getTexture(name:String):Texture
 		{
 			return _textures[name];
+		}
+		
+		
+		public function hasTexture(name:String):Boolean
+		{
+			return _textures.hasOwnProperty(name);
 		}
 		
 	}

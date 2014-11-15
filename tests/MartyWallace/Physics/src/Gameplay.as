@@ -24,7 +24,7 @@ package
 		{
 			super();
 			
-			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700), true, 6, 6))) as World;
+			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 1400), true))) as World;
 			_platform = _world.add(new Platform()) as Platform;
 			
 			_platform.x = viewport.middleX;

@@ -1,6 +1,7 @@
 package
 {
 	
+	import sentinel.framework.graphics.Image;
 	import sentinel.gameplay.environment.Being;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
@@ -14,7 +15,11 @@ package
 		
 		protected override function defineGraphics():IGraphics
 		{
-			var graphics:Quad = new Quad(400, 20, 0x222222);
+			var graphics:Image = new Image('crate');
+			
+			graphics.width = 400;
+			graphics.height = 60;
+			
 			graphics.alignPivot();
 			
 			return graphics;

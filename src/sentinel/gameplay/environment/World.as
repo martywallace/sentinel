@@ -9,6 +9,9 @@ package sentinel.gameplay.environment
 	import starling.display.DisplayObject;
 	
 	
+	// TODO: Graphics renders a step behind physics update.
+	
+	
 	public class World extends Thing
 	{
 		
