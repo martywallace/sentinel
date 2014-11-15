@@ -6,10 +6,27 @@ package sentinel.framework.graphics
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
+	import sentinel.framework.util.GraphicsUtil;
 	
 	
-	public class Sprite extends starling.display.Sprite implements IGraphics
+	public class Sprite extends starling.display.Sprite implements IGraphics, IGraphicsContainer
 	{
+		
+		private var _depth:int = 0;
+		
+		
+		public function deconstruct():void
+		{
+			removeFromParent(true);
+			removeEventListeners();
+		}
+		
+		
+		public function sortChildrenByDepth():void
+		{
+			sortChildren(GraphicsUtil.sortCompareFunction);
+		}
+		
 		
 		public override function addChild(child:DisplayObject):DisplayObject
 		{
@@ -23,14 +40,9 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function deconstruct():void
-		{
-			removeFromParent(true);
-			removeEventListeners();
-		}
-		
-		
 		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
+		public function get depth():int { return _depth; }
+		public function set depth(value:int):void { _depth = value; }
 		
 	}
 	

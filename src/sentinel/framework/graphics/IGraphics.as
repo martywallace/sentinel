@@ -43,6 +43,9 @@ package sentinel.framework.graphics
 		function get scaleY():Number;
 		function set scaleY(value:Number):void;
 		
+		function get depth():int;
+		function set depth(value:int):void;
+		
 		function get viewport():Viewport;
 		
 	}

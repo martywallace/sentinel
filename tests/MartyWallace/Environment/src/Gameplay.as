@@ -32,6 +32,14 @@ package
 			_world.camera.rotation += 0.01;
 			_world.camera.scale -= 0.01;
 			
+			if (_world.camera.scale < 0.5)
+			{
+				if (_world.numChildren > 0)
+				{
+					_world.getChildAt(0).deconstruct();
+				}
+			}
+			
 			super.update();
 		}
 		

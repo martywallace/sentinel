@@ -70,7 +70,7 @@ package sentinel.environment
 		 * @param being The Being to add.
 		 * @throws ArgumentError
 		 */
-		public override function add(being:Thing):void
+		public override function add(being:Thing):Thing
 		{
 			if (being is Being)
 			{
@@ -80,11 +80,15 @@ package sentinel.environment
 				{
 					_graphics.content.addChild((being as Being).graphics as DisplayObject);
 				}
+				
+				return being;
 			}
 			else
 			{
 				throw new ArgumentError("World.add() only accepts instances of Being.");
 			}
+			
+			return null;
 		}
 		
 		
@@ -94,16 +98,18 @@ package sentinel.environment
 		 * @param destroy Whether or not to also deconstruct the Being once removed.
 		 * @throws ArgumentError
 		 */
-		public override function remove(being:Thing, destroy:Boolean = false):void
+		public override function remove(being:Thing, destroy:Boolean = false):Thing
 		{
 			if (being is Being)
 			{
-				super.remove(being, destroy);
+				return super.remove(being, destroy);
 			}
 			else
 			{
 				throw new ArgumentError("World.remove() only accepts instances of Being.");
 			}
+			
+			return null;
 		}
 		
 		

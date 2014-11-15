@@ -62,13 +62,14 @@ package sentinel.framework
 		/**
 		 * Add a child Thing to this Thing.
 		 * @param thing The Thing to add.
+		 * @return The Thing that was added.
 		 */
-		public function add(thing:Thing):void
+		public function add(thing:Thing):Thing
 		{
 			if (thing === this)
 			{
 				// Cannot add Things to themselves.
-				return;
+				return null;
 			}
 			
 			if (thing.parent !== null)
@@ -76,7 +77,7 @@ package sentinel.framework
 				if (thing.parent === this)
 				{
 					// This Thing is already the parent of the target Thing.
-					return;
+					return null;
 				}
 				
 				thing.removeFromParent();
@@ -84,6 +85,8 @@ package sentinel.framework
 			
 			_children.push(thing);
 			thing.__added(this);
+			
+			return thing;
 		}
 		
 		
@@ -91,13 +94,14 @@ package sentinel.framework
 		 * Remove a child Thing from this Thing.
 		 * @param thing The Thing to remove.
 		 * @param destroy Whether to also <code>deconstruct()</code> the target Thing.
+		 * @return The Thing that was removed.
 		 */
-		public function remove(thing:Thing, destroy:Boolean = false):void
+		public function remove(thing:Thing, destroy:Boolean = false):Thing
 		{
 			if (thing === this)
 			{
 				// Things won't ever be added to themselves, thus can't be removed from themselves.
-				return;
+				return null;
 			}
 			
 			if (thing.parent === this)
@@ -123,6 +127,8 @@ package sentinel.framework
 					if (destroy) thing.deconstruct();
 				}
 			}
+			
+			return thing;
 		}
 		
 		
