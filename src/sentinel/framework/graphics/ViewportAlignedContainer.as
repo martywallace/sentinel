@@ -5,10 +5,14 @@ package sentinel.framework.graphics
 	import sentinel.framework.IDeconstructs;
 	
 	
+	// TODO: Too specific, migrate to World.
+	
 	public class ViewportAlignedContainer extends Sprite implements IUpdates
 	{
 		
 		private var _content:Sprite;
+		private var _offsetX:Number = 0;
+		private var _offsetY:Number = 0;
 		
 		
 		public function ViewportAlignedContainer()
@@ -31,8 +35,8 @@ package sentinel.framework.graphics
 		
 		public function update():void
 		{
-			super.x = viewport.width / 2;
-			super.y = viewport.height / 2;
+			super.x = viewport.width / 2 + offsetX;
+			super.y = viewport.height / 2 + offsetY;
 		}
 		
 		
@@ -42,6 +46,11 @@ package sentinel.framework.graphics
 		public override function set x(value:Number):void { _content.x = value; }
 		public override function get y():Number { return _content.y; }
 		public override function set y(value:Number):void { _content.y = value; }
+		
+		public function get offsetX():Number { return _offsetX; }
+		public function set offsetX(value:Number):void { _offsetX = value; }
+		public function get offsetY():Number { return _offsetY; }
+		public function set offsetY(value:Number):void { _offsetY = value; }
 		
 		public function get alignedX():Number { return super.x; }
 		public function get alignedY():Number { return super.y; }

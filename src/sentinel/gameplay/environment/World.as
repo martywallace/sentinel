@@ -48,15 +48,6 @@ package sentinel.gameplay.environment
 			if (_physics !== null)
 			{
 				_physics.update();
-				
-				if (_physics.debug !== null)
-				{
-					_physics.debug.wrapper.x = _graphics.alignedX;
-					_physics.debug.wrapper.y = _graphics.alignedY;
-					_physics.debug.wrapper.scaleX = _graphics.scaleX;
-					_physics.debug.wrapper.scaleY = _graphics.scaleY;
-					_physics.debug.wrapper.rotation = _graphics.rotation * 180 / Math.PI;
-				}
 			}
 			
 			_graphics.update();

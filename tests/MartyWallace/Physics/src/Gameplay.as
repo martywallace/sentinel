@@ -1,6 +1,7 @@
 package
 {
 	
+	import sentinel.framework.b2.B2Debug;
 	import sentinel.gameplay.environment.World;
 	import sentinel.framework.b2.B2Vector2D;
 	import sentinel.framework.b2.B2WorldDef;
@@ -22,7 +23,7 @@ package
 		{
 			super();
 			
-			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700)))) as World;
+			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700)), new B2Debug(game))) as World;
 			
 			var platform:Platform = _world.add(new Platform()) as Platform;
 			
@@ -70,10 +71,10 @@ package
 		{
 			var kbd:KeyboardState = keyboard.getState();
 			
-			if (kbd.isDown(Keyboard.A)) _world.camera.x -= 3;
-			if (kbd.isDown(Keyboard.D)) _world.camera.x += 3;
-			if (kbd.isDown(Keyboard.W)) _world.camera.y -= 3;
-			if (kbd.isDown(Keyboard.S)) _world.camera.y += 3;
+			if (kbd.isDown(Keyboard.A)) _world.camera.offsetX -= 3;
+			if (kbd.isDown(Keyboard.D)) _world.camera.offsetX += 3;
+			if (kbd.isDown(Keyboard.W)) _world.camera.offsetY -= 3;
+			if (kbd.isDown(Keyboard.S)) _world.camera.offsetY += 3;
 			
 			if (kbd.isDown(Keyboard.LEFT_ARROW)) _world.camera.rotation -= 0.01;
 			if (kbd.isDown(Keyboard.RIGHT_ARROW)) _world.camera.rotation += 0.01;
@@ -85,7 +86,7 @@ package
 			{
 				if (--_cooldown <= 0)
 				{
-					_cooldown = 2;
+					_cooldown = 40;
 					
 					var block:Block = new Block();
 					_world.add(block);
