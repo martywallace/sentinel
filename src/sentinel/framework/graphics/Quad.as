@@ -1,6 +1,9 @@
 package sentinel.framework.graphics
 {
 	
+	import sentinel.framework.Game;
+	import sentinel.framework.client.Viewport;
+	import starling.core.Starling;
 	import starling.display.Quad;
 	
 	
@@ -11,6 +14,16 @@ package sentinel.framework.graphics
 		{
 			super(width, height, color, premultipliedAlpha);
 		}
+		
+		
+		public function deconstruct():void
+		{
+			removeFromParent();
+			removeEventListeners();
+		}
+		
+		
+		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
 		
 	}
 	

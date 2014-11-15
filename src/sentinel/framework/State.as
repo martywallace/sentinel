@@ -4,6 +4,9 @@ package sentinel.framework
 	import sentinel.framework.graphics.Sprite;
 	
 	
+	// TODO: Ignore key presses until released from previous state.
+	
+	
 	public class State extends Thing
 	{
 		

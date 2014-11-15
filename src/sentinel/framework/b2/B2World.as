@@ -116,13 +116,6 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function get base():b2World{ return _base; }
-		public function get sleeps():Boolean{ return _def.sleep; }
-		public function get gravity():B2Vector2D { return _def.gravity; }
-		public function get debugging():Boolean { return _debug !== null; }
-		public function get numBodies():int { return _base.GetBodyCount(); }
-		
-		
 		public function get bodies():Vector.<B2Body>
 		{
 			var result:Vector.<B2Body> = new <B2Body>[];
@@ -140,6 +133,14 @@ package sentinel.framework.b2
 			
 			return result;
 		}
+		
+		
+		public function get base():b2World{ return _base; }
+		public function get sleeps():Boolean{ return _def.sleep; }
+		public function get gravity():B2Vector2D { return _def.gravity; }
+		public function get debug():B2Debug { return _debug; }
+		public function get debugging():Boolean { return _debug !== null; }
+		public function get numBodies():int { return _base.GetBodyCount(); }
 		
 	}
 	

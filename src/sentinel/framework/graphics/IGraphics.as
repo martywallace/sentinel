@@ -1,7 +1,11 @@
 package sentinel.framework.graphics
 {
 	
-	public interface IGraphics
+	import sentinel.framework.client.Viewport;
+	import sentinel.framework.IDeconstructs;
+	
+	
+	public interface IGraphics extends IDeconstructs
 	{
 		
 		function get x():Number;
@@ -21,6 +25,8 @@ package sentinel.framework.graphics
 		
 		function get visible():Boolean;
 		function set visible(value:Boolean):void;
+		
+		function get viewport():Viewport;
 		
 	}
 	

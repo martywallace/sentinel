@@ -66,7 +66,7 @@ package sentinel.framework
 		
 		public function get starling():Starling { return Starling.current; }
 		public function get state():State { return _state; }
-		public function get viewport():Viewport{ return _viewport; }
+		public override function get viewport():Viewport{ return _viewport; }
 		public function get keyboard():Keyboard{ return _keyboard; }
 		public function get mouse():Mouse { return _mouse; }
 		public function get ticks():uint { return _ticks; }

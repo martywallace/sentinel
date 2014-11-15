@@ -1,6 +1,9 @@
 package sentinel.framework.graphics
 {
 	
+	import sentinel.framework.client.Viewport;
+	import sentinel.framework.Game;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	
@@ -18,6 +21,16 @@ package sentinel.framework.graphics
 			
 			return super.addChild(child);
 		}
+		
+		
+		public function deconstruct():void
+		{
+			removeFromParent();
+			removeEventListeners();
+		}
+		
+		
+		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
 		
 	}
 	
