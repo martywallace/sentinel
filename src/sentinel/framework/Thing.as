@@ -239,6 +239,11 @@ package sentinel.framework
 		public function get keyboard():Keyboard { return game.keyboard; }
 		
 		/**
+		 * A reference to the game Library class.
+		 */
+		public function get library():Library { return game.library; }
+		
+		/**
 		 * The parent Thing, if this Thing has one.
 		 */
 		public function get parent():Thing { return _parent; }

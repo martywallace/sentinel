@@ -16,6 +16,7 @@ package sentinel.framework
 		private var _viewport:Viewport;
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
+		private var _library:Library;
 		private var _lastId:int = 0;
 		
 		
@@ -24,6 +25,7 @@ package sentinel.framework
 			_viewport = new Viewport(this);
 			_mouse = new Mouse(this);
 			_keyboard = new Keyboard(this);
+			_library = new Library();
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
 		}
@@ -66,6 +68,7 @@ package sentinel.framework
 		public function get state():State { return _state; }
 		public function get keyboard():Keyboard{ return _keyboard; }
 		public function get mouse():Mouse { return _mouse; }
+		public function get library():Library { return _library; }
 		public function get nextId():int { return ++_lastId; }
 		
 		

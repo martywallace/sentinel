@@ -24,7 +24,7 @@ package
 		{
 			super();
 			
-			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700), true, 6, 6), new B2Debug(game))) as World;
+			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700), true, 6, 6))) as World;
 			_platform = _world.add(new Platform()) as Platform;
 			
 			_platform.x = viewport.middleX;
@@ -88,7 +88,7 @@ package
 			{
 				if (--_cooldown <= 0)
 				{
-					_cooldown = 10;
+					_cooldown = 1;
 					
 					var block:Block = new Block();
 					_world.add(block);

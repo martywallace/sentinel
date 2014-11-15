@@ -7,6 +7,7 @@ package
 	import sentinel.framework.b2.B2World;
 	import sentinel.framework.events.B2ContactEvent;
 	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.graphics.Image;
 	import sentinel.framework.graphics.Quad;
 	import sentinel.gameplay.environment.Being;
 	import starling.events.TouchEvent;
@@ -17,9 +18,10 @@ package
 		
 		protected override function defineGraphics():IGraphics
 		{
-			var graphics:Quad = new Quad(10 + Math.random() * 30, 10 + Math.random() * 30, Math.random() * 0xFFFFFF);
-			graphics.alignPivot();
+			var graphics:Image = new Image('crate');
 			
+			graphics.width = graphics.height = 20 + Math.random() * 30;
+			graphics.alignPivot();
 			graphics.addEventListener(TouchEvent.TOUCH, _touch);
 			
 			return graphics;
