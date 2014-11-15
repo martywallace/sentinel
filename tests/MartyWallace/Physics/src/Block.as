@@ -1,19 +1,33 @@
 package
 {
 	
+	import sentinel.environment.Being;
+	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
 	import sentinel.framework.b2.B2FixtureDef;
-	import sentinel.framework.Thing;
+	import sentinel.framework.b2.B2World;
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Quad;
 	
 	
-	public class Block extends TestBeing
+	public class Block extends Being
 	{
 		
-		public function Block()
+		protected override function defineGraphics():IGraphics
 		{
-			_graphics = new Quad(10 + Math.random() * 30, 10 + Math.random() * 30, Math.random() * 0xFFFFFF);
-			_graphics.alignPivot();
+			var graphics:Quad = new Quad(10 + Math.random() * 30, 10 + Math.random() * 30, Math.random() * 0xFFFFFF);
+			graphics.alignPivot();
+			
+			return graphics;
+		}
+		
+		
+		protected override function defineBody(physics:B2World):B2Body
+		{
+			var body:B2Body = physics.createBody();
+			body.createFixture(new B2Box(graphics.width, graphics.height), new B2FixtureDef(1));
+			
+			return body;
 		}
 		
 		
@@ -25,16 +39,6 @@ package
 			}
 			
 			super.update();
-		}
-		
-		
-		protected override function added(to:Thing):void
-		{
-			_body = (to as TestWorld).physics.createBody();
-			_body.createFixture(new B2Box(_graphics.width, _graphics.height), new B2FixtureDef(1));
-			
-			
-			super.added(to);
 		}
 		
 	}

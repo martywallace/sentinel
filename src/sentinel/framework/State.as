@@ -21,7 +21,7 @@ package sentinel.framework
 		
 		public override function deconstruct():void
 		{
-			_graphics.removeFromParent();
+			_graphics.removeFromParent(true);
 			_graphics.removeEventListeners();
 			
 			super.deconstruct();

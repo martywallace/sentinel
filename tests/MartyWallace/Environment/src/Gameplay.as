@@ -23,7 +23,6 @@ package
 			
 			_world.add(new Block());
 			_world.camera.x = 100;
-			//_world.camera.rotation += 1;
 		}
 		
 		

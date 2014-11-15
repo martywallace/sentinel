@@ -1,19 +1,32 @@
 package
 {
 	
-	import sentinel.framework.b2.B2Box;
-	import sentinel.framework.Thing;
-	import starling.display.Quad;
+	import sentinel.environment.Being;
 	import sentinel.framework.b2.B2Body;
+	import sentinel.framework.b2.B2Box;
+	import sentinel.framework.b2.B2World;
+	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.graphics.Quad;
 	
 	
-	public class Platform extends TestBeing
+	public class Platform extends Being
 	{
 		
-		public function Platform()
+		protected override function defineGraphics():IGraphics
 		{
-			_graphics = new Quad(400, 20, 0x222222);
-			_graphics.alignPivot();
+			var graphics:Quad = new Quad(400, 20, 0x222222);
+			graphics.alignPivot();
+			
+			return graphics;
+		}
+		
+		
+		protected override function defineBody(physics:B2World):B2Body
+		{
+			var body:B2Body = physics.createBody(B2Body.STATIC);
+			body.createFixture(new B2Box(graphics.width, graphics.height));
+			
+			return body;
 		}
 		
 		
@@ -22,15 +35,6 @@ package
 			body.rotation = Math.cos(game.ticks / 30) / 5;
 			
 			super.update();
-		}
-		
-		
-		protected override function added(to:Thing):void
-		{
-			_body = (to as TestWorld).physics.createBody(B2Body.STATIC);
-			_body.createFixture(new B2Box(_graphics.width, _graphics.height));
-			
-			super.added(to);
 		}
 		
 	}

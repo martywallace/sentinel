@@ -31,6 +31,9 @@ package sentinel.framework.graphics
 		function get visible():Boolean;
 		function set visible(value:Boolean):void;
 		
+		function get alpha():Number;
+		function set alpha(value:Number):void;
+		
 		function get width():Number;
 		function set width(value:Number):void;
 		

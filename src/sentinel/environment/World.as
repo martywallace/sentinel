@@ -47,6 +47,8 @@ package sentinel.environment
 		{
 			if (_physics !== null)
 			{
+				_physics.update();
+				
 				if (_physics.debug !== null)
 				{
 					_physics.debug.wrapper.x = _graphics.alignedX;
@@ -55,8 +57,6 @@ package sentinel.environment
 					_physics.debug.wrapper.scaleY = _graphics.scaleY;
 					_physics.debug.wrapper.rotation = _graphics.rotation * 180 / Math.PI;
 				}
-				
-				_physics.update();
 			}
 			
 			_graphics.update();
@@ -79,6 +79,7 @@ package sentinel.environment
 				if ((being as Being).graphics !== null)
 				{
 					_graphics.content.addChild((being as Being).graphics as DisplayObject);
+					(being as Being).alignGraphicsToBody();
 				}
 				
 				return being;
