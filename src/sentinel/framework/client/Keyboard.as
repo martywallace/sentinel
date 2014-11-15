@@ -8,6 +8,19 @@ package sentinel.framework.client
 	import starling.events.EventDispatcher;
 	
 	
+	/**
+	 * Dispatched when a key has been pressed on the Keyboard.
+	 * @eventType sentinel.events.KeyboardEvent.KEY_PRESSED
+	 */
+	[Event(name='KeyPressed', type='sentinel.events.KeyboardEvent')]
+	
+	/**
+	 * Dispatched when a key has been released on the Keyboard.
+	 * @eventType sentinel.events.KeyboardEvent.KEY_RELEASED
+	 */
+	[Event(name='KeyReleased', type='sentinel.events.KeyboardEvent')]
+	
+	
 	public class Keyboard extends EventDispatcher
 	{
 		
@@ -111,13 +124,19 @@ package sentinel.framework.client
 		{
 			if(event.type === flash.events.KeyboardEvent.KEY_DOWN)
 			{
-				_keys[event.keyCode] = true;
-				dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_PRESSED, event.keyCode));
+				if (!_keys.hasOwnProperty(event.keyCode))
+				{
+					_keys[event.keyCode] = true;
+					dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_PRESSED, event.keyCode));
+				}
 			}
 			else
 			{
-				delete _keys[event.keyCode];
-				dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_RELEASED, event.keyCode));
+				if (_keys.hasOwnProperty(event.keyCode))
+				{
+					delete _keys[event.keyCode];
+					dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_RELEASED, event.keyCode));
+				}
 			}
 		}
 		
