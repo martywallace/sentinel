@@ -24,7 +24,7 @@ package
 		{
 			super();
 			
-			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700)), new B2Debug(game))) as World;
+			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700), true, 6, 6), new B2Debug(game))) as World;
 			_platform = _world.add(new Platform()) as Platform;
 			
 			_platform.x = viewport.middleX;
@@ -53,7 +53,7 @@ package
 		{
 			if (event.keyCode === Keyboard.P)
 			{
-				_paused = !_paused;
+				_world.frozen = !_world.frozen;
 			}
 		}
 		
@@ -84,7 +84,7 @@ package
 			if (kbd.isDown(Keyboard.UP_ARROW)) _world.camera.zoom += 0.01;
 			if (kbd.isDown(Keyboard.DOWN_ARROW)) _world.camera.zoom -= 0.01;
 			
-			if (!_paused)
+			if (!_world.frozen)
 			{
 				if (--_cooldown <= 0)
 				{

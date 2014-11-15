@@ -17,7 +17,6 @@ package sentinel.framework
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
 		private var _lastId:int = 0;
-		private var _ticks:uint = 0;
 		
 		
 		public function Game()
@@ -51,7 +50,6 @@ package sentinel.framework
 		private function _update(event:EnterFrameEvent):void
 		{
 			update();
-			_ticks ++;
 		}
 		
 		
@@ -68,7 +66,6 @@ package sentinel.framework
 		public function get state():State { return _state; }
 		public function get keyboard():Keyboard{ return _keyboard; }
 		public function get mouse():Mouse { return _mouse; }
-		public function get ticks():uint { return _ticks; }
 		public function get nextId():int { return ++_lastId; }
 		
 		

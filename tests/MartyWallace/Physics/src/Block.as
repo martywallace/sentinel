@@ -1,14 +1,14 @@
 package
 {
 	
-	import sentinel.framework.events.B2ContactEvent;
-	import sentinel.gameplay.environment.Being;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
 	import sentinel.framework.b2.B2FixtureDef;
 	import sentinel.framework.b2.B2World;
+	import sentinel.framework.events.B2ContactEvent;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Quad;
+	import sentinel.gameplay.environment.Being;
 	import starling.events.TouchEvent;
 	
 	
@@ -29,6 +29,7 @@ package
 		protected override function defineBody(physics:B2World):B2Body
 		{
 			var body:B2Body = physics.createBody(B2Body.DYNAMIC, this);
+			
 			body.createFixture(new B2Box(graphics.width, graphics.height), new B2FixtureDef(1));
 			
 			body.addEventListener(B2ContactEvent.BEGIN, _beginContact);
