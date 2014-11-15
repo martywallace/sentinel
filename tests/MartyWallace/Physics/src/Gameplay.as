@@ -17,6 +17,7 @@ package
 		private var _world:World;
 		private var _cooldown:int = 0;
 		private var _paused:Boolean = false;
+		private var _platform:Platform;
 		
 		
 		public function Gameplay()
@@ -24,11 +25,10 @@ package
 			super();
 			
 			_world = add(new World(new B2WorldDef(new B2Vector2D(0, 700)), new B2Debug(game))) as World;
+			_platform = _world.add(new Platform()) as Platform;
 			
-			var platform:Platform = _world.add(new Platform()) as Platform;
-			
-			platform.x = viewport.middleX;
-			platform.y = viewport.height - 60;
+			_platform.x = viewport.middleX;
+			_platform.y = viewport.height - 60;
 			
 			graphics.addChild(_world.graphics);
 			
@@ -71,10 +71,12 @@ package
 		{
 			var kbd:KeyboardState = keyboard.getState();
 			
-			if (kbd.isDown(Keyboard.A)) _world.camera.offsetX -= 3;
-			if (kbd.isDown(Keyboard.D)) _world.camera.offsetX += 3;
-			if (kbd.isDown(Keyboard.W)) _world.camera.offsetY -= 3;
-			if (kbd.isDown(Keyboard.S)) _world.camera.offsetY += 3;
+			if (kbd.isDown(Keyboard.A)) _world.camera.x -= 3;
+			if (kbd.isDown(Keyboard.D)) _world.camera.x += 3;
+			if (kbd.isDown(Keyboard.W)) _world.camera.y -= 3;
+			if (kbd.isDown(Keyboard.S)) _world.camera.y += 3;
+			
+			if (kbd.isDown(Keyboard.SPACEBAR)) _world.camera.lookAt(_platform);
 			
 			if (kbd.isDown(Keyboard.LEFT_ARROW)) _world.camera.rotation -= 0.01;
 			if (kbd.isDown(Keyboard.RIGHT_ARROW)) _world.camera.rotation += 0.01;
@@ -86,7 +88,7 @@ package
 			{
 				if (--_cooldown <= 0)
 				{
-					_cooldown = 40;
+					_cooldown = 10;
 					
 					var block:Block = new Block();
 					_world.add(block);

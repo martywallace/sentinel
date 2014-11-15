@@ -20,6 +20,18 @@ package sentinel.gameplay.environment
 		}
 		
 		
+		public function lookAt(being:Being):void
+		{
+			_set(being.x, being.y, rotation, zoom);
+		}
+		
+		
+		public function reset():void
+		{
+			_set(0, 0, 0, 1);
+		}
+		
+		
 		private function _set(x:Number, y:Number, rotation:Number, zoom:Number):void
 		{
 			_world.graphics.offsetX = _offsetX;

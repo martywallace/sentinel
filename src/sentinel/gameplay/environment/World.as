@@ -9,6 +9,7 @@ package sentinel.gameplay.environment
 	import sentinel.framework.Thing;
 	import starling.display.DisplayObject;
 	
+	// TODO: Freeze and unfreeze?
 	
 	public class World extends Thing
 	{

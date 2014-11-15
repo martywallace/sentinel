@@ -64,6 +64,10 @@ package sentinel.gameplay.environment
 					_body = defineBody((world as World).physics);
 				}
 			}
+			else
+			{
+				throw new Error("Instances of Being can only be added to a World.");
+			}
 		}
 		
 		
@@ -73,6 +77,10 @@ package sentinel.gameplay.environment
 			{
 				if (_graphics !== null) _graphics.deconstruct();
 				if (_body !== null) _body.deconstruct();
+			}
+			else
+			{
+				throw new Error("Instances of Being can only be removed from a World.");
 			}
 		}
 		
@@ -90,6 +98,7 @@ package sentinel.gameplay.environment
 		
 		
 		public function get world():World { return parent as World; }
+		public function get camera():Camera { return parent !== null ? (parent as World).camera : null; }
 		public function get graphics():IGraphics { return _graphics; }
 		public function get body():B2Body { return _body; }
 		
