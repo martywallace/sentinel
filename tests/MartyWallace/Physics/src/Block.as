@@ -7,7 +7,7 @@ package
 	import sentinel.framework.graphics.Quad;
 	
 	
-	public class Block extends Being
+	public class Block extends TestBeing
 	{
 		
 		public function Block()
@@ -30,7 +30,7 @@ package
 		
 		protected override function added(to:Thing):void
 		{
-			_body = (to as World).physics.createBody();
+			_body = (to as TestWorld).physics.createBody();
 			_body.createFixture(new B2Box(_graphics.width, _graphics.height), new B2FixtureDef(1));
 			
 			

@@ -18,7 +18,7 @@ package sentinel.framework.graphics
 		
 		public function deconstruct():void
 		{
-			removeFromParent();
+			removeFromParent(true);
 			removeEventListeners();
 		}
 		

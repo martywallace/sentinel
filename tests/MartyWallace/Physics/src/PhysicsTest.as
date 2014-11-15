@@ -1,6 +1,7 @@
 package
 {
 	
+	import sentinel.environment.World;
 	import sentinel.framework.Game;
 	
 	
@@ -9,7 +10,9 @@ package
 		
 		public override function construct():void
 		{
-			loadState(new World());
+			var w:World = new World();
+			
+			loadState(new TestWorld());
 		}
 		
 	}

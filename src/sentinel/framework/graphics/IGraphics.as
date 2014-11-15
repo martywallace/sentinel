@@ -8,6 +8,11 @@ package sentinel.framework.graphics
 	public interface IGraphics extends IDeconstructs
 	{
 		
+		function removeFromParent(dispose:Boolean = false):void;
+		function removeEventListeners(type:String = null):void;
+		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
+		
+		
 		function get x():Number;
 		function set x(value:Number):void;
 		
@@ -25,6 +30,18 @@ package sentinel.framework.graphics
 		
 		function get visible():Boolean;
 		function set visible(value:Boolean):void;
+		
+		function get width():Number;
+		function set width(value:Number):void;
+		
+		function get height():Number;
+		function set height(value:Number):void;
+		
+		function get scaleX():Number;
+		function set scaleX(value:Number):void;
+		
+		function get scaleY():Number;
+		function set scaleY(value:Number):void;
 		
 		function get viewport():Viewport;
 		

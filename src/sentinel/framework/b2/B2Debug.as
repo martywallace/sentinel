@@ -9,7 +9,6 @@ package sentinel.framework.b2
 	
 	/**
 	 * Defines and encapsulates debug drawing for Box2D.
-	 * 
 	 * @author Marty Wallace.
 	 */
 	public class B2Debug implements IDeconstructs
@@ -26,6 +25,7 @@ package sentinel.framework.b2
 		private var _game:Game;
 		private var _base:b2DebugDraw;
 		private var _graphics:Sprite;
+		private var _wrapper:Sprite;
 		
 		
 		/**
@@ -42,6 +42,7 @@ package sentinel.framework.b2
 			_game = game;
 			
 			_graphics = new Sprite();
+			_wrapper = new Sprite();
 			_base = new b2DebugDraw();
 			
 			_base.SetSprite(_graphics);
@@ -62,13 +63,15 @@ package sentinel.framework.b2
 				_base.AppendFlags(B2Debug.SHAPE);
 			}
 			
-			game.starling.nativeOverlay.addChild(_graphics);
+			_wrapper.addChild(_graphics);
+			game.starling.nativeOverlay.addChild(_wrapper);
 		}
 		
 		
 		public function deconstruct():void
 		{
 			_graphics.parent && _graphics.parent.removeChild(_graphics);
+			_wrapper.parent && _wrapper.parent.removeChild(_wrapper);
 		}
 		
 		
@@ -76,6 +79,11 @@ package sentinel.framework.b2
 		 * The native Sprite used to render the debug graphics.
 		 */
 		public function get graphics():Sprite { return _graphics; }
+		
+		/**
+		 * The wrapper Sprite used for rendering debug graphics.
+		 */
+		public function get wrapper():Sprite { return _wrapper; }
 		
 		/**
 		 * The base b2DebugDraw instance wrapped by this class.

@@ -8,14 +8,14 @@ package
 	import sentinel.framework.Thing;
 	
 	
-	public class World extends State
+	public class TestWorld extends State
 	{
 		
 		private var _physics:B2World;
 		private var _cooldown:int = 0;
 		
 		
-		public function World()
+		public function TestWorld()
 		{
 			super();
 			
@@ -33,7 +33,7 @@ package
 		{
 			if (being is Thing)
 			{
-				var b:Being = being as Being;
+				var b:TestBeing = being as TestBeing;
 				graphics.addChild(b.graphics);
 			
 				super.add(being);

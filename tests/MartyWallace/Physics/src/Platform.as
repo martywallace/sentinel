@@ -7,7 +7,7 @@ package
 	import sentinel.framework.b2.B2Body;
 	
 	
-	public class Platform extends Being
+	public class Platform extends TestBeing
 	{
 		
 		public function Platform()
@@ -27,7 +27,7 @@ package
 		
 		protected override function added(to:Thing):void
 		{
-			_body = (to as World).physics.createBody(B2Body.STATIC);
+			_body = (to as TestWorld).physics.createBody(B2Body.STATIC);
 			_body.createFixture(new B2Box(_graphics.width, _graphics.height));
 			
 			super.added(to);

@@ -6,7 +6,7 @@ package
 	import starling.display.Quad;
 	
 	
-	public class Being extends Thing
+	public class TestBeing extends Thing
 	{
 		
 		protected var _graphics:Quad;
@@ -35,7 +35,7 @@ package
 		
 		public function get graphics():Quad { return _graphics; }
 		public function get body():B2Body { return _body; }
-		public function get world():World { return parent as World; }
+		public function get world():TestWorld { return parent as TestWorld; }
 		
 	}
 	
