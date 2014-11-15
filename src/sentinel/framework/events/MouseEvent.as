@@ -8,10 +8,10 @@ package sentinel.framework.events
 	public class MouseEvent extends Event
 	{
 		
-		public static const LEFT_DOWN:String = 'LeftDown';
-		public static const LEFT_UP:String = 'LeftUp';
-		public static const RIGHT_DOWN:String = 'RightDown';
-		public static const RIGHT_UP:String = 'RightUp';
+		public static const LEFT_DOWN:String = 'leftDown';
+		public static const LEFT_UP:String = 'leftUp';
+		public static const RIGHT_DOWN:String = 'rightDown';
+		public static const RIGHT_UP:String = 'rightUp';
 		
 		
 		public function MouseEvent(type:String)

@@ -14,15 +14,8 @@ package sentinel.framework.events
 	public class B2ContactEvent extends Event
 	{
 		
-		/**
-		 * The <code>B2ContactEvent.BEGIN</code> event is dispatched by <code>B2Body</code> instances who have begun a collision with another body.
-		 */
-		public static const BEGIN:String = 'Begin';
-		
-		/**
-		 * The <code>B2ContactEvent.END</code> event is dispatched by <code>B2Body</code> instances who have ended a collision with another body.
-		 */
-		public static const END:String = 'End';
+		public static const BEGIN:String = 'begin';
+		public static const END:String = 'end';
 		
 		
 		private var _base:b2Contact;

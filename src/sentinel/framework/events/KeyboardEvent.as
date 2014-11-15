@@ -8,8 +8,8 @@ package sentinel.framework.events
 	public class KeyboardEvent extends Event
 	{
 		
-		public static const KEY_PRESSED:String = 'KeyPressed';
-		public static const KEY_RELEASED:String = 'KeyReleased';
+		public static const KEY_PRESSED:String = 'keyPressed';
+		public static const KEY_RELEASED:String = 'keyReleased';
 		
 		
 		private var _keyCode:uint;

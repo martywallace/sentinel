@@ -8,10 +8,10 @@ package sentinel.framework.events
 	public class ThingEvent extends Event
 	{
 		
-		public static const DECONSTRUCTED:String = 'Deconstructed';
-		public static const UPDATED:String = 'Updated';
-		public static const ADDED:String = 'Added';
-		public static const REMOVED:String = 'Removed';
+		public static const DECONSTRUCTED:String = 'deconstructed';
+		public static const UPDATED:String = 'updated';
+		public static const ADDED:String = 'added';
+		public static const REMOVED:String = 'removed';
 		
 		
 		public function ThingEvent(type:String)

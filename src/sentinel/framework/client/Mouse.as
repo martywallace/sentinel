@@ -9,6 +9,31 @@ package sentinel.framework.client
 	import starling.events.EventDispatcher;
 	
 	
+	/**
+	 * Dispatched when the left mouse button is pressed.
+	 * @eventType sentinel.events.MouseEvent.LEFT_DOWN
+	 */
+	[Event(name = 'leftDown', type = 'sentinel.events.MouseEvent')]
+	
+	/**
+	 * Dispatched when the left mouse button is released.
+	 * @eventType sentinel.events.MouseEvent.LEFT_UP
+	 */
+	[Event(name = 'leftUp', type = 'sentinel.events.MouseEvent')]
+	
+	/**
+	 * Dispatched when the right mouse button is pressed.
+	 * @eventType sentinel.events.MouseEvent.RIGHT_DOWN
+	 */
+	[Event(name = 'rightDown', type = 'sentinel.events.MouseEvent')]
+	
+	/**
+	 * Dispatched when the right mouse button is released.
+	 * @eventType sentinel.events.MouseEvent.RIGHT_UP
+	 */
+	[Event(name='rightUp', type='sentinel.events.MouseEvent')]
+	
+	
 	public class Mouse extends EventDispatcher
 	{
 		
