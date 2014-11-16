@@ -6,6 +6,7 @@ package sentinel.gameplay.ui
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
+	import starling.display.DisplayObject;
 	
 	
 	public class UI extends Thing
@@ -17,6 +18,51 @@ package sentinel.gameplay.ui
 		public function UI()
 		{
 			_graphics = new Sprite();
+		}
+		
+		
+		public override function deconstruct():void
+		{
+			_graphics.deconstruct();
+			
+			super.deconstruct();
+		}
+		
+		
+		public override function add(uiElement:Thing):Thing
+		{
+			if (uiElement is UIElement)
+			{
+				super.add(uiElement);
+				
+				if ((uiElement as UIElement).graphics !== null)
+				{
+					graphics.addChild((uiElement as UIElement).graphics as DisplayObject);
+				}
+				
+				return uiElement;
+			}
+			else
+			{
+				throw new ArgumentError("UI.add() only accepts instances of UIElement.");
+			}
+			
+			return null;
+		}
+		
+		
+		public override function remove(uiElement:Thing, destroy:Boolean = false):Thing
+		{
+			if (uiElement is UIElement)
+			{
+				return super.remove(uiElement, destroy);
+			}
+			else
+			{
+				throw new ArgumentError("UI.remove() only accepts instances of UIElement.");
+			}
+			
+			return null;
 		}
 		
 		

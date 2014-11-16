@@ -17,8 +17,8 @@ package sentinel.gameplay.scene
 		
 		public override function deconstruct():void
 		{
-			_graphics.deconstruct();
-			_body.deconstruct();
+			if(_graphics !== null) _graphics.deconstruct();
+			if(_body !== null) _body.deconstruct();
 			
 			super.deconstruct();
 		}
