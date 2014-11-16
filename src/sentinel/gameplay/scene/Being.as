@@ -1,10 +1,11 @@
-package sentinel.gameplay.environment
+package sentinel.gameplay.scene
 {
 	
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2World;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
+	import sentinel.gameplay.ui.UI;
 	
 	
 	public class Being extends Thing
@@ -98,6 +99,7 @@ package sentinel.gameplay.environment
 		
 		
 		public function get world():World { return parent as World; }
+		public function get ui():UI { return world.ui; }
 		public function get camera():Camera { return parent !== null ? (parent as World).camera : null; }
 		public function get graphics():IGraphics { return _graphics; }
 		public function get body():B2Body { return _body; }

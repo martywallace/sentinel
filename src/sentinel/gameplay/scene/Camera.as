@@ -1,4 +1,4 @@
-package sentinel.gameplay.environment
+package sentinel.gameplay.scene
 {
 	
 	import sentinel.framework.client.Viewport;

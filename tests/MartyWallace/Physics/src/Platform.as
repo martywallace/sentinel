@@ -2,7 +2,7 @@ package
 {
 	
 	import sentinel.framework.graphics.Image;
-	import sentinel.gameplay.environment.Being;
+	import sentinel.gameplay.scene.Being;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
 	import sentinel.framework.b2.B2World;
@@ -19,7 +19,6 @@ package
 			
 			graphics.width = 400;
 			graphics.height = 60;
-			
 			graphics.alignPivot();
 			
 			return graphics;

@@ -9,7 +9,7 @@ package
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.graphics.Quad;
-	import sentinel.gameplay.environment.Being;
+	import sentinel.gameplay.scene.Being;
 	import starling.events.TouchEvent;
 	
 	

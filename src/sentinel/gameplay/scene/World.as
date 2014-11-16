@@ -1,11 +1,14 @@
-package sentinel.gameplay.environment
+package sentinel.gameplay.scene
 {
 	
 	import sentinel.framework.b2.B2Debug;
 	import sentinel.framework.b2.B2World;
 	import sentinel.framework.b2.B2WorldDef;
+	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
+	import sentinel.gameplay.states.GameplayState;
+	import sentinel.gameplay.ui.UI;
 	import starling.display.DisplayObject;
 	
 	
@@ -18,8 +21,8 @@ package sentinel.gameplay.environment
 		private var _physics:B2World;
 		private var _camera:Camera;
 		private var _frozen:Boolean = false;
-		private var _graphics:Sprite = new Sprite();
-		private var _content:Sprite = new Sprite();
+		private var _graphics:IGraphicsContainer;
+		private var _content:Sprite;
 		private var _ticks:uint = 0;
 		
 		
@@ -133,8 +136,23 @@ package sentinel.gameplay.environment
 		}
 		
 		
+		/**
+		 * If this World is part of a GameplayState, returns the UI associated with that GameplayState.
+		 * Else returns null.
+		 */
+		public function get ui():UI
+		{
+			if (game.state is GameplayState)
+			{
+				return (game.state as GameplayState).ui;
+			}
+			
+			return null;
+		}
+		
+		
 		public function get physics():B2World { return _physics; }
-		public function get graphics():Sprite { return _graphics; }
+		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get frozen():Boolean { return _frozen; }
 		public function set frozen(value:Boolean):void { _frozen = value; }

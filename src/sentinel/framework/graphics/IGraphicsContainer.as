@@ -4,7 +4,7 @@ package sentinel.framework.graphics
 	import starling.display.DisplayObject;
 	
 	
-	public interface IGraphicsContainer
+	public interface IGraphicsContainer extends IGraphics
 	{
 		
 		function sortChildrenByDepth():void;
