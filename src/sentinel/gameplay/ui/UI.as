@@ -2,6 +2,7 @@ package sentinel.gameplay.ui
 {
 	
 	import sentinel.framework.graphics.IGraphicsContainer;
+	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
@@ -15,7 +16,7 @@ package sentinel.gameplay.ui
 		
 		public function UI()
 		{
-			//
+			_graphics = new Sprite();
 		}
 		
 		
