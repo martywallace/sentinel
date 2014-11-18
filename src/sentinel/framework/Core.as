@@ -1,0 +1,53 @@
+package sentinel.framework
+{
+	
+	import flash.display.MovieClip;
+	import starling.core.Starling;
+	import starling.events.Event;
+	
+	
+	/**
+	 * The Sentinel core, extended by your document class.
+	 * @author Marty Wallace.
+	 */
+	public class Core extends MovieClip
+	{
+		
+		private var _starling:Starling;
+		
+		
+		/**
+		 * Constructor.
+		 * @param main Your main game class, extending <code>sentinel.framework.Game</code>.
+		 * @param antiAliasing The anti-aliasing level used in rendering Starling graphics. This
+		 *        value should be between 0 and 16.
+		 * @param debug Whether or not to show the Starling debug box.
+		 */
+		public function Core(main:Class, antiAliasing:int = 0, debug:Boolean = false)
+		{
+			_starling = new Starling(main, stage);
+			
+			_starling.showStats = debug;
+			_starling.antiAliasing = antiAliasing;
+			_starling.addEventListener(Event.ROOT_CREATED, _rootCreated);
+		}
+		
+		
+		private function _rootCreated(event:Event):void
+		{
+			if (_starling.root is Game)
+			{				
+				_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
+				_starling.start();
+				
+				(_starling.root as Game).construct();
+			}
+			else
+			{
+				throw new Error("The class provided to Core() must extend sentinel.base.Game.");
+			}
+		}
+		
+	}
+	
+}
