@@ -1,7 +1,0 @@
-.settings/
-.project
-.flexLibraryProperties
-.actionScriptProperties
-
-bin/Box2D.swc
-bin/starling.swc
