@@ -3,7 +3,7 @@ package
 	
 	import sentinel.framework.Core;
 	
-	[SWF(frameRate='60', width='800', height='500', backgroundColor='#BEB98F')]
+	[SWF(frameRate='60', width='500', height='640', backgroundColor='#444444')]
 	public class Main extends Core 
 	{
 		

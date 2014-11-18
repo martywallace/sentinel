@@ -35,7 +35,7 @@ package sentinel.gameplay.ui
 			}
 			else
 			{
-				throw new Error("Instances of UIElement can only be added to UI.");
+				throw new Error("Instances of UIElement can only be added to UIElement.");
 			}
 		}
 		
@@ -48,7 +48,7 @@ package sentinel.gameplay.ui
 			}
 			else
 			{
-				throw new Error("Instances of UIElement can only be removed from UI.");
+				throw new Error("Instances of UIElement can only be removed from UIElement.");
 			}
 		}
 		

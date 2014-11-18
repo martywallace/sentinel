@@ -7,6 +7,11 @@ package sentinel.gameplay.states
 	import starling.display.DisplayObject;
 	
 	
+	/**
+	 * The GameplayState is the base class for your gameplay logic. It is responsible for initializing
+	 * a World and a UI, as well as bridging the two.
+	 * @author Marty Wallace.
+	 */
 	public class GameplayState extends State
 	{
 		

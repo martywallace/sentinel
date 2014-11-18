@@ -6,7 +6,6 @@ package sentinel.gameplay.ui
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
-	import starling.display.DisplayObject;
 	
 	
 	public class UI extends Thing
@@ -47,20 +46,19 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		/**
-		 * If this UI is part of a GameplayState, returns the World associated with that GameplayState.
-		 * Else return null.
-		 */
-		public function get world():World
+		protected final override function added(thing:Thing):void
 		{
-			if (game.state is GameplayState)
-			{
-				return (game.state as GameplayState).world;
-			}
-			
-			return null;
+			if (!(thing is GameplayState)) throw new Error("UI can only be added to GameplayState.");
 		}
 		
+		
+		protected final override function removed(thing:Thing):void
+		{
+			if (!(thing is GameplayState)) throw new Error("UI can only be removed from GameplayState.");
+		}
+		
+		
+		public function get world():World { return (parent as GameplayState).world; }
 		
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		

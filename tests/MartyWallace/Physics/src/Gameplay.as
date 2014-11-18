@@ -20,7 +20,7 @@ package
 		
 		public function Gameplay()
 		{
-			super(new World(new B2WorldDef(new B2Vector2D(0, 1400), true), new B2Debug(game)), new HUD());
+			super(new World(new B2WorldDef(new B2Vector2D(0, 1400))), new HUD());
 			
 			_platform = world.add(new Platform()) as Platform;
 			
@@ -79,21 +79,7 @@ package
 			if (kbd.isDown(Keyboard.UP_ARROW)) world.camera.zoom += 0.01;
 			if (kbd.isDown(Keyboard.DOWN_ARROW)) world.camera.zoom -= 0.01;
 			
-			if (!world.frozen)
-			{
-				if (--_cooldown <= 0)
-				{
-					_cooldown = 1;
-					
-					var block:Block = new Block();
-					world.add(block);
-					
-					block.x = Math.random() * viewport.width;
-					block.y = -50;
-				}
-				
-				super.update();
-			}
+			super.update();
 		}
 		
 	}

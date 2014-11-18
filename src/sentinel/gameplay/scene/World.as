@@ -9,7 +9,6 @@ package sentinel.gameplay.scene
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
-	import starling.display.DisplayObject;
 	
 	
 	public class World extends Thing
@@ -93,20 +92,20 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		/**
-		 * If this World is part of a GameplayState, returns the UI associated with that GameplayState.
-		 * Else returns null.
-		 */
-		public function get ui():UI
+		protected final override function added(thing:Thing):void
 		{
-			if (game.state is GameplayState)
-			{
-				return (game.state as GameplayState).ui;
-			}
-			
-			return null;
+			if (!(thing is GameplayState)) throw new Error("World can only be added to GameplayState.");
 		}
 		
+		
+		protected final override function removed(thing:Thing):void
+		{
+			if (!(thing is GameplayState)) throw new Error("World can only be removed from GameplayState.");
+		}
+		
+		
+		
+		public function get ui():UI { return (parent as GameplayState).ui }
 		
 		public function get physics():B2World { return _physics; }
 		public function get graphics():IGraphicsContainer { return _graphics; }

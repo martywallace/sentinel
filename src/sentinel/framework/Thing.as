@@ -40,10 +40,7 @@ package sentinel.framework
 		 */
 		public function deconstruct():void
 		{
-			for each(var thing:IDeconstructs in _children)
-			{
-				thing.deconstruct();
-			}
+			removeAll(true);
 			
 			removeFromParent();
 			removeEventListeners();
