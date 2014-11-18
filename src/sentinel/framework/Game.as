@@ -5,6 +5,7 @@ package sentinel.framework
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.graphics.Sprite;
+	import sentinel.framework.sound.Audio;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
@@ -24,6 +25,7 @@ package sentinel.framework
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
 		private var _library:Library;
+		private var _audio:Audio;
 		
 		
 		public function Game()
@@ -32,6 +34,7 @@ package sentinel.framework
 			_mouse = new Mouse(this);
 			_keyboard = new Keyboard(this);
 			_library = new Library();
+			_audio = new Audio(_library)
 			
 			addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
 		}
@@ -75,6 +78,7 @@ package sentinel.framework
 		public function get keyboard():Keyboard{ return _keyboard; }
 		public function get mouse():Mouse { return _mouse; }
 		public function get library():Library { return _library; }
+		public function get audio():Audio { return _audio; }
 		
 		
 		public override function get viewport():Viewport{ return _viewport; }

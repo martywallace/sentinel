@@ -58,6 +58,9 @@ package sentinel.gameplay.ui
 		}
 		
 		
+		/**
+		 * TODO: Throws null exception after the GameplayState has been exited and re-entered?
+		 */
 		public function get world():World { return (parent as GameplayState).world; }
 		
 		public function get graphics():IGraphicsContainer { return _graphics; }

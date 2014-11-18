@@ -23,6 +23,7 @@ package
 			graphics.alignPivot();
 			graphics.addEventListener(TouchEvent.TOUCH, _touch);
 			
+			
 			return graphics;
 		}
 		
