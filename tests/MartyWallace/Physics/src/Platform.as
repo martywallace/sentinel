@@ -1,13 +1,12 @@
 package
 {
 	
-	import sentinel.framework.graphics.Image;
-	import sentinel.gameplay.scene.Being;
 	import sentinel.framework.b2.B2Body;
 	import sentinel.framework.b2.B2Box;
 	import sentinel.framework.b2.B2World;
 	import sentinel.framework.graphics.IGraphics;
-	import sentinel.framework.graphics.Quad;
+	import sentinel.framework.graphics.Image;
+	import sentinel.gameplay.scene.Being;
 	
 	
 	public class Platform extends Being
@@ -15,7 +14,7 @@ package
 		
 		protected override function defineGraphics():IGraphics
 		{
-			var graphics:Image = new Image('crate');
+			var graphics:Image = library.getImage('crate');
 			
 			graphics.width = 400;
 			graphics.height = 60;

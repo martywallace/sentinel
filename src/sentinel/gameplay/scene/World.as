@@ -12,9 +12,6 @@ package sentinel.gameplay.scene
 	import starling.display.DisplayObject;
 	
 	
-	// TODO: Graphics renders a step behind physics update.
-	
-	
 	public class World extends Thing
 	{
 		
@@ -60,10 +57,7 @@ package sentinel.gameplay.scene
 			{
 				_ticks ++;
 				
-				if (_physics !== null)
-				{
-					_physics.update();
-				}
+				if (_physics !== null) _physics.update();
 				
 				super.update();
 			}
@@ -77,22 +71,8 @@ package sentinel.gameplay.scene
 		 */
 		public override function add(being:Thing):Thing
 		{
-			if (being is Being)
-			{
-				super.add(being);
-				
-				if ((being as Being).graphics !== null)
-				{
-					_content.addChild((being as Being).graphics as DisplayObject);
-					(being as Being).alignGraphicsToBody();
-				}
-				
-				return being;
-			}
-			else
-			{
-				throw new ArgumentError("World.add() only accepts instances of Being.");
-			}
+			if (being is Being) return super.add(being);
+			else throw new ArgumentError("World.add() only accepts instances of Being.");
 			
 			return null;
 		}
@@ -106,33 +86,10 @@ package sentinel.gameplay.scene
 		 */
 		public override function remove(being:Thing, destroy:Boolean = false):Thing
 		{
-			if (being is Being)
-			{
-				return super.remove(being, destroy);
-			}
-			else
-			{
-				throw new ArgumentError("World.remove() only accepts instances of Being.");
-			}
+			if (being is Being) return super.remove(being, destroy);
+			throw new ArgumentError("World.remove() only accepts instances of Being.");
 			
 			return null;
-		}
-		
-		
-		/**
-		 * Returns the list of Beings within this world.
-		 * Note: This returns a <em>copy</em> of the internally handled list.
-		 */
-		public function get beings():Vector.<Being>
-		{
-			var output:Vector.<Being> = new <Being>[];
-			
-			for (var i:int = 0; i < numChildren; i++)
-			{
-				output.push(getChildAt(i) as Being);
-			}
-			
-			return output;
 		}
 		
 		

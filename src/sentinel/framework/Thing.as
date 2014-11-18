@@ -17,7 +17,6 @@ package sentinel.framework
 	public class Thing extends EventDispatcher implements IUpdates, IDeconstructs
 	{
 		
-		private var _id:int = 0;
 		private var _parent:Thing;
 		private var _children:Vector.<Thing> = new <Thing>[];
 		
@@ -212,36 +211,27 @@ package sentinel.framework
 		/**
 		 * A reference to the core Game class.
 		 */
-		public function get game():Game { return Starling.current.root as Game; }
-		
-		/**
-		 * A unique ID assigned to this Thing by the core game.
-		 */
-		public function get id():int
-		{
-			if (_id === 0) _id = game.nextId;
-			return _id;
-		}
+		protected function get game():Game { return Starling.current.root as Game; }
 		
 		/**
 		 * A reference to the game Viewport class.
 		 */
-		public function get viewport():Viewport { return game.viewport; }
+		protected function get viewport():Viewport { return game.viewport; }
 		
 		/**
 		 * A reference to the game Mouse class.
 		 */
-		public function get mouse():Mouse { return game.mouse; }
+		protected function get mouse():Mouse { return game.mouse; }
 		
 		/**
 		 * A reference to the game Keyboard class.
 		 */
-		public function get keyboard():Keyboard { return game.keyboard; }
+		protected function get keyboard():Keyboard { return game.keyboard; }
 		
 		/**
 		 * A reference to the game Library class.
 		 */
-		public function get library():Library { return game.library; }
+		protected function get library():Library { return game.library; }
 		
 		/**
 		 * The parent Thing, if this Thing has one.
@@ -250,14 +240,9 @@ package sentinel.framework
 		
 		/**
 		 * Returns the list of child Things.
-		 * Note: The returned Vector is a <em>copy</em> of the internally handled list.
+		 * This is the <em>actual list</em> - be very careful what you do with it.
 		 */
-		public function get children():Vector.<Thing> { return _children.slice(); }
-		
-		/**
-		 * The number of children Things added to this Thing.
-		 */
-		public function get numChildren():int { return _children.length; }
+		public function get children():Vector.<Thing> { return _children; }
 		
 	}
 	

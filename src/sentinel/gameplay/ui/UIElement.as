@@ -4,6 +4,7 @@ package sentinel.gameplay.ui
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.scene.World;
+	import starling.display.DisplayObject;
 	
 	
 	public class UIElement extends Thing
@@ -25,6 +26,12 @@ package sentinel.gameplay.ui
 			if (ui is UI)
 			{
 				_graphics = defineGraphics();
+				
+				if (_graphics !== null)
+				{
+					// Add the graphics to the UI graphics container.
+					(ui as UI).graphics.addChild(_graphics as DisplayObject);
+				}
 			}
 			else
 			{

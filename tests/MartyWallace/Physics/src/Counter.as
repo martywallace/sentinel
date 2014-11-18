@@ -18,7 +18,7 @@ package
 		
 		public override function update():void
 		{
-			(graphics as TextField).text = world.numChildren.toString();
+			(graphics as TextField).text = world.children.length.toString();
 		}
 		
 	}

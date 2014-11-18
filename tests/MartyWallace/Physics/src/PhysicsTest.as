@@ -2,6 +2,8 @@ package
 {
 	
 	import sentinel.framework.Game;
+	import starling.textures.Texture;
+	import sentinel.framework.Library;
 	
 	
 	public class PhysicsTest extends Game
@@ -13,7 +15,7 @@ package
 		
 		public override function construct():void
 		{
-			library.addTextureFromBitmap('crate', new CrateAsset());
+			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
 			
 			loadState(new Menu());
 		}

@@ -6,6 +6,7 @@ package sentinel.gameplay.scene
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.ui.UI;
+	import starling.display.DisplayObject;
 	
 	
 	public class Being extends Thing
@@ -60,10 +61,19 @@ package sentinel.gameplay.scene
 			{
 				_graphics = defineGraphics();
 				
+				if (_graphics !== null)
+				{
+					// Add the graphics to the World's graphics container.
+					(world as World).__content.addChild(_graphics as DisplayObject);
+				}
+				
 				if ((world as World).physics !== null)
 				{
+					// Attempt to define a body for this Being.
 					_body = defineBody((world as World).physics);
 				}
+				
+				alignGraphicsToBody();
 			}
 			else
 			{

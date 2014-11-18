@@ -2,10 +2,11 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.client.Viewport;
-	import starling.display.Image;
-	import starling.core.Starling;
 	import sentinel.framework.Game;
 	import sentinel.framework.Library;
+	import starling.core.Starling;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	
 	
 	public class Image extends starling.display.Image implements IGraphics
@@ -14,16 +15,16 @@ package sentinel.framework.graphics
 		private var _depth:int = 0;
 		
 		
-		public function Image(textureName:String)
+		public function Image(texture:Texture)
 		{
-			super(library.getTexture(textureName));
+			super(texture);
 		}
 		
 		
 		public function deconstruct():void
 		{
-			removeFromParent(true);
-			removeEventListeners();
+			removeFromParent();
+			dispose();
 		}
 		
 		

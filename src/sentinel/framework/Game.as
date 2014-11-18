@@ -1,14 +1,20 @@
 package sentinel.framework
 {
 	
-	import starling.core.Starling;
-	import starling.events.EnterFrameEvent;
-	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Viewport;
+	import sentinel.framework.graphics.Sprite;
+	import starling.core.Starling;
+	import starling.events.EnterFrameEvent;
 	
 	
+	/**
+	 * The core game class passed to the constructor of <code>sentinel.framework.Core</code>. This
+	 * is the base class for your main game class and should contain logic for initializing assets
+	 * and the starting state.
+	 * @author Marty Wallace.
+	 */
 	public class Game extends Sprite implements IConstructs, IUpdates
 	{
 		
@@ -17,7 +23,6 @@ package sentinel.framework
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
 		private var _library:Library;
-		private var _lastId:int = 0;
 		
 		
 		public function Game()
@@ -69,7 +74,6 @@ package sentinel.framework
 		public function get keyboard():Keyboard{ return _keyboard; }
 		public function get mouse():Mouse { return _mouse; }
 		public function get library():Library { return _library; }
-		public function get nextId():int { return ++_lastId; }
 		
 		
 		public override function get viewport():Viewport{ return _viewport; }

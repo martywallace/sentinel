@@ -1,48 +1,67 @@
 package sentinel.framework
 {
 	
-	import flash.display.Bitmap;
+	import sentinel.framework.graphics.Image;
 	import starling.textures.Texture;
 	
 	
 	/**
-	 * The Library manages game assets e.g. graphics and sound.
+	 * The Library manages game assets e.g. textures, sprite sheets and sound.
 	 * @author Marty Wallace.
 	 */
-	public class Library
+	public final class Library
 	{
 		
-		private var _textures:Object = { };
+		public static const TEXTURE:String = 'texture';
+		public static const ATLAS:String = 'atlas';
+		public static const SOUND:String = 'sound';
 		
 		
-		public function addTexture(name:String, texture:Texture):void
+		private var _content:Object = { };
+		
+		
+		public function add(category:String, name:String, resource:*):void
 		{
-			if (!hasTexture(name))
+			if (!has(category, name))
 			{
-				_textures[name] = texture;
+				if (!_content.hasOwnProperty(category)) _content[category] = { };
+				_content[category][name] = resource;
 			}
 			else
 			{
-				throw new Error('Texture named "' + name + '" already exists within the Library.');
+				throw new Error('Library resource "' + name + '" under category "' + category + '" already exists.');
 			}
 		}
 		
 		
-		public function addTextureFromBitmap(name:String, bitmap:Bitmap):void
+		public function has(category:String, name:String):Boolean
 		{
-			addTexture(name, Texture.fromBitmap(bitmap));
+			return _content.hasOwnProperty(category) && _content[category].hasOwnProperty(name);
+		}
+		
+		
+		public function find(category:String, name:String):*
+		{
+			if (has(category, name))
+			{
+				return _content[category][name];
+			}
+			else
+			{
+				throw new Error('Library resource "' + name + '" under category "' + category + '" does not exist.');
+			}
 		}
 		
 		
 		public function getTexture(name:String):Texture
 		{
-			return _textures[name];
+			return find(TEXTURE, name) as Texture;
 		}
 		
 		
-		public function hasTexture(name:String):Boolean
+		public function getImage(textureName:String):Image
 		{
-			return _textures.hasOwnProperty(name);
+			return new Image(getTexture(textureName));
 		}
 		
 	}

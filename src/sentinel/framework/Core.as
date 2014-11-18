@@ -6,12 +6,23 @@ package sentinel.framework
 	import starling.events.Event;
 	
 	
+	/**
+	 * The Sentinel core, extended by your document class.
+	 * @author Marty Wallace.
+	 */
 	public class Core extends MovieClip
 	{
 		
 		private var _starling:Starling;
 		
 		
+		/**
+		 * Constructor.
+		 * @param main Your main game class, extending <code>sentinel.framework.Game</code>.
+		 * @param antiAliasing The anti-aliasing level used in rendering Starling graphics. This
+		 *        value should be between 0 and 16.
+		 * @param debug Whether or not to show the Starling debug box.
+		 */
 		public function Core(main:Class, antiAliasing:int = 0, debug:Boolean = false)
 		{
 			_starling = new Starling(main, stage);

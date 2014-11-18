@@ -1,6 +1,7 @@
 package
 {
 	
+	import sentinel.framework.b2.B2Debug;
 	import sentinel.framework.b2.B2Vector2D;
 	import sentinel.framework.b2.B2WorldDef;
 	import sentinel.framework.client.Keyboard;
@@ -8,7 +9,6 @@ package
 	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
-	import sentinel.gameplay.ui.UI;
 	
 	
 	public class Gameplay extends GameplayState
@@ -20,7 +20,7 @@ package
 		
 		public function Gameplay()
 		{
-			super(new World(new B2WorldDef(new B2Vector2D(0, 1400), true)), new HUD());
+			super(new World(new B2WorldDef(new B2Vector2D(0, 1400), true), new B2Debug(game)), new HUD());
 			
 			_platform = world.add(new Platform()) as Platform;
 			

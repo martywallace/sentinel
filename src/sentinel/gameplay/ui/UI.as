@@ -31,21 +31,8 @@ package sentinel.gameplay.ui
 		
 		public override function add(uiElement:Thing):Thing
 		{
-			if (uiElement is UIElement)
-			{
-				super.add(uiElement);
-				
-				if ((uiElement as UIElement).graphics !== null)
-				{
-					graphics.addChild((uiElement as UIElement).graphics as DisplayObject);
-				}
-				
-				return uiElement;
-			}
-			else
-			{
-				throw new ArgumentError("UI.add() only accepts instances of UIElement.");
-			}
+			if (uiElement is UIElement) return super.add(uiElement);
+			throw new ArgumentError("UI.add() only accepts instances of UIElement.");
 			
 			return null;
 		}
@@ -53,14 +40,8 @@ package sentinel.gameplay.ui
 		
 		public override function remove(uiElement:Thing, destroy:Boolean = false):Thing
 		{
-			if (uiElement is UIElement)
-			{
-				return super.remove(uiElement, destroy);
-			}
-			else
-			{
-				throw new ArgumentError("UI.remove() only accepts instances of UIElement.");
-			}
+			if (uiElement is UIElement) return super.remove(uiElement, destroy);
+			throw new ArgumentError("UI.remove() only accepts instances of UIElement.");
 			
 			return null;
 		}

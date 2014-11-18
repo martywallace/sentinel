@@ -5,7 +5,8 @@ package sentinel.framework
 	
 	
 	/**
-	 * A State is used to define a game state e.g. the main menu, settings screen, game over screen, or the gameplay itself.
+	 * A State is used to define a game state e.g. the main menu, settings screen, game over screen,
+	 * the gameplay itself, etc.
 	 * @author Marty Wallace.
 	 */
 	public class State extends Thing
