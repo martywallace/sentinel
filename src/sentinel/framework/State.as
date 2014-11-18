@@ -1,6 +1,7 @@
 package sentinel.framework
 {
 	
+	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	
 	
@@ -12,7 +13,7 @@ package sentinel.framework
 	public class State extends Thing
 	{
 		
-		private var _graphics:Sprite;
+		private var _graphics:IGraphicsContainer;
 		
 		
 		public function State()
@@ -23,14 +24,13 @@ package sentinel.framework
 		
 		public override function deconstruct():void
 		{
-			_graphics.removeFromParent(true);
-			_graphics.removeEventListeners();
+			_graphics.deconstruct();
 			
 			super.deconstruct();
 		}
 		
 		
-		public function get graphics():Sprite { return _graphics; }
+		public function get graphics():IGraphicsContainer { return _graphics; }
 		
 	}
 	

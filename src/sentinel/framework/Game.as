@@ -6,6 +6,7 @@ package sentinel.framework
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.graphics.Sprite;
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
 	
 	
@@ -50,7 +51,7 @@ package sentinel.framework
 			}
 			
 			_state = state;
-			addChild(_state.graphics);
+			addChild(_state.graphics as DisplayObject);
 		}
 		
 		

@@ -20,7 +20,7 @@ package
 		
 		public function Gameplay()
 		{
-			super(new World(new B2WorldDef(new B2Vector2D(0, 1400))), new HUD());
+			super(new World(new B2WorldDef(new B2Vector2D(0, 1400)), new B2Debug(game, 1, 0.5, 0, new <int>[B2Debug.SHAPE, B2Debug.CENTER_OF_MASS])), new HUD());
 			
 			_platform = world.add(new Platform()) as Platform;
 			
