@@ -16,8 +16,8 @@ package
 		}
 		
 		
-		public override function update():void
-		{
+		protected override function update():void
+		{	
 			(graphics as TextField).text = world.totalBeings.toString();
 		}
 		

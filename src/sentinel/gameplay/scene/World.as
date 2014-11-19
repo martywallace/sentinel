@@ -50,13 +50,13 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function update():void
+		protected override function update():void
 		{
 			if (!_frozen)
 			{
 				_ticks ++;
 				
-				if (_physics !== null) _physics.update();
+				if (_physics !== null) _physics.step();
 				
 				super.update();
 			}

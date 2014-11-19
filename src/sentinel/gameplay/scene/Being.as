@@ -29,7 +29,7 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function update():void
+		protected override function update():void
 		{
 			alignGraphicsToBody();
 			

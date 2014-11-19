@@ -4,7 +4,6 @@ package sentinel.framework.b2
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2World;
-	import sentinel.framework.IUpdates;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.framework.Thing;
 	
@@ -13,7 +12,7 @@ package sentinel.framework.b2
 	 * Wrapper for Box2D.Dynamics.b2World.
 	 * @author Marty Wallace.
 	 */
-	public class B2World implements IUpdates, IDeconstructs
+	public class B2World implements IDeconstructs
 	{
 		
 		private static var _scale:int = 30;
@@ -68,7 +67,7 @@ package sentinel.framework.b2
 			
 			// Update is required to iterate over the destroyed bodies above and actually
 			// destroy them.
-			update();
+			step();
 			
 			// TODO: Anything with forces? Etc?
 			// ...
@@ -98,7 +97,7 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function update():void
+		public function step():void
 		{
 			while (_destroyed.length > 0)
 			{

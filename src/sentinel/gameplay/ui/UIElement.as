@@ -21,9 +21,6 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		/**
-		 * @internal
-		 */
 		protected final override function added(ui:Thing):void
 		{
 			if (ui is UI)
@@ -43,9 +40,6 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		/**
-		 * @deprecated
-		 */
 		protected final override function removed(ui:Thing):void
 		{
 			if (ui is UI)

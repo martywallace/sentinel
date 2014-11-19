@@ -17,7 +17,7 @@ package sentinel.framework
 	 * and the starting state.
 	 * @author Marty Wallace.
 	 */
-	public class Game extends Sprite implements IConstructs, IUpdates
+	public class Game extends Sprite implements IConstructs
 	{
 		
 		private var _state:State;
@@ -61,15 +61,17 @@ package sentinel.framework
 		private function _update(event:EnterFrameEvent):void
 		{
 			update();
+			
+			if (_state !== null)
+			{
+				_state.__update();
+			}
 		}
 		
 		
-		public function update():void
+		protected function update():void
 		{
-			if (_state !== null)
-			{
-				_state.update();
-			}
+			//
 		}
 		
 		

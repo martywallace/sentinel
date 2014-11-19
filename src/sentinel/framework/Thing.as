@@ -1,10 +1,10 @@
 package sentinel.framework
 {
 	
-	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Viewport;
+	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.sound.Audio;
 	import starling.core.Starling;
 	import starling.events.EventDispatcher;
@@ -15,7 +15,7 @@ package sentinel.framework
 	 * Things are also able to be added to parent Things and contain their own children Things.
 	 * @author Marty Wallace.
 	 */
-	public class Thing extends EventDispatcher implements IUpdates, IDeconstructs
+	public class Thing extends EventDispatcher implements IDeconstructs
 	{
 		
 		private var _parent:Thing;
@@ -25,14 +25,20 @@ package sentinel.framework
 		/**
 		 * Update this Thing and its descendants.
 		 */
-		public function update():void
+		protected function update():void
 		{
-			for each(var thing:IUpdates in _children)
+			for each(var thing:Thing in _children)
 			{
-				thing.update();
+				thing.__update();
 			}
 			
 			_dispatchEvent(ThingEvent.UPDATED);
+		}
+		
+		
+		internal function __update():void
+		{
+			update();
 		}
 		
 		

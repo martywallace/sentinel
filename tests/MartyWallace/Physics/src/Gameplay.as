@@ -62,7 +62,7 @@ package
 		}
 		
 		
-		public override function update():void
+		protected override function update():void
 		{
 			var kbd:KeyboardState = keyboard.getState();
 			

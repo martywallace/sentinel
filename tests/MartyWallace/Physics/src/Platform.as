@@ -32,7 +32,7 @@ package
 		}
 		
 		
-		public override function update():void
+		protected override function update():void
 		{
 			body.rotation = Math.cos(world.ticks / 30) / 5;
 			

@@ -40,7 +40,7 @@ package
 		}
 		
 		
-		public override function update():void
+		protected override function update():void
 		{
 			if (body.y > viewport.height + 100)
 			{
