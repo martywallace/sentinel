@@ -28,21 +28,15 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		public override function add(uiElement:Thing):Thing
+		public function add(uiElement:UIElement):UIElement
 		{
-			if (uiElement is UIElement) return super.add(uiElement);
-			throw new ArgumentError("UI.add() only accepts instances of UIElement.");
-			
-			return null;
+			return addT(uiElement) as UIElement;
 		}
 		
 		
-		public override function remove(uiElement:Thing, destroy:Boolean = false):Thing
+		public function remove(uiElement:UIElement, destroy:Boolean = false):UIElement
 		{
-			if (uiElement is UIElement) return super.remove(uiElement, destroy);
-			throw new ArgumentError("UI.remove() only accepts instances of UIElement.");
-			
-			return null;
+			return removeT(uiElement, destroy) as UIElement;
 		}
 		
 		
@@ -58,11 +52,7 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		/**
-		 * TODO: Throws null exception after the GameplayState has been exited and re-entered?
-		 */
-		public function get world():World { return (parent as GameplayState).world; }
-		
+		public function get world():World{ return (parent as GameplayState).world; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		
 	}

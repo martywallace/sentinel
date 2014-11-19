@@ -1,7 +1,9 @@
 .settings/
 .project
-.flexLibraryProperties
+.flexLibProperties
 .actionScriptProperties
 
 bin/Box2D.swc
 bin/starling.swc
+
+Sentinel.as3proj

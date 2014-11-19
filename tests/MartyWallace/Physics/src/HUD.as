@@ -21,14 +21,24 @@ package
 		}
 		
 		
+		public override function deconstruct():void
+		{
+			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _keypress);
+			
+			super.deconstruct();
+		}
+		
+		
 		public function _keypress(event:KeyboardEvent):void
 		{
 			if (event.keyCode === Keyboard.B)
 			{
-				var block:Block = world.add(new Block()) as Block;
+				var block:Block = new Block();
 				
 				block.x = Math.random() * viewport.width;
 				block.y = -100;
+				
+				world.add(block);
 			}
 		}
 		

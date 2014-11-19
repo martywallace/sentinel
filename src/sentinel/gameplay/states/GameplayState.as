@@ -26,8 +26,8 @@ package sentinel.gameplay.states
 			_world = world;
 			_ui = ui;
 			
-			add(_world);
-			add(_ui);
+			addT(_world);
+			addT(_ui);
 			
 			graphics.addChild(_world.graphics as DisplayObject);
 			graphics.addChild(_ui.graphics as DisplayObject);

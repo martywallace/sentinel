@@ -21,6 +21,9 @@ package sentinel.gameplay.ui
 		}
 		
 		
+		/**
+		 * @internal
+		 */
 		protected final override function added(ui:Thing):void
 		{
 			if (ui is UI)
@@ -40,6 +43,9 @@ package sentinel.gameplay.ui
 		}
 		
 		
+		/**
+		 * @deprecated
+		 */
 		protected final override function removed(ui:Thing):void
 		{
 			if (ui is UI)
@@ -59,8 +65,9 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		public function get ui():UI { return parent as UI; }
-		public function get world():World { return ui.world; }
+		protected function get ui():UI { return parent as UI; }
+		protected function get world():World { return ui !== null ? ui.world : null; }
+		
 		public function get graphics():IGraphics { return _graphics; }
 		
 	}

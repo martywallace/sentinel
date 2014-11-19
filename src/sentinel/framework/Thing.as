@@ -56,7 +56,7 @@ package sentinel.framework
 		 * @param thing The Thing to add.
 		 * @return The Thing that was added.
 		 */
-		public function add(thing:Thing):Thing
+		protected function addT(thing:Thing):Thing
 		{
 			if (thing === this)
 			{
@@ -83,12 +83,21 @@ package sentinel.framework
 		
 		
 		/**
+		 * Internal alias for <code>addT()</code>.
+		 */
+		internal function __addT(thing:Thing):Thing
+		{
+			return addT(thing);
+		}
+		
+		
+		/**
 		 * Remove a child Thing from this Thing.
 		 * @param thing The Thing to remove.
 		 * @param destroy Whether to also <code>deconstruct()</code> the target Thing.
 		 * @return The Thing that was removed.
 		 */
-		public function remove(thing:Thing, destroy:Boolean = false):Thing
+		protected function removeT(thing:Thing, destroy:Boolean = false):Thing
 		{
 			if (thing === this)
 			{
@@ -125,12 +134,21 @@ package sentinel.framework
 		
 		
 		/**
+		 * Internal alias for <code>removeT()</code>.
+		 */
+		internal function __removeT(thing:Thing, destroy:Boolean = false):Thing
+		{
+			return removeT(thing, destroy);
+		}
+		
+		
+		/**
 		 * Remove this Thing from its parent, if it has one.
 		 * @param destroy Whether to also <code>deconstruct()</code> this Thing.
 		 */
 		public function removeFromParent(destroy:Boolean = false):void
 		{
-			if (parent !== null) parent.remove(this);
+			if (parent !== null) parent.__removeT(this);
 			if (destroy) deconstruct();
 		}
 		
@@ -143,7 +161,7 @@ package sentinel.framework
 		{
 			while (_children.length > 0)
 			{
-				remove(_children[_children.length - 1], destroy);
+				removeT(_children[_children.length - 1], destroy);
 			}
 		}
 		
@@ -239,13 +257,13 @@ package sentinel.framework
 		/**
 		 * The parent Thing, if this Thing has one.
 		 */
-		public function get parent():Thing { return _parent; }
+		protected function get parent():Thing { return _parent; }
 		
 		/**
 		 * Returns the list of child Things.
 		 * This is the <em>actual list</em> - be very careful what you do with it.
 		 */
-		public function get children():Vector.<Thing> { return _children; }
+		protected function get children():Vector.<Thing> { return _children; }
 		
 	}
 	

@@ -66,14 +66,10 @@ package sentinel.gameplay.scene
 		/**
 		 * Adds a Being to this World.
 		 * @param being The Being to add.
-		 * @throws ArgumentError
 		 */
-		public override function add(being:Thing):Thing
+		public function add(being:Being):Being
 		{
-			if (being is Being) return super.add(being);
-			else throw new ArgumentError("World.add() only accepts instances of Being.");
-			
-			return null;
+			return addT(being) as Being;
 		}
 		
 		
@@ -81,14 +77,10 @@ package sentinel.gameplay.scene
 		 * Removes a Being from this World.
 		 * @param being The Being to remove.
 		 * @param destroy Whether or not to also deconstruct the Being once removed.
-		 * @throws ArgumentError
 		 */
-		public override function remove(being:Thing, destroy:Boolean = false):Thing
+		public function remove(being:Being, destroy:Boolean = false):Being
 		{
-			if (being is Being) return super.remove(being, destroy);
-			throw new ArgumentError("World.remove() only accepts instances of Being.");
-			
-			return null;
+			return removeT(being, destroy) as Being;
 		}
 		
 		
@@ -106,13 +98,13 @@ package sentinel.gameplay.scene
 		
 		
 		public function get ui():UI { return (parent as GameplayState).ui }
-		
 		public function get physics():B2World { return _physics; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get frozen():Boolean { return _frozen; }
 		public function set frozen(value:Boolean):void { _frozen = value; }
 		public function get ticks():uint { return _ticks; }
+		public function get totalBeings():int { return children.length; }
 		
 		internal function get __content():Sprite { return _content; }
 		
