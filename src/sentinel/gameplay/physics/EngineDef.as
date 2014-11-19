@@ -1,14 +1,10 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
-	/**
-	 * Holds properties that define a <code>B2World</code>, like gravity.
-	 * @author Marty Wallace.
-	 */
-	public class B2WorldDef
+	public class EngineDef
 	{
 		
-		private var _gravity:B2Vector2D;
+		private var _gravity:Vector2D;
 		private var _sleep:Boolean = false;
 		private var _velocityIterations:int = 14;
 		private var _positionIterations:int = 14;
@@ -22,7 +18,7 @@ package sentinel.framework.b2
 		 * @param velocityIterations The number of iterations used to smooth out velocities. Higher values are slower but give more accurate results.
 		 * @param positionIterations The number of iterations used to smooth out positions. Higher values are slower by give more accurate results.
 		 */
-		public function B2WorldDef(gravity:B2Vector2D, sleep:Boolean = false, velocityIterations:int = 14, positionIterations:int = 14)
+		public function EngineDef(gravity:Vector2D, sleep:Boolean = false, velocityIterations:int = 14, positionIterations:int = 14)
 		{
 			_gravity = gravity;
 			_sleep = sleep;
@@ -31,7 +27,7 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function get gravity():B2Vector2D { return _gravity; }
+		public function get gravity():Vector2D { return _gravity; }
 		public function get sleep():Boolean{ return _sleep; }
 		public function get velocityIterations():int{ return _velocityIterations; }
 		public function get positionIterations():int{ return _positionIterations; }

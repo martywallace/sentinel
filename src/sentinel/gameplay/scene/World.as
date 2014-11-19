@@ -1,9 +1,9 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.framework.b2.B2Debug;
-	import sentinel.framework.b2.B2World;
-	import sentinel.framework.b2.B2WorldDef;
+	import sentinel.gameplay.physics.Debug;
+	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
@@ -14,7 +14,7 @@ package sentinel.gameplay.scene
 	public class World extends Thing
 	{
 		
-		private var _physics:B2World;
+		private var _physics:Engine;
 		private var _camera:Camera;
 		private var _frozen:Boolean = false;
 		private var _graphics:IGraphicsContainer;
@@ -22,11 +22,11 @@ package sentinel.gameplay.scene
 		private var _ticks:uint = 0;
 		
 		
-		public function World(definition:B2WorldDef = null, debug:B2Debug = null)
+		public function World(definition:EngineDef = null, debug:Debug = null)
 		{
 			if (definition !== null)
 			{
-				_physics = new B2World(definition, debug);
+				_physics = new Engine(definition, debug);
 			}
 			
 			_graphics = new Sprite();
@@ -98,7 +98,7 @@ package sentinel.gameplay.scene
 		
 		
 		public function get ui():UI { return (parent as GameplayState).ui }
-		public function get physics():B2World { return _physics; }
+		public function get physics():Engine { return _physics; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get frozen():Boolean { return _frozen; }

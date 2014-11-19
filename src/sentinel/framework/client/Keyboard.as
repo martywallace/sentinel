@@ -21,6 +21,11 @@ package sentinel.framework.client
 	[Event(name='keyReleased', type='sentinel.events.KeyboardEvent')]
 	
 	
+	/**
+	 * The Keyboard class provides access to the current state of the user's keyboard. It also
+	 * provides useful constants for ASCII values.
+	 * @author Marty Wallace.
+	 */
 	public class Keyboard extends EventDispatcher
 	{
 		
@@ -141,6 +146,9 @@ package sentinel.framework.client
 		}
 		
 		
+		/**
+		 * Gets the current keyboard state as a <code>KeyboardState</code> object.
+		 */
 		public function getState():KeyboardState
 		{
 			return new KeyboardState(ObjectUtil.shallowCopy(_keys));

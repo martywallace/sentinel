@@ -5,6 +5,10 @@ package sentinel.framework.client
 	import sentinel.framework.util.StringUtil;
 	
 	
+	/**
+	 * Stores information about the state of the user's mouse at a given point in time.
+	 * @author Marty Wallace.
+	 */
 	public class MouseState
 	{
 		
@@ -33,15 +37,24 @@ package sentinel.framework.client
 		}
 		
 		
-		public function equals(mouseState:MouseState):Boolean
-		{
-			return position.equals(mouseState.position) && left === mouseState.left && right === mouseState.right && available === mouseState.available;
-		}
+		/**
+		 * The position of the mouse pointer relative to the viewport.
+		 */
+		public function get position():Point { return _position; }
 		
+		/**
+		 * Whether or not the left mouse button is held down.
+		 */
+		public function get left():Boolean { return _left; }
 		
-		public function get position():Point{ return _position; }
-		public function get left():Boolean{ return _left; }
-		public function get right():Boolean{ return _right; }
+		/**
+		 * Whether or not the right mouse button is held down.
+		 */
+		public function get right():Boolean { return _right; }
+		
+		/**
+		 * Whether or not the cursor is within the viewport.
+		 */
 		public function get available():Boolean{ return _available; }
 		
 	}

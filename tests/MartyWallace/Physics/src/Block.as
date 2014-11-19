@@ -1,11 +1,11 @@
 package
 {
 	
-	import sentinel.framework.b2.B2Body;
-	import sentinel.framework.b2.B2Box;
-	import sentinel.framework.b2.B2FixtureDef;
-	import sentinel.framework.b2.B2World;
-	import sentinel.framework.events.B2ContactEvent;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Box;
+	import sentinel.gameplay.physics.FixtureDef;
+	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
 	import sentinel.gameplay.scene.Being;
@@ -28,13 +28,12 @@ package
 		}
 		
 		
-		protected override function defineBody(physics:B2World):B2Body
+		protected override function defineBody(physics:Engine):Body
 		{
-			var body:B2Body = physics.createBody(B2Body.DYNAMIC, this);
+			var body:Body = physics.createBody(Body.DYNAMIC, this);
 			
-			body.createFixture(new B2Box(graphics.width, graphics.height), new B2FixtureDef(1));
-			
-			body.addEventListener(B2ContactEvent.BEGIN, _beginContact);
+			body.createFixture(new Box(graphics.width, graphics.height), new FixtureDef(1));
+			body.addEventListener(ContactEvent.BEGIN, _beginContact);
 			
 			return body;
 		}
@@ -57,7 +56,7 @@ package
 		}
 		
 		
-		private function _beginContact(event:B2ContactEvent):void
+		private function _beginContact(event:ContactEvent):void
 		{
 			// Handle collisions.
 		}

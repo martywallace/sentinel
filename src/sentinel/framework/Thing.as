@@ -23,6 +23,21 @@ package sentinel.framework
 		
 		
 		/**
+		 * Deconstruct this Thing and its descendants.
+		 */
+		public function deconstruct():void
+		{
+			removeAll(true);
+			
+			removeFromParent();
+			removeEventListeners();
+			
+			_children.length = 0;
+			_dispatchEvent(ThingEvent.DECONSTRUCTED);
+		}
+		
+		
+		/**
 		 * Update this Thing and its descendants.
 		 */
 		protected function update():void
@@ -39,21 +54,6 @@ package sentinel.framework
 		internal function __update():void
 		{
 			update();
-		}
-		
-		
-		/**
-		 * Deconstruct this Thing and its descendants.
-		 */
-		public function deconstruct():void
-		{
-			removeAll(true);
-			
-			removeFromParent();
-			removeEventListeners();
-			
-			_children.length = 0;
-			_dispatchEvent(ThingEvent.DECONSTRUCTED);
 		}
 		
 		
@@ -183,6 +183,16 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Called when this Thing is added to another Thing.
+		 * @param to The Thing this Thing was added to.
+		 */
+		protected function added(to:Thing):void
+		{
+			//
+		}
+		
+		
 		internal function __added(to:Thing):void
 		{
 			_parent = to;
@@ -193,10 +203,10 @@ package sentinel.framework
 		
 		
 		/**
-		 * Called when this Thing is added to another Thing.
-		 * @param to The Thing this Thing was added to.
+		 * Called when this Thing is removed from another Thing.
+		 * @param from The Thing this Thing was removed from.
 		 */
-		protected function added(to:Thing):void
+		protected function removed(from:Thing):void
 		{
 			//
 		}
@@ -208,16 +218,6 @@ package sentinel.framework
 			_dispatchEvent(ThingEvent.REMOVED);
 			
 			removed(from);
-		}
-		
-		
-		/**
-		 * Called when this Thing is removed from another Thing.
-		 * @param from The Thing this Thing was removed from.
-		 */
-		protected function removed(from:Thing):void
-		{
-			//
 		}
 		
 		

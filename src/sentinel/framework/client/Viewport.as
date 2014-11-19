@@ -1,9 +1,14 @@
 package sentinel.framework.client
 {
 	
+	import flash.geom.Point;
 	import sentinel.framework.Game;
 	
 	
+	/**
+	 * Describes the game viewport (screen).
+	 * @author Marty Wallace.
+	 */
 	public class Viewport
 	{
 		
@@ -16,25 +21,20 @@ package sentinel.framework.client
 		}
 		
 		
-		/**
-		 * The viewport width.
-		 */
 		public function get width():int { return _game.starling.backBufferWidth; }
-		
-		/**
-		 * The viewport height.
-		 */
 		public function get height():int { return _game.starling.backBufferHeight; }
 		
-		/**
-		 * The center of the viewport along the X axis.
-		 */
-		public function get middleX():Number { return width / 2; }
+		public function get center():Point { return new Point(width / 2, height / 2); }
 		
-		/**
-		 * The center of the viewport along the Y axis.
-		 */
-		public function get middleY():Number { return height / 2; }
+		public function get top():Point { return new Point(width / 2, 0); }
+		public function get bottom():Point { return new Point(width / 2, height); }
+		public function get left():Point { return new Point(0, height / 2); }
+		public function get right():Point { return new Point(width, height / 2); }
+		
+		public function get topLeft():Point { return new Point(0, 0); }
+		public function get topRight():Point { return new Point(width, 0); }
+		public function get bottomLeft():Point { return new Point(0, height); }
+		public function get bottomRight():Point { return new Point(width, height); }
 		
 	}
 	

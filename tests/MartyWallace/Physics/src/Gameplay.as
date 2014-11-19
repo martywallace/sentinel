@@ -1,9 +1,9 @@
 package
 {
 	
-	import sentinel.framework.b2.B2Debug;
-	import sentinel.framework.b2.B2Vector2D;
-	import sentinel.framework.b2.B2WorldDef;
+	import sentinel.gameplay.physics.Debug;
+	import sentinel.gameplay.physics.Vector2D;
+	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
 	import sentinel.framework.events.KeyboardEvent;
@@ -20,15 +20,15 @@ package
 		
 		public function Gameplay()
 		{
-			super(new World(new B2WorldDef(new B2Vector2D(0, 1400)), new B2Debug(game, 1, 0.5, 0, new <int>[B2Debug.SHAPE, B2Debug.CENTER_OF_MASS])), new HUD());
+			super(new World(new EngineDef(new Vector2D(0, 1400)), new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])), new HUD());
 			
 			_platform = world.add(new Platform()) as Platform;
 			
-			_platform.x = viewport.middleX;
+			_platform.x = viewport.center.x;
 			_platform.y = viewport.height - 60;
 			
-			world.camera.x = viewport.middleX;
-			world.camera.y = viewport.middleY;
+			world.camera.x = viewport.center.x;
+			world.camera.y = viewport.center.y;
 			
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _quit);

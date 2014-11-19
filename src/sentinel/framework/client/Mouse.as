@@ -34,6 +34,10 @@ package sentinel.framework.client
 	[Event(name='rightUp', type='sentinel.events.MouseEvent')]
 	
 	
+	/**
+	 * The Mouse class provides access to the current state of the mouse buttons.
+	 * @author Marty Wallace.
+	 */
 	public class Mouse extends EventDispatcher
 	{
 		
@@ -88,6 +92,10 @@ package sentinel.framework.client
 		}
 		
 		
+		/**
+		 * Returns the current state of the mouse buttons as a <code>MouseState</code> object.
+		 * @return
+		 */
 		public function getState():MouseState
 		{
 			var viewportPosition:Point = new Point(_game.starling.nativeStage.mouseX, _game.starling.nativeStage.mouseY);

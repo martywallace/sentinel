@@ -1,4 +1,4 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
 	import Box2D.Dynamics.b2DebugDraw;
@@ -11,7 +11,7 @@ package sentinel.framework.b2
 	 * Defines and encapsulates debug drawing for Box2D.
 	 * @author Marty Wallace.
 	 */
-	public class B2Debug implements IDeconstructs
+	public class Debug implements IDeconstructs
 	{
 		
 		public static const AABB:int = b2DebugDraw.e_aabbBit;
@@ -37,7 +37,7 @@ package sentinel.framework.b2
 		 * @param fillAlpha Fill alpha of debug graphics.
 		 * @param flags List of drawing flags. If null or empty, <code>B2Debug.SHAPE</code> will be used.
 		 */
-		public function B2Debug(game:Game, lineThickness:int = 1, lineAlpha:Number = 1, fillAlpha:Number = 0.2, flags:Vector.<int> = null)
+		public function Debug(game:Game, lineThickness:int = 1, lineAlpha:Number = 1, fillAlpha:Number = 0.2, flags:Vector.<int> = null)
 		{
 			_game = game;
 			
@@ -46,7 +46,7 @@ package sentinel.framework.b2
 			_base = new b2DebugDraw();
 			
 			_base.SetSprite(_graphics);
-			_base.SetDrawScale(B2World.scale);
+			_base.SetDrawScale(Engine.scale);
 			_base.SetLineThickness(lineThickness);
 			_base.SetAlpha(lineAlpha);
 			_base.SetFillAlpha(fillAlpha);
@@ -60,7 +60,7 @@ package sentinel.framework.b2
 			}
 			else
 			{
-				_base.AppendFlags(B2Debug.SHAPE);
+				_base.AppendFlags(Debug.SHAPE);
 			}
 			
 			_wrapper.addChild(_graphics);

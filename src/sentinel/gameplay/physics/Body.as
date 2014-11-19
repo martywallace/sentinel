@@ -1,4 +1,4 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
 	import Box2D.Dynamics.b2Body;
@@ -11,7 +11,7 @@ package sentinel.framework.b2
 	import sentinel.framework.IDeconstructs;
 	
 	
-	public class B2Body extends EventDispatcher implements IDeconstructs
+	public class Body extends EventDispatcher implements IDeconstructs
 	{
 		
 		public static const STATIC:int = b2Body.b2_staticBody;
@@ -20,28 +20,28 @@ package sentinel.framework.b2
 		
 		
 		private var _base:b2Body;
-		private var _world:B2World;
+		private var _world:Engine;
 		private var _def:b2BodyDef;
-		private var _data:B2BodyData;
-		private var _position:B2Vector2D;
-		private var _fixtures:Vector.<B2Fixture>;
-		private var _linearVelocity:B2Vector2D;
-		private var _internalForce:B2Vector2D;
+		private var _data:BodyData;
+		private var _position:Vector2D;
+		private var _fixtures:Vector.<Fixture>;
+		private var _linearVelocity:Vector2D;
+		private var _internalForce:Vector2D;
 		
 		
 		/**
 		 * Internal - Use <code>B2World.createBody()</code>.
 		 */
-		public function B2Body(world:B2World, body:b2Body, def:b2BodyDef, owner:Thing)
+		public function Body(world:Engine, body:b2Body, def:b2BodyDef, owner:Thing)
 		{
 			_base = body;
 			_def = def;
 			_world = world;
-			_data = new B2BodyData(this, owner);
-			_position = new B2Vector2D();
-			_fixtures = new <B2Fixture>[];
-			_linearVelocity = new B2Vector2D();
-			_internalForce = new B2Vector2D();
+			_data = new BodyData(this, owner);
+			_position = new Vector2D();
+			_fixtures = new <Fixture>[];
+			_linearVelocity = new Vector2D();
+			_internalForce = new Vector2D();
 			
 			_base.SetUserData(_data);
 		}
@@ -74,7 +74,7 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function createFixture(shape:IB2Shape, fixtureDef:B2FixtureDef = null):B2Fixture
+		public function createFixture(shape:IShape, fixtureDef:FixtureDef = null):Fixture
 		{
 			var nativeFixtureDef:b2FixtureDef = new b2FixtureDef();
 			nativeFixtureDef.shape = shape.base;
@@ -87,7 +87,7 @@ package sentinel.framework.b2
 			}
 			
 			var nativeFixture:b2Fixture = _base.CreateFixture(nativeFixtureDef);
-			var fixture:B2Fixture = new B2Fixture(nativeFixture);
+			var fixture:Fixture = new Fixture(nativeFixture);
 			
 			_fixtures.push(fixture);
 			
@@ -96,7 +96,7 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function destroyFixture(fixture:B2Fixture):void
+		public function destroyFixture(fixture:Fixture):void
 		{
 			var i:int = _fixtures.indexOf(fixture);
 			
@@ -112,17 +112,17 @@ package sentinel.framework.b2
 		{
 			while (_fixtures.length > 0)
 			{
-				var f:B2Fixture = _fixtures.pop();
+				var f:Fixture = _fixtures.pop();
 				_base.DestroyFixture(f.base);
 			}
 		}
 		
 		
 		public function get base():b2Body { return _base; }
-		public function get world():B2World { return _world; }
+		public function get world():Engine { return _world; }
 		public function get owner():Thing{ return _data.owner }
 		
-		public function get fixtures():Vector.<B2Fixture> { return _fixtures; }
+		public function get fixtures():Vector.<Fixture> { return _fixtures; }
 		public function get numFixtures():int { return _fixtures.length; }
 		
 		public function get awake():Boolean{ return _base.IsAwake(); }
@@ -143,8 +143,8 @@ package sentinel.framework.b2
 		public function get linearDamping():Number{ return _base.GetLinearDamping(); }
 		public function set linearDamping(value:Number):void{ _base.SetLinearDamping(value); }
 		
-		public function get linearVelocity():B2Vector2D{ return _linearVelocity; }
-		public function set linearVelocity(value:B2Vector2D):void { _linearVelocity = value; }
+		public function get linearVelocity():Vector2D{ return _linearVelocity; }
+		public function set linearVelocity(value:Vector2D):void { _linearVelocity = value; }
 		
 		public function get angularVelocity():Number{ return _base.GetAngularVelocity(); }
 		
@@ -155,43 +155,43 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function get linearVelocityX():Number{ return _base.GetLinearVelocity().x * B2World.scale; }
+		public function get linearVelocityX():Number{ return _base.GetLinearVelocity().x * Engine.scale; }
 		
 		public function set linearVelocityX(value:Number):void
 		{
 			_linearVelocity.x = value;
-			_linearVelocity.y = _base.GetLinearVelocity().y * B2World.scale;
+			_linearVelocity.y = _base.GetLinearVelocity().y * Engine.scale;
 			_base.SetLinearVelocity(_linearVelocity.base);
 			_base.SetAwake(true);
 		}
 		
-		public function get linearVelocityY():Number{ return _base.GetLinearVelocity().y * B2World.scale; }
+		public function get linearVelocityY():Number{ return _base.GetLinearVelocity().y * Engine.scale; }
 		
 		public function set linearVelocityY(value:Number):void
 		{
 			_linearVelocity.y = value;
-			_linearVelocity.x = _base.GetLinearVelocity().x * B2World.scale;
+			_linearVelocity.x = _base.GetLinearVelocity().x * Engine.scale;
 			_base.SetLinearVelocity(_linearVelocity.base);
 			_base.SetAwake(true);
 		}
 		
 		
-		public function get x():Number{ return _base.GetPosition().x * B2World.scale; }
+		public function get x():Number{ return _base.GetPosition().x * Engine.scale; }
 		
 		public function set x(value:Number):void
 		{
 			_position.x = value;
-			_position.y = _base.GetPosition().y * B2World.scale;
+			_position.y = _base.GetPosition().y * Engine.scale;
 			_base.SetPosition(_position.base);
 		}
 		
 		
-		public function get y():Number{ return _base.GetPosition().y * B2World.scale; }
+		public function get y():Number{ return _base.GetPosition().y * Engine.scale; }
 		
 		public function set y(value:Number):void
 		{
 			_position.y = value;
-			_position.x = _base.GetPosition().x * B2World.scale;
+			_position.x = _base.GetPosition().x * Engine.scale;
 			_base.SetPosition(_position.base);
 		}
 		

@@ -1,4 +1,4 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
 	import Box2D.Collision.b2AABB;
@@ -6,7 +6,7 @@ package sentinel.framework.b2
 	import Box2D.Dynamics.Contacts.b2Contact;
 	
 	
-	public class B2Fixture
+	public class Fixture
 	{
 		
 		private var _base:b2Fixture;
@@ -15,14 +15,14 @@ package sentinel.framework.b2
 		/**
 		 * Internal - Use <code>B2Body.createFixture()</code>.
 		 */
-		public function B2Fixture(fixture:b2Fixture)
+		public function Fixture(fixture:b2Fixture)
 		{
 			_base = fixture;
 			_base.SetUserData(this);
 		}
 		
 		
-		public function redefine(fixtureDef:B2FixtureDef):void
+		public function redefine(fixtureDef:FixtureDef):void
 		{
 			_base.SetDensity(fixtureDef.density);
 			_base.SetFriction(fixtureDef.friction);
@@ -35,7 +35,7 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function overlaps(fixture:B2Fixture):Boolean
+		public function overlaps(fixture:Fixture):Boolean
 		{
 			return aabb.TestOverlap(fixture.aabb);
 		}

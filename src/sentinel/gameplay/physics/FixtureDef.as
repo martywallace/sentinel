@@ -1,7 +1,7 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
-	public class B2FixtureDef
+	public class FixtureDef
 	{
 		
 		private var _density:Number;
@@ -9,7 +9,7 @@ package sentinel.framework.b2
 		private var _restitution:Number;
 		
 		
-		public function B2FixtureDef(density:Number = 0, friction:Number = 0.2, restitution:Number = 0)
+		public function FixtureDef(density:Number = 0, friction:Number = 0.2, restitution:Number = 0)
 		{
 			_density = density;
 			_friction = friction;

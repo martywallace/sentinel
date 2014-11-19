@@ -19,7 +19,7 @@ package
 			_playBtn = new ButtonBox('Play', 0xFF0000);
 			graphics.addChild(_playBtn);
 			
-			_playBtn.x = viewport.middleX;
+			_playBtn.x = viewport.center.x;
 			_playBtn.y = viewport.height - 160;
 			
 			_playBtn.addEventListener(TouchEvent.TOUCH, _play);

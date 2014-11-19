@@ -39,8 +39,8 @@ package sentinel.gameplay.scene
 		
 		private function _set(x:Number, y:Number, rotation:Number, zoom:Number):void
 		{
-			_world.graphics.x = viewport.middleX + _offsetX;
-			_world.graphics.y = viewport.middleY + _offsetY;
+			_world.graphics.x = viewport.width / 2 + _offsetX;
+			_world.graphics.y = viewport.height / 2 + _offsetY;
 			_world.graphics.rotation = -rotation;
 			_world.graphics.scaleX = _world.graphics.scaleY = zoom;
 			

@@ -1,4 +1,4 @@
-package sentinel.framework.b2
+package sentinel.gameplay.physics
 {
 	
 	import Box2D.Dynamics.b2Body;
@@ -12,7 +12,7 @@ package sentinel.framework.b2
 	 * Wrapper for Box2D.Dynamics.b2World.
 	 * @author Marty Wallace.
 	 */
-	public class B2World implements IDeconstructs
+	public class Engine implements IDeconstructs
 	{
 		
 		private static var _scale:int = 30;
@@ -26,9 +26,9 @@ package sentinel.framework.b2
 		
 		
 		private var _base:b2World;
-		private var _def:B2WorldDef;
-		private var _debug:B2Debug;
-		private var _destroyed:Vector.<B2Body> = new <B2Body>[];
+		private var _def:EngineDef;
+		private var _debug:Debug;
+		private var _destroyed:Vector.<Body> = new <Body>[];
 		
 		
 		/**
@@ -37,9 +37,9 @@ package sentinel.framework.b2
 		 * @param def An optional world definition.
 		 * @param debug An optional debug definition.
 		 */
-		public function B2World(def:B2WorldDef = null, debug:B2Debug = null)
+		public function Engine(def:EngineDef = null, debug:Debug = null)
 		{
-			_def = def === null ? new B2WorldDef(new B2Vector2D()) : def;
+			_def = def === null ? new EngineDef(new Vector2D()) : def;
 			_base = new b2World(_def.gravity.base, _def.sleep);
 			_debug = debug;
 			
@@ -48,7 +48,7 @@ package sentinel.framework.b2
 				_base.SetDebugDraw(debug.base);
 			}
 			
-			_base.SetContactListener(new B2ContactListener());
+			_base.SetContactListener(new ContactListener());
 		}
 		
 		
@@ -60,7 +60,7 @@ package sentinel.framework.b2
 				_debug = null;
 			}
 			
-			for each(var body:B2Body in bodies)
+			for each(var body:Body in bodies)
 			{
 				body.deconstruct();
 			}
@@ -80,18 +80,18 @@ package sentinel.framework.b2
 		 * @param owner An optional owner of the B2Body.
 		 * @return The new B2Body.
 		 */
-		public function createBody(type:int = 2, owner:Thing = null):B2Body
+		public function createBody(type:int = 2, owner:Thing = null):Body
 		{
 			var def:b2BodyDef = new b2BodyDef();
 			def.type = type;
 			
 			var baseBody:b2Body = _base.CreateBody(def);
 			
-			return new B2Body(this, baseBody, def, owner);
+			return new Body(this, baseBody, def, owner);
 		}
 		
 		
-		internal function __destroyBody(body:B2Body):void
+		internal function __destroyBody(body:Body):void
 		{
 			if(_destroyed.indexOf(body) < 0) _destroyed.push(body);
 		}
@@ -101,7 +101,7 @@ package sentinel.framework.b2
 		{
 			while (_destroyed.length > 0)
 			{
-				var d:B2Body = _destroyed.pop();
+				var d:Body = _destroyed.pop();
 				_base.DestroyBody(d.base);
 				
 				d.deconstruct();
@@ -117,16 +117,16 @@ package sentinel.framework.b2
 		}
 		
 		
-		public function get bodies():Vector.<B2Body>
+		public function get bodies():Vector.<Body>
 		{
-			var result:Vector.<B2Body> = new <B2Body>[];
+			var result:Vector.<Body> = new <Body>[];
 			var start:b2Body = _base.GetBodyList();
 			
 			while (start !== null)
 			{
-				if (start.GetUserData() !== null && start.GetUserData() is B2BodyData)
+				if (start.GetUserData() !== null && start.GetUserData() is BodyData)
 				{
-					result.push((start.GetUserData() as B2BodyData).body);
+					result.push((start.GetUserData() as BodyData).body);
 				}
 				
 				start = start.GetNext();
@@ -138,8 +138,8 @@ package sentinel.framework.b2
 		
 		public function get base():b2World{ return _base; }
 		public function get sleeps():Boolean{ return _def.sleep; }
-		public function get gravity():B2Vector2D { return _def.gravity; }
-		public function get debug():B2Debug { return _debug; }
+		public function get gravity():Vector2D { return _def.gravity; }
+		public function get debug():Debug { return _debug; }
 		public function get debugging():Boolean { return _debug !== null; }
 		public function get numBodies():int { return _base.GetBodyCount(); }
 		

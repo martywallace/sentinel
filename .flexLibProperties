@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses/>
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="sentinel.framework.Core"/>
+    <classEntry path="sentinel.framework.Game"/>
+    <classEntry path="sentinel.framework.IConstructs"/>
+    <classEntry path="sentinel.framework.IDeconstructs"/>
+    <classEntry path="sentinel.framework.Library"/>
+    <classEntry path="sentinel.framework.State"/>
+    <classEntry path="sentinel.framework.Thing"/>
+    <classEntry path="sentinel.framework.b2.B2Body"/>
+    <classEntry path="sentinel.framework.b2.B2BodyData"/>
+    <classEntry path="sentinel.framework.b2.B2Box"/>
+    <classEntry path="sentinel.framework.b2.B2Circle"/>
+    <classEntry path="sentinel.framework.b2.B2ContactListener"/>
+    <classEntry path="sentinel.framework.b2.B2Debug"/>
+    <classEntry path="sentinel.framework.b2.B2Fixture"/>
+    <classEntry path="sentinel.framework.b2.B2FixtureDef"/>
+    <classEntry path="sentinel.framework.b2.B2Polygon"/>
+    <classEntry path="sentinel.framework.b2.B2Vector2D"/>
+    <classEntry path="sentinel.framework.b2.B2World"/>
+    <classEntry path="sentinel.framework.b2.B2WorldDef"/>
+    <classEntry path="sentinel.framework.b2.IB2Shape"/>
+    <classEntry path="sentinel.framework.client.Keyboard"/>
+    <classEntry path="sentinel.framework.client.KeyboardState"/>
+    <classEntry path="sentinel.framework.client.Mouse"/>
+    <classEntry path="sentinel.framework.client.MouseState"/>
+    <classEntry path="sentinel.framework.client.Viewport"/>
+    <classEntry path="sentinel.framework.events.B2ContactEvent"/>
+    <classEntry path="sentinel.framework.events.KeyboardEvent"/>
+    <classEntry path="sentinel.framework.events.MouseEvent"/>
+    <classEntry path="sentinel.framework.events.ThingEvent"/>
+    <classEntry path="sentinel.framework.graphics.IGraphics"/>
+    <classEntry path="sentinel.framework.graphics.IGraphicsContainer"/>
+    <classEntry path="sentinel.framework.graphics.Image"/>
+    <classEntry path="sentinel.framework.graphics.Quad"/>
+    <classEntry path="sentinel.framework.graphics.Sprite"/>
+    <classEntry path="sentinel.framework.graphics.TextField"/>
+    <classEntry path="sentinel.framework.sound.Audio"/>
+    <classEntry path="sentinel.framework.sound.Sound"/>
+    <classEntry path="sentinel.framework.util.Align"/>
+    <classEntry path="sentinel.framework.util.GraphicsUtil"/>
+    <classEntry path="sentinel.framework.util.NumberUtil"/>
+    <classEntry path="sentinel.framework.util.ObjectUtil"/>
+    <classEntry path="sentinel.framework.util.Random"/>
+    <classEntry path="sentinel.framework.util.StringUtil"/>
+    <classEntry path="sentinel.gameplay.scene.Being"/>
+    <classEntry path="sentinel.gameplay.scene.Camera"/>
+    <classEntry path="sentinel.gameplay.scene.World"/>
+    <classEntry path="sentinel.gameplay.states.GameplayState"/>
+    <classEntry path="sentinel.gameplay.ui.UI"/>
+    <classEntry path="sentinel.gameplay.ui.UIElement"/>
+  </includeClasses>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>

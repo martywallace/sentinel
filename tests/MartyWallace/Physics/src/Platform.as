@@ -1,10 +1,10 @@
 package
 {
 	
-	import sentinel.framework.b2.B2Body;
-	import sentinel.framework.b2.B2Box;
-	import sentinel.framework.b2.B2FixtureDef;
-	import sentinel.framework.b2.B2World;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Box;
+	import sentinel.gameplay.physics.FixtureDef;
+	import sentinel.gameplay.physics.Engine;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.graphics.Quad;
@@ -23,10 +23,10 @@ package
 		}
 		
 		
-		protected override function defineBody(physics:B2World):B2Body
+		protected override function defineBody(physics:Engine):Body
 		{
-			var body:B2Body = physics.createBody(B2Body.STATIC, this);
-			body.createFixture(new B2Box(graphics.width, graphics.height), new B2FixtureDef(1, 0.5, 0.5));
+			var body:Body = physics.createBody(Body.STATIC, this);
+			body.createFixture(new Box(graphics.width, graphics.height), new FixtureDef(1, 0.5, 0.5));
 			
 			return body;
 		}

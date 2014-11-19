@@ -1,8 +1,8 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.framework.b2.B2Body;
-	import sentinel.framework.b2.B2World;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Engine;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.ui.UI;
@@ -13,7 +13,7 @@ package sentinel.gameplay.scene
 	{
 		
 		private var _graphics:IGraphics;
-		private var _body:B2Body;
+		private var _body:Body;
 		
 		private var _x:Number = 0;
 		private var _y:Number = 0;
@@ -31,13 +31,13 @@ package sentinel.gameplay.scene
 		
 		protected override function update():void
 		{
-			alignGraphicsToBody();
+			alignGraphics();
 			
 			super.update();
 		}
 		
 		
-		public function alignGraphicsToBody():void
+		public function alignGraphics():void
 		{
 			if (_graphics !== null && _body !== null)
 			{
@@ -45,16 +45,28 @@ package sentinel.gameplay.scene
 				_graphics.y = _body.y;
 				_graphics.rotation = _body.rotation;
 			}
+			else
+			{
+				_graphics.x = _x;
+				_graphics.y = _y;
+				_graphics.rotation = _rotation;
+			}
 		}
 		
 		
-		public function alignBodyToGraphics():void
+		public function alignBody():void
 		{
 			if (_graphics !== null && _body !== null)
 			{
 				_body.x = _graphics.x;
 				_body.y = _graphics.y;
 				_body.rotation = _graphics.rotation;
+			}
+			else
+			{
+				_body.x = _x;
+				_body.y = _y;
+				_body.rotation = _rotation;
 			}
 		}
 		
@@ -69,23 +81,15 @@ package sentinel.gameplay.scene
 				{
 					// Add the graphics to the World's graphics container.
 					(world as World).__content.addChild(_graphics as DisplayObject);
-					
-					_graphics.x = _x;
-					_graphics.y = _y;
-					_graphics.rotation = _rotation;
+					alignGraphics();
 				}
 				
 				if ((world as World).physics !== null)
 				{
 					// Attempt to define a body for this Being.
 					_body = defineBody((world as World).physics);
-					
-					_body.x = _x;
-					_body.y = _y;
-					_body.rotation = _rotation;
+					alignBody();
 				}
-				
-				alignGraphicsToBody();
 			}
 			else
 			{
@@ -114,7 +118,7 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		protected function defineBody(physics:B2World):B2Body
+		protected function defineBody(physics:Engine):Body
 		{
 			return null;
 		}
@@ -122,7 +126,7 @@ package sentinel.gameplay.scene
 		
 		public function get world():World { return parent as World; }
 		public function get graphics():IGraphics { return _graphics; }
-		public function get body():B2Body { return _body; }
+		public function get body():Body { return _body; }
 		
 		public function get x():Number { return _body !== null ? _body.x : (_graphics !== null ? _graphics.x : _x); }
 		
