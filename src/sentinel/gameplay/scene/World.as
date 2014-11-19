@@ -14,7 +14,7 @@ package sentinel.gameplay.scene
 	public class World extends Thing
 	{
 		
-		private var _physics:Engine;
+		private var _engine:Engine;
 		private var _camera:Camera;
 		private var _frozen:Boolean = false;
 		private var _graphics:IGraphicsContainer;
@@ -26,7 +26,7 @@ package sentinel.gameplay.scene
 		{
 			if (definition !== null)
 			{
-				_physics = new Engine(definition, debug);
+				_engine = new Engine(definition, debug);
 			}
 			
 			_graphics = new Sprite();
@@ -39,9 +39,9 @@ package sentinel.gameplay.scene
 		
 		public override function deconstruct():void
 		{
-			if (_physics !== null)
+			if (_engine !== null)
 			{
-				_physics.deconstruct();
+				_engine.deconstruct();
 			}
 			
 			_graphics.deconstruct();
@@ -56,7 +56,7 @@ package sentinel.gameplay.scene
 			{
 				_ticks ++;
 				
-				if (_physics !== null) _physics.step();
+				if (_engine !== null) _engine.step();
 				
 				super.update();
 			}
@@ -98,7 +98,7 @@ package sentinel.gameplay.scene
 		
 		
 		public function get ui():UI { return (parent as GameplayState).ui }
-		public function get physics():Engine { return _physics; }
+		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get frozen():Boolean { return _frozen; }

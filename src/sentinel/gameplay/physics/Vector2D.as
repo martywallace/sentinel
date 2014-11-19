@@ -30,12 +30,11 @@ package sentinel.gameplay.physics
 		
 		public function get base():b2Vec2 { return _base; }
 		
+		public function get x():Number { return _base.x * Engine.scale; }
+		public function set x(value:Number):void{ _base.Set(value / Engine.scale, _base.y); }
 		
-		public function get x():Number{ return _base.x * Engine.scale; }
-		public function set x(value:Number):void { _base.x = value / Engine.scale; }
-		
-		public function get y():Number{ return _base.y * Engine.scale; }
-		public function set y(value:Number):void { _base.y = value / Engine.scale; }
+		public function get y():Number { return _base.y * Engine.scale; }
+		public function set y(value:Number):void{ _base.Set(_base.x, value / Engine.scale); }
 		
 		public function get length():Number { return Math.sqrt(x * x + y * y); }
 		public function get angle():Number { return Math.atan2(y, x); }

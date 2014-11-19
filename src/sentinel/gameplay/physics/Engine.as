@@ -141,7 +141,7 @@ package sentinel.gameplay.physics
 		public function get gravity():Vector2D { return _def.gravity; }
 		public function get debug():Debug { return _debug; }
 		public function get debugging():Boolean { return _debug !== null; }
-		public function get numBodies():int { return _base.GetBodyCount(); }
+		public function get totalBodies():int { return _base.GetBodyCount(); }
 		
 	}
 	

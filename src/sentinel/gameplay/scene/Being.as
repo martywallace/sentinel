@@ -84,10 +84,10 @@ package sentinel.gameplay.scene
 					alignGraphics();
 				}
 				
-				if ((world as World).physics !== null)
+				if ((world as World).engine !== null)
 				{
 					// Attempt to define a body for this Being.
-					_body = defineBody((world as World).physics);
+					_body = defineBody((world as World).engine);
 					alignBody();
 				}
 			}
@@ -118,7 +118,7 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		protected function defineBody(physics:Engine):Body
+		protected function defineBody(engine:Engine):Body
 		{
 			return null;
 		}

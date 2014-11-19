@@ -47,16 +47,16 @@ package sentinel.gameplay.scene
 			_world.__content.x = -x;
 			_world.__content.y = -y;
 			
-			if (_world.physics !== null && _world.physics.debugging)
+			if (_world.engine !== null && _world.engine.debugging)
 			{
-				_world.physics.debug.graphics.x = _world.__content.x;
-				_world.physics.debug.graphics.y = _world.__content.y;
+				_world.engine.debug.graphics.x = _world.__content.x;
+				_world.engine.debug.graphics.y = _world.__content.y;
 				
-				_world.physics.debug.wrapper.x = _world.graphics.x;
-				_world.physics.debug.wrapper.y = _world.graphics.y;
-				_world.physics.debug.wrapper.scaleX = _world.graphics.scaleX;
-				_world.physics.debug.wrapper.scaleY = _world.graphics.scaleY;
-				_world.physics.debug.wrapper.rotation = _world.graphics.rotation * 180 / Math.PI;
+				_world.engine.debug.wrapper.x = _world.graphics.x;
+				_world.engine.debug.wrapper.y = _world.graphics.y;
+				_world.engine.debug.wrapper.scaleX = _world.graphics.scaleX;
+				_world.engine.debug.wrapper.scaleY = _world.graphics.scaleY;
+				_world.engine.debug.wrapper.rotation = _world.graphics.rotation * 180 / Math.PI;
 			}
 		}
 		

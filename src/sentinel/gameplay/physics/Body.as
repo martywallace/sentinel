@@ -20,7 +20,7 @@ package sentinel.gameplay.physics
 		
 		
 		private var _base:b2Body;
-		private var _world:Engine;
+		private var _engine:Engine;
 		private var _def:b2BodyDef;
 		private var _data:BodyData;
 		private var _position:Vector2D;
@@ -29,14 +29,11 @@ package sentinel.gameplay.physics
 		private var _internalForce:Vector2D;
 		
 		
-		/**
-		 * Internal - Use <code>B2World.createBody()</code>.
-		 */
-		public function Body(world:Engine, body:b2Body, def:b2BodyDef, owner:Thing)
+		public function Body(engine:Engine, body:b2Body, def:b2BodyDef, owner:Thing)
 		{
 			_base = body;
 			_def = def;
-			_world = world;
+			_engine = engine;
 			_data = new BodyData(this, owner);
 			_position = new Vector2D();
 			_fixtures = new <Fixture>[];
@@ -49,7 +46,7 @@ package sentinel.gameplay.physics
 		
 		public function deconstruct():void
 		{
-			if (_world !== null)
+			if (_engine !== null)
 			{
 				destroy();
 			}
@@ -64,10 +61,10 @@ package sentinel.gameplay.physics
 		
 		public function destroy():void
 		{
-			if (_world !== null)
+			if (_engine !== null)
 			{
-				_world.__destroyBody(this);
-				_world = null;
+				_engine.__destroyBody(this);
+				_engine = null;
 				
 				deconstruct();
 			}
@@ -119,11 +116,11 @@ package sentinel.gameplay.physics
 		
 		
 		public function get base():b2Body { return _base; }
-		public function get world():Engine { return _world; }
+		public function get engine():Engine { return _engine; }
 		public function get owner():Thing{ return _data.owner }
 		
 		public function get fixtures():Vector.<Fixture> { return _fixtures; }
-		public function get numFixtures():int { return _fixtures.length; }
+		public function get totalFixtures():int { return _fixtures.length; }
 		
 		public function get awake():Boolean{ return _base.IsAwake(); }
 		public function set awake(value:Boolean):void{ _base.SetAwake(value); }
@@ -181,7 +178,6 @@ package sentinel.gameplay.physics
 		public function set x(value:Number):void
 		{
 			_position.x = value;
-			_position.y = _base.GetPosition().y * Engine.scale;
 			_base.SetPosition(_position.base);
 		}
 		
@@ -191,7 +187,6 @@ package sentinel.gameplay.physics
 		public function set y(value:Number):void
 		{
 			_position.y = value;
-			_position.x = _base.GetPosition().x * Engine.scale;
 			_base.SetPosition(_position.base);
 		}
 		

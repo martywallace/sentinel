@@ -28,9 +28,9 @@ package
 		}
 		
 		
-		protected override function defineBody(physics:Engine):Body
+		protected override function defineBody(engine:Engine):Body
 		{
-			var body:Body = physics.createBody(Body.DYNAMIC, this);
+			var body:Body = engine.createBody(Body.DYNAMIC, this);
 			
 			body.createFixture(new Box(graphics.width, graphics.height), new FixtureDef(1));
 			body.addEventListener(ContactEvent.BEGIN, _beginContact);

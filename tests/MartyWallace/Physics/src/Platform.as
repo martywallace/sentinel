@@ -23,9 +23,9 @@ package
 		}
 		
 		
-		protected override function defineBody(physics:Engine):Body
+		protected override function defineBody(engine:Engine):Body
 		{
-			var body:Body = physics.createBody(Body.STATIC, this);
+			var body:Body = engine.createBody(Body.STATIC, this);
 			body.createFixture(new Box(graphics.width, graphics.height), new FixtureDef(1, 0.5, 0.5));
 			
 			return body;
