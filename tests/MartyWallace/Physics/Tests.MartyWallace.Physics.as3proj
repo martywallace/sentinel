@@ -54,7 +54,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="..\..\..\libs\starling.swc" />
+    <element path="..\..\..\libs\Box2D.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

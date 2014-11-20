@@ -51,7 +51,7 @@ package
 			body.isBullet = true;
 			body.linearVelocity = _velocity;
 			
-			//fixture.isSensor = true;
+			fixture.isSensor = true;
 			
 			return body;
 		}
@@ -66,6 +66,9 @@ package
 			
 			super.update();
 		}
+		
+		
+		public function get owner():Bot { return _owner; }
 		
 	}
 	

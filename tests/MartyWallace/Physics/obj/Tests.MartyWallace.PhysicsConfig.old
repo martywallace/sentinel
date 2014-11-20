@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'20 Nov 14'</value>
+      <value>'21 Nov 14'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -36,10 +36,7 @@
       <path-element>C:\Users\User\Documents\ActionScript\Projects\Sentinel\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
-    <include-libraries>
-      <library>C:\Users\User\Documents\ActionScript\Projects\Sentinel\bin\starling.swc</library>
-      <library>C:\Users\User\Documents\ActionScript\Projects\Sentinel\bin\Box2D.swc</library>
-    </include-libraries>
+    <include-libraries />
   </compiler>
   <file-specs>
     <path-element>C:\Users\User\Documents\ActionScript\Projects\Sentinel\tests\MartyWallace\Physics\src\Main.as</path-element>

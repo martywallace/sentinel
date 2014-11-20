@@ -179,15 +179,15 @@ package sentinel.gameplay.scene
 		 * Get or set the x position of this Being.
 		 * This is an alias for <code>position.x</code> and <code>moveTo(value, y)</code>.
 		 */
-		public function get x():Number { return _position.x; }
-		public function set x(value:Number):void { moveTo(value, _position.y); }
+		public function get x():Number { return position.x; }
+		public function set x(value:Number):void { moveTo(value, position.y); }
 		
 		/**
 		 * Get or set the y position of this Being.
 		 * This is an alias for <code>position.y</code> and <code>moveTo(x, value)</code>.
 		 */
-		public function get y():Number { return _position.y; }
-		public function set y(value:Number):void { moveTo(_position.x, value); }
+		public function get y():Number { return position.y; }
+		public function set y(value:Number):void { moveTo(position.x, value); }
 		
 		
 		public function get rotation():Number

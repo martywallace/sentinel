@@ -36,7 +36,7 @@ package
 		
 		protected override function defineGraphics():IGraphics
 		{
-			var graphics:Quad = new Quad(40, 40, _team.color);
+			var graphics:Quad = new Quad(30, 30, _team.color);
 			graphics.alignPivot();
 			
 			return graphics;
@@ -46,7 +46,7 @@ package
 		protected override function defineBody(engine:Engine):Body
 		{
 			var body:Body = engine.createBody(Body.DYNAMIC, this);
-			body.createFixture(new Box(40, 40), new FixtureDef(1));
+			body.createFixture(new Box(30, 30), new FixtureDef(1));
 			
 			body.addEventListener(ContactEvent.BEGIN, _onConcat);
 			
@@ -56,23 +56,44 @@ package
 		
 		private function _onConcat(event:ContactEvent):void
 		{
-			trace(event.externalOwner);
 			if (event.externalOwner is Bullet)
 			{
-				_health -= 1;
-				
-				if (_health <= 0)
+				if ((event.externalOwner as Bullet).owner.team !== team)
 				{
-					deconstruct();
+					_health -= 1;
+					
+					if (_health <= 0)
+					{
+						deconstruct();
+					}
+					
+					event.externalOwner.deconstruct();
 				}
-				
-				event.externalOwner.deconstruct();
 			}
 		}
 		
 		
 		protected override function update():void
 		{
+			var closest:Bot = null;
+			var closestValue:Number = Number.MAX_VALUE;
+			
+			for each(var being:Being in world.getBeingsByType(Bot))
+			{
+				var bot:Bot = being as Bot;
+				
+				if (bot.team !== team)
+				{
+					if (position.distanceTo(bot.position) < closestValue)
+					{
+						closest = bot;
+						closestValue = position.distanceTo(bot.position);
+					}
+				}
+			}
+			
+			_target = closest;
+				
 			if (_target !== null)
 			{
 				_cooldown --;
@@ -84,27 +105,14 @@ package
 				}
 				
 				rotation = Math.atan2(_target.y - y, _target.x - x);
+				
+				body.linearVelocityX = Math.cos(rotation) * 20;
+				body.linearVelocityY = Math.sin(rotation) * 20;
 			}
 			else
 			{
-				var closest:Bot = null;
-				var closestValue:Number = Number.MAX_VALUE;
-				
-				for each(var being:Being in world.getBeingsByType(Bot))
-				{
-					var bot:Bot = being as Bot;
-					
-					if (bot.team !== team)
-					{
-						if (position.distanceTo(bot.position) < closestValue)
-						{
-							closest = bot;
-							closestValue = position.distanceTo(bot.position);
-						}
-					}
-				}
-				
-				_target = closest;
+				body.linearVelocityX = 0;
+				body.linearVelocityY = 0;
 			}
 			
 			super.update();
@@ -114,7 +122,6 @@ package
 		protected function shoot():void
 		{
 			var bullet:Bullet = new Bullet(this);
-			
 			bullet.moveTo(x + Math.cos(rotation) * 32, y + Math.sin(rotation) * 32);
 			
 			world.add(bullet);

@@ -15,10 +15,10 @@ package
 		
 		public function Battle()
 		{
-			super(new World(new EngineDef(), new Debug(game)), new UI());
+			super(new World(new EngineDef()), new UI());
 			
-			var teams:int = 3;
-			var bots:int = 3;
+			var teams:int = 4;
+			var bots:int = 12;
 			
 			
 			for (var t:int = 0; t < teams; t++)
