@@ -1,14 +1,15 @@
 package
 {
 	
-	import sentinel.framework.b2.B2Body;
-	import sentinel.framework.b2.B2Box;
-	import sentinel.framework.b2.B2FixtureDef;
-	import sentinel.framework.b2.B2World;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Quad;
-	import sentinel.gameplay.scene.Being;
 	import sentinel.framework.util.Random;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Box;
+	import sentinel.gameplay.physics.FixtureDef;
+	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.events.ContactEvent;
 	
 	
 	public class Bot extends Being
@@ -17,6 +18,7 @@ package
 		private var _team:Team;
 		private var _target:Bot;
 		private var _cooldown:int = 0;
+		private var _health:int = 6;
 		
 		
 		public function Bot(team:Team)
@@ -41,12 +43,31 @@ package
 		}
 		
 		
-		protected override function defineBody(physics:B2World):B2Body
+		protected override function defineBody(engine:Engine):Body
 		{
-			var body:B2Body = physics.createBody(B2Body.DYNAMIC, this);
-			body.createFixture(new B2Box(40, 40), new B2FixtureDef(1));
+			var body:Body = engine.createBody(Body.DYNAMIC, this);
+			body.createFixture(new Box(40, 40), new FixtureDef(1));
+			
+			body.addEventListener(ContactEvent.BEGIN, _onConcat);
 			
 			return body;
+		}
+		
+		
+		private function _onConcat(event:ContactEvent):void
+		{
+			trace(event.externalOwner);
+			if (event.externalOwner is Bullet)
+			{
+				_health -= 1;
+				
+				if (_health <= 0)
+				{
+					deconstruct();
+				}
+				
+				event.externalOwner.deconstruct();
+			}
 		}
 		
 		
@@ -54,12 +75,36 @@ package
 		{
 			if (_target !== null)
 			{
-				// Get vector between two things.
-				//
+				_cooldown --;
+				
+				if (_cooldown <= 0)
+				{
+					_cooldown = Random.between(20, 100);
+					shoot();
+				}
+				
+				rotation = Math.atan2(_target.y - y, _target.x - x);
 			}
 			else
 			{
-				// ...?
+				var closest:Bot = null;
+				var closestValue:Number = Number.MAX_VALUE;
+				
+				for each(var being:Being in world.getBeingsByType(Bot))
+				{
+					var bot:Bot = being as Bot;
+					
+					if (bot.team !== team)
+					{
+						if (position.distanceTo(bot.position) < closestValue)
+						{
+							closest = bot;
+							closestValue = position.distanceTo(bot.position);
+						}
+					}
+				}
+				
+				_target = closest;
 			}
 			
 			super.update();
@@ -68,7 +113,11 @@ package
 		
 		protected function shoot():void
 		{
-			//
+			var bullet:Bullet = new Bullet(this);
+			
+			bullet.moveTo(x + Math.cos(rotation) * 32, y + Math.sin(rotation) * 32);
+			
+			world.add(bullet);
 		}
 		
 		

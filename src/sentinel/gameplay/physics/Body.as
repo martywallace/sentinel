@@ -148,8 +148,16 @@ package sentinel.gameplay.physics
 		public function get linearDamping():Number{ return _base.GetLinearDamping(); }
 		public function set linearDamping(value:Number):void{ _base.SetLinearDamping(value); }
 		
-		public function get linearVelocity():Vector2D{ return _linearVelocity; }
-		public function set linearVelocity(value:Vector2D):void { _linearVelocity = value; }
+		public function get linearVelocity():Vector2D { return _linearVelocity; }
+		
+		public function set linearVelocity(value:Vector2D):void
+		{
+			if (!value.isZero)
+			{
+				linearVelocityX = value.x;
+				linearVelocityY = value.y;
+			}
+		}
 		
 		public function get angularVelocity():Number{ return _base.GetAngularVelocity(); }
 		

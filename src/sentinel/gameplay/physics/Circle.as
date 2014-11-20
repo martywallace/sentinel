@@ -5,7 +5,7 @@ package sentinel.gameplay.physics
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
-	public class Circle implements IB2Shape
+	public class Circle implements IShape
 	{
 		
 		private var _base:b2CircleShape;
@@ -13,7 +13,7 @@ package sentinel.gameplay.physics
 		
 		public function Circle(radius:Number)
 		{
-			_base = new b2CircleShape(radius / B2World.scale);
+			_base = new b2CircleShape(radius / Engine.scale);
 		}
 		
 		

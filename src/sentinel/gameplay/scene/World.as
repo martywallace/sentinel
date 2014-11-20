@@ -96,6 +96,24 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * TODO: Bit messy.
+		 */
+		public function getBeingsByType(type:Class):Vector.<Being>
+		{
+			var output:Vector.<Being> = new <Being>[];
+			for each(var thing:Thing in children)
+			{
+				if (thing is type)
+				{
+					output.push(thing);
+				}
+			}
+			
+			return output;
+		}
+		
+		
 		
 		public function get ui():UI { return (parent as GameplayState).ui }
 		public function get engine():Engine { return _engine; }

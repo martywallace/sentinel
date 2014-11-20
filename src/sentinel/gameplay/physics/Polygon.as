@@ -5,14 +5,14 @@ package sentinel.gameplay.physics
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
-	public class B2Polygon implements IShape
+	public class Polygon implements IShape
 	{
 		
 		private var _base:b2PolygonShape;
 		private var _verticies:Vector.<Vector2D>;
 		
 		
-		public function B2Polygon(verticies:Vector.<Vector2D>)
+		public function Polygon(verticies:Vector.<Vector2D>)
 		{
 			var nativeVerticies:Array = [];
 			

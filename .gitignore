@@ -1,9 +1,8 @@
 .settings/
+
 .project
 .flexLibProperties
 .actionScriptProperties
 
-bin/Box2D.swc
-bin/starling.swc
-
+build.xml
 Sentinel.as3proj

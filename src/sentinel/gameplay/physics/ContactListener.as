@@ -35,8 +35,8 @@ package sentinel.gameplay.physics
 			var bodyA:Body = (contact.GetFixtureA().GetBody().GetUserData() as BodyData).body;
 			var bodyB:Body = (contact.GetFixtureB().GetBody().GetUserData() as BodyData).body;
 			
-			if (bodyA.hasEventListener(ContactEvent.BEGIN)) bodyA.dispatchEvent(new ContactEvent(type, contact, fixtureA, bodyA, fixtureB, bodyB));
-			if (bodyB.hasEventListener(ContactEvent.END)) bodyB.dispatchEvent(new ContactEvent(type, contact, fixtureB, bodyB, fixtureA, bodyA));
+			if (bodyA.hasEventListener(type)) bodyA.dispatchEvent(new ContactEvent(type, contact, fixtureA, bodyA, fixtureB, bodyB));
+			if (bodyB.hasEventListener(type)) bodyB.dispatchEvent(new ContactEvent(type, contact, fixtureB, bodyB, fixtureA, bodyA));
 		}
 		
 	}

@@ -2,10 +2,12 @@ package
 {
 	
 	import flash.geom.Point;
+	import sentinel.framework.util.Random;
+	import sentinel.gameplay.physics.Debug;
+	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
-	import sentinel.framework.util.Random;
 	
 	
 	public class Battle extends GameplayState
@@ -13,7 +15,7 @@ package
 		
 		public function Battle()
 		{
-			super(new World(), new UI());
+			super(new World(new EngineDef(), new Debug(game)), new UI());
 			
 			var teams:int = 3;
 			var bots:int = 3;
@@ -32,7 +34,6 @@ package
 					bot.y = position.y;
 					
 					world.add(bot);
-					
 				}
 			}
 			

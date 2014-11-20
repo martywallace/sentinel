@@ -11,6 +11,12 @@ package sentinel.gameplay.physics
 		private var _base:b2Vec2;
 		
 		
+		public static function inDirection(angle:Number, length:Number):Vector2D
+		{
+			return new Vector2D(Math.cos(angle) * length, Math.sin(angle) * length);
+		}
+		
+		
 		public function Vector2D(x:Number = 0, y:Number = 0)
 		{
 			_base = new b2Vec2(x / Engine.scale, y / Engine.scale);
@@ -37,13 +43,16 @@ package sentinel.gameplay.physics
 		
 		public function distanceTo(vector2d:Vector2D):Number
 		{
-			return vector2d.subtract(this).length;
+			var a:Number = vector2d.x - x;
+			var b:Number = vector2d.y - y;
+			
+			return Math.sqrt(a * a + b * b);
 		}
 		
 		
 		public function angleTo(vector2d:Vector2D):Number
 		{
-			return vector2d.subtract(this).angle;
+			return Math.atan2(vector2d.y - y, vector2d.x - x);
 		}
 		
 		
@@ -57,6 +66,8 @@ package sentinel.gameplay.physics
 		
 		public function get length():Number { return Math.sqrt(x * x + y * y); }
 		public function get angle():Number { return Math.atan2(y, x); }
+		
+		public function get isZero():Boolean { return x === 0 && y === 0; }
 		
 	}
 	
