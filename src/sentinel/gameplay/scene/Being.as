@@ -5,19 +5,28 @@ package sentinel.gameplay.scene
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
+	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.ui.UI;
 	import starling.display.DisplayObject;
 	
 	
+	/**
+	 * A Being is an objct that lives in a World.
+	 * @author Marty Wallace.
+	 */
 	public class Being extends Thing
 	{
 		
 		private var _graphics:IGraphics;
 		private var _body:Body;
-		
-		private var _x:Number = 0;
-		private var _y:Number = 0;
+		private var _position:Vector2D;
 		private var _rotation:Number = 0;
+		
+		
+		public function Being()
+		{
+			_position = new Vector2D();
+		}
 		
 		
 		public override function deconstruct():void
@@ -41,14 +50,14 @@ package sentinel.gameplay.scene
 		{
 			if (_graphics !== null && _body !== null)
 			{
-				_graphics.x = _body.x;
-				_graphics.y = _body.y;
+				_graphics.x = _body.position.x;
+				_graphics.y = _body.position.y;
 				_graphics.rotation = _body.rotation;
 			}
 			else
 			{
-				_graphics.x = _x;
-				_graphics.y = _y;
+				_graphics.x = _position.x;
+				_graphics.y = _position.y;
 				_graphics.rotation = _rotation;
 			}
 		}
@@ -58,14 +67,12 @@ package sentinel.gameplay.scene
 		{
 			if (_graphics !== null && _body !== null)
 			{
-				_body.x = _graphics.x;
-				_body.y = _graphics.y;
+				_body.moveTo(_graphics.x, _graphics.y);
 				_body.rotation = _graphics.rotation;
 			}
 			else
 			{
-				_body.x = _x;
-				_body.y = _y;
+				_body.moveTo(_position.x, _position.y);
 				_body.rotation = _rotation;
 			}
 		}
@@ -124,31 +131,72 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		public function moveTo(x:Number, y:Number):void
+		{
+			_position.x = x;
+			_position.y = y;
+			
+			if (_body !== null)
+			{
+				_body.moveTo(x, y);
+			}
+			
+			if (_graphics !== null)
+			{
+				_graphics.x = x;
+				_graphics.y = y;
+			}
+		}
+		
+		
 		public function get world():World { return parent as World; }
 		public function get graphics():IGraphics { return _graphics; }
 		public function get body():Body { return _body; }
 		
-		public function get x():Number { return _body !== null ? _body.x : (_graphics !== null ? _graphics.x : _x); }
-		
-		public function set x(value:Number):void
+		/**
+		 * Returns the position of this Being. Modifying the <code>x</code> or <code>y</code> values
+		 * of the result will not affect this Being, use <code>moveTo()</code> or modify the
+		 * <code>x</code> and <code>y</code> values of this Being directly instead.
+		 */
+		public function get position():Vector2D
 		{
-			_x = value;
+			if (_graphics !== null)
+			{
+				_position.x = _graphics.x;
+				_position.y = _graphics.y;
+			}
 			
-			if (_body !== null) _body.x = value;
-			if (_graphics !== null) _graphics.x = value;
+			if (_body !== null)
+			{
+				_position.x = _body.position.x;
+				_position.y = _body.position.y;
+			}
+			
+			return _position;
 		}
 		
-		public function get y():Number { return _body !== null ? _body.y : (_graphics !== null ? _graphics.y : _y); }
+		/**
+		 * Get or set the x position of this Being.
+		 * This is an alias for <code>position.x</code> and <code>moveTo(value, y)</code>.
+		 */
+		public function get x():Number { return _position.x; }
+		public function set x(value:Number):void { moveTo(value, _position.y); }
 		
-		public function set y(value:Number):void
+		/**
+		 * Get or set the y position of this Being.
+		 * This is an alias for <code>position.y</code> and <code>moveTo(x, value)</code>.
+		 */
+		public function get y():Number { return _position.y; }
+		public function set y(value:Number):void { moveTo(_position.x, value); }
+		
+		
+		public function get rotation():Number
 		{
-			_y = value;
+			if (_graphics !== null) _rotation = _graphics.rotation;
+			if (_body !== null) _rotation = _body.rotation;
 			
-			if (_body !== null) _body.y = value;
-			if (_graphics !== null) _graphics.y = value;
+			return _rotation;
 		}
-		
-		public function get rotation():Number { return _body !== null ? _body.rotation : (_graphics !== null ? _graphics.rotation : _rotation); }
 		
 		public function set rotation(value:Number):void
 		{

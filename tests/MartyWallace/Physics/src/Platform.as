@@ -14,6 +14,12 @@ package
 	public class Platform extends Being
 	{
 		
+		public function Platform()
+		{
+			super();
+		}
+		
+		
 		protected override function defineGraphics():IGraphics
 		{
 			var graphics:Quad = new Quad(400, 40, 0x333333);

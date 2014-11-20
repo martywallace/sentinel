@@ -15,6 +15,12 @@ package
 	public class Block extends Being
 	{
 		
+		public function Block()
+		{
+			super();
+		}
+		
+		
 		protected override function defineGraphics():IGraphics
 		{
 			var graphics:Image = library.getImage('crate');
@@ -22,7 +28,6 @@ package
 			graphics.width = graphics.height = 20 + Math.random() * 30;
 			graphics.alignPivot();
 			graphics.addEventListener(TouchEvent.TOUCH, _touch);
-			
 			
 			return graphics;
 		}
@@ -41,7 +46,7 @@ package
 		
 		protected override function update():void
 		{
-			if (body.y > viewport.height + 100)
+			if (y > viewport.height + 100)
 			{
 				deconstruct();
 			}

@@ -115,10 +115,18 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		public function moveTo(x:Number, y:Number):void
+		{
+			_position.x = x;
+			_position.y = y;
+			
+			_base.SetPosition(_position.base);
+		}
+		
+		
 		public function get base():b2Body { return _base; }
 		public function get engine():Engine { return _engine; }
 		public function get owner():Thing{ return _data.owner }
-		
 		public function get fixtures():Vector.<Fixture> { return _fixtures; }
 		public function get totalFixtures():int { return _fixtures.length; }
 		
@@ -173,21 +181,16 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function get x():Number{ return _base.GetPosition().x * Engine.scale; }
-		
-		public function set x(value:Number):void
+		/**
+		 * Returns the position of this Body. Modifying the <code>x</code> or <code>y</code> values
+		 * of the result will not affect this Body, use <code>moveTo()</code> instead.
+		 */
+		public function get position():Vector2D
 		{
-			_position.x = value;
-			_base.SetPosition(_position.base);
-		}
-		
-		
-		public function get y():Number{ return _base.GetPosition().y * Engine.scale; }
-		
-		public function set y(value:Number):void
-		{
-			_position.y = value;
-			_base.SetPosition(_position.base);
+			_position.x = _base.GetPosition().x * Engine.scale;
+			_position.y = _base.GetPosition().y * Engine.scale;
+			
+			return _position;
 		}
 		
 	}

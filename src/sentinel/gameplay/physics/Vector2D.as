@@ -2,6 +2,7 @@ package sentinel.gameplay.physics
 {
 	
 	import Box2D.Common.Math.b2Vec2;
+	import sentinel.framework.util.StringUtil;
 	
 	
 	public class Vector2D
@@ -16,6 +17,12 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		public function toString():String
+		{
+			return StringUtil.toDebugString(['x', 'y'], [x, y]);
+		}
+		
+		
 		public function add(vector2d:Vector2D):Vector2D
 		{
 			return new Vector2D(x + vector2d.x, y + vector2d.y);
@@ -25,6 +32,18 @@ package sentinel.gameplay.physics
 		public function subtract(vector2d:Vector2D):Vector2D
 		{
 			return new Vector2D(x - vector2d.x, y - vector2d.y);
+		}
+		
+		
+		public function distanceTo(vector2d:Vector2D):Number
+		{
+			return vector2d.subtract(this).length;
+		}
+		
+		
+		public function angleTo(vector2d:Vector2D):Number
+		{
+			return vector2d.subtract(this).angle;
 		}
 		
 		
