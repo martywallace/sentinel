@@ -1,6 +1,10 @@
 package sentinel.framework.util
 {
 	
+	/**
+	 * Utilities for working with Objects.
+	 * @author Marty Wallace.
+	 */
 	public class ObjectUtil
 	{
 		
@@ -10,6 +14,10 @@ package sentinel.framework.util
 		}
 		
 		
+		/**
+		 * Create a shallow copy of the target Object.
+		 * @param object The target Object.
+		 */
 		public static function shallowCopy(object:Object):Object
 		{
 			var result:Object = {};
@@ -19,6 +27,10 @@ package sentinel.framework.util
 		}
 		
 		
+		/**
+		 * Returns the total number of properties associated with an Object.
+		 * @param object The target Object.
+		 */
 		public static function countProperties(object:Object):int
 		{
 			var total:int = 0;
@@ -28,6 +40,11 @@ package sentinel.framework.util
 		}
 		
 		
+		/**
+		 * Merge a collection of Objects. Objects appearing earlier in the list will have their
+		 * properties overwritten with those who appear later in the list.
+		 * @param ...objects The list of Objects to merge.
+		 */
 		public static function merge(...objects):Object
 		{
 			var base:Object = { };

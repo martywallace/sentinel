@@ -10,14 +10,37 @@ package beings
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	import starling.events.TouchEvent;
+	import sentinel.framework.util.ObjectUtil;
+	import sentinel.framework.util.Random;
 	
 	
 	public class Block extends Being
 	{
 		
+		private var _size:int = 10;
+		
+		
 		public function Block()
 		{
 			super();
+			
+			_size = Random.between(10, 60);
+		}
+		
+		
+		public override function save():Object
+		{
+			return ObjectUtil.merge(super.save(), {
+				size: _size
+			});
+		}
+		
+		
+		public override function load(data:Object):void
+		{
+			super.load(data);
+			
+			if(data.hasOwnProperty('size')) _size = data.size;
 		}
 		
 		
@@ -25,7 +48,7 @@ package beings
 		{
 			var graphics:Image = library.getImage('crate');
 			
-			graphics.width = graphics.height = 20 + Math.random() * 30;
+			graphics.width = graphics.height = _size;
 			graphics.alignPivot();
 			graphics.addEventListener(TouchEvent.TOUCH, _touch);
 			
@@ -37,7 +60,7 @@ package beings
 		{
 			var body:Body = engine.createBody(Body.DYNAMIC, this);
 			
-			body.createFixture(new Box(graphics.width, graphics.height), new FixtureDef(1));
+			body.createFixture(new Box(_size, _size), new FixtureDef(1));
 			body.addEventListener(ContactEvent.BEGIN, _beginContact);
 			
 			return body;

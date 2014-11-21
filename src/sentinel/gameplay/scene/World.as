@@ -14,7 +14,7 @@ package sentinel.gameplay.scene
 	
 	/**
 	 * The World is the core class for dealing with collections of Beings and the interactions
-	 * between those Beings.
+	 * between those Beings. The World also deals with initializing a physics engine, if required.
 	 * @author Marty Wallace.
 	 */
 	public class World extends Thing
@@ -29,11 +29,16 @@ package sentinel.gameplay.scene
 		private var _unique:Object = { };
 		
 		
-		public function World(definition:EngineDef = null, debug:Debug = null)
+		/**
+		 * Constructor.
+		 * @param engineDef An EngineDef describing the physics engine.
+		 * @param debug A Debug instance describing the type of debugging to use.
+		 */
+		public function World(engineDef:EngineDef = null, debug:Debug = null)
 		{
-			if (definition !== null)
+			if (engineDef !== null)
 			{
-				_engine = new Engine(definition, debug);
+				_engine = new Engine(engineDef, debug);
 			}
 			
 			_graphics = new Sprite();
@@ -77,9 +82,7 @@ package sentinel.gameplay.scene
 				}
 			}
 			
-			return ObjectUtil.merge({
-				beings: beings
-			});
+			return ObjectUtil.merge(super.save(), { beings: beings });
 		}
 		
 		
@@ -171,6 +174,10 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * Returns a Being who implements IUnique and matches the specified token.
+		 * @param token The <code>token</code> value of the saught IUnique Being.
+		 */
 		public function getUnique(token:String):Being
 		{
 			return _unique.hasOwnProperty(token) ? _unique[token] : null;
