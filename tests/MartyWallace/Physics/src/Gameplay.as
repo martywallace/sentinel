@@ -9,6 +9,7 @@ package
 	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
+	import sentinel.gameplay.scene.Being;
 	
 	
 	public class Gameplay extends GameplayState
@@ -22,10 +23,8 @@ package
 		{
 			super(new World(new EngineDef(new Vector2D(0, 1400)), new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])), new HUD());
 			
-			_platform = world.add(new Platform()) as Platform;
-			
-			_platform.x = viewport.center.x;
-			_platform.y = viewport.height - 60;
+			_platform = Being.createFromSave({ type: 'Platform', x: viewport.center.x, y: viewport.height - 60 }) as Platform;
+			world.add(_platform);
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
@@ -48,6 +47,7 @@ package
 		{
 			if (event.keyCode === Keyboard.P)
 			{
+				trace(world.json);
 				world.frozen = !world.frozen;
 			}
 		}

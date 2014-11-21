@@ -1,10 +1,12 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.gameplay.physics.Body;
-	import sentinel.gameplay.physics.Engine;
+	import flash.utils.getDefinitionByName;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
+	import sentinel.framework.util.ObjectUtil;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.ui.UI;
 	import starling.display.DisplayObject;
@@ -16,6 +18,27 @@ package sentinel.gameplay.scene
 	 */
 	public class Being extends Thing
 	{
+		
+		/**
+		 * Attempts to create a new Being from save data obtained via <code>Being.save()</code>.
+		 * @param data The save data.
+		 */
+		public static function createFromSave(data:Object):Being
+		{
+			if (!data.hasOwnProperty('type'))
+			{
+				// Error?
+				return null;
+			}
+			
+			var type:Class = getDefinitionByName(data.type) as Class;
+			var being:Being = new type() as Being;
+			
+			being.load(data);
+			
+			return being;
+		}
+		
 		
 		private var _graphics:IGraphics;
 		private var _body:Body;
@@ -78,6 +101,34 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		public function moveTo(x:Number, y:Number):void
+		{
+			_position.x = x;
+			_position.y = y;
+			
+			if (_body !== null)
+			{
+				_body.moveTo(x, y);
+			}
+			
+			if (_graphics !== null)
+			{
+				_graphics.x = x;
+				_graphics.y = y;
+			}
+		}
+		
+		
+		public override function save():Object
+		{
+			return ObjectUtil.merge(super.save(), {
+				x: x,
+				y: y,
+				rotation: rotation
+			});
+		}
+		
+		
 		protected final override function added(world:Thing):void
 		{
 			if (world is World)
@@ -88,6 +139,8 @@ package sentinel.gameplay.scene
 				{
 					// Add the graphics to the World's graphics container.
 					(world as World).__content.addChild(_graphics as DisplayObject);
+					(world as World).__content.sortChildrenByDepth();
+					
 					alignGraphics();
 				}
 				
@@ -128,24 +181,6 @@ package sentinel.gameplay.scene
 		protected function defineBody(engine:Engine):Body
 		{
 			return null;
-		}
-		
-		
-		public function moveTo(x:Number, y:Number):void
-		{
-			_position.x = x;
-			_position.y = y;
-			
-			if (_body !== null)
-			{
-				_body.moveTo(x, y);
-			}
-			
-			if (_graphics !== null)
-			{
-				_graphics.x = x;
-				_graphics.y = y;
-			}
 		}
 		
 		

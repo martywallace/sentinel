@@ -1,16 +1,22 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.gameplay.physics.Debug;
-	import sentinel.gameplay.physics.Engine;
-	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
+	import sentinel.framework.util.ObjectUtil;
+	import sentinel.gameplay.physics.Debug;
+	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	
 	
+	/**
+	 * The World is the core class for dealing with collections of Beings and the interactions
+	 * between those Beings.
+	 * @author Marty Wallace.
+	 */
 	public class World extends Thing
 	{
 		
@@ -47,6 +53,47 @@ package sentinel.gameplay.scene
 			_graphics.deconstruct();
 			
 			super.deconstruct();
+		}
+		
+		
+		public override function save():Object
+		{
+			var beings:Array = [];
+			
+			for each(var thing:Thing in children)
+			{
+				if (thing is Being)
+				{
+					var data:Object = thing.save();
+					
+					if (data !== null)
+					{
+						// Only save objects who return actual data for save(). This provides the
+						// opportunity to return null from save() on Beings that shouldn't be added
+						// to the save data e.g. particles, effects, bullets, etc.
+						beings.push(data);
+					}
+				}
+			}
+			
+			return ObjectUtil.merge({
+				beings: beings
+			});
+		}
+		
+		
+		public override function load(data:Object):void
+		{
+			super.load(data);
+			
+			if (data.hasOwnProperty('beings'))
+			{
+				for each(var def:Object in data.beings)
+				{
+					var being:Being = Being.createFromSave(def);
+					add(being);
+				}
+			}
 		}
 		
 		
@@ -97,7 +144,8 @@ package sentinel.gameplay.scene
 		
 		
 		/**
-		 * TODO: Bit messy.
+		 * Returns a list of Beings who are of the specified type.
+		 * @param type The type of Beings to get.
 		 */
 		public function getBeingsByType(type:Class):Vector.<Being>
 		{

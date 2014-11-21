@@ -27,6 +27,22 @@ package sentinel.framework.util
 			return total;
 		}
 		
+		
+		public static function merge(...objects):Object
+		{
+			var base:Object = { };
+			
+			for each(var o:Object in objects)
+			{
+				for (var prop:String in o)
+				{
+					base[prop] = o[prop];
+				}
+			}
+			
+			return base;
+		}
+		
 	}
 	
 }

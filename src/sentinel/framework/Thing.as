@@ -1,6 +1,7 @@
 package sentinel.framework
 {
 	
+	import flash.utils.getQualifiedClassName;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Viewport;
@@ -34,6 +35,37 @@ package sentinel.framework
 			
 			_children.length = 0;
 			_dispatchEvent(ThingEvent.DECONSTRUCTED);
+		}
+		
+		
+		/**
+		 * Saves a simple representation of this Thing as an Object.
+		 */
+		public function save():Object
+		{
+			return { type: className };
+		}
+		
+		
+		/**
+		 * Loads some save data obtained via <code>Thing.save()</code> and attempt to apply it to
+		 * this Thing.
+		 * @param data The data to load.
+		 */
+		public function load(data:Object):void
+		{
+			for (var prop:String in data)
+			{
+				if (hasOwnProperty(prop))
+				{
+					this[prop] = data[prop];
+				}
+				else
+				{
+					// Ignore.
+					// ...
+				}
+			}
 		}
 		
 		
@@ -229,6 +261,16 @@ package sentinel.framework
 			}
 		}
 		
+		
+		/**
+		 * The full class name of this Thing.
+		 */
+		public function get className():String { return getQualifiedClassName(this); }
+		
+		/**
+		 * Returns the result of <code>save()</code> as JSON.
+		 */
+		public function get json():String { return JSON.stringify(save()); }
 		
 		/**
 		 * A reference to the core Game class.
