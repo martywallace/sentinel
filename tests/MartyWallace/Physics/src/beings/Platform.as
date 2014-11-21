@@ -1,13 +1,12 @@
-package
+package beings
 {
 	
+	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.graphics.Quad;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
-	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.physics.Engine;
-	import sentinel.framework.graphics.IGraphics;
-	import sentinel.framework.graphics.Image;
-	import sentinel.framework.graphics.Quad;
+	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	
 	

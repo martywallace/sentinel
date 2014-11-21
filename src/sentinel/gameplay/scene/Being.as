@@ -21,19 +21,25 @@ package sentinel.gameplay.scene
 		
 		/**
 		 * Attempts to create a new Being from save data obtained via <code>Being.save()</code>.
+		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
 		 */
-		public static function createFromSave(data:Object):Being
+		public static function createFromSave(type:String, data:Object):Being
 		{
-			if (!data.hasOwnProperty('type'))
+			var className:Class = null;
+			
+			try
 			{
-				// Error?
+				className = getDefinitionByName(type) as Class;
+			}
+			
+			catch (error:ReferenceError)
+			{
+				throw new Error('Type "' + type + '" could not be loaded. You may need to manually reference this type in your project.');
 				return null;
 			}
 			
-			var type:Class = getDefinitionByName(data.type) as Class;
-			var being:Being = new type() as Being;
-			
+			var being:Being = new className() as Being;
 			being.load(data);
 			
 			return being;

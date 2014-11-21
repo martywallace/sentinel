@@ -96,6 +96,8 @@ package sentinel.framework
 		 */
 		protected function addT(thing:Thing):Thing
 		{
+			if (thing === null) return null;
+			
 			if (thing === this)
 			{
 				// Cannot add Things to themselves.
@@ -137,6 +139,8 @@ package sentinel.framework
 		 */
 		protected function removeT(thing:Thing, destroy:Boolean = false):Thing
 		{
+			if (thing === null) return null;
+			
 			if (thing === this)
 			{
 				// Things won't ever be added to themselves, thus can't be removed from themselves.

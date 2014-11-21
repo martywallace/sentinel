@@ -1,13 +1,13 @@
-package
+package beings
 {
 	
-	import sentinel.gameplay.physics.Body;
-	import sentinel.gameplay.physics.Box;
-	import sentinel.gameplay.physics.FixtureDef;
-	import sentinel.gameplay.physics.Engine;
-	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
+	import sentinel.gameplay.events.ContactEvent;
+	import sentinel.gameplay.physics.Body;
+	import sentinel.gameplay.physics.Box;
+	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	import starling.events.TouchEvent;
 	

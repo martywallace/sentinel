@@ -90,8 +90,11 @@ package sentinel.gameplay.scene
 			{
 				for each(var def:Object in data.beings)
 				{
-					var being:Being = Being.createFromSave(def);
-					add(being);
+					if (def.hasOwnProperty('type'))
+					{
+						var being:Being = Being.createFromSave(def.type, def);
+						add(being);
+					}
 				}
 			}
 		}

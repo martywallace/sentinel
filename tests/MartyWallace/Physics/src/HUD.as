@@ -1,15 +1,18 @@
 package
 {
 	
-	import sentinel.framework.graphics.TextField;
-	import sentinel.framework.events.KeyboardEvent;
+	import beings.Block;
 	import sentinel.framework.client.Keyboard;
+	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.gameplay.ui.UI;
-	import starling.display.DisplayObject;
+	import sentinel.gameplay.scene.Being;
 	
 	
 	public class HUD extends UI
 	{
+		
+		private var _block:Block;
+		
 		
 		public function HUD()
 		{
@@ -33,12 +36,7 @@ package
 		{
 			if (event.keyCode === Keyboard.B)
 			{
-				var block:Block = new Block();
-				
-				block.x = Math.random() * viewport.width;
-				block.y = -100;
-				
-				world.add(block);
+				world.add(Being.createFromSave('beings::Block', { x: Math.random() * viewport.width, y: -100 }));
 			}
 		}
 		

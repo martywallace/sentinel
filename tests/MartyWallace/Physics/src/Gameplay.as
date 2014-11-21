@@ -1,15 +1,16 @@
 package
 {
 	
-	import sentinel.gameplay.physics.Debug;
-	import sentinel.gameplay.physics.Vector2D;
-	import sentinel.gameplay.physics.EngineDef;
+	import beings.Platform;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
 	import sentinel.framework.events.KeyboardEvent;
+	import sentinel.gameplay.physics.Debug;
+	import sentinel.gameplay.physics.EngineDef;
+	import sentinel.gameplay.physics.Vector2D;
+	import sentinel.gameplay.scene.Being;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
-	import sentinel.gameplay.scene.Being;
 	
 	
 	public class Gameplay extends GameplayState
@@ -23,7 +24,7 @@ package
 		{
 			super(new World(new EngineDef(new Vector2D(0, 1400)), new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])), new HUD());
 			
-			_platform = Being.createFromSave({ type: 'Platform', x: viewport.center.x, y: viewport.height - 60 }) as Platform;
+			_platform = Being.createFromSave('beings::Platform', { x: viewport.center.x, y: viewport.height - 60 }) as Platform;
 			world.add(_platform);
 			
 			world.camera.x = viewport.center.x;
