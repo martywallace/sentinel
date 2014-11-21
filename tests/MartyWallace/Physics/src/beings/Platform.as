@@ -8,9 +8,10 @@ package beings
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.scene.IUnique;
 	
 	
-	public class Platform extends Being
+	public class Platform extends Being implements IUnique
 	{
 		
 		public function Platform()
@@ -42,6 +43,12 @@ package beings
 			body.rotation = Math.cos(world.ticks / 30) / 5;
 			
 			super.update();
+		}
+		
+		
+		public function get token():String
+		{
+			return 'platform';
 		}
 		
 	}

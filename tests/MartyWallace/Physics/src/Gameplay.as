@@ -16,16 +16,15 @@ package
 	public class Gameplay extends GameplayState
 	{
 		
-		private var _cooldown:int = 0;
 		private var _platform:Platform;
+		private var _cooldown:int = 0;
 		
 		
 		public function Gameplay()
 		{
 			super(new World(new EngineDef(new Vector2D(0, 1400)), new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])), new HUD());
 			
-			_platform = Being.createFromSave('beings::Platform', { x: viewport.center.x, y: viewport.height - 60 }) as Platform;
-			world.add(_platform);
+			world.add(Being.create('beings::Platform', { x: viewport.center.x, y: viewport.height - 60 } ));
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
@@ -72,7 +71,7 @@ package
 			if (kbd.isDown(Keyboard.W)) world.camera.y -= 3;
 			if (kbd.isDown(Keyboard.S)) world.camera.y += 3;
 			
-			if (kbd.isDown(Keyboard.SPACEBAR)) world.camera.lookAt(_platform);
+			if (kbd.isDown(Keyboard.SPACEBAR)) world.camera.lookAt(world.getUnique('platform'));
 			
 			if (kbd.isDown(Keyboard.LEFT_ARROW)) world.camera.rotation -= 0.01;
 			if (kbd.isDown(Keyboard.RIGHT_ARROW)) world.camera.rotation += 0.01;

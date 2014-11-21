@@ -36,7 +36,7 @@ package
 		{
 			if (event.keyCode === Keyboard.B)
 			{
-				world.add(Being.createFromSave('beings::Block', { x: Math.random() * viewport.width, y: -100 }));
+				world.add(Being.create('beings::Block', { x: Math.random() * viewport.width, y: -100 }));
 			}
 		}
 		

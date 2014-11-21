@@ -26,6 +26,7 @@ package sentinel.gameplay.scene
 		private var _graphics:IGraphicsContainer;
 		private var _content:Sprite;
 		private var _ticks:uint = 0;
+		private var _unique:Object = { };
 		
 		
 		public function World(definition:EngineDef = null, debug:Debug = null)
@@ -92,7 +93,7 @@ package sentinel.gameplay.scene
 				{
 					if (def.hasOwnProperty('type'))
 					{
-						var being:Being = Being.createFromSave(def.type, def);
+						var being:Being = Being.create(def.type, def);
 						add(being);
 					}
 				}
@@ -119,6 +120,22 @@ package sentinel.gameplay.scene
 		 */
 		public function add(being:Being):Being
 		{
+			if (being !== null)
+			{
+				if (being is IUnique)
+				{
+					if (!_unique.hasOwnProperty((being as IUnique).token))
+					{
+						_unique[(being as IUnique).token] = being;
+					}
+					else
+					{
+						throw new Error('Unique Being conflict using token "' + (being as IUnique).token + '".');
+						return null;
+					}
+				}
+			}
+			
 			return addT(being) as Being;
 		}
 		
@@ -130,6 +147,14 @@ package sentinel.gameplay.scene
 		 */
 		public function remove(being:Being, destroy:Boolean = false):Being
 		{
+			if (being !== null)
+			{
+				if (being is IUnique)
+				{
+					delete _unique[(being as IUnique).token];
+				}
+			}
+			
 			return removeT(being, destroy) as Being;
 		}
 		
@@ -143,6 +168,12 @@ package sentinel.gameplay.scene
 		protected final override function removed(thing:Thing):void
 		{
 			if (!(thing is GameplayState)) throw new Error("World can only be removed from GameplayState.");
+		}
+		
+		
+		public function getUnique(token:String):Being
+		{
+			return _unique.hasOwnProperty(token) ? _unique[token] : null;
 		}
 		
 		
