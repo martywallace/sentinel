@@ -104,7 +104,7 @@ package
 					shoot();
 				}
 				
-				rotation = Math.atan2(_target.y - y, _target.x - x);
+				rotation = position.angleTo(_target.position);
 				
 				body.linearVelocityX = Math.cos(rotation) * 20;
 				body.linearVelocityY = Math.sin(rotation) * 20;
