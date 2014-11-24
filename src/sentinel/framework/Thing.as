@@ -41,9 +41,9 @@ package sentinel.framework
 		/**
 		 * Saves a simple representation of this Thing as an Object.
 		 */
-		public function save():Object
+		public function save():Data
 		{
-			return { type: className };
+			return new Data({ type: className });
 		}
 		
 		
@@ -270,11 +270,6 @@ package sentinel.framework
 		 * The full class name of this Thing.
 		 */
 		public function get className():String { return getQualifiedClassName(this); }
-		
-		/**
-		 * Returns the result of <code>save()</code> as JSON.
-		 */
-		public function get json():String { return JSON.stringify(save()); }
 		
 		/**
 		 * A reference to the core Game class.

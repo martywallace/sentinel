@@ -1,6 +1,7 @@
 package beings
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
 	import sentinel.gameplay.events.ContactEvent;
@@ -28,11 +29,9 @@ package beings
 		}
 		
 		
-		public override function save():Object
+		public override function save():Data
 		{
-			return ObjectUtil.merge(super.save(), {
-				size: _size
-			});
+			return super.save().merge({ size: _size });
 		}
 		
 		

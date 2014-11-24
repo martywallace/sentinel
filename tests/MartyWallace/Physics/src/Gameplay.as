@@ -47,7 +47,7 @@ package
 		{
 			if (event.keyCode === Keyboard.P)
 			{
-				trace(world.json);
+				trace(world.save().toJson());
 				world.frozen = !world.frozen;
 			}
 		}
