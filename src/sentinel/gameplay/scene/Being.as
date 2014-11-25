@@ -2,7 +2,6 @@ package sentinel.gameplay.scene
 {
 	
 	import flash.utils.getDefinitionByName;
-	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
 	import sentinel.framework.util.ObjectUtil;
@@ -132,13 +131,21 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function save():Data
+		public override function save():Object
 		{
-			return super.save().merge({
+			return ObjectUtil.merge(super.save(), {
 				x: Number(x.toFixed(2)),
 				y: Number(y.toFixed(2)),
 				rotation: rotation
 			});
+		}
+		
+		
+		public override function load(data:Object):void
+		{
+			x = ObjectUtil.prop(data, 'x', 0);
+			y = ObjectUtil.prop(data, 'y', 0);
+			rotation = ObjectUtil.prop(data, 'rotation', 0);
 		}
 		
 		

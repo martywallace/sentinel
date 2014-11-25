@@ -1,10 +1,10 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
+	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
@@ -62,7 +62,7 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function save():Data
+		public override function save():Object
 		{
 			var beings:Array = [];
 			
@@ -70,7 +70,7 @@ package sentinel.gameplay.scene
 			{
 				if (thing is Being)
 				{
-					var data:Data = thing.save();
+					var data:Object = thing.save();
 					
 					if (data !== null)
 					{
@@ -82,23 +82,18 @@ package sentinel.gameplay.scene
 				}
 			}
 			
-			return super.save().merge({ beings: beings });
+			return ObjectUtil.merge(super.save(), { beings: beings });
 		}
 		
 		
 		public override function load(data:Object):void
 		{
-			super.load(data);
-			
-			if (data.hasOwnProperty('beings'))
+			for each(var def:Object in ObjectUtil.prop(data, 'beings', []))
 			{
-				for each(var def:Object in data.beings)
+				if (def.hasOwnProperty('type'))
 				{
-					if (def.hasOwnProperty('type'))
-					{
-						var being:Being = Being.create(def.type, def);
-						add(being);
-					}
+					var being:Being = Being.create(def.type, def);
+					add(being);
 				}
 			}
 		}

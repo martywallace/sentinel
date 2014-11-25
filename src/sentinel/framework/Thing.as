@@ -41,9 +41,9 @@ package sentinel.framework
 		/**
 		 * Saves a simple representation of this Thing as an Object.
 		 */
-		public function save():Data
+		public function save():Object
 		{
-			return new Data({ type: className });
+			return { type: className };
 		}
 		
 		
@@ -54,18 +54,7 @@ package sentinel.framework
 		 */
 		public function load(data:Object):void
 		{
-			for (var prop:String in data)
-			{
-				if (hasOwnProperty(prop))
-				{
-					this[prop] = data[prop];
-				}
-				else
-				{
-					// Ignore.
-					// ...
-				}
-			}
+			//
 		}
 		
 		

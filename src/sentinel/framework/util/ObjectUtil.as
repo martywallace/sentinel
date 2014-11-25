@@ -60,6 +60,18 @@ package sentinel.framework.util
 			return base;
 		}
 		
+		
+		/**
+		 * Fetch a property of an object, or a fallback value if the property is not defined.
+		 * @param target The target object.
+		 * @param prop The property to fetch.
+		 * @param fallback The fallback value to use.
+		 */
+		public static function prop(target:Object, prop:String, fallback:* = null):*
+		{
+			return target.hasOwnProperty(prop) ? target[prop] : fallback;
+		}
+		
 	}
 	
 }

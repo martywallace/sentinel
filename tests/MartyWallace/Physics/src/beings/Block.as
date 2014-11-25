@@ -1,9 +1,10 @@
 package beings
 {
 	
-	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
+	import sentinel.framework.util.ObjectUtil;
+	import sentinel.framework.util.Random;
 	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
@@ -11,8 +12,6 @@ package beings
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	import starling.events.TouchEvent;
-	import sentinel.framework.util.ObjectUtil;
-	import sentinel.framework.util.Random;
 	
 	
 	public class Block extends Being
@@ -29,9 +28,9 @@ package beings
 		}
 		
 		
-		public override function save():Data
+		public override function save():Object
 		{
-			return super.save().merge({ size: _size });
+			return ObjectUtil.merge(super.save(), { size: _size });
 		}
 		
 		
@@ -39,7 +38,7 @@ package beings
 		{
 			super.load(data);
 			
-			if(data.hasOwnProperty('size')) _size = data.size;
+			_size = ObjectUtil.prop(data, 'size', 10);
 		}
 		
 		

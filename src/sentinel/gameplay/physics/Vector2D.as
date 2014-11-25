@@ -2,7 +2,6 @@ package sentinel.gameplay.physics
 {
 	
 	import Box2D.Common.Math.b2Vec2;
-	import sentinel.framework.Data;
 	import sentinel.framework.ISavable;
 	import sentinel.framework.util.StringUtil;
 	
@@ -31,9 +30,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function save():Data
+		public function save():Object
 		{
-			return new Data({ x: x, y: y });
+			return { x: x, y: y };
 		}
 		
 		

@@ -1,7 +1,7 @@
 package sentinel.gameplay.scene
 {
 	
-	import sentinel.framework.Data;
+	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
@@ -30,7 +30,7 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function save():Data
+		public override function save():Object
 		{
 			var verticies:Array = [];
 			
@@ -39,7 +39,7 @@ package sentinel.gameplay.scene
 				verticies.push(vec.save());
 			}
 			
-			return super.save().merge({
+			return ObjectUtil.merge(super.save(), {
 				friction: _friction,
 				restitution: _restitution,
 				verticies: verticies
@@ -53,18 +53,18 @@ package sentinel.gameplay.scene
 			
 			var verticies:Vector.<Vector2D> = new <Vector2D>[];
 			
-			for each(var i:Object in data.prop('verticies'))
+			for each(var i:Object in ObjectUtil.prop(data, 'verticies', []))
 			{
-				verticies.push(new Vector2D(i.x, i.y);
+				verticies.push(new Vector2D(i.x, i.y));
 			}
 			
-			_set(verticies, data.prop('friction', 0.2), data.prop('restitution', 0));
+			_set(verticies, ObjectUtil.prop(data, 'friction', 0.2), ObjectUtil.prop(data, 'restitution', 0));
 		}
 		
 		
 		protected override function defineBody(engine:Engine):Body
 		{
-			if (_verticies !== null)
+			if (_verticies !== null && _verticies.length !== 0)
 			{
 				var poly:Polygon = new Polygon(_verticies);
 				var body:Body = engine.createBody(Body.STATIC, this);
