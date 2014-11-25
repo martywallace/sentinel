@@ -1,42 +1,26 @@
 package
 {
 	
-	import sentinel.framework.State;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
+	import sentinel.testing.states.TestMenu;
+	import sentinel.testing.ui.TestMenuButton;
 	
 	
-	public class Menu extends State
+	public class Menu extends TestMenu
 	{
-		
-		private var _playBtn:ButtonBox;
-		
 		
 		public function Menu()
 		{
 			super();
 			
-			_playBtn = new ButtonBox('Play', 0xFF0000);
-			graphics.addChild(_playBtn);
-			
-			_playBtn.x = viewport.center.x;
-			_playBtn.y = viewport.height - 160;
-			
-			_playBtn.addEventListener(TouchEvent.TOUCH, _play);
+			setButtons(new <TestMenuButton>[
+				new TestMenuButton('Play', _menuButton)
+			]);
 		}
 		
 		
-		public override function deconstruct():void
+		private function _menuButton(button:TestMenuButton):void
 		{
-			_playBtn.deconstruct();
-			
-			super.deconstruct();
-		}
-		
-		
-		private function _play(event:TouchEvent):void
-		{
-			if (event.touches[0].phase === TouchPhase.BEGAN)
+			if (button.text === 'Play')
 			{
 				game.loadState(new Gameplay());
 			}

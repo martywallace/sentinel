@@ -1,12 +1,12 @@
 package
 {
 	
-	import sentinel.framework.Game;
+	import sentinel.testing.TestGame;
 	import starling.textures.Texture;
 	import sentinel.framework.Library;
 	
 	
-	public class PhysicsTest extends Game
+	public class PhysicsTest extends TestGame
 	{
 		
 		[Embed(source = '../../Assets/Crate.png')]
@@ -15,6 +15,8 @@ package
 		
 		public override function construct():void
 		{
+			super.construct();
+			
 			storage.prepare("PhysicsTest");
 			
 			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
