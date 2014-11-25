@@ -4,7 +4,11 @@ package sentinel.gameplay.physics
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
-	internal interface IShape
+	/**
+	 * Defines a shape used by a Fixture.
+	 * @author Marty Wallace.
+	 */
+	public interface IShape
 	{
 		
 		function get base():b2Shape;

@@ -5,12 +5,15 @@ package
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
 	import sentinel.framework.events.KeyboardEvent;
+	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.scene.Boundary;
 	import sentinel.gameplay.scene.World;
 	import sentinel.gameplay.states.GameplayState;
+	import sentinel.framework.util.Random;
 	
 	
 	public class Gameplay extends GameplayState
@@ -28,6 +31,13 @@ package
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
+			
+			var boundary:Boundary = new Boundary(new Box(50, 50));
+			
+			boundary.rotation = Random.angle;
+			boundary.moveTo(viewport.center.x, 200);
+			
+			world.add(boundary);
 			
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
 			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _quit);

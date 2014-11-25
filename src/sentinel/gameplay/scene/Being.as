@@ -78,32 +78,38 @@ package sentinel.gameplay.scene
 		
 		public function alignGraphics():void
 		{
-			if (_graphics !== null && _body !== null)
+			if (_graphics !== null)
 			{
-				_graphics.x = _body.position.x;
-				_graphics.y = _body.position.y;
-				_graphics.rotation = _body.rotation;
-			}
-			else
-			{
-				_graphics.x = _position.x;
-				_graphics.y = _position.y;
-				_graphics.rotation = _rotation;
+				if (_body !== null)
+				{
+					_graphics.x = _body.position.x;
+					_graphics.y = _body.position.y;
+					_graphics.rotation = _body.rotation;
+				}
+				else
+				{
+					_graphics.x = _position.x;
+					_graphics.y = _position.y;
+					_graphics.rotation = _rotation;
+				}
 			}
 		}
 		
 		
 		public function alignBody():void
 		{
-			if (_graphics !== null && _body !== null)
+			if (_body !== null)
 			{
-				_body.moveTo(_graphics.x, _graphics.y);
-				_body.rotation = _graphics.rotation;
-			}
-			else
-			{
-				_body.moveTo(_position.x, _position.y);
-				_body.rotation = _rotation;
+				if (_graphics !== null)
+				{
+					_body.moveTo(_graphics.x, _graphics.y);
+					_body.rotation = _graphics.rotation;
+				}
+				else
+				{
+					_body.moveTo(_position.x, _position.y);
+					_body.rotation = _rotation;
+				}
 			}
 		}
 		
