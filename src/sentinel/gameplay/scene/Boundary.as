@@ -1,10 +1,12 @@
 package sentinel.gameplay.scene
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
-	import sentinel.gameplay.physics.IShape;
+	import sentinel.gameplay.physics.Polygon;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -15,27 +17,72 @@ package sentinel.gameplay.scene
 	public class Boundary extends Being
 	{
 		
-		private var _shape:IShape;
+		private var _verticies:Vector.<Vector2D>;
 		private var _friction:Number;
 		private var _restitution:Number;
 		
 		
-		public function Boundary(shape:IShape, friction:Number = 0.2, restitution:Number = 0)
+		public function Boundary(verticies:Vector.<Vector2D> = null, friction:Number = 0.2, restitution:Number = 0)
 		{
 			super();
 			
-			_shape = shape;
-			_friction = friction;
-			_restitution = restitution;
+			_set(verticies, friction, restitution);
+		}
+		
+		
+		public override function save():Data
+		{
+			var verticies:Array = [];
+			
+			for each(var vec:Vector2D in _verticies)
+			{
+				verticies.push(vec.save());
+			}
+			
+			return super.save().merge({
+				friction: _friction,
+				restitution: _restitution,
+				verticies: verticies
+			});
+		}
+		
+		
+		public override function load(data:Object):void
+		{
+			super.load(data);
+			
+			var verticies:Vector.<Vector2D> = new <Vector2D>[];
+			
+			for each(var i:Object in data.prop('verticies'))
+			{
+				verticies.push(new Vector2D(i.x, i.y);
+			}
+			
+			_set(verticies, data.prop('friction', 0.2), data.prop('restitution', 0));
 		}
 		
 		
 		protected override function defineBody(engine:Engine):Body
 		{
-			var body:Body = engine.createBody(Body.STATIC, this);
-			body.createFixture(_shape, new FixtureDef(1, _friction, _restitution));
+			if (_verticies !== null)
+			{
+				var poly:Polygon = new Polygon(_verticies);
+				var body:Body = engine.createBody(Body.STATIC, this);
+				
+				body.createFixture(poly, new FixtureDef(1, _friction, _restitution));
+				
+				return body;
+			}
 			
-			return body;
+			return null;
+		}
+		
+		
+		private function _set(verticies:Vector.<Vector2D>, friction:Number, restitution:Number):void
+		{
+			_verticies = verticies;
+			_friction = friction;
+			_restitution = restitution;
 		}
 		
 	}

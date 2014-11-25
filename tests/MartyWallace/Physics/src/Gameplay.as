@@ -20,6 +20,8 @@ package
 	{
 		
 		private var _platform:Platform;
+		private var _boundary:Boundary;
+		
 		private var _cooldown:int = 0;
 		
 		

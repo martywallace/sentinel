@@ -48,10 +48,19 @@ package sentinel.framework
 		}
 		
 		
+		public function prop(name:String, fallback:* = null):*
+		{
+			return hasOwnProperty(name) ? this[name] : fallback;
+		}
+		
+		
 		public function toJson():String
 		{
 			return JSON.stringify(this);
 		}
+		
+		
+		public function get totalProperties():int { return ObjectUtil.countProperties(this); }
 		
 	}
 	

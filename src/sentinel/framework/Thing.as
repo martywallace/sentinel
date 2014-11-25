@@ -16,7 +16,7 @@ package sentinel.framework
 	 * Things are also able to be added to parent Things and contain their own children Things.
 	 * @author Marty Wallace.
 	 */
-	public class Thing extends EventDispatcher implements IDeconstructs
+	public class Thing extends EventDispatcher implements IDeconstructs, ISavable, ILoadable
 	{
 		
 		private var _parent:Thing;

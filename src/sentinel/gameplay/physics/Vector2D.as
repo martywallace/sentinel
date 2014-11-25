@@ -2,10 +2,12 @@ package sentinel.gameplay.physics
 {
 	
 	import Box2D.Common.Math.b2Vec2;
+	import sentinel.framework.Data;
+	import sentinel.framework.ISavable;
 	import sentinel.framework.util.StringUtil;
 	
 	
-	public class Vector2D
+	public class Vector2D implements ISavable
 	{
 		
 		private var _base:b2Vec2;
@@ -26,6 +28,12 @@ package sentinel.gameplay.physics
 		public function toString():String
 		{
 			return StringUtil.toDebugString(['x', 'y'], [x, y]);
+		}
+		
+		
+		public function save():Data
+		{
+			return new Data({ x: x, y: y });
 		}
 		
 		
