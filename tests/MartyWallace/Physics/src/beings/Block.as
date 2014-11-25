@@ -38,7 +38,7 @@ package beings
 		{
 			super.load(data);
 			
-			_size = ObjectUtil.prop(data, 'size', 10);
+			_size = ObjectUtil.prop(data, 'size', _size);
 		}
 		
 		

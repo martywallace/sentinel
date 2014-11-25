@@ -4,6 +4,7 @@ package sentinel.framework
 	import flash.utils.getQualifiedClassName;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
+	import sentinel.framework.client.Storage;
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.sound.Audio;
@@ -289,6 +290,11 @@ package sentinel.framework
 		 * A reference to the game Audio class.
 		 */
 		protected function get audio():Audio { return game.audio; }
+		
+		/**
+		 * A reference to the game storage class.
+		 */
+		protected function get storage():Storage { return game.storage; }
 		
 		/**
 		 * The parent Thing, if this Thing has one.

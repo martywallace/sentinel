@@ -15,6 +15,8 @@ package
 		
 		public override function construct():void
 		{
+			storage.prepare("PhysicsTest");
+			
 			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
 			
 			loadState(new Menu());
