@@ -17,7 +17,7 @@ package sentinel.framework
 	 * and the starting state.
 	 * @author Marty Wallace.
 	 */
-	public class Game extends Sprite implements IConstructs
+	public class Game extends Sprite
 	{
 		
 		private var _state:State;
@@ -46,6 +46,10 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Loads a new State. Unloads the current state, if one is set.
+		 * @param state The new State to load.
+		 */
 		public function loadState(state:State):void
 		{
 			if (_state !== null)

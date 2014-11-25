@@ -9,7 +9,7 @@ package sentinel.gameplay.events
 	
 	
 	/**
-	 * An event holding contact data between two B2Bodies.
+	 * An event holding contact data between two Bodies.
 	 * @author Marty Wallace.
 	 */
 	public class ContactEvent extends Event
@@ -37,14 +37,14 @@ package sentinel.gameplay.events
 		 */
 		public function ContactEvent(type:String, base:b2Contact, localFixture:Fixture, localBody:Body, externalFixture:Fixture, externalBody:Body)
 		{
+			super(type);
+			
 			_base = base;
 			
 			_localFixture = localFixture;
 			_localBody = localBody;
 			_externalFixture = externalFixture;
 			_externalBody = externalBody;
-			
-			super(type);
 		}
 		
 		
