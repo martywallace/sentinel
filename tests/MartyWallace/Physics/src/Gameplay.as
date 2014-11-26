@@ -4,19 +4,15 @@ package
 	import beings.Platform;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
-	import sentinel.framework.events.KeyboardEvent;
-	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Vector2D;
-	import sentinel.gameplay.scene.Being;
 	import sentinel.gameplay.scene.Boundary;
 	import sentinel.gameplay.scene.World;
-	import sentinel.gameplay.states.GameplayState;
-	import sentinel.framework.util.Random;
+	import sentinel.testing.states.TestGameplay;
 	
 	
-	public class Gameplay extends GameplayState
+	public class Gameplay extends TestGameplay
 	{
 		
 		private var _platform:Platform;
@@ -27,9 +23,13 @@ package
 		
 		public function Gameplay()
 		{
-			super(new World(new EngineDef(new Vector2D(0, 1400)), new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])), new HUD());
-			
-			trace(storage.getSlot(1));
+			super(
+				new World(
+					new EngineDef(new Vector2D(0, 1400)),
+					new Debug(game, 1, 0.5, 0, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS])
+				),
+				new HUD()
+			);
 			
 			if (storage.load('world') !== null)
 			{
@@ -45,37 +45,12 @@ package
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
-			
-			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
-			keyboard.addEventListener(KeyboardEvent.KEY_PRESSED, _quit);
 		}
 		
 		
-		public override function deconstruct():void
+		protected override function exit():void
 		{
-			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _togglePause);
-			keyboard.removeEventListener(KeyboardEvent.KEY_PRESSED, _quit);
-			
-			super.deconstruct();
-		}
-		
-		
-		private function _togglePause(event:KeyboardEvent):void
-		{
-			if (event.keyCode === Keyboard.P)
-			{
-				storage.save('world', world.save());
-				world.frozen = !world.frozen;
-			}
-		}
-		
-		
-		private function _quit(event:KeyboardEvent):void
-		{
-			if (event.keyCode === Keyboard.ESC)
-			{
-				game.loadState(new Menu());
-			}
+			game.loadState(new Menu());
 		}
 		
 		
