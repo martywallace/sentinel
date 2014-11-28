@@ -4,12 +4,12 @@ package
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Quad;
 	import sentinel.framework.util.Random;
+	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
-	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.physics.Engine;
+	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
-	import sentinel.gameplay.events.ContactEvent;
 	
 	
 	public class Bot extends Being

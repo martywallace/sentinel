@@ -3,14 +3,13 @@ package
 	
 	import flash.geom.Point;
 	import sentinel.framework.util.Random;
-	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.scene.World;
-	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
+	import sentinel.testing.states.TestGameplay;
 	
 	
-	public class Battle extends GameplayState
+	public class Battle extends TestGameplay
 	{
 		
 		public function Battle()
@@ -39,6 +38,12 @@ package
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
+		}
+		
+		
+		protected override function exit():void
+		{
+			game.loadState(new Menu());
 		}
 		
 	}

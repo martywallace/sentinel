@@ -1,15 +1,17 @@
 package
 {
 	
-	import sentinel.framework.Game;
+	import sentinel.testing.TestGame;
 	
 	
-	public class BotBattle extends Game
+	public class BotBattle extends TestGame
 	{
 		
 		public override function construct():void
 		{
-			loadState(new Battle());
+			super.construct();
+			
+			loadState(new Menu());
 		}
 		
 	}
