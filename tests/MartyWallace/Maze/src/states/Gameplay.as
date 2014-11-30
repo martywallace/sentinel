@@ -35,6 +35,9 @@ package states
 			game.loadState(new Menu());
 		}
 		
+		
+		protected override function get backgroundColor():uint { return 0x000066; }
+		
 	}
 	
 }

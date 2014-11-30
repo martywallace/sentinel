@@ -3,6 +3,7 @@ package sentinel.framework
 	
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
+	import sentinel.framework.graphics.Quad;
 	
 	
 	/**
@@ -19,6 +20,7 @@ package sentinel.framework
 		public function State()
 		{
 			_graphics = new Sprite();
+			_graphics.addChild(new Quad(viewport.width, viewport.height, backgroundColor));
 		}
 		
 		
@@ -31,6 +33,9 @@ package sentinel.framework
 		
 		
 		public function get graphics():IGraphicsContainer { return _graphics; }
+		
+		
+		protected function get backgroundColor():uint { return 0xFFFFFF; }
 		
 	}
 	
