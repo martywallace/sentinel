@@ -17,7 +17,7 @@ package beings
 		
 		protected override function defineGraphics():IGraphics
 		{
-			var graphics:Quad = new Quad(_width, _height, 0x0000CC);
+			var graphics:Quad = new Quad(_width, _height, 0x5555FF);
 			graphics.alignPivot();
 			
 			return graphics;

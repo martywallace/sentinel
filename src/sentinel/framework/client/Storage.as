@@ -7,65 +7,51 @@ package sentinel.framework.client
 	
 	
 	/**
-	 * Local storage for IStorables via SharedObject.
+	 * Local storage via SharedObject.
 	 * @author Marty Wallace.
 	 */
 	public class Storage
 	{
 		
-		private var _name:String;
-		private var _sharedObject:SharedObject;
+		private var _slot:uint = 1;
+		private var _so:SharedObject;
 		
 		
-		public function prepare(name:String):void
+		public function Storage(identity:String):void
 		{
-			_name = name.replace(/[^\w_\/]/g);
-			_sharedObject = SharedObject.getLocal(_name);
+			_so = SharedObject.getLocal(identity.replace(/[^\w\/]/, ''));
 		}
 		
 		
-		public function save(field:String, data:Object, slot:int = 1):void
+		public function save(field:String, data:*):void
 		{
-			if (_name !== null)
-			{
-				getSlot(slot, true)[field] = data;
-			}
-			
-			else throw new Error("You must use Storage.prepare() before you can save data.");
+			_data[field] = data;
 		}
 		
 		
-		public function load(field:String, slot:int = 1):Object
+		public function load(field:String, fallback:* = null):*
 		{
-			if (_name !== null)
-			{
-				if (getSlot(slot) !== null)
-				{
-					return getSlot(slot)[field];
-				}
-			}
-			
-			else throw new Error("You must use Storage.prepare() before you can load data.");
-			
-			return null;
+			return ObjectUtil.prop(_data, field, fallback);
 		}
 		
 		
-		public function getSlot(slot:int, createIfMissing:Boolean = false):Object
+		public function empty():void
 		{
-			var slotField:String = '_slot' + slot;
-			
-			if (!_sharedObject.data.hasOwnProperty(slotField))
-			{
-				if (createIfMissing) _sharedObject.data[slotField] = { };
-				else return null;
-			}
-			
-			return _sharedObject.data[slotField];
+			_so.data[slotName] = { };
 		}
 		
 		
-		public function get name():String { return _name; }
+		private function get _data():Object
+		{
+			if (!_so.data.hasOwnProperty(slotName)) _so.data[slotName] = { };
+			return _so.data[slotName];
+		}
+		
+		
+		public function set slot(value:uint):void { _slot = value; }
+		public function get slot():uint { return _slot; }
+		
+		public function get slotName():String { return '_slot' + slot; }
 		
 	}
 	

@@ -5,6 +5,11 @@ package sentinel.testing.states
 	import sentinel.testing.ui.TestMenuButton;
 	
 	
+	/**
+	 * A test menu state, providing a way to easily create some buttons quickly for a test only or
+	 * temporary gam menu.
+	 * @author Marty Wallace.
+	 */
 	public class TestMenu extends State
 	{
 		

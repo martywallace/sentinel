@@ -11,6 +11,7 @@ package beings
 	import sentinel.gameplay.scene.Being;
 	import sentinel.gameplay.scene.IUnique;
 	import sentinel.framework.client.Keyboard;
+	import sentinel.framework.util.ObjectUtil;
 	
 	
 	public class Hero extends Being implements IUnique
@@ -47,19 +48,9 @@ package beings
 			if (kbd.isDown(Keyboard.W)) body.linearVelocityY -= _speed;
 			if (kbd.isDown(Keyboard.S)) body.linearVelocityY += _speed;
 			
+			storage.save('hero', save());
+			
 			super.update();
-		}
-		
-		
-		public override function save():Object
-		{
-			return super.save();
-		}
-		
-		
-		public override function load(data:Object):void
-		{
-			super.load(data);
 		}
 		
 		

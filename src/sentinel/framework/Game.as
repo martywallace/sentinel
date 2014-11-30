@@ -32,14 +32,21 @@ package sentinel.framework
 		
 		public function Game()
 		{
-			_viewport = new Viewport(this);
-			_mouse = new Mouse(this);
-			_keyboard = new Keyboard(this);
-			_library = new Library();
-			_audio = new Audio(_library);
-			_storage = new Storage();
-			
-			addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
+			if (identity !== null)
+			{
+				_viewport = new Viewport(this);
+				_mouse = new Mouse(this);
+				_keyboard = new Keyboard(this);
+				_library = new Library();
+				_audio = new Audio(_library);
+				_storage = new Storage(identity);
+				
+				addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
+			}
+			else
+			{
+				throw new Error('You must set a game identity.');
+			}
 		}
 		
 		
@@ -89,9 +96,10 @@ package sentinel.framework
 		public function get library():Library { return _library; }
 		public function get audio():Audio { return _audio; }
 		public function get storage():Storage { return _storage; }
+		public override function get viewport():Viewport { return _viewport; }
 		
 		
-		public override function get viewport():Viewport{ return _viewport; }
+		protected function get identity():String { return null; }
 		
 	}
 	
