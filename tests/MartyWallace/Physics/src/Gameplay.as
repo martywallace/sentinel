@@ -4,13 +4,16 @@ package
 	import beings.Platform;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
+	import sentinel.gameplay.events.RegionEvent;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.scene.Boundary;
+	import sentinel.gameplay.scene.Region;
 	import sentinel.gameplay.scene.World;
 	import sentinel.testing.states.TestGameplay;
+	import sentinel.framework.util.Random;
 	
 	
 	public class Gameplay extends TestGameplay
@@ -43,6 +46,20 @@ package
 				world.add(platform);
 			}
 			
+			var region:Region = world.add(new Region(new <Vector2D>[
+				new Vector2D(),
+				new Vector2D(100, 0),
+				new Vector2D(100, 100),
+				new Vector2D(0, 100)
+			])) as Region;
+			
+			region.rotation = Random.angle;
+			region.x = viewport.center.x;
+			region.y = viewport.center.y;
+			
+			region.addEventListener(RegionEvent.ENTER, _regionHandler);
+			region.addEventListener(RegionEvent.EXIT, _regionHandler);
+			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
 			
@@ -54,6 +71,12 @@ package
 		{
 			// A good place to set up a pause menu.
 			// ...
+		}
+		
+		
+		private function _regionHandler(event:RegionEvent):void
+		{
+			trace(event.type + ': ' + event.being);
 		}
 		
 		

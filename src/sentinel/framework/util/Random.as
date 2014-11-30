@@ -94,12 +94,14 @@ package sentinel.framework.util
 		
 		
 		/**
+		 * // Todo: This is weird, change to getBase() or something.
 		 * A random number between 0 and 1, not including 1.
 		 */
 		public static function get base():Number{ return Math.random(); }
 		
 		
 		/**
+		 * Todo: This is weird, change to getAngle().
 		 * A random angle, in radians.
 		 */
 		public static function get angle():Number{ return Math.random() * Math.PI * 2; }
