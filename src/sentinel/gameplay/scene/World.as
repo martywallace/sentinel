@@ -5,6 +5,7 @@ package sentinel.gameplay.scene
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
 	import sentinel.framework.util.ObjectUtil;
+	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
@@ -203,10 +204,16 @@ package sentinel.gameplay.scene
 		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
-		public function get frozen():Boolean { return _frozen; }
-		public function set frozen(value:Boolean):void { _frozen = value; }
 		public function get ticks():uint { return _ticks; }
 		public function get totalBeings():int { return children.length; }
+		
+		public function get frozen():Boolean { return _frozen; }
+		
+		public function set frozen(value:Boolean):void
+		{
+			_frozen = value;
+			dispatchEvent(new WorldEvent(value ? WorldEvent.FREEZE : WorldEvent.UNFREEZE));
+		}
 		
 		internal function get __content():Sprite { return _content; }
 		

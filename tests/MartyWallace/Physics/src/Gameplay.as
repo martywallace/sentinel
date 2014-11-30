@@ -4,6 +4,7 @@ package
 	import beings.Platform;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
+	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Vector2D;
@@ -44,6 +45,15 @@ package
 			
 			world.camera.x = viewport.center.x;
 			world.camera.y = viewport.center.y;
+			
+			world.addEventListener(WorldEvent.FREEZE, _worldFreezeHandler);
+		}
+		
+		
+		private function _worldFreezeHandler(event:WorldEvent):void
+		{
+			// A good place to set up a pause menu.
+			// ...
 		}
 		
 		

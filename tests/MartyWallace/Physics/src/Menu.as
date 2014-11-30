@@ -26,6 +26,9 @@ package
 			}
 		}
 		
+		
+		protected override function get backgroundColor():uint { return 0x4499BB; }
+		
 	}
 	
 }
