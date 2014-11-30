@@ -73,6 +73,9 @@ package
 			super.update();
 		}
 		
+		
+		protected override function get backgroundColor():uint { return 0x666666; }
+		
 	}
 	
 }

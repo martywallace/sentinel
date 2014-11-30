@@ -17,8 +17,6 @@ package
 		{
 			super.construct();
 			
-			storage.prepare("PhysicsTest");
-			
 			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
 			
 			loadState(new Menu());
