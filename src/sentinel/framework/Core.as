@@ -40,7 +40,7 @@ package sentinel.framework
 				_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
 				_starling.start();
 				
-				(_starling.root as Game).construct();
+				(_starling.root as Game).__construct();
 			}
 			else
 			{

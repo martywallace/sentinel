@@ -30,9 +30,9 @@ package sentinel.gameplay.scene
 			
 			try
 			{
+				// Attempt to obtain the class definition from the 'type' string value.
 				className = getDefinitionByName(type) as Class;
 			}
-			
 			catch (error:ReferenceError)
 			{
 				throw new Error('Type "' + type + '" could not be loaded. You may need to manually reference this type in your project.');

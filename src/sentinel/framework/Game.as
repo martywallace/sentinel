@@ -50,7 +50,13 @@ package sentinel.framework
 		}
 		
 		
-		public function construct():void
+		internal function __construct():void
+		{
+			construct();
+		}
+		
+		
+		protected function construct():void
 		{
 			//
 		}
