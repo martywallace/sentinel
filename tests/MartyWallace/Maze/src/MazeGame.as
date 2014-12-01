@@ -8,7 +8,7 @@ package
 	public class MazeGame extends TestGame
 	{
 		
-		public override function construct():void
+		protected override function construct():void
 		{
 			super.construct();
 			
