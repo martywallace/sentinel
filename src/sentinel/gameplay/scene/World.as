@@ -43,7 +43,7 @@ package sentinel.gameplay.scene
 			}
 			
 			_graphics = new Sprite();
-			_content = new Sprite();
+			_content = new Sprite(true);
 			_camera = new Camera(this);
 			
 			_graphics.addChild(_content);

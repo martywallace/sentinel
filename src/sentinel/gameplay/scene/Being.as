@@ -159,7 +159,6 @@ package sentinel.gameplay.scene
 				{
 					// Add the graphics to the World's graphics container.
 					(world as World).__content.addChild(_graphics as DisplayObject);
-					(world as World).__content.sortChildrenByDepth();
 					
 					alignGraphics();
 				}

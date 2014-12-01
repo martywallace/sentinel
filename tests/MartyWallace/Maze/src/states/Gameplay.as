@@ -17,7 +17,7 @@ package states
 		
 		public function Gameplay()
 		{
-			super(new Maze(false), new UI());
+			super(new Maze(true), new UI());
 			
 			world.add(new Hero());
 			

@@ -12,7 +12,7 @@ package scene
 		
 		public function Maze(debug:Boolean = false)
 		{
-			super(new EngineDef(), debug ? new Debug(game) : null);
+			super(new EngineDef(), debug ? new Debug(game, 1, 1, 0.2, new <int>[Debug.SHAPE, Debug.CENTER_OF_MASS]) : null);
 			
 			camera.rotation = 0.05;
 		}

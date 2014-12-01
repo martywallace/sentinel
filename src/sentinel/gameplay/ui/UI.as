@@ -16,7 +16,7 @@ package sentinel.gameplay.ui
 		
 		public function UI()
 		{
-			_graphics = new Sprite();
+			_graphics = new Sprite(true);
 		}
 		
 		

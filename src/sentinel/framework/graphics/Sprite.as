@@ -13,6 +13,20 @@ package sentinel.framework.graphics
 	{
 		
 		private var _depth:int = 0;
+		private var _autoSort:Boolean = false;
+		
+		
+		/**
+		 * Constructor.
+		 * @param autoSort Whether children added to this Sprite should automatically be sorted by
+		 * their <code>depth</code> property. Reduces performance.
+		 */
+		public function Sprite(autoSort:Boolean = false)
+		{
+			super();
+			
+			_autoSort = autoSort;
+		}
 		
 		
 		public function deconstruct():void
@@ -36,13 +50,23 @@ package sentinel.framework.graphics
 				return null;
 			}
 			
-			return super.addChild(child);
+			var child:DisplayObject = super.addChild(child);
+			
+			if (_autoSort)
+			{
+				sortChildrenByDepth();
+			}
+			
+			return child;
 		}
 		
 		
 		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
+		
 		public function get depth():int { return _depth; }
 		public function set depth(value:int):void { _depth = value; }
+		
+		public function get autoSort():Boolean { return _autoSort; }
 		
 	}
 	

@@ -21,6 +21,7 @@ package sentinel.framework.graphics
 		function getChildIndex(child:DisplayObject):int;
 		
 		function get numChildren():int;
+		function get autoSort():Boolean;
 		
 	}
 	
