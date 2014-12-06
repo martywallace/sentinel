@@ -18,19 +18,19 @@ package sentinel.framework.client
 		private var _so:SharedObject;
 		
 		
-		public function Storage(identity:String):void
+		protected override function construct():void
 		{
-			_so = SharedObject.getLocal(identity.replace(/[^\w\/]/, ''));
+			_so = SharedObject.getLocal(game.identity.replace(/[^\w\/]/, ''));
 		}
 		
 		
-		public function push(field:String, data:*):void
+		public function save(field:String, data:*):void
 		{
 			_data[field] = data;
 		}
 		
 		
-		public function pull(field:String, fallback:* = null):*
+		public function load(field:String, fallback:* = null):*
 		{
 			return ObjectUtil.prop(_data, field, fallback);
 		}

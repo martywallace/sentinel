@@ -31,9 +31,9 @@ package
 				new HUD()
 			);
 			
-			if (storage.pull('world') !== null)
+			if (storage.load('world') !== null)
 			{
-				world.load(storage.pull('world'));
+				world.load(storage.load('world'));
 			}
 			else
 			{

@@ -7,7 +7,7 @@ package sentinel.testing
 	public class TestGame extends Game
 	{
 		
-		protected override function get identity():String { return 'TestGame'; }
+		public override function get identity():String { return 'TestGame'; }
 		
 	}
 	

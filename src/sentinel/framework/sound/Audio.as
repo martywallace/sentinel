@@ -2,7 +2,6 @@ package sentinel.framework.sound
 {
 	
 	import sentinel.framework.Component;
-	import sentinel.framework.Library;
 	
 	
 	/**
@@ -10,14 +9,11 @@ package sentinel.framework.sound
 	 * @author Marty Wallace.
 	 */
 	public class Audio extends Component
-	{
+	{	
 		
-		private var _library:Library;
-		
-		
-		public function Audio(library:Library)
+		protected override function construct():void
 		{
-			_library = library;
+			//
 		}
 		
 		

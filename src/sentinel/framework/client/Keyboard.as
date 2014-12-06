@@ -4,7 +4,6 @@ package sentinel.framework.client
 	import flash.events.KeyboardEvent;
 	import sentinel.framework.Component;
 	import sentinel.framework.events.KeyboardEvent;
-	import sentinel.framework.Game;
 	import sentinel.framework.util.ObjectUtil;
 	
 	
@@ -112,16 +111,13 @@ package sentinel.framework.client
 		public static const DOWN_ARROW:uint = 40;
 		
 		
-		private var _game:Game;
-		private var _keys:Object = {};
+		private var _keys:Object = { };
 		
 		
-		public function Keyboard(game:Game)
+		protected override function construct():void
 		{ 
-			_game = game;
-			
-			_game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
-			_game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
+			starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
+			starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
 		}
 		
 		

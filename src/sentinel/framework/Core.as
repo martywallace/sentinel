@@ -36,11 +36,18 @@ package sentinel.framework
 		private function _rootCreated(event:Event):void
 		{
 			if (_starling.root is Game)
-			{				
-				_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
-				_starling.start();
-				
-				(_starling.root as Game).__construct();
+			{
+				if ((_starling.root as Game).identity !== null)
+				{
+					_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
+					_starling.start();
+					
+					(_starling.root as Game).__construct();
+				}
+				else
+				{
+					throw new Error("Your Game must define an identity.");
+				}
 			}
 			else
 			{

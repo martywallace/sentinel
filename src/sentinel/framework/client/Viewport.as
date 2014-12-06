@@ -3,7 +3,6 @@ package sentinel.framework.client
 	
 	import flash.geom.Point;
 	import sentinel.framework.Component;
-	import sentinel.framework.Game;
 	
 	
 	/**
@@ -13,29 +12,18 @@ package sentinel.framework.client
 	public class Viewport extends Component
 	{
 		
-		private var _game:Game;
+		private var _center:Point;
 		
 		
-		public function Viewport(game:Game)
+		protected override function construct():void
 		{
-			_game = game;
+			_center = new Point(width / 2, height / 2);
 		}
 		
 		
-		public function get width():int { return _game.starling.backBufferWidth; }
-		public function get height():int { return _game.starling.backBufferHeight; }
-		
-		public function get center():Point { return new Point(width / 2, height / 2); }
-		
-		public function get top():Point { return new Point(width / 2, 0); }
-		public function get bottom():Point { return new Point(width / 2, height); }
-		public function get left():Point { return new Point(0, height / 2); }
-		public function get right():Point { return new Point(width, height / 2); }
-		
-		public function get topLeft():Point { return new Point(0, 0); }
-		public function get topRight():Point { return new Point(width, 0); }
-		public function get bottomLeft():Point { return new Point(0, height); }
-		public function get bottomRight():Point { return new Point(width, height); }
+		public function get width():int { return starling.backBufferWidth; }
+		public function get height():int { return starling.backBufferHeight; }
+		public function get center():Point { return _center; }
 		
 		public override function get name():String { return 'viewport'; }
 		

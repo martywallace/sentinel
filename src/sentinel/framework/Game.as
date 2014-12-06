@@ -27,43 +27,46 @@ package sentinel.framework
 		
 		public function Game()
 		{
-			if (identity !== null)
-			{
-				// Inbuilt components.
-				var components:Vector.<Component> = new <Component>[
-					new Viewport(this),
-					new Mouse(this),
-					new Keyboard(this),
-					new Library(),
-					new Audio(library),
-					new Storage(identity)
-				];
-				
-				// Additional components.
-				var extra:Vector.<Component> = defineComponents();
-				
-				if (extra !== null)
-				{
-					components.concat(extra);
-				}
-				
-				for each(var comp:Component in components)
-				{
-					_components[comp.name] = comp;
-				}
-				
-				addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
-			}
-			else
-			{
-				throw new Error('You must set a game identity.');
-			}
+			//
 		}
 		
 		
 		internal function __construct():void
 		{
+			// Define all required components.
+			var components:Vector.<Component> = new <Component>[
+				new Viewport(), new Library(),
+				new Mouse(), new Keyboard(),
+				new Audio(), new Storage()
+			];
+			
+			components.concat(defineComponents() || new <Component>[]);
+			
+			for each(var component:Component in components)
+			{
+				if (!_components.hasOwnProperty(component.name))
+				{
+					_components[component.name] = component;
+				}
+				else
+				{
+					// Cannot have two Components with the same name.
+					throw new Error('A Component named "' + component.name + '" already exists.');
+				}
+			}
+			
+			// Initialize components - this step is done in a later loop to ensure components that
+			// depend on the existence of other components function correctly.
+			for (var componentName:String in _components)
+			{
+				(_components[componentName] as Component).__construct();
+			}
+			
+			// Initialize user game construction code.
 			construct();
+			
+			// Begin updating.
+			addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
 		}
 		
 		
@@ -128,7 +131,7 @@ package sentinel.framework
 		public override function get viewport():Viewport { return getComponent('viewport') as Viewport; }
 		
 		
-		protected function get identity():String { return null; }
+		public function get identity():String { return null; }
 		
 	}
 	

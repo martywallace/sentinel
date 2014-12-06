@@ -6,7 +6,6 @@ package sentinel.framework.client
 	import flash.geom.Point;
 	import sentinel.framework.Component;
 	import sentinel.framework.events.MouseEvent;
-	import sentinel.framework.Game;
 	
 	
 	/**
@@ -41,21 +40,18 @@ package sentinel.framework.client
 	public class Mouse extends Component
 	{
 		
-		private var _game:Game;
 		private var _left:Boolean = false;
 		private var _right:Boolean = false;
 		private var _available:Boolean = false;
 		
 		
-		public function Mouse(game:Game)
+		protected override function construct():void
 		{
-			_game = game;
-			
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_UP, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_DOWN, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_UP, _mouseEventHandler);
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, _mouseEventHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_UP, _mouseEventHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_DOWN, _mouseEventHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.RIGHT_MOUSE_UP, _mouseEventHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
 		}
 		
 		
@@ -75,8 +71,8 @@ package sentinel.framework.client
 			
 			if(event.type === flash.events.MouseEvent.MOUSE_MOVE)
 			{
-				_game.starling.nativeStage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
-				_game.starling.nativeStage.addEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
+				starling.nativeStage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+				starling.nativeStage.addEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
 				
 				_available = true;
 			}
@@ -85,8 +81,8 @@ package sentinel.framework.client
 		
 		private function _mouseLeaveHandler(event:Event):void
 		{
-			_game.starling.nativeStage.removeEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
-			_game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
+			starling.nativeStage.removeEventListener(Event.MOUSE_LEAVE, _mouseLeaveHandler);
+			starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, _mouseEventHandler);
 			
 			_available = false;
 		}
@@ -98,7 +94,7 @@ package sentinel.framework.client
 		 */
 		public function getState():MouseState
 		{
-			var viewportPosition:Point = new Point(_game.starling.nativeStage.mouseX, _game.starling.nativeStage.mouseY);
+			var viewportPosition:Point = new Point(starling.nativeStage.mouseX, starling.nativeStage.mouseY);
 			
 			return new MouseState(viewportPosition, _left, _right, _available);
 		}
