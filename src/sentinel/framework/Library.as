@@ -1,6 +1,7 @@
 package sentinel.framework
 {
 	
+	import flash.media.Sound;
 	import sentinel.framework.graphics.Image;
 	import starling.textures.Texture;
 	
@@ -62,6 +63,12 @@ package sentinel.framework
 		public function getImage(textureName:String):Image
 		{
 			return new Image(getTexture(textureName));
+		}
+		
+		
+		public function getSound(name:String):Sound
+		{
+			return find(SOUND, name) as Sound;
 		}
 		
 		

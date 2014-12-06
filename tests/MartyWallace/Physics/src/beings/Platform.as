@@ -9,6 +9,7 @@ package beings
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	import sentinel.gameplay.scene.IUnique;
+	import sentinel.gameplay.events.ContactEvent;
 	
 	
 	public class Platform extends Being implements IUnique
@@ -34,7 +35,15 @@ package beings
 			var body:Body = engine.createBody(Body.STATIC, this);
 			body.createFixture(new Box(400, 40), new FixtureDef(1, 0.5, 0.5));
 			
+			body.addEventListener(ContactEvent.BEGIN, _contact);
+			
 			return body;
+		}
+		
+		
+		private function _contact(event:ContactEvent):void
+		{
+			audio.play('sfx');
 		}
 		
 		

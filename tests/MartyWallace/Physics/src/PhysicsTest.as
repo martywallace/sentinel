@@ -12,10 +12,14 @@ package
 		[Embed(source = '../../Assets/Crate.png')]
 		public var CrateAsset:Class;
 		
+		[Embed(source = '../../Assets/sfx.mp3')]
+		public var SFXAsset:Class;
+		
 		
 		protected override function construct():void
 		{
 			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
+			library.add(Library.SOUND, 'sfx', new SFXAsset());
 			
 			loadState(new Menu());
 		}
