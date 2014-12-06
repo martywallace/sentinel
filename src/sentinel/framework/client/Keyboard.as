@@ -2,10 +2,10 @@ package sentinel.framework.client
 {
 	
 	import flash.events.KeyboardEvent;
+	import sentinel.framework.Component;
 	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.framework.Game;
 	import sentinel.framework.util.ObjectUtil;
-	import starling.events.EventDispatcher;
 	
 	
 	/**
@@ -26,7 +26,7 @@ package sentinel.framework.client
 	 * provides useful constants for ASCII values.
 	 * @author Marty Wallace.
 	 */
-	public class Keyboard extends EventDispatcher
+	public class Keyboard extends Component
 	{
 		
 		public static const NUM_0:uint = 48;
@@ -153,6 +153,9 @@ package sentinel.framework.client
 		{
 			return new KeyboardState(ObjectUtil.shallowCopy(_keys));
 		}
+		
+		
+		public override function get name():String { return 'keyboard'; }
 		
 	}
 	

@@ -2,6 +2,7 @@ package sentinel.framework.client
 {
 	
 	import flash.geom.Point;
+	import sentinel.framework.Component;
 	import sentinel.framework.Game;
 	
 	
@@ -9,7 +10,7 @@ package sentinel.framework.client
 	 * Describes the game viewport (screen).
 	 * @author Marty Wallace.
 	 */
-	public class Viewport
+	public class Viewport extends Component
 	{
 		
 		private var _game:Game;
@@ -35,6 +36,8 @@ package sentinel.framework.client
 		public function get topRight():Point { return new Point(width, 0); }
 		public function get bottomLeft():Point { return new Point(0, height); }
 		public function get bottomRight():Point { return new Point(width, height); }
+		
+		public override function get name():String { return 'viewport'; }
 		
 	}
 	

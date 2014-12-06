@@ -1,6 +1,7 @@
 package sentinel.framework.sound
 {
 	
+	import sentinel.framework.Component;
 	import sentinel.framework.Library;
 	
 	
@@ -8,7 +9,7 @@ package sentinel.framework.sound
 	 * The Audio class assists with playing audio in your game.
 	 * @author Marty Wallace.
 	 */
-	public class Audio
+	public class Audio extends Component
 	{
 		
 		private var _library:Library;
@@ -18,6 +19,9 @@ package sentinel.framework.sound
 		{
 			_library = library;
 		}
+		
+		
+		public override function get name():String { return 'audio'; }
 		
 	}
 	

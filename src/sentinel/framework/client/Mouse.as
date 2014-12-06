@@ -4,9 +4,9 @@ package sentinel.framework.client
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import sentinel.framework.Component;
 	import sentinel.framework.events.MouseEvent;
 	import sentinel.framework.Game;
-	import starling.events.EventDispatcher;
 	
 	
 	/**
@@ -38,7 +38,7 @@ package sentinel.framework.client
 	 * The Mouse class provides access to the current state of the mouse buttons.
 	 * @author Marty Wallace.
 	 */
-	public class Mouse extends EventDispatcher
+	public class Mouse extends Component
 	{
 		
 		private var _game:Game;
@@ -102,6 +102,9 @@ package sentinel.framework.client
 			
 			return new MouseState(viewportPosition, _left, _right, _available);
 		}
+		
+		
+		public override function get name():String { return 'mouse'; }
 		
 	}
 	

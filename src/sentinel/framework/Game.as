@@ -22,24 +22,35 @@ package sentinel.framework
 	{
 		
 		private var _state:State;
-		private var _viewport:Viewport;
-		private var _keyboard:Keyboard;
-		private var _mouse:Mouse;
-		private var _library:Library;
-		private var _audio:Audio;
-		private var _storage:Storage;
+		private var _components:Object = { };
 		
 		
 		public function Game()
 		{
 			if (identity !== null)
 			{
-				_viewport = new Viewport(this);
-				_mouse = new Mouse(this);
-				_keyboard = new Keyboard(this);
-				_library = new Library();
-				_audio = new Audio(_library);
-				_storage = new Storage(identity);
+				// Inbuilt components.
+				var components:Vector.<Component> = new <Component>[
+					new Viewport(this),
+					new Mouse(this),
+					new Keyboard(this),
+					new Library(),
+					new Audio(library),
+					new Storage(identity)
+				];
+				
+				// Additional components.
+				var extra:Vector.<Component> = defineComponents();
+				
+				if (extra !== null)
+				{
+					components.concat(extra);
+				}
+				
+				for each(var comp:Component in components)
+				{
+					_components[comp.name] = comp;
+				}
 				
 				addEventListener(EnterFrameEvent.ENTER_FRAME, _update);
 			}
@@ -95,14 +106,26 @@ package sentinel.framework
 		}
 		
 		
+		protected function defineComponents():Vector.<Component>
+		{
+			return null;
+		}
+		
+		
+		protected function getComponent(name:String):Component
+		{
+			return _components[name];
+		}
+		
+		
 		public function get starling():Starling { return Starling.current; }
 		public function get state():State { return _state; }
-		public function get keyboard():Keyboard{ return _keyboard; }
-		public function get mouse():Mouse { return _mouse; }
-		public function get library():Library { return _library; }
-		public function get audio():Audio { return _audio; }
-		public function get storage():Storage { return _storage; }
-		public override function get viewport():Viewport { return _viewport; }
+		public function get keyboard():Keyboard{ return getComponent('keyboard') as Keyboard; }
+		public function get mouse():Mouse { return getComponent('mouse') as Mouse; }
+		public function get library():Library { return getComponent('library') as Library; }
+		public function get audio():Audio { return getComponent('audio') as Audio; }
+		public function get storage():Storage { return getComponent('storage') as Storage; }
+		public override function get viewport():Viewport { return getComponent('viewport') as Viewport; }
 		
 		
 		protected function get identity():String { return null; }

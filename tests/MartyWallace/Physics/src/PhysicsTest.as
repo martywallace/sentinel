@@ -15,8 +15,6 @@ package
 		
 		protected override function construct():void
 		{
-			super.construct();
-			
 			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
 			
 			loadState(new Menu());

@@ -2,6 +2,7 @@ package sentinel.framework.client
 {
 	
 	import flash.net.SharedObject;
+	import sentinel.framework.Component;
 	import sentinel.framework.IStorable;
 	import sentinel.framework.util.ObjectUtil;
 	
@@ -10,7 +11,7 @@ package sentinel.framework.client
 	 * Local storage via SharedObject.
 	 * @author Marty Wallace.
 	 */
-	public class Storage
+	public class Storage extends Component
 	{
 		
 		private var _slot:uint = 1;
@@ -23,13 +24,13 @@ package sentinel.framework.client
 		}
 		
 		
-		public function save(field:String, data:*):void
+		public function push(field:String, data:*):void
 		{
 			_data[field] = data;
 		}
 		
 		
-		public function load(field:String, fallback:* = null):*
+		public function pull(field:String, fallback:* = null):*
 		{
 			return ObjectUtil.prop(_data, field, fallback);
 		}
@@ -52,6 +53,8 @@ package sentinel.framework.client
 		public function get slot():uint { return _slot; }
 		
 		public function get slotName():String { return '_slot' + slot; }
+		
+		public override function get name():String { return 'storage'; }
 		
 	}
 	
