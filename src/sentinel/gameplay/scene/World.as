@@ -28,6 +28,7 @@ package sentinel.gameplay.scene
 		private var _content:Sprite;
 		private var _ticks:uint = 0;
 		private var _unique:Object = { };
+		private var _map:Map;
 		
 		
 		/**
@@ -63,39 +64,21 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		public override function save():Object
+		public function loadMap(map:Map):void
 		{
-			var beings:Array = [];
+			unloadMap();
 			
-			for each(var thing:Thing in children)
-			{
-				if (thing is Being)
-				{
-					var data:Object = thing.save();
-					
-					if (data !== null)
-					{
-						// Only save objects who return actual data for save(). This provides the
-						// opportunity to return null from save() on Beings that shouldn't be added
-						// to the save data e.g. particles, effects, bullets, etc.
-						beings.push(data);
-					}
-				}
-			}
-			
-			return ObjectUtil.merge(super.save(), { beings: beings });
+			_map = map;
+			_map.__construct(this);
 		}
 		
 		
-		public override function load(data:Object):void
+		public function unloadMap():void
 		{
-			for each(var def:Object in ObjectUtil.prop(data, 'beings', []))
+			if (_map !== null)
 			{
-				if (def.hasOwnProperty('type'))
-				{
-					var being:Being = Being.create(def.type, def);
-					add(being);
-				}
+				_map.deconstruct();
+				_map = null;
 			}
 		}
 		
@@ -216,6 +199,7 @@ package sentinel.gameplay.scene
 		}
 		
 		internal function get __content():Sprite { return _content; }
+		internal function get __children():Vector.<Thing> { return children; }
 		
 	}
 	

@@ -9,6 +9,7 @@ package
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.scene.Boundary;
+	import sentinel.gameplay.scene.Map;
 	import sentinel.gameplay.scene.World;
 	import sentinel.testing.states.TestGameplay;
 	
@@ -19,6 +20,7 @@ package
 		private var _platform:Platform;
 		private var _boundary:Boundary;
 		private var _cooldown:int = 0;
+		private var _map:Map;
 		
 		
 		public function Gameplay()
@@ -30,6 +32,9 @@ package
 				),
 				new HUD()
 			);
+			
+			_map = new Map();
+			world.loadMap(_map);
 			
 			if (storage.load('world') !== null)
 			{
@@ -53,7 +58,7 @@ package
 		private function _worldFreezeHandler(event:WorldEvent):void
 		{
 			// A good place to set up a pause menu.
-			// ...
+			trace(JSON.stringify(_map.save()));
 		}
 		
 		

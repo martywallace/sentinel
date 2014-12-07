@@ -43,7 +43,7 @@ package beings
 		
 		private function _contact(event:ContactEvent):void
 		{
-			audio.sfx('sfx', 0.1).volume = 0.1;
+			audio.sfx('sfx', 0.1);
 		}
 		
 		
