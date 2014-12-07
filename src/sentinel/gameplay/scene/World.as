@@ -4,7 +4,6 @@ package sentinel.gameplay.scene
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
@@ -64,6 +63,12 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		// TODO: Provide a way to pass a transition object to loadMap()?
+		
+		/**
+		 * Loads a new Map into this World.
+		 * @param map The Map to load.
+		 */
 		public function loadMap(map:Map):void
 		{
 			unloadMap();
@@ -73,6 +78,10 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * Unload the current Map, if one exists. This will remove all Beings that currently exist
+		 * within the World.
+		 */
 		public function unloadMap():void
 		{
 			if (_map !== null)
@@ -97,6 +106,18 @@ package sentinel.gameplay.scene
 		
 		
 		/**
+		 * Register the list of classes extending Being that are used by this game. This allows
+		 * <code>Being.create()</code> to function correctly.
+		 */
+		protected function registerBeingTypes():Vector.<Class>
+		{
+			return new <Class>[
+				Boundary, Region
+			];
+		}
+		
+		
+		/**
 		 * Adds a Being to this World.
 		 * @param being The Being to add.
 		 */
@@ -106,13 +127,13 @@ package sentinel.gameplay.scene
 			{
 				if (being is IUnique)
 				{
-					if (!_unique.hasOwnProperty((being as IUnique).token))
+					if (!_unique.hasOwnProperty((being as IUnique).uniqueName))
 					{
-						_unique[(being as IUnique).token] = being;
+						_unique[(being as IUnique).uniqueName] = being;
 					}
 					else
 					{
-						throw new Error('Unique Being conflict using token "' + (being as IUnique).token + '".');
+						throw new Error('Unique Being conflict using token "' + (being as IUnique).uniqueName + '".');
 						return null;
 					}
 				}
@@ -133,7 +154,7 @@ package sentinel.gameplay.scene
 			{
 				if (being is IUnique)
 				{
-					delete _unique[(being as IUnique).token];
+					delete _unique[(being as IUnique).uniqueName];
 				}
 			}
 			
@@ -154,12 +175,12 @@ package sentinel.gameplay.scene
 		
 		
 		/**
-		 * Returns a Being who implements IUnique and matches the specified token.
-		 * @param token The <code>token</code> value of the saught IUnique Being.
+		 * Returns a Being who implements IUnique and matches the specified unique name.
+		 * @param uniqueName The <code>uniqueName</code> value of the saught IUnique Being.
 		 */
-		public function getUnique(token:String):Being
+		public function getUnique(uniqueName:String):Being
 		{
-			return _unique.hasOwnProperty(token) ? _unique[token] : null;
+			return _unique.hasOwnProperty(uniqueName) ? _unique[uniqueName] : null;
 		}
 		
 		
@@ -182,13 +203,13 @@ package sentinel.gameplay.scene
 		}
 		
 		
-		
 		public function get ui():UI { return (parent as GameplayState).ui }
 		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get ticks():uint { return _ticks; }
 		public function get totalBeings():int { return children.length; }
+		public function get map():Map { return _map; }
 		
 		public function get frozen():Boolean { return _frozen; }
 		

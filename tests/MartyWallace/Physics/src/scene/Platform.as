@@ -1,25 +1,19 @@
-package beings
+package scene
 {
 	
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Quad;
+	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.scene.Being;
 	import sentinel.gameplay.scene.IUnique;
-	import sentinel.gameplay.events.ContactEvent;
 	
 	
 	public class Platform extends Being implements IUnique
-	{
-		
-		public function Platform()
-		{
-			super();
-		}
-		
+	{	
 		
 		protected override function defineGraphics():IGraphics
 		{
@@ -49,16 +43,13 @@ package beings
 		
 		protected override function update():void
 		{
-			body.rotation = Math.cos(world.ticks / 30) / 5;
+			rotation = Math.cos(world.ticks / 30) / 5;
 			
 			super.update();
 		}
 		
 		
-		public function get token():String
-		{
-			return 'platform';
-		}
+		public function get uniqueName():String { return 'platform'; }
 		
 	}
 	

@@ -1,4 +1,4 @@
-package
+package states
 {
 	
 	import sentinel.testing.states.TestMenu;

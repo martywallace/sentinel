@@ -52,6 +52,9 @@ package sentinel.gameplay.scene
 		private var _rotation:Number = 0;
 		
 		
+		/**
+		 * Constructor.
+		 */
 		public function Being()
 		{
 			_position = new Vector2D();
@@ -75,6 +78,10 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * Position and rotate the graphics owned by this Being to mimic its physics body.
+		 * This method does nothing unless this Being owns both graphics and a physics body.
+		 */
 		public function alignGraphics():void
 		{
 			if (_graphics !== null)
@@ -95,6 +102,10 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * Position and rotate the physics body owned by this Being to mimic its graphics.
+		 * This method does nothing unless this Being owns both a physics body and graphics.
+		 */
 		public function alignBody():void
 		{
 			if (_body !== null)
@@ -113,6 +124,11 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * Utility to method for setting the x and y values at the same time.
+		 * @param The new x coordinate.
+		 * @param The new y coordinate.
+		 */
 		public function moveTo(x:Number, y:Number):void
 		{
 			_position.x = x;

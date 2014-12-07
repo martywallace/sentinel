@@ -8,7 +8,7 @@ package sentinel.gameplay.scene
 	public interface IUnique
 	{
 		
-		function get token():String;
+		function get uniqueName():String;
 		
 	}
 	

@@ -15,6 +15,14 @@ package sentinel.gameplay.scene
 		private var _world:World;
 		
 		
+		public override function deconstruct():void
+		{
+			_world.removeAll();
+			
+			super.deconstruct();
+		}
+		
+		
 		public override function save():Object
 		{
 			var beings:Array = [];

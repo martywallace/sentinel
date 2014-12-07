@@ -1,11 +1,10 @@
-package beings
+package scene
 {
 	
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.util.ObjectUtil;
 	import sentinel.framework.util.Random;
-	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Engine;
@@ -57,9 +56,7 @@ package beings
 		protected override function defineBody(engine:Engine):Body
 		{
 			var body:Body = engine.createBody(Body.DYNAMIC, this);
-			
 			body.createFixture(new Box(_size, _size), new FixtureDef(1));
-			body.addEventListener(ContactEvent.BEGIN, _beginContact);
 			
 			return body;
 		}
@@ -79,12 +76,6 @@ package beings
 		private function _touch(event:TouchEvent):void
 		{
 			deconstruct();
-		}
-		
-		
-		private function _beginContact(event:ContactEvent):void
-		{
-			// Handle collisions.
 		}
 		
 	}

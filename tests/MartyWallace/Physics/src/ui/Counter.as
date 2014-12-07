@@ -1,4 +1,4 @@
-package
+package ui
 {
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.TextField;

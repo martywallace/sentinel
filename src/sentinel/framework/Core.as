@@ -1,7 +1,7 @@
 package sentinel.framework
 {
 	
-	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -10,7 +10,7 @@ package sentinel.framework
 	 * The Sentinel core, extended by your document class.
 	 * @author Marty Wallace.
 	 */
-	public class Core extends MovieClip
+	public class Core extends Sprite
 	{
 		
 		private var _starling:Starling;
