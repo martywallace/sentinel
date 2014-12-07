@@ -3,6 +3,7 @@ package sentinel.framework
 	
 	import flash.media.Sound;
 	import sentinel.framework.graphics.Image;
+	import sentinel.framework.sound.Sound;
 	import starling.textures.Texture;
 	
 	
@@ -66,9 +67,9 @@ package sentinel.framework
 		}
 		
 		
-		public function getSound(name:String):Sound
+		public function getSound(name:String):sentinel.framework.sound.Sound
 		{
-			return find(SOUND, name) as Sound;
+			return new sentinel.framework.sound.Sound(find(SOUND, name) as flash.media.Sound);
 		}
 		
 		
