@@ -4,6 +4,7 @@ package
 	import sentinel.testing.TestGame;
 	import starling.textures.Texture;
 	import sentinel.framework.Library;
+	import starling.textures.TextureAtlas;
 	import states.Menu;
 	
 	
@@ -19,8 +20,8 @@ package
 		
 		protected override function construct():void
 		{
-			library.add(Library.TEXTURE, 'crate', Texture.fromBitmap(new CrateAsset()));
-			library.add(Library.SOUND, 'sfx', new SFXAsset());
+			library.addTexture('crate', Texture.fromBitmap(new CrateAsset()));
+			library.addSound('sfx', new SFXAsset());
 			
 			loadState(new Menu());
 		}

@@ -3,11 +3,12 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.Game;
+	import sentinel.framework.util.GraphicsUtil;
 	import starling.core.Starling;
 	import starling.text.TextField;
 	
 	
-	public class TextField extends starling.text.TextField implements IGraphics
+	public class TextField extends starling.text.TextField implements IGraphicsContainer
 	{
 		
 		private var _depth:int = 0;
@@ -26,9 +27,18 @@ package sentinel.framework.graphics
 		}
 		
 		
+		public function sortChildrenByDepth():void
+		{
+			sortChildren(GraphicsUtil.sortCompareFunction);
+		}
+		
+		
 		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
+		
 		public function get depth():int { return _depth; }
 		public function set depth(value:int):void { _depth = value; }
+		
+		public function get autoSort():Boolean { return false; }
 		
 	}
 	

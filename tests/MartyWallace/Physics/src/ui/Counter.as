@@ -1,8 +1,10 @@
 package ui
 {
+	
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.TextField;
 	import sentinel.gameplay.ui.UIElement;
+	
 	
 	public class Counter extends UIElement
 	{

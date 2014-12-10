@@ -5,6 +5,7 @@ package sentinel.framework
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.sound.Sound;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	
 	/**
@@ -14,17 +15,17 @@ package sentinel.framework
 	public class Library extends Component
 	{
 		
-		public static const TEXTURE:String = 'texture';
-		public static const ATLAS:String = 'atlas';
-		public static const SOUND:String = 'sound';
+		private static const TEXTURES:String = 'textures';
+		private static const ATLASES:String = 'atlases';
+		private static const SOUNDS:String = 'sounds';
 		
 		
 		private var _content:Object = { };
 		
 		
-		public function add(category:String, name:String, resource:*):void
+		private function _add(category:String, name:String, resource:*):void
 		{
-			if (!has(category, name))
+			if (!_has(category, name))
 			{
 				if (!_content.hasOwnProperty(category)) _content[category] = { };
 				_content[category][name] = resource;
@@ -36,15 +37,15 @@ package sentinel.framework
 		}
 		
 		
-		public function has(category:String, name:String):Boolean
+		private function _has(category:String, name:String):Boolean
 		{
 			return _content.hasOwnProperty(category) && _content[category].hasOwnProperty(name);
 		}
 		
 		
-		public function find(category:String, name:String):*
+		private function _find(category:String, name:String):*
 		{
-			if (has(category, name))
+			if (_has(category, name))
 			{
 				return _content[category][name];
 			}
@@ -55,9 +56,33 @@ package sentinel.framework
 		}
 		
 		
+		public function addTexture(name:String, texture:Texture):void
+		{
+			_add(TEXTURES, name, texture);
+		}
+		
+		
+		public function addAtlas(name:String, atlas:TextureAtlas):void
+		{
+			_add(ATLASES, name, atlas);
+		}
+		
+		
+		public function addSound(name:String, sound:flash.media.Sound):void
+		{
+			_add(SOUNDS, name, sound);
+		}
+		
+		
 		public function getTexture(name:String):Texture
 		{
-			return find(TEXTURE, name) as Texture;
+			return _find(TEXTURES, name) as Texture;
+		}
+		
+		
+		public function getAtlas(name:String):TextureAtlas
+		{
+			return _find(ATLASES, name) as TextureAtlas;
 		}
 		
 		
@@ -69,7 +94,7 @@ package sentinel.framework
 		
 		public function getSound(name:String):sentinel.framework.sound.Sound
 		{
-			return new sentinel.framework.sound.Sound(find(SOUND, name) as flash.media.Sound);
+			return new sentinel.framework.sound.Sound(_find(SOUNDS, name) as flash.media.Sound);
 		}
 		
 		

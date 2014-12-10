@@ -219,8 +219,19 @@ package sentinel.gameplay.scene
 		}
 		
 		
+		/**
+		 * The parent World containing this Being.
+		 */
 		public function get world():World { return parent as World; }
+		
+		/**
+		 * The graphics representing this Being.
+		 */
 		public function get graphics():IGraphics { return _graphics; }
+		
+		/**
+		 * The physics body used by this Being.
+		 */
 		public function get body():Body { return _body; }
 		
 		/**
@@ -259,7 +270,9 @@ package sentinel.gameplay.scene
 		public function get y():Number { return position.y; }
 		public function set y(value:Number):void { moveTo(position.x, value); }
 		
-		
+		/**
+		 * Get or set the rotation of this Being.
+		 */
 		public function get rotation():Number
 		{
 			if (_graphics !== null) _rotation = _graphics.rotation;
@@ -276,8 +289,10 @@ package sentinel.gameplay.scene
 			if (_graphics !== null) _graphics.rotation = value;
 		}
 		
+		/**
+		 * Returns the active UI, if this Being is a descendant of <code>GameplayState</code>.
+		 */
 		protected function get ui():UI { return world !== null ? world.ui : null; }
-		protected function get camera():Camera { return world !== null ? world.camera : null; }
 		
 	}
 	
