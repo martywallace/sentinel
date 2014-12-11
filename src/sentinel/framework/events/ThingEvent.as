@@ -2,7 +2,6 @@ package sentinel.framework.events
 {
 	
 	import sentinel.framework.Thing;
-	import starling.events.Event;
 	
 	
 	public class ThingEvent extends Event

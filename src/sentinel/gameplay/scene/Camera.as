@@ -27,7 +27,14 @@ package sentinel.gameplay.scene
 		
 		public function lookAt(being:Being):void
 		{
-			_set(being.position.x, being.position.y, rotation, zoom);
+			if (being !== null)
+			{
+				_set(being.position.x, being.position.y, rotation, zoom);
+			}
+			else
+			{
+				// Ignore this call.
+			}
 		}
 		
 		

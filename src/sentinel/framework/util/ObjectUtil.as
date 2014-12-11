@@ -69,6 +69,8 @@ package sentinel.framework.util
 		 */
 		public static function prop(target:Object, prop:String, fallback:* = null):*
 		{
+			if (target === null) return fallback;
+			
 			return target.hasOwnProperty(prop) ? target[prop] : fallback;
 		}
 		

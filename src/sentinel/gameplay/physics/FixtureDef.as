@@ -9,7 +9,7 @@ package sentinel.gameplay.physics
 		private var _restitution:Number;
 		
 		
-		public function FixtureDef(density:Number = 0, friction:Number = 0.2, restitution:Number = 0)
+		public function FixtureDef(density:Number = 1, friction:Number = 0.2, restitution:Number = 0)
 		{
 			_density = density;
 			_friction = friction;

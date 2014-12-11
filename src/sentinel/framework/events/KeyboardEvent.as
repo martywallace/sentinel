@@ -2,7 +2,6 @@ package sentinel.framework.events
 {
 	
 	import sentinel.framework.client.Keyboard;
-	import starling.events.Event;
 	
 	
 	public class KeyboardEvent extends Event
@@ -12,19 +11,14 @@ package sentinel.framework.events
 		public static const KEY_RELEASED:String = 'keyReleased';
 		
 		
-		private var _keyCode:uint;
-		
-		
 		public function KeyboardEvent(type:String, keyCode:uint)
 		{
-			_keyCode = keyCode;
-			
-			super(type);
+			super(type, { keyCode: keyCode });
 		}
 		
 		
-		public function get keyCode():uint{ return _keyCode; }
-		public function get keyChar():String{ return String.fromCharCode(_keyCode); }
+		public function get keyCode():uint{ return data.keyCode; }
+		public function get keyChar():String{ return String.fromCharCode(keyCode); }
 		public function get keyboard():Keyboard{ return target as Keyboard; }
 		
 	}

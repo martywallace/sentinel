@@ -2,7 +2,6 @@ package sentinel.framework.events
 {
 	
 	import sentinel.framework.client.Mouse;
-	import starling.events.Event;
 	
 	
 	public class MouseEvent extends Event

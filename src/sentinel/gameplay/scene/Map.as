@@ -15,6 +15,20 @@ package sentinel.gameplay.scene
 		private var _world:World;
 		
 		
+		internal function __construct(world:World):void
+		{
+			_world = world;
+			
+			construct();
+		}
+		
+		
+		protected function construct():void
+		{
+			//
+		}
+		
+		
 		public override function deconstruct():void
 		{
 			_world.removeAll();
@@ -57,20 +71,6 @@ package sentinel.gameplay.scene
 					_world.add(being);
 				}
 			}
-		}
-		
-		
-		internal function __construct(world:World):void
-		{
-			_world = world;
-			
-			construct();
-		}
-		
-		
-		protected function construct():void
-		{
-			//
 		}
 		
 		

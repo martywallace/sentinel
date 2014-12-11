@@ -1,8 +1,8 @@
 package sentinel.gameplay.events
 {
 	
+	import sentinel.framework.events.Event;
 	import sentinel.gameplay.scene.World;
-	import starling.events.Event;
 	
 	
 	public class WorldEvent extends Event
