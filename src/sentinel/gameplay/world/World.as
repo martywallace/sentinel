@@ -101,6 +101,7 @@ package sentinel.gameplay.world
 				_ticks ++;
 				
 				if (_engine !== null) _engine.step();
+				if (_map !== null) _map.__update();
 				
 				super.update();
 			}

@@ -23,6 +23,27 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Alias for <code>world.add()</code>.
+		 * @param being The Being to add to the World associated with this Map.
+		 */
+		public function add(being:Being):Being
+		{
+			return _world.add(being);
+		}
+		
+		
+		/**
+		 * Alias for <code>world.remove()</code>.
+		 * @param being The Being to remove from the World associated with this Map.
+		 * @param destroy Whether or not to deconstruct the target Being after removal.
+		 */
+		public function remove(being:Being, destroy:Boolean = false):Being
+		{
+			return _world.remove(being, destroy);
+		}
+		
+		
 		protected function construct():void
 		{
 			//
@@ -71,6 +92,15 @@ package sentinel.gameplay.world
 					_world.add(being);
 				}
 			}
+		}
+		
+		
+		/**
+		 * Grant access to <code>update()</code> within <code>sentinel.gameplay.world</code>.
+		 */
+		internal function __update():void
+		{
+			update();
 		}
 		
 		
