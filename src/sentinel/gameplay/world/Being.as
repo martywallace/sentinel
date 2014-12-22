@@ -225,6 +225,11 @@ package sentinel.gameplay.world
 		public function get world():World { return parent as World; }
 		
 		/**
+		 * The Map loaded by the parent World containing this Being.
+		 */
+		public function get map():Map{ return world.map; }
+		
+		/**
 		 * The graphics representing this Being.
 		 */
 		public function get graphics():IGraphics { return _graphics; }
