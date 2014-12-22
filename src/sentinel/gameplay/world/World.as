@@ -208,7 +208,7 @@ package sentinel.gameplay.world
 		public function get ui():UI { return (parent as GameplayState).ui }
 		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
-		public function get mouseContainer():IGraphics{ return _graphics; }
+		public function get mouseContainer():IGraphics{ return _content; }
 		public function get camera():Camera { return _camera; }
 		public function get ticks():uint { return _ticks; }
 		public function get totalBeings():int { return children.length; }
