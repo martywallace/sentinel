@@ -1,9 +1,7 @@
-package sentinel.gameplay.scene
+package sentinel.gameplay.world
 {
 	
-	import flash.geom.Point;
-	import sentinel.framework.client.Mouse;
-	import sentinel.framework.client.MouseState;
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
@@ -12,7 +10,6 @@ package sentinel.gameplay.scene
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
-	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	
@@ -94,19 +91,6 @@ package sentinel.gameplay.scene
 				_map.deconstruct();
 				_map = null;
 			}
-		}
-		
-		
-		/**
-		 * Returns the position of the mouse within the World.
-		 * @param mouse Reference to the Mouse component.
-		 */
-		public function getMousePosition(mouse:Mouse):Vector2D
-		{
-			var ms:MouseState = mouse.getState();
-			var p:Point = _content.globalToLocal(new Point(ms.viewportPosition.x, ms.viewportPosition.y));
-			
-			return new Vector2D(p.x, p.y);
 		}
 		
 		
@@ -224,6 +208,7 @@ package sentinel.gameplay.scene
 		public function get ui():UI { return (parent as GameplayState).ui }
 		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
+		public function get mouseContainer():IGraphics{ return _graphics; }
 		public function get camera():Camera { return _camera; }
 		public function get ticks():uint { return _ticks; }
 		public function get totalBeings():int { return children.length; }

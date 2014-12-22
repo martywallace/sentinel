@@ -2,6 +2,7 @@ package sentinel.framework
 {
 	
 	import sentinel.framework.client.Mouse;
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.gameplay.physics.Vector2D;
 	
 	
@@ -13,10 +14,9 @@ package sentinel.framework
 	{
 		
 		/**
-		 * Returns the position of the mouse relative to this object.
-		 * @param mouse A reference to the Mouse component.
+		 * Returns the graphics object used as the 'container' for the mouse.
 		 */
-		function getMousePosition(mouse:Mouse):Vector2D;
+		function get mouseContainer():IGraphics;
 		
 	}
 	

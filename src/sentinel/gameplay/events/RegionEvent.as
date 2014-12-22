@@ -2,8 +2,8 @@ package sentinel.gameplay.events
 {
 	
 	import sentinel.framework.events.Event;
-	import sentinel.gameplay.scene.Being;
-	import sentinel.gameplay.scene.Region;
+	import sentinel.gameplay.world.Being;
+	import sentinel.gameplay.world.Region;
 	
 	
 	public class RegionEvent extends Event

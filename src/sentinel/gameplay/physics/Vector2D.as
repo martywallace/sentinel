@@ -2,6 +2,7 @@ package sentinel.gameplay.physics
 {
 	
 	import Box2D.Common.Math.b2Vec2;
+	import flash.geom.Point;
 	import sentinel.framework.IStorable;
 	import sentinel.framework.util.StringUtil;
 	import sentinel.framework.util.ObjectUtil;
@@ -16,6 +17,12 @@ package sentinel.gameplay.physics
 		public static function inDirection(angle:Number, length:Number):Vector2D
 		{
 			return new Vector2D(Math.cos(angle) * length, Math.sin(angle) * length);
+		}
+		
+		
+		public static function fromPoint(point:Point):Vector2D
+		{
+			return new Vector2D(point.x, point.y);
 		}
 		
 		
@@ -68,6 +75,12 @@ package sentinel.gameplay.physics
 		public function angleTo(vector2d:Vector2D):Number
 		{
 			return Math.atan2(vector2d.y - y, vector2d.x - x);
+		}
+		
+		
+		public function toPoint():Point
+		{
+			return new Point(x, y);
 		}
 		
 		

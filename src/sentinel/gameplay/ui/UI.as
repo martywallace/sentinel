@@ -4,7 +4,7 @@ package sentinel.gameplay.ui
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.Thing;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.World;
 	import sentinel.gameplay.states.GameplayState;
 	
 	

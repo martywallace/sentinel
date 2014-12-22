@@ -1,6 +1,7 @@
 package sentinel.framework.graphics
 {
 	
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.IDeconstructs;
@@ -14,6 +15,9 @@ package sentinel.framework.graphics
 		
 		function removeFromParent(dispose:Boolean = false):void;
 		function removeEventListeners(type:String = null):void;
+		
+		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
+		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
 		
 		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
 		

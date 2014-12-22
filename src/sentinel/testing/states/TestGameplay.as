@@ -4,7 +4,7 @@ package sentinel.testing.states
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
 	import sentinel.framework.events.KeyboardEvent;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.World;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	

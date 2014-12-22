@@ -2,7 +2,7 @@ package sentinel.gameplay.events
 {
 	
 	import sentinel.framework.events.Event;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.World;
 	
 	
 	public class WorldEvent extends Event

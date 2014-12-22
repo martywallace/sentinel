@@ -3,7 +3,7 @@ package sentinel.gameplay.ui
 	
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.World;
 	import starling.display.DisplayObject;
 	
 	

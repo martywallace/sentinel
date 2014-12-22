@@ -2,7 +2,7 @@ package sentinel.gameplay.states
 {
 	
 	import sentinel.framework.State;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.World;
 	import sentinel.gameplay.ui.UI;
 	import starling.display.DisplayObject;
 	

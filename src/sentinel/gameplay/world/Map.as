@@ -1,4 +1,4 @@
-package sentinel.gameplay.scene
+package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Thing;
