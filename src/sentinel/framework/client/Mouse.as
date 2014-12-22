@@ -6,6 +6,8 @@ package sentinel.framework.client
 	import flash.geom.Point;
 	import sentinel.framework.Component;
 	import sentinel.framework.events.MouseEvent;
+	import sentinel.framework.IMouseDataProvider;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -90,13 +92,22 @@ package sentinel.framework.client
 		
 		/**
 		 * Returns the current state of the mouse buttons as a <code>MouseState</code> object.
-		 * @return
 		 */
 		public function getState():MouseState
 		{
 			var viewportPosition:Point = new Point(starling.nativeStage.mouseX, starling.nativeStage.mouseY);
 			
 			return new MouseState(viewportPosition, _left, _right, _available);
+		}
+		
+		
+		/**
+		 * Returns the position of the mouse within a given object.
+		 * @param within The mouse data provider to get the mouse position within.
+		 */
+		public function getPosition(within:IMouseDataProvider):Vector2D
+		{
+			return within.getMousePosition(this);
 		}
 		
 		

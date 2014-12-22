@@ -126,8 +126,8 @@ package sentinel.gameplay.scene
 		
 		/**
 		 * Utility to method for setting the x and y values at the same time.
-		 * @param The new x coordinate.
-		 * @param The new y coordinate.
+		 * @param x The new x coordinate.
+		 * @param y The new y coordinate.
 		 */
 		public function moveTo(x:Number, y:Number):void
 		{

@@ -1,13 +1,18 @@
 package sentinel.gameplay.scene
 {
 	
+	import flash.geom.Point;
+	import sentinel.framework.client.Mouse;
+	import sentinel.framework.client.MouseState;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
+	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
+	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	
@@ -17,7 +22,7 @@ package sentinel.gameplay.scene
 	 * between those Beings. The World also deals with initializing a physics engine, if required.
 	 * @author Marty Wallace.
 	 */
-	public class World extends Thing
+	public class World extends Thing implements IMouseDataProvider
 	{
 		
 		private var _engine:Engine;
@@ -89,6 +94,19 @@ package sentinel.gameplay.scene
 				_map.deconstruct();
 				_map = null;
 			}
+		}
+		
+		
+		/**
+		 * Returns the position of the mouse within the World.
+		 * @param mouse Reference to the Mouse component.
+		 */
+		public function getMousePosition(mouse:Mouse):Vector2D
+		{
+			var ms:MouseState = mouse.getState();
+			var p:Point = _content.globalToLocal(new Point(ms.viewportPosition.x, ms.viewportPosition.y));
+			
+			return new Vector2D(p.x, p.y);
 		}
 		
 		

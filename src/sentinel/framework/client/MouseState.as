@@ -30,7 +30,7 @@ package sentinel.framework.client
 		public function toString():String
 		{
 			return StringUtil.toDebugString(["x","y","left","right","available"], [
-				position.x, position.y,
+				_position.x, _position.y,
 				left, right,
 				available
 			]);
@@ -40,7 +40,7 @@ package sentinel.framework.client
 		/**
 		 * The position of the mouse pointer relative to the viewport.
 		 */
-		public function get position():Point { return _position; }
+		public function get viewportPosition():Point{ return _position; }
 		
 		/**
 		 * Whether or not the left mouse button is held down.
