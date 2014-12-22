@@ -92,16 +92,29 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		// TODO.
+		public function queryPoint(point:Vector2D):Vector.<Fixture>
+		{
+			return null;
+		}
+		
+		
 		/**
-		 * Cast a line through the physics world and return a list of all the Fixtures the line came
-		 * into contact with.
-		 * @param start The line start point.
-		 * @param end The line end point.
+		 * Cast a line through the physics world and return a list of all the Fixtures whose shape
+		 * is intersected by the line.
+		 * @param start The line start position.
+		 * @param end The line end position.
 		 */
-		public function raycast(start:Vector2D, end:Vector2D):Vector.<Fixture>
+		public function queryLine(start:Vector2D, end:Vector2D):Vector.<Fixture>
 		{
 			var list:Vector.<Fixture> = new <Fixture>[];
 			var internalList:Vector.<b2Fixture> = _base.RayCastAll(start.__base, end.__base);
+			
+			if (_debug !== null)
+			{
+				// Debug Raycast line.
+				_debug.__base.DrawPolygon([start.__base, end.__base], 2, _debug.__color);
+			}
 			
 			for each(var fixture:b2Fixture in internalList)
 			{
@@ -109,6 +122,12 @@ package sentinel.gameplay.physics
 			}
 			
 			return list;
+		}
+		
+		
+		public function queryShape(shape:Shape):Vector.<Fixture>
+		{
+			return null;
 		}
 		
 		

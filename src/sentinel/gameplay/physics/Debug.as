@@ -1,6 +1,7 @@
 package sentinel.gameplay.physics
 {
 	
+	import Box2D.Common.b2Color;
 	import Box2D.Dynamics.b2DebugDraw;
 	import flash.display.Sprite;
 	import sentinel.framework.Game;
@@ -26,6 +27,7 @@ package sentinel.gameplay.physics
 		private var _base:b2DebugDraw;
 		private var _graphics:Sprite;
 		private var _wrapper:Sprite;
+		private var _color:b2Color;
 		
 		
 		/**
@@ -44,6 +46,7 @@ package sentinel.gameplay.physics
 			_graphics = new Sprite();
 			_wrapper = new Sprite();
 			_base = new b2DebugDraw();
+			_color = new b2Color(255, 255, 255);
 			
 			_base.SetSprite(_graphics);
 			_base.SetDrawScale(Engine.scale);
@@ -76,6 +79,7 @@ package sentinel.gameplay.physics
 		
 		
 		internal function get __base():b2DebugDraw { return _base; }
+		internal function get __color():b2Color{ return _color; }
 		
 		
 		/**
@@ -87,6 +91,7 @@ package sentinel.gameplay.physics
 		 * The wrapper Sprite used for rendering debug graphics.
 		 */
 		public function get wrapper():Sprite { return _wrapper; }
+		
 		
 	}
 	

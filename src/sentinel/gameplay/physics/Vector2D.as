@@ -90,6 +90,12 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		public function cast(angle:Number, distance:Number):Vector2D
+		{
+			return Vector2D.inDirection(angle, distance).add(this);
+		}
+		
+		
 		public function toPoint():Point
 		{
 			return new Point(x, y);

@@ -1,6 +1,7 @@
 package sentinel.gameplay.world
 {
 	
+	import flash.display.Shape;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
@@ -177,17 +178,44 @@ package sentinel.gameplay.world
 		}
 		
 		
+		// TODO.
+		public function queryPoint(point:Vector2D):Vector.<Being>
+		{
+			return null;
+		}
+		
+		
+		/**
+		 * Cast a line within the World and return a list of all the Beings the line intersects.
+		 * This method only works for Beings who have a physics body with a fixture and a shape.
+		 * @param start The start position for the line.
+		 * @param end The end position for the line.
+		 */
 		public function queryLine(start:Vector2D, end:Vector2D):Vector.<Being>
 		{
 			var list:Vector.<Being> = new <Being>[];
 			
-			for each(var fixture:Fixture in _engine.raycast)
+			for each(var fixture:Fixture in _engine.queryLine(start, end))
 			{
-				//
+				list.push(fixture.body.owner);
 			}
 			
 			
 			return list;
+		}
+		
+		
+		// TODO.
+		public function queryBox(location:Vector2D, width:Number, height:Number):Vector.<Being>
+		{
+			return null;
+		}
+		
+		
+		// TODO.
+		public function queryShape(shape:Shape):Vector.<Being>
+		{
+			return null;
 		}
 		
 		
