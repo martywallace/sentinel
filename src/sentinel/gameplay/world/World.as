@@ -10,6 +10,8 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
+	import sentinel.gameplay.physics.Fixture;
+	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	
@@ -165,6 +167,30 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Returns a Being who implements IUnique and matches the specified unique name.
+		 * @param uniqueName The <code>uniqueName</code> value of the saught IUnique Being.
+		 */
+		public function getUnique(uniqueName:String):Being
+		{
+			return _unique.hasOwnProperty(uniqueName) ? _unique[uniqueName] : null;
+		}
+		
+		
+		public function queryLine(start:Vector2D, end:Vector2D):Vector.<Being>
+		{
+			var list:Vector.<Being> = new <Being>[];
+			
+			for each(var fixture:Fixture in _engine.raycast)
+			{
+				//
+			}
+			
+			
+			return list;
+		}
+		
+		
 		protected final override function added(thing:Thing):void
 		{
 			if (!(thing is GameplayState)) throw new Error("World can only be added to GameplayState.");
@@ -174,16 +200,6 @@ package sentinel.gameplay.world
 		protected final override function removed(thing:Thing):void
 		{
 			if (!(thing is GameplayState)) throw new Error("World can only be removed from GameplayState.");
-		}
-		
-		
-		/**
-		 * Returns a Being who implements IUnique and matches the specified unique name.
-		 * @param uniqueName The <code>uniqueName</code> value of the saught IUnique Being.
-		 */
-		public function getUnique(uniqueName:String):Being
-		{
-			return _unique.hasOwnProperty(uniqueName) ? _unique[uniqueName] : null;
 		}
 		
 		

@@ -9,25 +9,37 @@ package sentinel.gameplay.physics
 	 * A box shape.
 	 * @author Marty Wallace.
 	 */
-	public class Box implements IShape
+	public class Box extends Shape
 	{
 		
-		private var _base:b2PolygonShape;
+		private var _width:Number;
+		private var _height:Number;
+		private var _x:int;
+		private var _y:int;
+		private var _rotation:Number;
 		
 		
 		public function Box(width:int, height:int, x:int = 0, y:int = 0, rotation:Number = 0):void
 		{
-			_base = new b2PolygonShape();
+			_width = width;
+			_height = height;
+			_x = x;
+			_y = y;
+			_rotation = rotation;
 			
-			var mwidth:Number = (width / 2) / Engine.scale;
-			var mheight:Number = (height / 2) / Engine.scale;
-			var center:Vector2D = new Vector2D(x, y);
-			
-			_base.SetAsOrientedBox(mwidth, mheight, center.base, rotation);
+			super();
 		}
 		
 		
-		public function get base():b2Shape{ return _base; }
+		protected override function defineBase():b2Shape
+		{
+			var base:b2PolygonShape = new b2PolygonShape();
+			var center:Vector2D = new Vector2D(_x, _y);
+			
+			base.SetAsOrientedBox((_width / 2) / Engine.scale, (_height / 2) / Engine.scale, center.base, _rotation);
+			
+			return base;
+		}
 		
 	}
 	

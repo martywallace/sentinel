@@ -5,20 +5,29 @@ package sentinel.gameplay.physics
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
-	public class Edge implements IShape
+	public class Edge extends Shape
 	{
 		
-		private var _base:b2PolygonShape;
+		private var _start:Vector2D;
+		private var _end:Vector2D;
 		
 		
 		public function Edge(start:Vector2D, end:Vector2D)
 		{
-			_base = new b2PolygonShape();
-			_base.SetAsEdge(start.base, end.base);
+			_start = start;
+			_end = end;
+			
+			super();
 		}
 		
 		
-		public function get base():b2Shape{ return _base; }
+		protected override function defineBase():b2Shape
+		{
+			var base:b2PolygonShape = new b2PolygonShape();
+			base.SetAsEdge(_start.__base, _end.__base);
+			
+			return base;
+		}
 		
 	}
 	

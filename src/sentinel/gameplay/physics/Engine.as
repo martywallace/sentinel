@@ -3,6 +3,7 @@ package sentinel.gameplay.physics
 	
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
+	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2World;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.framework.Thing;
@@ -40,12 +41,12 @@ package sentinel.gameplay.physics
 		public function Engine(def:EngineDef = null, debug:Debug = null)
 		{
 			_def = def === null ? new EngineDef(new Vector2D()) : def;
-			_base = new b2World(_def.gravity.base, _def.sleep);
+			_base = new b2World(_def.gravity.__base, _def.sleep);
 			_debug = debug;
 			
 			if (debug !== null)
 			{
-				_base.SetDebugDraw(debug.base);
+				_base.SetDebugDraw(debug.__base);
 			}
 			
 			_base.SetContactListener(new ContactListener());
@@ -91,6 +92,26 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * Cast a line through the physics world and return a list of all the Fixtures the line came
+		 * into contact with.
+		 * @param start The line start point.
+		 * @param end The line end point.
+		 */
+		public function raycast(start:Vector2D, end:Vector2D):Vector.<Fixture>
+		{
+			var list:Vector.<Fixture> = new <Fixture>[];
+			var internalList:Vector.<b2Fixture> = _base.RayCastAll(start.__base, end.__base);
+			
+			for each(var fixture:b2Fixture in internalList)
+			{
+				list.push(fixture.GetUserData() as Fixture);
+			}
+			
+			return list;
+		}
+		
+		
 		internal function __destroyBody(body:Body):void
 		{
 			if(_destroyed.indexOf(body) < 0) _destroyed.push(body);
@@ -102,7 +123,7 @@ package sentinel.gameplay.physics
 			while (_destroyed.length > 0)
 			{
 				var d:Body = _destroyed.pop();
-				_base.DestroyBody(d.base);
+				_base.DestroyBody(d.__base);
 				
 				d.deconstruct();
 			}
@@ -136,7 +157,8 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function get base():b2World{ return _base; }
+		internal function get __base():b2World{ return _base; }
+		
 		public function get sleeps():Boolean{ return _def.sleep; }
 		public function get gravity():Vector2D { return _def.gravity; }
 		public function get debug():Debug { return _debug; }

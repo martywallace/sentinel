@@ -80,6 +80,12 @@ package sentinel.framework
 		}
 		
 		
+		public function getTextureFromAtlas(atlasName:String, region:String):Texture
+		{
+			return getAtlas(atlasName).getTexture(region);
+		}
+		
+		
 		public function getAtlas(name:String):TextureAtlas
 		{
 			return _find(ATLASES, name) as TextureAtlas;
@@ -89,6 +95,12 @@ package sentinel.framework
 		public function getImage(textureName:String):Image
 		{
 			return new Image(getTexture(textureName));
+		}
+		
+		
+		public function getImageFromAtlas(atlasName:String, region:String):Image
+		{
+			return new Image(getTextureFromAtlas(atlasName, region));
 		}
 		
 		

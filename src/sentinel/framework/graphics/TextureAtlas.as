@@ -11,6 +11,11 @@ package sentinel.framework.graphics
 		public function TextureAtlas(texture:Texture, regions:Object)
 		{
 			super(texture);
+			
+			for (var frame:String in regions)
+			{
+				addRegion(frame, regions[frame]);
+			}
 		}
 		
 	}

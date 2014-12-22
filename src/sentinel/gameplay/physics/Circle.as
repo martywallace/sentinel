@@ -5,19 +5,24 @@ package sentinel.gameplay.physics
 	import Box2D.Collision.Shapes.b2Shape;
 	
 	
-	public class Circle implements IShape
+	public class Circle extends Shape
 	{
 		
-		private var _base:b2CircleShape;
+		private var _radius:Number;
 		
 		
 		public function Circle(radius:Number)
 		{
-			_base = new b2CircleShape(radius / Engine.scale);
+			_radius = radius;
+			
+			super();
 		}
 		
 		
-		public function get base():b2Shape{ return _base; }
+		protected override function defineBase():b2Shape
+		{
+			return new b2CircleShape(_radius / Engine.scale);
+		}
 		
 	}
 	

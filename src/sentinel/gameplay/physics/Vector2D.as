@@ -78,13 +78,25 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		public function cosTo(vector2d:Vector2D):Number
+		{
+			return Math.cos(angleTo(vector2d));
+		}
+		
+		
+		public function sinTo(vector2d:Vector2D):Number
+		{
+			return Math.sin(angleTo(vector2d));
+		}
+		
+		
 		public function toPoint():Point
 		{
 			return new Point(x, y);
 		}
 		
 		
-		public function get base():b2Vec2 { return _base; }
+		internal function get __base():b2Vec2 { return _base; }
 		
 		public function get x():Number { return _base.x * Engine.scale; }
 		public function set x(value:Number):void{ _base.Set(value / Engine.scale, _base.y); }

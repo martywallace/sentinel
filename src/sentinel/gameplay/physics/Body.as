@@ -9,6 +9,7 @@ package sentinel.gameplay.physics
 	import starling.events.EventDispatcher;
 	import sentinel.framework.Thing;
 	import sentinel.framework.IDeconstructs;
+	import Box2D.Dynamics.Contacts.b2Contact;
 	
 	
 	public class Body extends EventDispatcher implements IDeconstructs
@@ -71,10 +72,10 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function createFixture(shape:IShape, fixtureDef:FixtureDef = null):Fixture
+		public function createFixture(shape:Shape, fixtureDef:FixtureDef = null):Fixture
 		{
 			var nativeFixtureDef:b2FixtureDef = new b2FixtureDef();
-			nativeFixtureDef.shape = shape.base;
+			nativeFixtureDef.shape = shape.__base;
 			
 			if (fixtureDef !== null)
 			{
@@ -100,7 +101,7 @@ package sentinel.gameplay.physics
 			if (i >= 0)
 			{
 				_fixtures.splice(i, 1);
-				_base.DestroyFixture(fixture.base);
+				_base.DestroyFixture(fixture.__base);
 			}
 		}
 		
@@ -110,7 +111,7 @@ package sentinel.gameplay.physics
 			while (_fixtures.length > 0)
 			{
 				var f:Fixture = _fixtures.pop();
-				_base.DestroyFixture(f.base);
+				_base.DestroyFixture(f.__base);
 			}
 		}
 		
@@ -120,11 +121,12 @@ package sentinel.gameplay.physics
 			_position.x = x;
 			_position.y = y;
 			
-			_base.SetPosition(_position.base);
+			_base.SetPosition(_position.__base);
 		}
 		
 		
-		public function get base():b2Body { return _base; }
+		internal function get __base():b2Body { return _base; }
+		
 		public function get engine():Engine { return _engine; }
 		public function get owner():Thing{ return _data.owner }
 		public function get fixtures():Vector.<Fixture> { return _fixtures; }
@@ -174,7 +176,7 @@ package sentinel.gameplay.physics
 		{
 			_linearVelocity.x = value;
 			_linearVelocity.y = _base.GetLinearVelocity().y * Engine.scale;
-			_base.SetLinearVelocity(_linearVelocity.base);
+			_base.SetLinearVelocity(_linearVelocity.__base);
 			_base.SetAwake(true);
 		}
 		
@@ -184,7 +186,7 @@ package sentinel.gameplay.physics
 		{
 			_linearVelocity.y = value;
 			_linearVelocity.x = _base.GetLinearVelocity().x * Engine.scale;
-			_base.SetLinearVelocity(_linearVelocity.base);
+			_base.SetLinearVelocity(_linearVelocity.__base);
 			_base.SetAwake(true);
 		}
 		

@@ -75,6 +75,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		internal function get __base():b2DebugDraw { return _base; }
+		
+		
 		/**
 		 * The native Sprite used to render the debug graphics.
 		 */
@@ -84,11 +87,6 @@ package sentinel.gameplay.physics
 		 * The wrapper Sprite used for rendering debug graphics.
 		 */
 		public function get wrapper():Sprite { return _wrapper; }
-		
-		/**
-		 * The base b2DebugDraw instance wrapped by this class.
-		 */
-		public function get base():b2DebugDraw { return _base; }
 		
 	}
 	

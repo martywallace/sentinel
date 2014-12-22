@@ -41,7 +41,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function get base():b2Fixture{ return _base; }
+		internal function get __base():b2Fixture{ return _base; }
+		
+		public function get body():Body{ return (_base.GetBody().GetUserData() as BodyData).body; }
 		public function get aabb():b2AABB{ return _base.GetAABB(); }
 		public function get density():Number{ return _base.GetDensity(); }
 		public function get friction():Number{ return _base.GetFriction(); }
