@@ -17,7 +17,7 @@ package sentinel.framework.util
 		 */
 		public static function roll(chance:Number):Boolean
 		{
-			return base <= chance;
+			return getBase() <= chance;
 		}
 		
 		
@@ -28,7 +28,7 @@ package sentinel.framework.util
 		 */
 		public static function between(min:Number, max:Number):Number
 		{
-			return min + (max - min) * base;
+			return min + (max - min) * getBase();
 		}
 		
 		
@@ -56,7 +56,7 @@ package sentinel.framework.util
 		 */
 		public static function inCircle(x:int, y:int, radius:Number):Point
 		{
-			var ang:Number = angle;
+			var ang:Number = getAngle();
 			
 			return new Point(
 				x + Math.cos(ang) * radius,
@@ -74,7 +74,7 @@ package sentinel.framework.util
 		 */
 		public static function inRing(x:int, y:int, innerRadius:Number, outerRadius:Number):Point
 		{
-			var ang:Number = angle;
+			var ang:Number = getAngle();
 			
 			return new Point(
 				x + Math.cos(ang) * between(innerRadius, outerRadius),
@@ -89,22 +89,26 @@ package sentinel.framework.util
 		 */
 		public static function fromArray(array:Array):*
 		{
-			return array[int(base * array.length)];
+			return array[int(getBase() * array.length)];
 		}
 		
 		
 		/**
-		 * // Todo: This is weird, change to getBase() or something.
 		 * A random number between 0 and 1, not including 1.
 		 */
-		public static function get base():Number{ return Math.random(); }
+		public static function getBase():Number
+		{
+			return Math.random();
+		}
 		
 		
 		/**
-		 * Todo: This is weird, change to getAngle().
 		 * A random angle, in radians.
 		 */
-		public static function get angle():Number{ return Math.random() * Math.PI * 2; }
+		public static function getAngle():Number
+		{
+			return getBase() * Math.PI * 2;
+		}
 		
 	}
 
