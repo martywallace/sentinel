@@ -5,6 +5,7 @@ package sentinel.gameplay.world
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
 	import sentinel.framework.util.ObjectUtil;
+	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
@@ -16,7 +17,7 @@ package sentinel.gameplay.world
 	 * A Being is an objct that lives in a World.
 	 * @author Marty Wallace.
 	 */
-	public class Being extends Thing
+	public class Being extends Thing implements IPositionProvider
 	{
 		
 		/**
