@@ -110,12 +110,6 @@ package sentinel.gameplay.physics
 			var list:Vector.<Fixture> = new <Fixture>[];
 			var internalList:Vector.<b2Fixture> = _base.RayCastAll(start.__base, end.__base);
 			
-			if (_debug !== null)
-			{
-				// Debug Raycast line.
-				_debug.__base.DrawPolygon([start.__base, end.__base], 2, _debug.__color);
-			}
-			
 			for each(var fixture:b2Fixture in internalList)
 			{
 				list.push(fixture.GetUserData() as Fixture);

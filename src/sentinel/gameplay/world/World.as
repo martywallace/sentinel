@@ -206,13 +206,6 @@ package sentinel.gameplay.world
 		
 		
 		// TODO.
-		public function queryBox(location:Vector2D, width:Number, height:Number):Vector.<Being>
-		{
-			return null;
-		}
-		
-		
-		// TODO.
 		public function queryShape(shape:Shape):Vector.<Being>
 		{
 			return null;

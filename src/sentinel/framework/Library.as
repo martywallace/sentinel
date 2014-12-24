@@ -86,6 +86,12 @@ package sentinel.framework
 		}
 		
 		
+		public function getTexturesFromAtlas(atlasName:String, prefix:String = ''):Vector.<Texture>
+		{
+			return getAtlas(atlasName).getTextures(prefix);
+		}
+		
+		
 		public function getAtlas(name:String):TextureAtlas
 		{
 			return _find(ATLASES, name) as TextureAtlas;
