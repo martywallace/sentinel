@@ -3,19 +3,23 @@ package sentinel.gameplay.world
 	
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.Game;
+	import sentinel.gameplay.IPositionProvider;
+	import sentinel.gameplay.physics.Vector2D;
 	import starling.core.Starling;
 	
 	
 	/**
-	 * The Camera used to view a World, typically centred on the main character.
+	 * The Camera used to view a World, typically centred on the main character. It allows you to
+	 * move, rotate and scale the world around a given point.
 	 * @author Marty Wallace.
 	 */
-	public class Camera
+	public class Camera implements IPositionProvider
 	{
 		
 		private var _world:World;
 		private var _offsetX:Number = 0;
 		private var _offsetY:Number = 0;
+		private var _position:Vector2D;
 		
 		
 		public function Camera(world:World)
@@ -25,6 +29,10 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Move the camera ontop of a Being within the World.
+		 * @param being The Being to look at.
+		 */
 		public function lookAt(being:Being):void
 		{
 			if (being !== null)
@@ -34,6 +42,8 @@ package sentinel.gameplay.world
 			else
 			{
 				// Ignore this call.
+				// Being forgiving to those who potentially nullify the game character but let this
+				// continue running.
 			}
 		}
 		
@@ -75,6 +85,14 @@ package sentinel.gameplay.world
 		
 		public function get y():Number { return -_world.__content.y; }
 		public function set y(value:Number):void{ _set(x, value, rotation, zoom); }
+		
+		public function get position():Vector2D
+		{
+			_position.x = x;
+			_position.y = y;
+			
+			return _position;
+		}
 		
 		public function get rotation():Number { return -_world.graphics.rotation; }
 		public function set rotation(value:Number):void { _set(x, y, value, zoom); }

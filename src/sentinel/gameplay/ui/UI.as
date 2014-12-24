@@ -3,12 +3,18 @@ package sentinel.gameplay.ui
 	
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
+	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.world.World;
 	import sentinel.gameplay.states.GameplayState;
 	
 	
-	public class UI extends Thing
+	/**
+	 * The UI is a graphics layer typically on top of the World, most commonly used as the in-game
+	 * heads up display (e.g. for displaying health bars, etc).
+	 * @author Marty Wallace.
+	 */
+	public class UI extends Thing implements IMouseDataProvider
 	{
 		
 		private var _graphics:IGraphicsContainer;
@@ -54,6 +60,7 @@ package sentinel.gameplay.ui
 		
 		public function get world():World{ return (parent as GameplayState).world; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
+		public function get mouseContainer():UI{ return _graphics; }
 		
 	}
 	
