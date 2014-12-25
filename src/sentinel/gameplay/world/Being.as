@@ -14,7 +14,9 @@ package sentinel.gameplay.world
 	
 	
 	/**
-	 * A Being is an objct that lives in a World.
+	 * A Being is an object that lives in a World. It can define graphics and a physics body. It
+	 * should be used as the base class for all of your gameplay objects within a World like trees,
+	 * enemies, loot, the main hero, etc.
 	 * @author Marty Wallace.
 	 */
 	public class Being extends Thing implements IPositionProvider
@@ -148,6 +150,10 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Saves a simple representation of this Being, useful for working with
+		 * <code>Being.create()</code>.
+		 */
 		public override function save():Object
 		{
 			return ObjectUtil.merge(super.save(), {
@@ -158,6 +164,10 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Applies properties stored in a simple object to this Being.
+		 * @param data The data to apply.
+		 */
 		public override function load(data:Object):void
 		{
 			x = ObjectUtil.prop(data, 'x', 0);
@@ -208,12 +218,21 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Defines graphics to be used by this Being. Graphics are defined when this Being is added
+		 * to a World.
+		 */
 		protected function defineGraphics():IGraphics
 		{
 			return null;
 		}
 		
 		
+		/**
+		 * Defines a physics body to be used by this Being. The body is defined when this Being is
+		 * added to a World.
+		 * @param engine A reference to the physics engine.
+		 */
 		protected function defineBody(engine:Engine):Body
 		{
 			return null;

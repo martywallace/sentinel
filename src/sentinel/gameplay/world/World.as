@@ -1,7 +1,6 @@
 package sentinel.gameplay.world
 {
 	
-	import flash.display.Shape;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
@@ -12,6 +11,7 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.physics.Fixture;
+	import sentinel.gameplay.physics.Shape;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
@@ -178,37 +178,13 @@ package sentinel.gameplay.world
 		}
 		
 		
-		// TODO.
-		public function queryPoint(point:Vector2D):Vector.<Being>
-		{
-			return null;
-		}
-		
-		
 		/**
-		 * Cast a line within the World and return a list of all the Beings the line intersects.
-		 * This method only works for Beings who have a physics body with a fixture and a shape.
-		 * @param start The start position for the line.
-		 * @param end The end position for the line.
+		 * Queries the World for a collection of Beings meeting a given criteria.
+		 * @param query The query to use.
 		 */
-		public function queryLine(start:Vector2D, end:Vector2D):Vector.<Being>
+		public function query(query:BeingQuery):Vector.<Being>
 		{
-			var list:Vector.<Being> = new <Being>[];
-			
-			for each(var fixture:Fixture in _engine.queryLine(start, end))
-			{
-				list.push(fixture.body.owner);
-			}
-			
-			
-			return list;
-		}
-		
-		
-		// TODO.
-		public function queryShape(shape:Shape):Vector.<Being>
-		{
-			return null;
+			return query.__execute(this);
 		}
 		
 		
@@ -221,25 +197,6 @@ package sentinel.gameplay.world
 		protected final override function removed(thing:Thing):void
 		{
 			if (!(thing is GameplayState)) throw new Error("World can only be removed from GameplayState.");
-		}
-		
-		
-		/**
-		 * Returns a list of Beings who are of the specified type.
-		 * @param type The type of Beings to get.
-		 */
-		public function getBeingsByType(type:Class):Vector.<Being>
-		{
-			var output:Vector.<Being> = new <Being>[];
-			for each(var thing:Thing in children)
-			{
-				if (thing is type)
-				{
-					output.push(thing);
-				}
-			}
-			
-			return output;
 		}
 		
 		

@@ -1,6 +1,7 @@
 package sentinel.gameplay.ui
 {
 	
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
@@ -60,7 +61,7 @@ package sentinel.gameplay.ui
 		
 		public function get world():World{ return (parent as GameplayState).world; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
-		public function get mouseContainer():UI{ return _graphics; }
+		public function get mouseContainer():IGraphics{ return _graphics; }
 		
 	}
 	
