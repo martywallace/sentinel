@@ -16,7 +16,7 @@ package sentinel.gameplay.world
 	/**
 	 * A Being is an object that lives in a World. It can define graphics and a physics body. It
 	 * should be used as the base class for all of your gameplay objects within a World like trees,
-	 * enemies, loot, the main hero, etc.
+	 * enemies, loot, projectiles, the main hero, etc.
 	 * @author Marty Wallace.
 	 */
 	public class Being extends Thing implements IPositionProvider
@@ -187,14 +187,38 @@ package sentinel.gameplay.world
 					// Add the graphics to the World's graphics container.
 					(world as World).__content.addChild(_graphics as DisplayObject);
 					
-					alignGraphics();
+					if (!_graphics.atZero)
+					{
+						// If the position of the graphics has been modified, use those values for
+						// the final position.
+						moveTo(_graphics.x, _graphics.y);
+						rotation = _graphics.rotation;
+					}
+					else
+					{
+						alignGraphics();
+					}
 				}
 				
 				if ((world as World).engine !== null)
 				{
 					// Attempt to define a body for this Being.
 					_body = defineBody((world as World).engine);
-					alignBody();
+					
+					if (_body !== null)
+					{
+						if (!_body.atZero)
+						{
+							// If the position of the body has been modified, use those values for the
+							// final position. This overrides the position of the graphics.
+							moveTo(_body.position.x, _body.position.y);
+							rotation = _body.rotation;
+						}
+						else
+						{
+							alignBody();
+						}
+					}
 				}
 			}
 			else

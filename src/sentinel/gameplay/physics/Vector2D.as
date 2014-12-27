@@ -90,6 +90,11 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * Returns a new Vector2D whose position is a given angle and distance from this Vector2D.
+		 * @param angle The angle to cast at.
+		 * @param distance The distance to cast.
+		 */
 		public function cast(angle:Number, distance:Number):Vector2D
 		{
 			return Vector2D.inDirection(angle, distance).add(this);
@@ -99,6 +104,12 @@ package sentinel.gameplay.physics
 		public function toPoint():Point
 		{
 			return new Point(x, y);
+		}
+		
+		
+		public function equals(vector2d:Vector2D):Boolean
+		{
+			return x === vector2d.x && y === vector2d.y;
 		}
 		
 		

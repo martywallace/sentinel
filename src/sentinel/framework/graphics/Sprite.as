@@ -67,6 +67,7 @@ package sentinel.framework.graphics
 		public function set depth(value:int):void { _depth = value; }
 		
 		public function get autoSort():Boolean { return _autoSort; }
+		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }
 		
 	}
 	

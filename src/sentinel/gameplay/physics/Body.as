@@ -203,6 +203,9 @@ package sentinel.gameplay.physics
 			return _position;
 		}
 		
+		
+		public function get atZero():Boolean{ return _position.x === 0 && _position.y === 0 && rotation === 0; }
+		
 	}
 	
 }

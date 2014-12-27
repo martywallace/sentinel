@@ -71,6 +71,7 @@ package sentinel.framework.graphics
 		function set depth(value:int):void;
 		
 		function get hasVisibleArea():Boolean;
+		function get atZero():Boolean;
 		function get bounds():Rectangle;
 		
 		function get parent():DisplayObjectContainer;

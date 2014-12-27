@@ -33,6 +33,7 @@ package sentinel.framework.graphics
 		
 		public function get viewport():Viewport { return (Starling.current.root as Game).viewport; }
 		public function get library():Library { return (Starling.current.root as Game).library; }
+		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }
 		
 	}
 	
