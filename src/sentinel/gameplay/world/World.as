@@ -6,13 +6,11 @@ package sentinel.gameplay.world
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
+	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
-	import sentinel.gameplay.physics.Fixture;
-	import sentinel.gameplay.physics.Shape;
-	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.UI;
 	
@@ -174,7 +172,7 @@ package sentinel.gameplay.world
 		 */
 		public function getUnique(uniqueName:String):Being
 		{
-			return _unique.hasOwnProperty(uniqueName) ? _unique[uniqueName] : null;
+			return ObjectUtil.prop(_unique, uniqueName, null);
 		}
 		
 		

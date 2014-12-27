@@ -10,10 +10,17 @@ package sentinel.gameplay.world
 	public class BeingQuery
 	{
 		
+		public static const ALL:String = 'all';
 		public static const TYPE:String = 'type';
 		public static const POINT:String = 'point';
 		public static const LINE:String = 'line';
 		public static const SHAPE:String = 'shape';
+		
+		
+		public static function all():BeingQuery
+		{
+			return new BeingQuery(ALL);
+		}
 		
 		
 		public static function type(type:Class):BeingQuery
@@ -44,7 +51,7 @@ package sentinel.gameplay.world
 		private var _options:Object;
 		
 		
-		public function BeingQuery(type:String, options:Object)
+		public function BeingQuery(type:String, options:Object = null)
 		{
 			_type = type;
 			_options = options;
@@ -53,16 +60,29 @@ package sentinel.gameplay.world
 		
 		internal function __execute(world:World):Vector.<Being>
 		{
-			var _result:Vector.<Being> = new <Being>[];
+			var result:Vector.<Being> = new <Being>[];
+			var being:Thing;
 			
-			if (_type === TYPE)
+			if (_type === ALL)
+			{
+				// Return all Beings in the world.
+				for each(being in world.__children)
+				{
+					if (being is IQueryable)
+					{
+						result.push(being);
+					}
+				}
+			}
+			
+			else if (_type === TYPE)
 			{
 				// Query by type of Being.
-				for each(var being:Thing in world.__children)
+				for each(being in world.__children)
 				{
 					if (being is IQueryable && being is _options.type)
 					{
-						_result.push(being);
+						result.push(being);
 					}
 				}
 			}
@@ -83,13 +103,13 @@ package sentinel.gameplay.world
 				{
 					if (fixture.body.owner !== null && fixture.body.owner is IQueryable)
 					{
-						_result.push(fixture.body.owner as Being);
+						result.push(fixture.body.owner as Being);
 					}
 				}
 			}
 			
 			
-			return _result;
+			return result;
 		}
 		
 	}
