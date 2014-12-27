@@ -105,6 +105,7 @@ package sentinel.framework.client
 		
 		
 		/**
+		 * TODO: Using Vector2D within the framework package. Needs to be generalised.
 		 * Returns the position of the mouse within a given <code>IMouseDataProvider</code>.
 		 * @param target The mouse data provider to get the mouse position within.
 		 */

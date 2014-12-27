@@ -92,10 +92,22 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		// TODO.
+		/**
+		 * Return a list of all Fixtures whose shape overlaps a Vector2D point.
+		 * @param point The point to check at.
+		 */
 		public function queryPoint(point:Vector2D):Vector.<Fixture>
 		{
-			return null;
+			var list:Vector.<Fixture> = new <Fixture>[];
+			
+			_base.QueryPoint(function(fixture:b2Fixture):Boolean
+			{
+				list.push(fixture.GetUserData() as Fixture);
+				return true;
+				
+			}, point.__base);
+			
+			return list;
 		}
 		
 		

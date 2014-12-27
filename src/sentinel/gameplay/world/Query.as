@@ -7,7 +7,7 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Vector2D;
 	
 	
-	public class BeingQuery
+	public class Query
 	{
 		
 		public static const ALL:String = 'all';
@@ -17,33 +17,33 @@ package sentinel.gameplay.world
 		public static const SHAPE:String = 'shape';
 		
 		
-		public static function all():BeingQuery
+		public static function all():Query
 		{
-			return new BeingQuery(ALL);
+			return new Query(ALL);
 		}
 		
 		
-		public static function type(type:Class):BeingQuery
+		public static function type(type:Class):Query
 		{
-			return new BeingQuery(TYPE, { type: type });
+			return new Query(TYPE, { type: type });
 		}
 		
 		
-		public static function point(point:Vector2D):BeingQuery
+		public static function point(point:Vector2D):Query
 		{
-			return new BeingQuery(POINT, { point: point });
+			return new Query(POINT, { point: point });
 		}
 		
 		
-		public static function line(start:Vector2D, end:Vector2D):BeingQuery
+		public static function line(start:Vector2D, end:Vector2D):Query
 		{
-			return new BeingQuery(LINE, { start: start, end: end });
+			return new Query(LINE, { start: start, end: end });
 		}
 		
 		
-		public static function shape(shape:Shape):BeingQuery
+		public static function shape(shape:Shape):Query
 		{
-			return new BeingQuery(SHAPE, { shape: shape });
+			return new Query(SHAPE, { shape: shape });
 		}
 		
 		
@@ -51,7 +51,7 @@ package sentinel.gameplay.world
 		private var _options:Object;
 		
 		
-		public function BeingQuery(type:String, options:Object = null)
+		public function Query(type:String, options:Object = null)
 		{
 			_type = type;
 			_options = options;
