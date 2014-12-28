@@ -136,11 +136,22 @@ package sentinel.gameplay.physics
 					result.push(new EngineQueryResult(fixture.GetUserData() as Fixture, Vector2D.__fromBase(point)));
 				}
 				
-				return limit <= 0 ? fraction : (result.length >= limit ? 0 : fraction);
+				return 1;
 				
 			}, start.__base, end.__base);
 			
-			return result;
+			
+			// Sort the list by distance from the start point.
+			result = result.sort(function(a:EngineQueryResult, b:EngineQueryResult):Number
+			{
+				var ad:Number = a.point.distanceTo(start);
+				var bd:Number = b.point.distanceTo(start);
+				
+				return ad === bd ? 0 : (ad < bd ? -1 : 1); 
+				
+			});
+			
+			return limit === 0 ? result : result.slice(0, limit);
 		}
 		
 		
