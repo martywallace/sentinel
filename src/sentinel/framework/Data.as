@@ -10,9 +10,8 @@ package sentinel.framework
 	 * Arbitrary data wrapped in helper methods.
 	 * @author Marty Wallace.
 	 */
-	public dynamic class Data extends Proxy
+	public final dynamic class Data extends Proxy
 	{
-		
 		
 		/**
 		 * Creates a Data object from a primitive Object.
@@ -25,6 +24,7 @@ package sentinel.framework
 		
 		
 		private var _internal:Object;
+		private var _fields:Array;
 		
 		
 		/**
@@ -67,6 +67,58 @@ package sentinel.framework
 		flash_proxy override function setProperty(name:*, value:*):void
 		{
 			_internal[name] = value;
+		}
+		
+		
+		flash_proxy override function hasProperty(name:*):Boolean
+		{
+			return _internal.hasOwnProperty(name);
+		}
+		
+		
+		flash_proxy override function nextNameIndex(index:int):int
+		{
+			if (index === 0)
+			{
+				_fields = [];
+				for (var field:String in _internal)
+				{
+					_fields.push(field);
+				}
+			}
+			
+			if (index < _fields.length + 1)
+			{
+				return index + 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+		
+		flash_proxy override function nextName(index:int):String
+		{
+			return _fields[index - 1];
+		}
+		
+		
+		flash_proxy override function nextValue(index:int):*
+		{
+			return _internal[_fields[index - 1]];
+		}
+		
+		
+		flash_proxy override function deleteProperty(name:*):Boolean
+		{
+			if (_internal.hasOwnProperty(name))
+			{
+				delete _internal[name];
+				return true;
+			}
+			
+			return false;
 		}
 		
 		

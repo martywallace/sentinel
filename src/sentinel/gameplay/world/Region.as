@@ -2,6 +2,7 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Data;
+	import sentinel.framework.util.StorageUtil;
 	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.events.RegionEvent;
 	import sentinel.gameplay.physics.Body;
@@ -14,13 +15,15 @@ package sentinel.gameplay.world
 	public class Region extends Being
 	{
 		
+		private var _name:String;
 		private var _verticies:Vector.<Vector2D>;
 		
 		
-		public function Region(verticies:Vector.<Vector2D> = null)
+		public function Region(name:String, verticies:Vector.<Vector2D> = null)
 		{
 			super();
 			
+			_name = name;
 			_verticies = verticies;
 		}
 		
@@ -46,15 +49,9 @@ package sentinel.gameplay.world
 		
 		public override function save():Data
 		{
-			var verticies:Array = [];
-			
-			for each(var vertex:Vector2D in _verticies)
-			{
-				verticies.push(vertex.save());
-			}
-			
-			return super.save().merge({
-				verticies: verticies
+			return super.save().merge( {
+				name: _name,
+				verticies: StorageUtil.saveList(_verticies)
 			});
 		}
 		
@@ -63,7 +60,9 @@ package sentinel.gameplay.world
 		{
 			super.load(data);
 			
+			_name = data.prop('name');
 			_verticies = new <Vector2D>[];
+			
 			for each(var vertex:Object in data.prop('verticies', []))
 			{
 				_verticies.push(new Vector2D(vertex.x, vertex.y));
@@ -75,6 +74,9 @@ package sentinel.gameplay.world
 		{
 			dispatchEvent(new RegionEvent(event.type === ContactEvent.BEGIN ? RegionEvent.ENTER : RegionEvent.EXIT, event.externalOwner as Being));
 		}
+		
+		
+		public function get name():String { return _name; }
 		
 	}
 	

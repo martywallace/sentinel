@@ -1,8 +1,8 @@
 package sentinel.gameplay.world
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.gameplay.physics.EngineQueryResult;
-	import sentinel.gameplay.physics.Fixture;
 	import sentinel.gameplay.physics.Shape;
 	import sentinel.gameplay.physics.Vector2D;
 	
@@ -48,20 +48,20 @@ package sentinel.gameplay.world
 		
 		
 		private var _type:String;
-		private var _options:Object;
+		private var _options:Data;
 		
 		
 		public function Query(type:String, options:Object = null)
 		{
 			_type = type;
-			_options = options;
+			_options = Data.create(options);
 		}
 		
 		
-		internal function __execute(world:World):Vector.<QueryResult>
+		internal function __execute(world:World):Vector.<WorldQueryResult>
 		{
 			var being:Being;
-			var result:Vector.<QueryResult> = new <QueryResult>[];
+			var result:Vector.<WorldQueryResult> = new <WorldQueryResult>[];
 			
 			if (_type === ALL)
 			{
@@ -70,7 +70,7 @@ package sentinel.gameplay.world
 				{
 					if (being is IQueryable)
 					{
-						result.push(new QueryResult(being));
+						result.push(new WorldQueryResult(this, being));
 					}
 				}
 			}
@@ -82,7 +82,7 @@ package sentinel.gameplay.world
 				{
 					if (being is IQueryable && being is _options.type)
 					{
-						result.push(new QueryResult(being));
+						result.push(new WorldQueryResult(this, being));
 					}
 				}
 			}
@@ -105,7 +105,7 @@ package sentinel.gameplay.world
 						eqr.fixture.body.owner is Being &&
 						eqr.fixture.body.owner is IQueryable)
 					{
-						result.push(new QueryResult(eqr.fixture.body.owner as Being, eqr));
+						result.push(new WorldQueryResult(this, eqr.fixture.body.owner as Being, eqr));
 					}
 				}
 				
@@ -119,6 +119,17 @@ package sentinel.gameplay.world
 			
 			return result;
 		}
+		
+		
+		/**
+		 * Returns the type of query that was made.
+		 */
+		public function get type():String { return _type; }
+		
+		/**
+		 * Returns the options associated with the query.
+		 */
+		public function get options():Data { return _options; }
 		
 	}
 	

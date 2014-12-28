@@ -6,6 +6,7 @@ package sentinel.gameplay.world
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
+	import sentinel.framework.Data;
 	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
@@ -29,7 +30,8 @@ package sentinel.gameplay.world
 		private var _graphics:IGraphicsContainer;
 		private var _content:Sprite;
 		private var _ticks:uint = 0;
-		private var _unique:Object = { };
+		private var _unique:Data;
+		private var _groups:Data;
 		private var _map:Map;
 		
 		
@@ -48,6 +50,9 @@ package sentinel.gameplay.world
 			_graphics = new Sprite();
 			_content = new Sprite(true);
 			_camera = new Camera(this);
+			
+			_unique = new Data();
+			_groups = new Data();
 			
 			_graphics.addChild(_content);
 		}
@@ -116,7 +121,7 @@ package sentinel.gameplay.world
 		protected function registerBeingTypes():Vector.<Class>
 		{
 			return new <Class>[
-				Boundary, Region
+				Boundary, BoundaryBox, Region
 			];
 		}
 		
@@ -131,13 +136,36 @@ package sentinel.gameplay.world
 			{
 				if (being is IUnique)
 				{
-					if (!_unique.hasOwnProperty((being as IUnique).uniqueName))
+					var unique:IUnique = being as IUnique;
+					
+					if (!_unique.hasOwnProperty(unique.uniqueName))
 					{
-						_unique[(being as IUnique).uniqueName] = being;
+						_unique[unique.uniqueName] = being;
 					}
 					else
 					{
-						throw new Error('Unique Being conflict using token "' + (being as IUnique).uniqueName + '".');
+						throw new Error('Unique Being conflict using uniqueName "' + unique.uniqueName + '".');
+						return null;
+					}
+				}
+				
+				if (being is IGroupable)
+				{
+					var groupable:IGroupable = being as IGroupable;
+					
+					if (!_groups.hasOwnProperty(groupable.groupName))
+					{
+						// Create the group.
+						_groups[groupable.groupName] = { };
+					}
+					
+					if (!_groups[groupable.groupName].hasOwnProperty(groupable.nameInGroup))
+					{
+						_groups[groupable.groupName][groupable.nameInGroup] = being;
+					}
+					else
+					{
+						throw new Error('Groupable Being conflict in group "' + groupable.groupName + '" using nameInGroup "' + groupable.nameInGroup + '".');
 						return null;
 					}
 				}
@@ -160,6 +188,16 @@ package sentinel.gameplay.world
 				{
 					delete _unique[(being as IUnique).uniqueName];
 				}
+				
+				if (being is IGroupable)
+				{
+					var groupable:IGroupable = being as IGroupable;
+					if (_groups.hasOwnProperty(groupable.groupName))
+					{
+						// Delete reference to this within its group.
+						delete _groups[groupable.groupName][groupable.nameInGroup];
+					}
+				}
 			}
 			
 			return removeT(being, destroy) as Being;
@@ -177,10 +215,12 @@ package sentinel.gameplay.world
 		
 		
 		/**
-		 * Queries the World for a collection of Beings meeting a given criteria.
+		 * Queries the World for a collection of Beings meeting a given criteria. The result Beings
+		 * are contained within a <code>WorldQueryResult</code>, which provides additional information
+		 * about the query made.
 		 * @param query The query to use.
 		 */
-		public function query(query:Query):Vector.<QueryResult>
+		public function query(query:Query):Vector.<WorldQueryResult>
 		{
 			return query.__execute(this);
 		}

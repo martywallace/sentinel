@@ -21,7 +21,7 @@ package sentinel.gameplay.physics
 		 * @param point2 A secondary point of interest. In a <code>queryLine()</code> call, this will
 		 * be the normal.
 		 */
-		public function EngineQueryResult(fixture:Fixture, point:Vector2D = null, point2:Vector2D = null) 
+		public function EngineQueryResult(fixture:Fixture = null, point:Vector2D = null, point2:Vector2D = null) 
 		{
 			_fixture = fixture;
 			_point = point;

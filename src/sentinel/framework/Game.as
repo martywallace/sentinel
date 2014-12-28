@@ -23,6 +23,7 @@ package sentinel.framework
 		
 		private var _state:State;
 		private var _components:Object = { };
+		private var _nextId:uint = 1;
 		
 		
 		public function Game()
@@ -118,6 +119,12 @@ package sentinel.framework
 		protected function getComponent(name:String):Component
 		{
 			return _components[name];
+		}
+		
+		
+		internal function __getNextId():uint
+		{
+			return _nextId++;
 		}
 		
 		
