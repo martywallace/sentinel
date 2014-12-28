@@ -49,7 +49,7 @@ package sentinel.gameplay.world
 		
 		public override function save():Data
 		{
-			return super.save().merge( {
+			return super.save().merge({
 				name: _name,
 				verticies: StorageUtil.saveList(_verticies)
 			});

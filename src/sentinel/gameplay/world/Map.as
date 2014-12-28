@@ -45,18 +45,6 @@ package sentinel.gameplay.world
 		}
 		
 		
-		/**
-		 * Creates a Region within the World associated with this Map. This is an alias for
-		 * <code>add(new Region(name, verticies))</code>.
-		 * @param name The name to associate with the Region.
-		 * @param verticies The list of verticies to use to create the Region.
-		 */
-		public function createRegion(name:String, verticies:Vector.<Vector2D>):Region
-		{
-			return add(new Region(name, verticies)) as Region;	
-		}
-		
-		
 		protected function construct():void
 		{
 			//
