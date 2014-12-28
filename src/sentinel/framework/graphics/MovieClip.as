@@ -14,7 +14,7 @@ package sentinel.framework.graphics
 		private var _depth:int = 0;
 		
 		
-		public function MovieClip(textures:Vector.<Texture>, fps:int = 12)
+		public function MovieClip(textures:Vector.<Texture>, fps:int = 1)
 		{
 			super(textures, fps);
 		}

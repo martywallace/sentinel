@@ -36,7 +36,7 @@ package sentinel.gameplay.physics
 			var base:b2PolygonShape = new b2PolygonShape();
 			var center:Vector2D = new Vector2D(_x, _y);
 			
-			base.SetAsOrientedBox((_width / 2) / Engine.scale, (_height / 2) / Engine.scale, center.base, _rotation);
+			base.SetAsOrientedBox((_width / 2) / Engine.scale, (_height / 2) / Engine.scale, center.__base, _rotation);
 			
 			return base;
 		}
