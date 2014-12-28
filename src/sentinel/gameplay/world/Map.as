@@ -3,6 +3,7 @@ package sentinel.gameplay.world
 	
 	import sentinel.framework.Data;
 	import sentinel.framework.Thing;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -41,6 +42,18 @@ package sentinel.gameplay.world
 		public function remove(being:Being, destroy:Boolean = false):Being
 		{
 			return _world.remove(being, destroy);
+		}
+		
+		
+		/**
+		 * Creates a Region within the World associated with this Map. This is an alias for
+		 * <code>add(new Region(name, verticies))</code>.
+		 * @param name The name to associate with the Region.
+		 * @param verticies The list of verticies to use to create the Region.
+		 */
+		public function createRegion(name:String, verticies:Vector.<Vector2D>):Region
+		{
+			return add(new Region(name, verticies)) as Region;	
 		}
 		
 		
