@@ -64,10 +64,14 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Deconstruct this Being. Also deconstructs its graphics and physics body. If this Being
+		 * belongs to a World, it will remove itself from it.
+		 */
 		public override function deconstruct():void
 		{
-			if(_graphics !== null) _graphics.deconstruct();
-			if(_body !== null) _body.deconstruct();
+			if (_graphics !== null) _graphics.deconstruct();
+			if (_body !== null) _body.deconstruct();
 			
 			super.deconstruct();
 		}
@@ -173,6 +177,20 @@ package sentinel.gameplay.world
 			x = data.prop('x');
 			y = data.prop('y');
 			rotation = data.prop('rotation', 0);
+		}
+		
+		
+		/**
+		 * Removes this Being from its parent World.
+		 * @param destroy Whether or not to also <code>deconstruct()</code> this Being.
+		 */
+		public override function removeFromParent(destroy:Boolean = false):void
+		{
+			if (world !== null)
+			{
+				world.remove(this, destroy);
+				super.removeFromParent(destroy);
+			}
 		}
 		
 		

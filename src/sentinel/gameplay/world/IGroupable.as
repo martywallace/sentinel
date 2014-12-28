@@ -2,7 +2,8 @@ package sentinel.gameplay.world
 {
 	
 	/**
-	 * A contract for a Being who can be named and grouped for referencing.
+	 * A contract for a Being who can be named and grouped for referencing. A groupable Being has a
+	 * unique name within the group it belongs to.
 	 * @author Marty Wallace.
 	 */
 	public interface IGroupable

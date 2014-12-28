@@ -12,7 +12,7 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Vector2D;
 	
 	
-	public class Region extends Being
+	public class Region extends Being implements IGroupable
 	{
 		
 		private var _name:String;
@@ -62,7 +62,7 @@ package sentinel.gameplay.world
 			
 			_name = data.prop('name');
 			_verticies = new <Vector2D>[];
-			
+
 			for each(var vertex:Object in data.prop('verticies', []))
 			{
 				_verticies.push(new Vector2D(vertex.x, vertex.y));
@@ -76,7 +76,8 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public function get name():String { return _name; }
+		public function get groupName():String { return '__INTERNAL__regions'; }
+		public function get nameInGroup():String { return _name; }
 		
 	}
 	

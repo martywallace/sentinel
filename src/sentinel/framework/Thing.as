@@ -8,6 +8,7 @@ package sentinel.framework
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.sound.Audio;
+	import sentinel.framework.util.StringUtil;
 	import starling.core.Starling;
 	import starling.events.EventDispatcher;
 	
@@ -23,6 +24,12 @@ package sentinel.framework
 		private var _id:uint = 0;
 		private var _parent:Thing;
 		private var _children:Vector.<Thing> = new <Thing>[];
+		
+		
+		public function toString():String
+		{
+			return StringUtil.toDebugString(['type', 'id'], [className, id]);
+		}
 		
 		
 		/**
@@ -260,7 +267,11 @@ package sentinel.framework
 		/**
 		 * A unique ID number assigned to this Thing by the core Game class.
 		 */
-		public function get id():uint{ return _id === 0 ? game.__getNextId() : _id; }
+		public function get id():uint
+		{
+			if (_id === 0) _id = game.__getNextId();
+			return _id;
+		}
 		
 		/**
 		 * The full class name of this Thing.

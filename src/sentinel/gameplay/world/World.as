@@ -192,9 +192,9 @@ package sentinel.gameplay.world
 				if (being is IGroupable)
 				{
 					var groupable:IGroupable = being as IGroupable;
+					
 					if (_groups.hasOwnProperty(groupable.groupName))
 					{
-						// Delete reference to this within its group.
 						delete _groups[groupable.groupName][groupable.nameInGroup];
 					}
 				}
@@ -210,7 +210,40 @@ package sentinel.gameplay.world
 		 */
 		public function getUnique(uniqueName:String):Being
 		{
-			return ObjectUtil.prop(_unique, uniqueName, null);
+			return _unique.prop(uniqueName);
+		}
+		
+		
+		/**
+		 * Returns a list of Beings who belong to the specified group.
+		 * @param groupName The group name.
+		 */
+		public function getGroup(groupName:String):Vector.<Being>
+		{
+			var result:Vector.<Being> = new <Being>[];
+			
+			for (var nameInGroup:String in _groups.prop(groupName, { }))
+			{
+				result.push(_groups[groupName][nameInGroup]);
+			}
+			
+			return result;
+		}
+		
+		
+		/**
+		 * Returns a single Being from the specified group with a given name within that group.
+		 * @param groupName The group name.
+		 * @param nameInGroup The name of the Being within the group.
+		 */
+		public function getFromGroup(groupName:String, nameInGroup:String):Being
+		{
+			if (_groups.prop(groupName) !== null && _groups.prop(groupName).hasOwnProperty(nameInGroup))
+			{
+				return _groups.prop(groupName)[nameInGroup];
+			}
+			
+			return null;
 		}
 		
 		

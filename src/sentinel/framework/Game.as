@@ -3,9 +3,9 @@ package sentinel.framework
 	
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
+	import sentinel.framework.client.Storage;
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.graphics.Sprite;
-	import sentinel.framework.client.Storage;
 	import sentinel.framework.sound.Audio;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -28,7 +28,7 @@ package sentinel.framework
 		
 		public function Game()
 		{
-			//
+			super();
 		}
 		
 		
