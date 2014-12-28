@@ -26,6 +26,12 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		internal static function __fromBase(base:b2Vec2):Vector2D
+		{
+			return new Vector2D(base.x * Engine.scale, base.y * Engine.scale);
+		}
+		
+		
 		public function Vector2D(x:Number = 0, y:Number = 0)
 		{
 			_base = new b2Vec2(x / Engine.scale, y / Engine.scale);

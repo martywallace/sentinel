@@ -180,7 +180,7 @@ package sentinel.gameplay.world
 		 * Queries the World for a collection of Beings meeting a given criteria.
 		 * @param query The query to use.
 		 */
-		public function query(query:Query):Vector.<Being>
+		public function query(query:Query):Vector.<QueryResult>
 		{
 			return query.__execute(this);
 		}

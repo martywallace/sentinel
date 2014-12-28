@@ -3,6 +3,7 @@ package sentinel.gameplay.physics
 	
 	import Box2D.Common.Math.b2Mat22;
 	import Box2D.Common.Math.b2Transform;
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
@@ -95,58 +96,61 @@ package sentinel.gameplay.physics
 		
 		
 		/**
-		 * Return a list of all Fixtures whose shape overlaps a Vector2D point.
+		 * ...
 		 * @param point The point to check at.
 		 */
-		public function queryPoint(point:Vector2D):Vector.<Fixture>
+		public function queryPoint(point:Vector2D):Vector.<EngineQueryResult>
 		{
-			var list:Vector.<Fixture> = new <Fixture>[];
+			var result:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
 			
 			_base.QueryPoint(function(fixture:b2Fixture):Boolean
 			{
 				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
 				{
-					list.push(fixture.GetUserData() as Fixture);
+					result.push(new EngineQueryResult(fixture.GetUserData() as Fixture), point);
 				}
 				
 				return true;
 				
 			}, point.__base);
 			
-			return list;
+			return result;
 		}
 		
 		
 		/**
-		 * Cast a line through the physics world and return a list of all the Fixtures whose shape
-		 * is intersected by the line.
+		 * Cast a line through the physics world and return a list of EngineQueryResult objects
+		 * containing data about each intersection made.
 		 * @param start The line start position.
 		 * @param end The line end position.
+		 * @param limit The result length limit. Set to 0 for unlimited results.
 		 */
-		public function queryLine(start:Vector2D, end:Vector2D):Vector.<Fixture>
+		public function queryLine(start:Vector2D, end:Vector2D, limit:int = 0):Vector.<EngineQueryResult>
 		{
-			var list:Vector.<Fixture> = new <Fixture>[];
-			var internalList:Vector.<b2Fixture> = _base.RayCastAll(start.__base, end.__base);
+			var result:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
 			
-			for each(var fixture:b2Fixture in internalList)
+			_base.RayCast(function(fixture:b2Fixture, point:b2Vec2, normal:b2Vec2, fraction:Number):Number
 			{
-				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
+				if (fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
 				{
-					list.push(fixture.GetUserData() as Fixture);
+					result.push(new EngineQueryResult(fixture.GetUserData() as Fixture, Vector2D.__fromBase(point)));
 				}
-			}
+				
+				return limit <= 0 ? fraction : (result.length >= limit ? 0 : fraction);
+				
+			}, start.__base, end.__base);
 			
-			return list;
+			return result;
 		}
 		
 		
 		/**
-		 * Returns a list of all Fixtures who overlap a given Shape.
+		 *
 		 * @param shape The Shape to use.
 		 * @param position The Shape position.
 		 * @param rotation The Shape rotation.
 		 */
-		public function queryShape(shape:Shape, position:Vector2D, rotation:Number = 0):Vector.<Fixture>
+		public function queryShape(shape:Shape, position:Vector2D, rotation:Number = 0):Vector.<EngineQueryResult>
 		{
 			var transform:b2Transform;
 			
@@ -164,20 +168,20 @@ package sentinel.gameplay.physics
 				transform = new b2Transform(position.__base, mat22);
 			}
 			
-			var list:Vector.<Fixture> = new <Fixture>[];
+			var result:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
 			
 			_base.QueryShape(function(fixture:b2Fixture):Boolean
 			{
 				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
 				{
-					list.push(fixture.GetUserData() as Fixture);
+					result.push(new EngineQueryResult(fixture.GetUserData() as Fixture, position));
 				}
 				
 				return true;
 				
 			}, shape.__base, transform);
 			
-			return list;
+			return result;
 		}
 		
 		

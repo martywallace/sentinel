@@ -1,7 +1,7 @@
 package sentinel.gameplay.world
 {
 	
-	import sentinel.framework.Thing;
+	import sentinel.gameplay.physics.EngineQueryResult;
 	import sentinel.gameplay.physics.Fixture;
 	import sentinel.gameplay.physics.Shape;
 	import sentinel.gameplay.physics.Vector2D;
@@ -35,9 +35,9 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public static function line(start:Vector2D, end:Vector2D):Query
+		public static function line(start:Vector2D, end:Vector2D, limit:int = 0):Query
 		{
-			return new Query(LINE, { start: start, end: end });
+			return new Query(LINE, { start: start, end: end, limit: limit });
 		}
 		
 		
@@ -58,10 +58,10 @@ package sentinel.gameplay.world
 		}
 		
 		
-		internal function __execute(world:World):Vector.<Being>
+		internal function __execute(world:World):Vector.<QueryResult>
 		{
-			var result:Vector.<Being> = new <Being>[];
-			var being:Thing;
+			var being:Being;
+			var result:Vector.<QueryResult> = new <QueryResult>[];
 			
 			if (_type === ALL)
 			{
@@ -70,7 +70,7 @@ package sentinel.gameplay.world
 				{
 					if (being is IQueryable)
 					{
-						result.push(being);
+						result.push(new QueryResult(being));
 					}
 				}
 			}
@@ -82,28 +82,30 @@ package sentinel.gameplay.world
 				{
 					if (being is IQueryable && being is _options.type)
 					{
-						result.push(being);
+						result.push(new QueryResult(being));
 					}
 				}
 			}
 			
 			else
 			{
-				// Physics related queries.
-				var fixtures:Vector.<Fixture> = new <Fixture>[];
+				// Physics engine related queries.
+				var engineQueryResults:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
 				
 				switch(_type)
 				{
-					case POINT: fixtures = world.engine.queryPoint(_options.point); break;
-					case LINE: fixtures = world.engine.queryLine(_options.start, _options.end); break;
-					case SHAPE: fixtures = world.engine.queryShape(_options.shape, _options.position); break;
+					case POINT: engineQueryResults = world.engine.queryPoint(_options.point); break;
+					case LINE: engineQueryResults = world.engine.queryLine(_options.start, _options.end, _options.limit); break;
+					case SHAPE: engineQueryResults = world.engine.queryShape(_options.shape, _options.position); break;
 				}
 				
-				for each(var fixture:Fixture in fixtures)
+				for each(var eqr:EngineQueryResult in engineQueryResults)
 				{
-					if (fixture.body.owner !== null && fixture.body.owner is IQueryable)
+					if (eqr.fixture.body.owner !== null &&
+						eqr.fixture.body.owner is Being &&
+						eqr.fixture.body.owner is IQueryable)
 					{
-						result.push(fixture.body.owner as Being);
+						result.push(new QueryResult(eqr.fixture.body.owner as Being, eqr));
 					}
 				}
 			}
