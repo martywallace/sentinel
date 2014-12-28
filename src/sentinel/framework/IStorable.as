@@ -8,8 +8,8 @@ package sentinel.framework
 	public interface IStorable
 	{
 		
-		function save():Object;
-		function load(data:Object):void;
+		function save():Data;
+		function load(data:Data):void;
 		
 	}
 	

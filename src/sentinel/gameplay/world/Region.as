@@ -1,7 +1,7 @@
 package sentinel.gameplay.world
 {
 	
-	import sentinel.framework.util.ObjectUtil;
+	import sentinel.framework.Data;
 	import sentinel.gameplay.events.ContactEvent;
 	import sentinel.gameplay.events.RegionEvent;
 	import sentinel.gameplay.physics.Body;
@@ -44,29 +44,29 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public override function save():Object
+		public override function save():Data
 		{
 			var verticies:Array = [];
 			
-			for each(var vec:Vector2D in _verticies)
+			for each(var vertex:Vector2D in _verticies)
 			{
-				verticies.push(vec.save());
+				verticies.push(vertex.save());
 			}
 			
-			return ObjectUtil.merge(super.save(), {
+			return super.save().merge({
 				verticies: verticies
 			});
 		}
 		
 		
-		public override function load(data:Object):void
+		public override function load(data:Data):void
 		{
 			super.load(data);
 			
 			_verticies = new <Vector2D>[];
-			for each(var i:Object in ObjectUtil.prop(data, 'verticies', []))
+			for each(var vertex:Object in data.prop('verticies', []))
 			{
-				_verticies.push(new Vector2D(i.x, i.y));
+				_verticies.push(new Vector2D(vertex.x, vertex.y));
 			}
 		}
 		

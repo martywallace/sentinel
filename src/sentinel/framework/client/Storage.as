@@ -3,8 +3,7 @@ package sentinel.framework.client
 	
 	import flash.net.SharedObject;
 	import sentinel.framework.Component;
-	import sentinel.framework.IStorable;
-	import sentinel.framework.util.ObjectUtil;
+	import sentinel.framework.Data;
 	
 	
 	/**
@@ -14,7 +13,7 @@ package sentinel.framework.client
 	public class Storage extends Component
 	{
 		
-		private var _slot:uint = 1;
+		private var _block:uint = 1;
 		private var _so:SharedObject;
 		
 		
@@ -32,27 +31,28 @@ package sentinel.framework.client
 		
 		public function load(field:String, fallback:* = null):*
 		{
-			return ObjectUtil.prop(_data, field, fallback);
+			return _data.prop(field, fallback);
 		}
 		
 		
 		public function empty():void
 		{
-			_so.data[slotName] = { };
+			_so.data[blockName] = { };
 		}
 		
 		
-		private function get _data():Object
+		private function get _data():Data
 		{
-			if (!_so.data.hasOwnProperty(slotName)) _so.data[slotName] = { };
-			return _so.data[slotName];
+			if (!_so.data.hasOwnProperty(blockName)) _so.data[blockName] = new Data();
+			if (!(_so.data[blockName] is Data)) _so.data[blockName] = Data.create(_so.data[blockName]);
+			
+			return _so.data[blockName];
 		}
 		
 		
-		public function set slot(value:uint):void { _slot = value; }
-		public function get slot():uint { return _slot; }
-		
-		public function get slotName():String { return '_slot' + slot; }
+		public function set block(value:uint):void { _block = value; }
+		public function get block():uint { return _block; }
+		public function get blockName():String { return '_block' + block; }
 		
 		public override function get name():String { return 'storage'; }
 		

@@ -2,9 +2,9 @@ package sentinel.gameplay.world
 {
 	
 	import flash.utils.getDefinitionByName;
+	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.Thing;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
@@ -27,7 +27,7 @@ package sentinel.gameplay.world
 		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
 		 */
-		public static function create(type:String, save:Object):Being
+		public static function create(type:String, save:Data):Being
 		{
 			var className:Class = null;
 			
@@ -154,9 +154,9 @@ package sentinel.gameplay.world
 		 * Saves a simple representation of this Being, useful for working with
 		 * <code>Being.create()</code>.
 		 */
-		public override function save():Object
+		public override function save():Data
 		{
-			return ObjectUtil.merge(super.save(), {
+			return super.save().merge({
 				x: Number(x.toFixed(2)),
 				y: Number(y.toFixed(2)),
 				rotation: rotation
@@ -168,11 +168,11 @@ package sentinel.gameplay.world
 		 * Applies properties stored in a simple object to this Being.
 		 * @param data The data to apply.
 		 */
-		public override function load(data:Object):void
+		public override function load(data:Data):void
 		{
-			x = ObjectUtil.prop(data, 'x', 0);
-			y = ObjectUtil.prop(data, 'y', 0);
-			rotation = ObjectUtil.prop(data, 'rotation', 0);
+			x = data.prop('x');
+			y = data.prop('y');
+			rotation = data.prop('rotation', 0);
 		}
 		
 		

@@ -6,6 +6,7 @@ package sentinel.gameplay.physics
 	import sentinel.framework.IStorable;
 	import sentinel.framework.util.StringUtil;
 	import sentinel.framework.util.ObjectUtil;
+	import sentinel.framework.Data;
 	
 	
 	public class Vector2D implements IStorable
@@ -44,16 +45,16 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function save():Object
+		public function save():Data
 		{
-			return { x: x, y: y };
+			return Data.create({ x: x, y: y });
 		}
 		
 		
-		public function load(data:Object):void
+		public function load(data:Data):void
 		{
-			x = ObjectUtil.prop(data, 'x', 0);
-			y = ObjectUtil.prop(data, 'y', 0);
+			x = data.prop('x', 0);
+			y = data.prop('y', 0);
 		}
 		
 		

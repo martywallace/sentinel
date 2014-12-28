@@ -42,9 +42,9 @@ package sentinel.framework
 		/**
 		 * Saves a simple representation of this Thing as an Object.
 		 */
-		public function save():Object
+		public function save():Data
 		{
-			return { type: className };
+			return Data.create({ type: className });
 		}
 		
 		
@@ -53,7 +53,7 @@ package sentinel.framework
 		 * this Thing.
 		 * @param data The data to load.
 		 */
-		public function load(data:Object):void
+		public function load(data:Data):void
 		{
 			//
 		}

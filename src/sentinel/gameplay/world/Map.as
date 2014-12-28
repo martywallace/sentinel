@@ -1,8 +1,8 @@
 package sentinel.gameplay.world
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.framework.Thing;
-	import sentinel.framework.util.ObjectUtil;
 	
 	
 	/**
@@ -58,7 +58,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public override function save():Object
+		public override function save():Data
 		{
 			var beings:Array = [];
 			
@@ -78,17 +78,17 @@ package sentinel.gameplay.world
 				}
 			}
 			
-			return ObjectUtil.merge(super.save(), { beings: beings });
+			return super.save().merge({ beings: beings });
 		}
 		
 		
-		public override function load(data:Object):void
+		public override function load(data:Data):void
 		{
-			for each(var def:Object in ObjectUtil.prop(data, 'beings', []))
+			for each(var def:Object in data.prop('beings', []))
 			{
 				if (def.hasOwnProperty('type'))
 				{
-					var being:Being = Being.create(def.type, def);
+					var being:Being = Being.create(def.type, Data.create(def));
 					_world.add(being);
 				}
 			}

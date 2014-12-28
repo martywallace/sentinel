@@ -1,10 +1,10 @@
 package sentinel.gameplay.world 
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Edge;
 	import sentinel.gameplay.physics.Engine;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.physics.Vector2D;
 	
 	
@@ -26,21 +26,21 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public override function save():Object
+		public override function save():Data
 		{
-			return ObjectUtil.merge(super.save(), {
+			return super.save().merge({
 				width: _width,
 				height: _height
 			});
 		}
 		
 		
-		public override function load(data:Object):void
+		public override function load(data:Data):void
 		{
 			super.load(data);
 			
-			_width = ObjectUtil.prop(data, 'width', 0);
-			_height = ObjectUtil.prop(data, 'height', 0);
+			_width = data.prop('width', 0);
+			_height = data.prop('height', 0);
 		}
 		
 		
