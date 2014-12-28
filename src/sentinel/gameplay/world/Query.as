@@ -41,9 +41,9 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public static function shape(shape:Shape):Query
+		public static function shape(shape:Shape, position:Vector2D):Query
 		{
-			return new Query(SHAPE, { shape: shape });
+			return new Query(SHAPE, { shape: shape, position: position });
 		}
 		
 		
@@ -96,7 +96,7 @@ package sentinel.gameplay.world
 				{
 					case POINT: fixtures = world.engine.queryPoint(_options.point); break;
 					case LINE: fixtures = world.engine.queryLine(_options.start, _options.end); break;
-					case SHAPE: fixtures = world.engine.queryShape(_options.shape); break;
+					case SHAPE: fixtures = world.engine.queryShape(_options.shape, _options.position); break;
 				}
 				
 				for each(var fixture:Fixture in fixtures)

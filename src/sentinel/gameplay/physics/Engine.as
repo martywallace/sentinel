@@ -1,6 +1,8 @@
 package sentinel.gameplay.physics
 {
 	
+	import Box2D.Common.Math.b2Mat22;
+	import Box2D.Common.Math.b2Transform;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
@@ -102,7 +104,11 @@ package sentinel.gameplay.physics
 			
 			_base.QueryPoint(function(fixture:b2Fixture):Boolean
 			{
-				list.push(fixture.GetUserData() as Fixture);
+				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
+				{
+					list.push(fixture.GetUserData() as Fixture);
+				}
+				
 				return true;
 				
 			}, point.__base);
@@ -124,16 +130,54 @@ package sentinel.gameplay.physics
 			
 			for each(var fixture:b2Fixture in internalList)
 			{
-				list.push(fixture.GetUserData() as Fixture);
+				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
+				{
+					list.push(fixture.GetUserData() as Fixture);
+				}
 			}
 			
 			return list;
 		}
 		
 		
-		public function queryShape(shape:Shape):Vector.<Fixture>
+		/**
+		 * Returns a list of all Fixtures who overlap a given Shape.
+		 * @param shape The Shape to use.
+		 * @param position The Shape position.
+		 * @param rotation The Shape rotation.
+		 */
+		public function queryShape(shape:Shape, position:Vector2D, rotation:Number = 0):Vector.<Fixture>
 		{
-			return null;
+			var transform:b2Transform;
+			
+			if (rotation === 0)
+			{
+				// Don't need rotation.
+				transform = new b2Transform(position.__base);
+			}
+			else
+			{
+				// Some kind of Box2D sorcery required for rotation.
+				var mat22:b2Mat22 = new b2Mat22();
+				mat22.Set(rotation);
+				
+				transform = new b2Transform(position.__base, mat22);
+			}
+			
+			var list:Vector.<Fixture> = new <Fixture>[];
+			
+			_base.QueryShape(function(fixture:b2Fixture):Boolean
+			{
+				if(fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
+				{
+					list.push(fixture.GetUserData() as Fixture);
+				}
+				
+				return true;
+				
+			}, shape.__base, transform);
+			
+			return list;
 		}
 		
 		
