@@ -37,7 +37,6 @@ package sentinel.gameplay.physics
 		
 		/**
 		 * Constructor.
-		 * 
 		 * @param def An optional world definition.
 		 * @param debug An optional debug definition.
 		 */
@@ -96,7 +95,8 @@ package sentinel.gameplay.physics
 		
 		
 		/**
-		 * ...
+		 * Query the world for Fixtures who overlap a given point and return a list of
+		 * <code>EngineQueryResult</code>s associated with those Fixtures.
 		 * @param point The point to check at.
 		 */
 		public function queryPoint(point:Vector2D):Vector.<EngineQueryResult>
@@ -119,13 +119,12 @@ package sentinel.gameplay.physics
 		
 		
 		/**
-		 * Cast a line through the physics world and return a list of EngineQueryResult objects
+		 * Cast a line through the world and return a list of <code>EngineQueryResult</code>s
 		 * containing data about each intersection made.
 		 * @param start The line start position.
 		 * @param end The line end position.
-		 * @param limit The result length limit. Set to 0 for unlimited results.
 		 */
-		public function queryLine(start:Vector2D, end:Vector2D, limit:int = 0):Vector.<EngineQueryResult>
+		public function queryLine(start:Vector2D, end:Vector2D):Vector.<EngineQueryResult>
 		{
 			var result:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
 			
@@ -133,7 +132,11 @@ package sentinel.gameplay.physics
 			{
 				if (fixture.GetUserData() !== null && fixture.GetUserData() is Fixture)
 				{
-					result.push(new EngineQueryResult(fixture.GetUserData() as Fixture, Vector2D.__fromBase(point)));
+					result.push(new EngineQueryResult(
+						fixture.GetUserData() as Fixture,
+						Vector2D.__fromBase(point),
+						Vector2D.__fromBase(normal)
+					));
 				}
 				
 				return 1;
@@ -142,7 +145,7 @@ package sentinel.gameplay.physics
 			
 			
 			// Sort the list by distance from the start point.
-			result = result.sort(function(a:EngineQueryResult, b:EngineQueryResult):Number
+			return result.sort(function(a:EngineQueryResult, b:EngineQueryResult):Number
 			{
 				var ad:Number = a.point.distanceTo(start);
 				var bd:Number = b.point.distanceTo(start);
@@ -150,13 +153,12 @@ package sentinel.gameplay.physics
 				return ad === bd ? 0 : (ad < bd ? -1 : 1); 
 				
 			});
-			
-			return limit === 0 ? result : result.slice(0, limit);
 		}
 		
 		
 		/**
-		 *
+		 * Query the world for Fixtures who overlap a provided Shape and return a list of
+		 * <code>EngineQueryResult</code>s associated with those Fixtures.
 		 * @param shape The Shape to use.
 		 * @param position The Shape position.
 		 * @param rotation The Shape rotation.
@@ -202,6 +204,10 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * Run one step of calculations within the physics world. Should be called each time the game
+		 * World updates.
+		 */
 		public function step():void
 		{
 			while (_destroyed.length > 0)
@@ -222,6 +228,10 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * Iterate over the list of bodies contained within this physics world and returns them as a
+		 * Vector.<Body> list.
+		 */
 		public function get bodies():Vector.<Body>
 		{
 			var result:Vector.<Body> = new <Body>[];

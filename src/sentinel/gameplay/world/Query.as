@@ -95,7 +95,7 @@ package sentinel.gameplay.world
 				switch(_type)
 				{
 					case POINT: engineQueryResults = world.engine.queryPoint(_options.point); break;
-					case LINE: engineQueryResults = world.engine.queryLine(_options.start, _options.end, _options.limit); break;
+					case LINE: engineQueryResults = world.engine.queryLine(_options.start, _options.end); break;
 					case SHAPE: engineQueryResults = world.engine.queryShape(_options.shape, _options.position); break;
 				}
 				
@@ -107,6 +107,12 @@ package sentinel.gameplay.world
 					{
 						result.push(new QueryResult(eqr.fixture.body.owner as Being, eqr));
 					}
+				}
+				
+				if (_type === LINE && _options.limit > 0)
+				{
+					// Line query can be limited to first N results.
+					result = result.slice(0, _options.limit);
 				}
 			}
 			
