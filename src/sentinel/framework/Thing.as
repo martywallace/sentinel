@@ -221,7 +221,7 @@ package sentinel.framework
 		 * Called when this Thing is added to another Thing.
 		 * @param to The Thing this Thing was added to.
 		 */
-		protected function added(to:Thing):void
+		protected function addedT(to:Thing):void
 		{
 			//
 		}
@@ -232,7 +232,7 @@ package sentinel.framework
 			_parent = to;
 			_dispatchEvent(ThingEvent.ADDED);
 			
-			added(to);
+			addedT(to);
 		}
 		
 		
@@ -240,7 +240,7 @@ package sentinel.framework
 		 * Called when this Thing is removed from another Thing.
 		 * @param from The Thing this Thing was removed from.
 		 */
-		protected function removed(from:Thing):void
+		protected function removedT(from:Thing):void
 		{
 			//
 		}
@@ -251,7 +251,7 @@ package sentinel.framework
 			_parent = null;
 			_dispatchEvent(ThingEvent.REMOVED);
 			
-			removed(from);
+			removedT(from);
 		}
 		
 		

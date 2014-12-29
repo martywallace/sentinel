@@ -47,15 +47,29 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected final override function added(thing:Thing):void
+		protected final override function addedT(thing:Thing):void
 		{
-			if (!(thing is GameplayState)) throw new Error("UI can only be added to GameplayState.");
+			if ((thing is GameplayState)) added(thing as GameplayState);
+			else throw new Error("UI can only be added to GameplayState.");
 		}
 		
 		
-		protected final override function removed(thing:Thing):void
+		protected function added(to:GameplayState):void
 		{
-			if (!(thing is GameplayState)) throw new Error("UI can only be removed from GameplayState.");
+			//
+		}
+		
+		
+		protected final override function removedT(thing:Thing):void
+		{
+			if ((thing is GameplayState)) removed(thing as GameplayState);
+			else throw new Error("UI can only be removed from GameplayState.");
+		}
+		
+		
+		protected function removed(from:GameplayState):void
+		{
+			//
 		}
 		
 		

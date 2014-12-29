@@ -44,7 +44,7 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected final override function added(ui:Thing):void
+		protected final override function addedT(ui:Thing):void
 		{
 			if (ui is UI)
 			{
@@ -55,6 +55,8 @@ package sentinel.gameplay.ui
 					// Add the graphics to the UI graphics container.
 					(ui as UI).graphics.addChild(_graphics as DisplayObject);
 				}
+				
+				added(ui as UI);
 			}
 			else
 			{
@@ -63,16 +65,29 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected final override function removed(ui:Thing):void
+		protected function added(to:UI):void
+		{
+			//
+		}
+		
+		
+		protected final override function removedT(ui:Thing):void
 		{
 			if (ui is UI)
 			{
 				if (_graphics !== null) _graphics.deconstruct();
+				removed(ui as UI);
 			}
 			else
 			{
 				throw new Error("Instances of UIElement can only be removed from UIElement.");
 			}
+		}
+		
+		
+		protected function removed(from:UI):void
+		{
+			//
 		}
 		
 		

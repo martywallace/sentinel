@@ -194,7 +194,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		protected final override function added(world:Thing):void
+		protected final override function addedT(world:Thing):void
 		{
 			if (world is World)
 			{
@@ -238,6 +238,8 @@ package sentinel.gameplay.world
 						}
 					}
 				}
+				
+				added(world as World);
 			}
 			else
 			{
@@ -246,17 +248,31 @@ package sentinel.gameplay.world
 		}
 		
 		
-		protected final override function removed(world:Thing):void
+		protected function added(to:World):void
+		{
+			//
+		}
+		
+		
+		protected final override function removedT(world:Thing):void
 		{
 			if (world is World)
 			{
 				if (_graphics !== null) _graphics.deconstruct();
 				if (_body !== null) _body.deconstruct();
+				
+				removed(world as World);
 			}
 			else
 			{
 				throw new Error("Instances of Being can only be removed from a World.");
 			}
+		}
+		
+		
+		protected function removed(from:World):void
+		{
+			//
 		}
 		
 		
