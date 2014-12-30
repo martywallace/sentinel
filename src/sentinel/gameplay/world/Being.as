@@ -27,7 +27,7 @@ package sentinel.gameplay.world
 		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
 		 */
-		public static function create(type:String, save:Data):Being
+		public static function create(type:String, save:Data = null):Being
 		{
 			var className:Class = null;
 			
@@ -43,7 +43,12 @@ package sentinel.gameplay.world
 			}
 			
 			var being:Being = new className() as Being;
-			being.load(save);
+			
+			if (being !== null && save !== null)
+			{
+				// Apply save data.
+				being.load(save);
+			}
 			
 			return being;
 		}
