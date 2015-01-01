@@ -50,14 +50,14 @@ package sentinel.framework.graphics
 				return null;
 			}
 			
-			var child:DisplayObject = super.addChild(child);
+			var added:DisplayObject = super.addChild(child);
 			
 			if (_autoSort)
 			{
 				sortChildrenByDepth();
 			}
 			
-			return child;
+			return added;
 		}
 		
 		
