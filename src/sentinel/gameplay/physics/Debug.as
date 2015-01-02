@@ -4,7 +4,7 @@ package sentinel.gameplay.physics
 	import Box2D.Common.b2Color;
 	import Box2D.Dynamics.b2DebugDraw;
 	import flash.display.Sprite;
-	import sentinel.framework.Game;
+	import sentinel.framework.BaseGame;
 	import sentinel.framework.IDeconstructs;
 	
 	
@@ -23,7 +23,7 @@ package sentinel.gameplay.physics
 		public static const SHAPE:int = b2DebugDraw.e_shapeBit;
 		
 		
-		private var _game:Game;
+		private var _game:BaseGame;
 		private var _base:b2DebugDraw;
 		private var _graphics:Sprite;
 		private var _wrapper:Sprite;
@@ -39,7 +39,7 @@ package sentinel.gameplay.physics
 		 * @param fillAlpha Fill alpha of debug graphics.
 		 * @param flags List of drawing flags. If null or empty, <code>B2Debug.SHAPE</code> will be used.
 		 */
-		public function Debug(game:Game, lineThickness:int = 1, lineAlpha:Number = 1, fillAlpha:Number = 0.2, flags:Vector.<int> = null)
+		public function Debug(game:BaseGame, lineThickness:int = 1, lineAlpha:Number = 1, fillAlpha:Number = 0.2, flags:Vector.<int> = null)
 		{
 			_game = game;
 			

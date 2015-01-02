@@ -6,11 +6,11 @@ package sentinel.framework
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
 	import sentinel.framework.client.Viewport;
+	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.sound.Audio;
 	import sentinel.framework.util.StringUtil;
 	import starling.core.Starling;
-	import starling.events.EventDispatcher;
 	
 	
 	/**
@@ -35,15 +35,15 @@ package sentinel.framework
 		/**
 		 * Deconstruct this Thing and its descendants.
 		 */
-		public function deconstruct():void
+		public override function deconstruct():void
 		{
 			removeAll(true);
-			
 			removeFromParent();
-			removeEventListeners();
 			
 			_children.length = 0;
 			_dispatchEvent(ThingEvent.DECONSTRUCTED);
+			
+			super.deconstruct();
 		}
 		
 		
@@ -281,7 +281,7 @@ package sentinel.framework
 		/**
 		 * A reference to the core Game class.
 		 */
-		protected function get game():Game { return Starling.current.root as Game; }
+		protected function get game():BaseGame { return Starling.current.root as BaseGame; }
 		
 		/**
 		 * A reference to the game Viewport class.

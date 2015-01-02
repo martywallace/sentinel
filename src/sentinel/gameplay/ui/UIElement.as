@@ -5,7 +5,7 @@ package sentinel.gameplay.ui
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Vector2D;
-	import sentinel.gameplay.world.World;
+	import sentinel.gameplay.world.BaseWorld;
 	import starling.display.DisplayObject;
 	
 	
@@ -46,17 +46,17 @@ package sentinel.gameplay.ui
 		
 		protected final override function addedT(ui:Thing):void
 		{
-			if (ui is UI)
+			if (ui is BaseUI)
 			{
 				_graphics = defineGraphics();
 				
 				if (_graphics !== null)
 				{
 					// Add the graphics to the UI graphics container.
-					(ui as UI).graphics.addChild(_graphics as DisplayObject);
+					(ui as BaseUI).graphics.addChild(_graphics as DisplayObject);
 				}
 				
-				added(ui as UI);
+				added(ui as BaseUI);
 			}
 			else
 			{
@@ -65,7 +65,7 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected function added(to:UI):void
+		protected function added(to:BaseUI):void
 		{
 			//
 		}
@@ -73,10 +73,10 @@ package sentinel.gameplay.ui
 		
 		protected final override function removedT(ui:Thing):void
 		{
-			if (ui is UI)
+			if (ui is BaseUI)
 			{
 				if (_graphics !== null) _graphics.deconstruct();
-				removed(ui as UI);
+				removed(ui as BaseUI);
 			}
 			else
 			{
@@ -85,7 +85,7 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected function removed(from:UI):void
+		protected function removed(from:BaseUI):void
 		{
 			//
 		}
@@ -97,8 +97,8 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		protected function get ui():UI { return parent as UI; }
-		protected function get world():World { return ui !== null ? ui.world : null; }
+		protected function get ui():BaseUI { return parent as BaseUI; }
+		protected function get world():BaseWorld { return ui !== null ? ui.world : null; }
 		
 		public function get graphics():IGraphics { return _graphics; }
 		

@@ -10,13 +10,13 @@ package sentinel.gameplay.world
 	 * A Map defines a collection of Beings, events, quests, etc within a World at one time.
 	 * @author Marty Wallace.
 	 */
-	public class Map extends Thing
+	public class BaseMap extends Thing
 	{
 		
-		private var _world:World;
+		private var _world:BaseWorld;
 		
 		
-		internal function __construct(world:World):void
+		internal function __construct(world:BaseWorld):void
 		{
 			_world = world;
 			
@@ -105,7 +105,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public function get world():World { return _world; }
+		public function get world():BaseWorld { return _world; }
 		
 	}
 	

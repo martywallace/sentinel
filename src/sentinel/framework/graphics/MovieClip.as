@@ -2,7 +2,7 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.client.Viewport;
-	import sentinel.framework.Game;
+	import sentinel.framework.BaseGame;
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.textures.Texture;
@@ -27,7 +27,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function get viewport():Viewport{ return (Starling.current.root as Game).viewport; }
+		public function get viewport():Viewport{ return (Starling.current.root as BaseGame).viewport; }
 		public function get depth():int{ return _depth; }
 		public function set depth(value:int):void { _depth = value; }
 		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }

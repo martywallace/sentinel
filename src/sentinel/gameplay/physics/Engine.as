@@ -8,6 +8,7 @@ package sentinel.gameplay.physics
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2World;
+	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.framework.Thing;
 	
@@ -16,7 +17,7 @@ package sentinel.gameplay.physics
 	 * Wrapper for Box2D.Dynamics.b2World.
 	 * @author Marty Wallace.
 	 */
-	public class Engine implements IDeconstructs
+	public class Engine extends EventDispatcher
 	{
 		
 		private static var _scale:int = 30;
@@ -55,7 +56,7 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function deconstruct():void
+		public override function deconstruct():void
 		{
 			if (_debug !== null)
 			{
@@ -74,6 +75,8 @@ package sentinel.gameplay.physics
 			
 			// TODO: Anything with forces? Etc?
 			// ...
+			
+			super.deconstruct();
 		}
 		
 		

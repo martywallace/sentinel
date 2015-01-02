@@ -13,7 +13,7 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.states.GameplayState;
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.ui.BaseUI;
 	
 	
 	/**
@@ -21,7 +21,7 @@ package sentinel.gameplay.world
 	 * between those Beings. The World also deals with initializing a physics engine, if required.
 	 * @author Marty Wallace.
 	 */
-	public class World extends Thing implements IMouseDataProvider
+	public class BaseWorld extends Thing implements IMouseDataProvider
 	{
 		
 		private var _engine:Engine;
@@ -33,7 +33,7 @@ package sentinel.gameplay.world
 		private var _unique:Data;
 		private var _groups:Data;
 		private var _services:Object;
-		private var _map:Map;
+		private var _map:BaseMap;
 		
 		
 		/**
@@ -41,7 +41,7 @@ package sentinel.gameplay.world
 		 * @param engineDef An EngineDef describing the physics engine.
 		 * @param debug A Debug instance describing the type of debugging to use.
 		 */
-		public function World(engineDef:EngineDef = null, debug:Debug = null)
+		public function BaseWorld(engineDef:EngineDef = null, debug:Debug = null)
 		{
 			if (engineDef !== null)
 			{
@@ -58,20 +58,26 @@ package sentinel.gameplay.world
 			
 			for each(var service:WorldService in (defineServices() || new <WorldService>[]))
 			{
-				trace(service);
-				if (!_services.hasOwnProperty(service.name))
+				if (service.name !== null)
 				{
-					_services[service.name] = service;
+					if (!_services.hasOwnProperty(service.name))
+					{
+						_services[service.name] = service;
+					}
+					else
+					{
+						throw new Error('WorldService named "' + service.name + '" already exists.');
+					}
 				}
 				else
 				{
-					throw new Error('WorldService named "' + service.name + '" already exists.');
+					throw new Error("WorldService must define a name.");
 				}
 			}
 			
 			for (var serviceName:String in _services)
 			{
-				(_services[serviceName] as WorldService).__construct();
+				(_services[serviceName] as WorldService).__construct(this);
 			}
 			
 			_graphics.addChild(_content);
@@ -97,7 +103,7 @@ package sentinel.gameplay.world
 		 * Loads a new Map into this World.
 		 * @param map The Map to load.
 		 */
-		public function loadMap(map:Map):void
+		public function loadMap(map:BaseMap):void
 		{
 			unloadMap();
 			
@@ -300,7 +306,7 @@ package sentinel.gameplay.world
 		 */
 		protected function getService(serviceName:String):WorldService
 		{
-			return _services.prop(serviceName);
+			return _services[serviceName];
 		}
 		
 		
@@ -330,14 +336,14 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public function get ui():UI { return (parent as GameplayState).ui }
+		public function get ui():BaseUI { return (parent as GameplayState).ui }
 		public function get engine():Engine { return _engine; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get mouseContainer():IGraphics{ return _content; }
 		public function get camera():Camera { return _camera; }
 		public function get ticks():uint { return _ticks; }
 		public function get totalBeings():int { return children.length; }
-		public function get map():Map { return _map; }
+		public function get map():BaseMap { return _map; }
 		
 		public function get frozen():Boolean { return _frozen; }
 		

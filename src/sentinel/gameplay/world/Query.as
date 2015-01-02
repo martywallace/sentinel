@@ -58,7 +58,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		internal function __execute(world:World):Vector.<WorldQueryResult>
+		internal function __execute(world:BaseWorld):Vector.<WorldQueryResult>
 		{
 			var being:Being;
 			var result:Vector.<WorldQueryResult> = new <WorldQueryResult>[];

@@ -2,8 +2,8 @@ package sentinel.gameplay.states
 {
 	
 	import sentinel.framework.State;
-	import sentinel.gameplay.world.World;
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.world.BaseWorld;
+	import sentinel.gameplay.ui.BaseUI;
 	import starling.display.DisplayObject;
 	
 	
@@ -15,11 +15,11 @@ package sentinel.gameplay.states
 	public class GameplayState extends State
 	{
 		
-		private var _world:World;
-		private var _ui:UI;
+		private var _world:BaseWorld;
+		private var _ui:BaseUI;
 		
 		
-		public function GameplayState(world:World, ui:UI)
+		public function GameplayState(world:BaseWorld, ui:BaseUI)
 		{
 			super();
 			
@@ -43,8 +43,8 @@ package sentinel.gameplay.states
 		}
 		
 		
-		public function get world():World { return _world; }
-		public function get ui():UI { return _ui; }
+		public function get world():BaseWorld { return _world; }
+		public function get ui():BaseUI { return _ui; }
 		
 	}
 	

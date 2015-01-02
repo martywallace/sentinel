@@ -4,15 +4,15 @@ package sentinel.testing.states
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.KeyboardState;
 	import sentinel.framework.events.KeyboardEvent;
-	import sentinel.gameplay.world.World;
+	import sentinel.gameplay.world.BaseWorld;
 	import sentinel.gameplay.states.GameplayState;
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.ui.BaseUI;
 	
 	
 	public class TestGameplay extends GameplayState
 	{
 		
-		public function TestGameplay(world:World, ui:UI)
+		public function TestGameplay(world:BaseWorld, ui:BaseUI)
 		{
 			super(world, ui);
 			

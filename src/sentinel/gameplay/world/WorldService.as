@@ -1,7 +1,7 @@
 package sentinel.gameplay.world
 {	
 	
-	import starling.events.EventDispatcher;
+	import sentinel.framework.events.EventDispatcher;
 	
 	
 	/**
@@ -11,17 +11,20 @@ package sentinel.gameplay.world
 	public class WorldService extends EventDispatcher
 	{
 		
-		private var _world:World;
+		private var _world:BaseWorld;
 		
 		
-		public function WorldService(world:World)
+		public override function deconstruct():void
 		{
-			_world = world;
+			// ..?
+			
+			super.deconstruct();
 		}
 		
 		
-		internal function __construct():void
+		internal function __construct(world:BaseWorld):void
 		{
+			_world = world;
 			construct();
 		}
 		
@@ -44,7 +47,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		protected function get world():World { return _world; }
+		protected function get world():BaseWorld { return _world; }
 		
 		
 		public function get name():String { return null; }

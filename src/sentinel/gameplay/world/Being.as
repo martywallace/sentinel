@@ -9,7 +9,7 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.ui.BaseUI;
 	import starling.display.DisplayObject;
 	
 	
@@ -201,14 +201,14 @@ package sentinel.gameplay.world
 		
 		protected final override function addedT(world:Thing):void
 		{
-			if (world is World)
+			if (world is BaseWorld)
 			{
 				_graphics = defineGraphics();
 				
 				if (_graphics !== null)
 				{
 					// Add the graphics to the World's graphics container.
-					(world as World).__content.addChild(_graphics as DisplayObject);
+					(world as BaseWorld).__content.addChild(_graphics as DisplayObject);
 					
 					if (!_graphics.atZero)
 					{
@@ -223,10 +223,10 @@ package sentinel.gameplay.world
 					}
 				}
 				
-				if ((world as World).engine !== null)
+				if ((world as BaseWorld).engine !== null)
 				{
 					// Attempt to define a body for this Being.
-					_body = defineBody((world as World).engine);
+					_body = defineBody((world as BaseWorld).engine);
 					
 					if (_body !== null)
 					{
@@ -244,7 +244,7 @@ package sentinel.gameplay.world
 					}
 				}
 				
-				added(world as World);
+				added(world as BaseWorld);
 			}
 			else
 			{
@@ -253,7 +253,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		protected function added(to:World):void
+		protected function added(to:BaseWorld):void
 		{
 			//
 		}
@@ -261,12 +261,12 @@ package sentinel.gameplay.world
 		
 		protected final override function removedT(world:Thing):void
 		{
-			if (world is World)
+			if (world is BaseWorld)
 			{
 				if (_graphics !== null) _graphics.deconstruct();
 				if (_body !== null) _body.deconstruct();
 				
-				removed(world as World);
+				removed(world as BaseWorld);
 			}
 			else
 			{
@@ -275,7 +275,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		protected function removed(from:World):void
+		protected function removed(from:BaseWorld):void
 		{
 			//
 		}
@@ -305,12 +305,12 @@ package sentinel.gameplay.world
 		/**
 		 * The parent World containing this Being.
 		 */
-		public function get world():World { return parent as World; }
+		public function get world():BaseWorld { return parent as BaseWorld; }
 		
 		/**
 		 * The Map loaded by the parent World containing this Being.
 		 */
-		public function get map():Map{ return world.map; }
+		public function get map():BaseMap{ return world.map; }
 		
 		/**
 		 * The graphics representing this Being.
@@ -380,7 +380,7 @@ package sentinel.gameplay.world
 		/**
 		 * Returns the active UI, if this Being is a descendant of <code>GameplayState</code>.
 		 */
-		protected function get ui():UI { return world !== null ? world.ui : null; }
+		protected function get ui():BaseUI { return world !== null ? world.ui : null; }
 		
 	}
 	

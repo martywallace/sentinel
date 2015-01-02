@@ -18,7 +18,7 @@ package sentinel.framework
 	 * and the starting state.
 	 * @author Marty Wallace.
 	 */
-	public class Game extends Sprite
+	public class BaseGame extends Sprite
 	{
 		
 		private var _state:State;
@@ -26,7 +26,7 @@ package sentinel.framework
 		private var _nextId:uint = 1;
 		
 		
-		public function Game()
+		public function BaseGame()
 		{
 			super();
 		}

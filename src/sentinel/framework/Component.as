@@ -2,7 +2,7 @@ package sentinel.framework
 {
 	
 	import starling.core.Starling;
-	import starling.events.EventDispatcher;
+	import sentinel.framework.events.EventDispatcher;
 	
 	
 	/**
@@ -41,7 +41,7 @@ package sentinel.framework
 		/**
 		 * Returns the active Game instance.
 		 */
-		public function get game():Game { return starling.root as Game; }
+		public function get game():BaseGame { return starling.root as BaseGame; }
 		
 		/**
 		 * Returns the name of this component. The component name must be unique across all

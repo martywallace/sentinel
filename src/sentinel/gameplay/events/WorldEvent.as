@@ -2,7 +2,7 @@ package sentinel.gameplay.events
 {
 	
 	import sentinel.framework.events.Event;
-	import sentinel.gameplay.world.World;
+	import sentinel.gameplay.world.BaseWorld;
 	
 	
 	public class WorldEvent extends Event
@@ -18,7 +18,7 @@ package sentinel.gameplay.events
 		}
 		
 		
-		public function get world():World { return target as World; }
+		public function get world():BaseWorld { return target as BaseWorld; }
 		
 	}
 	

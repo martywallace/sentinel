@@ -5,14 +5,11 @@ package sentinel.gameplay.physics
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
-	import Box2D.Dynamics.b2World;
-	import starling.events.EventDispatcher;
+	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.Thing;
-	import sentinel.framework.IDeconstructs;
-	import Box2D.Dynamics.Contacts.b2Contact;
 	
 	
-	public class Body extends EventDispatcher implements IDeconstructs
+	public class Body extends EventDispatcher
 	{
 		
 		public static const STATIC:int = b2Body.b2_staticBody;
@@ -45,7 +42,7 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		public function deconstruct():void
+		public override function deconstruct():void
 		{
 			if (_engine !== null)
 			{
@@ -53,10 +50,8 @@ package sentinel.gameplay.physics
 			}
 			
 			destroyAllFixtures();
-			removeEventListeners();
 			
-			// TODO: More?
-			// ...
+			super.deconstruct();
 		}
 		
 		

@@ -6,7 +6,7 @@ package sentinel.gameplay.ui
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
-	import sentinel.gameplay.world.World;
+	import sentinel.gameplay.world.BaseWorld;
 	import sentinel.gameplay.states.GameplayState;
 	
 	
@@ -15,13 +15,13 @@ package sentinel.gameplay.ui
 	 * heads up display (e.g. for displaying health bars, etc).
 	 * @author Marty Wallace.
 	 */
-	public class UI extends Thing implements IMouseDataProvider
+	public class BaseUI extends Thing implements IMouseDataProvider
 	{
 		
 		private var _graphics:IGraphicsContainer;
 		
 		
-		public function UI()
+		public function BaseUI()
 		{
 			_graphics = new Sprite(true);
 		}
@@ -73,7 +73,7 @@ package sentinel.gameplay.ui
 		}
 		
 		
-		public function get world():World{ return (parent as GameplayState).world; }
+		public function get world():BaseWorld{ return (parent as GameplayState).world; }
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		public function get mouseContainer():IGraphics{ return _graphics; }
 		
