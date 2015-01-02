@@ -1,11 +1,10 @@
 package sentinel.gameplay.world
 {
 	
-	import sentinel.framework.client.Viewport;
 	import sentinel.framework.BaseGame;
+	import sentinel.framework.client.Viewport;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Vector2D;
-	import starling.core.Starling;
 	
 	
 	/**
@@ -78,7 +77,7 @@ package sentinel.gameplay.world
 		}
 		
 		
-		public function get viewport():Viewport { return (Starling.current.root as BaseGame).viewport; }
+		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
 		
 		public function get x():Number { return -_world.__content.x; }
 		public function set x(value:Number):void{ _set(value, y, rotation, zoom); }

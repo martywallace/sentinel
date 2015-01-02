@@ -281,7 +281,7 @@ package sentinel.framework
 		/**
 		 * A reference to the core Game class.
 		 */
-		protected function get game():BaseGame { return Starling.current.root as BaseGame; }
+		protected function get game():BaseGame { return BaseGame.getInstance(); }
 		
 		/**
 		 * A reference to the game Viewport class.

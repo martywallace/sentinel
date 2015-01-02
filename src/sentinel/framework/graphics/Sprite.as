@@ -1,12 +1,11 @@
 package sentinel.framework.graphics
 {
 	
-	import sentinel.framework.client.Viewport;
 	import sentinel.framework.BaseGame;
-	import starling.core.Starling;
+	import sentinel.framework.client.Viewport;
+	import sentinel.framework.util.GraphicsUtil;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import sentinel.framework.util.GraphicsUtil;
 	
 	
 	public class Sprite extends starling.display.Sprite implements IGraphics, IGraphicsContainer
@@ -61,7 +60,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function get viewport():Viewport { return (Starling.current.root as BaseGame).viewport; }
+		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
 		
 		public function get depth():int { return _depth; }
 		public function set depth(value:int):void { _depth = value; }

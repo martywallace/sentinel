@@ -1,10 +1,9 @@
 package sentinel.framework.graphics
 {
 	
-	import sentinel.framework.client.Viewport;
 	import sentinel.framework.BaseGame;
+	import sentinel.framework.client.Viewport;
 	import sentinel.framework.util.GraphicsUtil;
-	import starling.core.Starling;
 	import starling.text.TextField;
 	
 	
@@ -33,7 +32,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function get viewport():Viewport { return (Starling.current.root as BaseGame).viewport; }
+		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
 		
 		public function get depth():int { return _depth; }
 		public function set depth(value:int):void { _depth = value; }

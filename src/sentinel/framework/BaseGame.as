@@ -21,15 +21,18 @@ package sentinel.framework
 	public class BaseGame extends Sprite
 	{
 		
+		/**
+		 * Returns a reference to the core game class.
+		 */
+		public static function getInstance():BaseGame
+		{
+			return Starling.current.root as BaseGame;
+		}
+		
+		
 		private var _state:State;
 		private var _components:Object;
 		private var _nextId:uint = 1;
-		
-		
-		public function BaseGame()
-		{
-			super();
-		}
 		
 		
 		internal function __construct():void

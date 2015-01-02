@@ -19,6 +19,11 @@ package sentinel.gameplay.states
 		private var _ui:BaseUI;
 		
 		
+		/**
+		 * Constructor.
+		 * @param world The World to initialize the GameplayState with.
+		 * @param ui The UI to initialize the GameplayState with.
+		 */
 		public function GameplayState(world:BaseWorld, ui:BaseUI)
 		{
 			super();
@@ -43,7 +48,14 @@ package sentinel.gameplay.states
 		}
 		
 		
+		/**
+		 * The World used by this GameplayState.
+		 */
 		public function get world():BaseWorld { return _world; }
+		
+		/**
+		 * The UI used by this GameplayState.
+		 */
 		public function get ui():BaseUI { return _ui; }
 		
 	}

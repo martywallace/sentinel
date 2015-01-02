@@ -3,7 +3,6 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.client.Viewport;
-	import starling.core.Starling;
 	import starling.display.Quad;
 	
 	
@@ -26,9 +25,11 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function get viewport():Viewport { return (Starling.current.root as BaseGame).viewport; }
+		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
+		
 		public function get depth():int { return _depth; }
 		public function set depth(value:int):void { _depth = value; }
+		
 		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }		
 	}
 	

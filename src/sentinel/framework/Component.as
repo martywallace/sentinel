@@ -41,7 +41,7 @@ package sentinel.framework
 		/**
 		 * Returns the active Game instance.
 		 */
-		public function get game():BaseGame { return starling.root as BaseGame; }
+		public function get game():BaseGame { return BaseGame.getInstance(); }
 		
 		/**
 		 * Returns the name of this component. The component name must be unique across all
