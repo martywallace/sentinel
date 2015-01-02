@@ -22,7 +22,7 @@ package sentinel.framework
 	{
 		
 		private var _state:State;
-		private var _components:Object = { };
+		private var _components:Object;
 		private var _nextId:uint = 1;
 		
 		
@@ -34,6 +34,8 @@ package sentinel.framework
 		
 		internal function __construct():void
 		{
+			_components = { };
+			
 			// Define all required components.
 			var components:Vector.<Component> = new <Component>[
 				new Viewport(), new Library(),

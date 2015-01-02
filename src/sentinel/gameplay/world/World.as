@@ -32,6 +32,7 @@ package sentinel.gameplay.world
 		private var _ticks:uint = 0;
 		private var _unique:Data;
 		private var _groups:Data;
+		private var _services:Object;
 		private var _map:Map;
 		
 		
@@ -53,6 +54,25 @@ package sentinel.gameplay.world
 			
 			_unique = new Data();
 			_groups = new Data();
+			_services = { };
+			
+			for each(var service:WorldService in (defineServices() || new <WorldService>[]))
+			{
+				trace(service);
+				if (!_services.hasOwnProperty(service.name))
+				{
+					_services[service.name] = service;
+				}
+				else
+				{
+					throw new Error('WorldService named "' + service.name + '" already exists.');
+				}
+			}
+			
+			for (var serviceName:String in _services)
+			{
+				(_services[serviceName] as WorldService).__construct();
+			}
 			
 			_graphics.addChild(_content);
 		}
@@ -109,8 +129,23 @@ package sentinel.gameplay.world
 				if (_engine !== null) _engine.step();
 				if (_map !== null) _map.__update();
 				
+				for(var serviceName:String in _services)
+				{
+					// Update each WorldService item.
+					(_services[serviceName] as WorldService).__update();
+				}
+				
 				super.update();
 			}
+		}
+		
+		
+		/**
+		 * Returns a list of services to attach to this World.
+		 */
+		protected function defineServices():Vector.<WorldService>
+		{
+			return null;
 		}
 		
 		
@@ -256,6 +291,16 @@ package sentinel.gameplay.world
 		public function query(query:Query):Vector.<WorldQueryResult>
 		{
 			return query.__execute(this);
+		}
+		
+		
+		/**
+		 * Returns a WorldService with the specified name.
+		 * @param serviceName The name of the WorldService to find.
+		 */
+		protected function getService(serviceName:String):WorldService
+		{
+			return _services.prop(serviceName);
 		}
 		
 		
