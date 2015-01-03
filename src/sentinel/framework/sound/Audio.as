@@ -2,14 +2,14 @@ package sentinel.framework.sound
 {
 	
 	import flash.media.SoundTransform;
-	import sentinel.framework.Component;
+	import sentinel.framework.Service;
 	
 	
 	/**
 	 * The Audio class assists with playing audio in your game.
 	 * @author Marty Wallace.
 	 */
-	public class Audio extends Component
+	public class Audio extends Service
 	{
 		
 		private var _sfxTransform:SoundTransform;

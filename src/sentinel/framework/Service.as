@@ -4,6 +4,10 @@ package sentinel.framework
 	import sentinel.framework.events.EventDispatcher;
 	
 	
+	/**
+	 * Describes a service provided to an IServiceable.
+	 * @author Marty Wallace.
+	 */
 	public class Service extends EventDispatcher
 	{
 		

@@ -1,22 +1,21 @@
 package sentinel.gameplay.world
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
+	import sentinel.framework.IServiceable;
+	import sentinel.framework.Service;
 	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
-	import sentinel.framework.Data;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.BaseUI;
-	import sentinel.framework.IServiceable;
-	import sentinel.framework.Service;
 	
 	
 	/**

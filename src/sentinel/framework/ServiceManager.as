@@ -12,6 +12,10 @@ package sentinel.framework
 		private var _services:Object;
 		
 		
+		/**
+		 * Constructor.
+		 * @param serviceable The object to be serviced.
+		 */
 		public function ServiceManager(serviceable:IServiceable)
 		{
 			_serviceable = serviceable;
@@ -19,6 +23,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Deconstruct this ServiceManager and all of the Services it manages.
+		 */
 		public function deconstruct():void
 		{
 			for (var serviceName:String in _services)
@@ -31,6 +38,10 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Defines the list of services to use.
+		 * @param services The list of services.
+		 */
 		public function setServices(services:Vector.<Service>):void
 		{
 			for each(var service:Service in services)
@@ -60,6 +71,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Updates all of the Services managed by this.
+		 */
 		public function update():void
 		{
 			for (var serviceName:String in _services)
@@ -69,6 +83,10 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Gets a Service with the specified name.
+		 * @param name The name of the Service to search for.
+		 */
 		public function getService(name:String):Service
 		{
 			return _services.hasOwnProperty(name) ? _services[name] : null;

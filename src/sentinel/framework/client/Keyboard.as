@@ -2,7 +2,7 @@ package sentinel.framework.client
 {
 	
 	import flash.events.KeyboardEvent;
-	import sentinel.framework.Component;
+	import sentinel.framework.Service;
 	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.framework.util.ObjectUtil;
 	
@@ -25,7 +25,7 @@ package sentinel.framework.client
 	 * provides useful constants for ASCII values.
 	 * @author Marty Wallace.
 	 */
-	public class Keyboard extends Component
+	public class Keyboard extends Service
 	{
 		
 		public static const NUM_0:uint = 48;
@@ -116,8 +116,8 @@ package sentinel.framework.client
 		
 		protected override function construct():void
 		{ 
-			starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
-			starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
+			game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
+			game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
 		}
 		
 		

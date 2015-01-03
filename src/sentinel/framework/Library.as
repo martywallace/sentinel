@@ -12,7 +12,7 @@ package sentinel.framework
 	 * The Library manages game assets e.g. textures, sprite sheets and sound.
 	 * @author Marty Wallace.
 	 */
-	public class Library extends Component
+	public class Library extends Service
 	{
 		
 		private static const TEXTURES:String = 'textures';

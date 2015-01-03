@@ -18,7 +18,7 @@ package sentinel.framework
 	 * and the starting state.
 	 * @author Marty Wallace.
 	 */
-	public class BaseGame extends Sprite
+	public class BaseGame extends Sprite implements IServiceable
 	{
 		
 		/**
@@ -31,42 +31,18 @@ package sentinel.framework
 		
 		
 		private var _state:State;
-		private var _components:Object;
+		private var _services:ServiceManager;
 		private var _nextId:uint = 1;
 		
 		
 		internal function __construct():void
 		{
-			_components = { };
+			_services = new ServiceManager(this);
 			
-			// Define all required components.
-			var components:Vector.<Component> = new <Component>[
-				new Viewport(), new Library(),
-				new Mouse(), new Keyboard(),
-				new Audio(), new Storage()
-			];
-			
-			components.concat(defineComponents() || new <Component>[]);
-			
-			for each(var component:Component in components)
-			{
-				if (!_components.hasOwnProperty(component.name))
-				{
-					_components[component.name] = component;
-				}
-				else
-				{
-					// Cannot have two Components with the same name.
-					throw new Error('A Component named "' + component.name + '" already exists.');
-				}
-			}
-			
-			// Initialize components - this step is done in a later loop to ensure components that
-			// depend on the existence of other components function correctly.
-			for (var componentName:String in _components)
-			{
-				(_components[componentName] as Component).__construct();
-			}
+			// Define all required services.
+			_services.setServices((new <Service>[
+				new Viewport(), new Library(), new Mouse(), new Keyboard(), new Audio(), new Storage()
+			]).concat(defineServices() || new <Service>[]));
 			
 			// Initialize user game construction code.
 			construct();
@@ -115,15 +91,15 @@ package sentinel.framework
 		}
 		
 		
-		protected function defineComponents():Vector.<Component>
+		protected function defineServices():Vector.<Service>
 		{
 			return null;
 		}
 		
 		
-		protected function getComponent(name:String):Component
+		protected function getService(name:String):Service
 		{
-			return _components[name];
+			return _services.getService(name);
 		}
 		
 		
@@ -135,12 +111,12 @@ package sentinel.framework
 		
 		public function get starling():Starling { return Starling.current; }
 		public function get state():State { return _state; }
-		public function get keyboard():Keyboard{ return getComponent('keyboard') as Keyboard; }
-		public function get mouse():Mouse { return getComponent('mouse') as Mouse; }
-		public function get library():Library { return getComponent('library') as Library; }
-		public function get audio():Audio { return getComponent('audio') as Audio; }
-		public function get storage():Storage { return getComponent('storage') as Storage; }
-		public override function get viewport():Viewport { return getComponent('viewport') as Viewport; }
+		public function get keyboard():Keyboard{ return getService('keyboard') as Keyboard; }
+		public function get mouse():Mouse { return getService('mouse') as Mouse; }
+		public function get library():Library { return getService('library') as Library; }
+		public function get audio():Audio { return getService('audio') as Audio; }
+		public function get storage():Storage { return getService('storage') as Storage; }
+		public override function get viewport():Viewport { return getService('viewport') as Viewport; }
 		
 		
 		public function get identity():String { return null; }

@@ -2,7 +2,7 @@ package sentinel.framework.client
 {
 	
 	import flash.net.SharedObject;
-	import sentinel.framework.Component;
+	import sentinel.framework.Service;
 	import sentinel.framework.Data;
 	
 	
@@ -10,7 +10,7 @@ package sentinel.framework.client
 	 * Local storage via SharedObject.
 	 * @author Marty Wallace.
 	 */
-	public class Storage extends Component
+	public class Storage extends Service
 	{
 		
 		private var _block:uint = 1;
