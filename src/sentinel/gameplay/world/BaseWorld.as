@@ -64,6 +64,9 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Deconstruct this World and all the Beings within it.
+		 */
 		public override function deconstruct():void
 		{
 			if (_engine !== null)
@@ -156,9 +159,9 @@ package sentinel.gameplay.world
 				{
 					var unique:IUnique = being as IUnique;
 					
-					if (!_unique.hasOwnProperty(unique.uniqueName))
+					if (!_unique.has(unique.uniqueName))
 					{
-						_unique[unique.uniqueName] = being;
+						_unique.set(unique.uniqueName, being);
 					}
 					else
 					{
@@ -171,15 +174,15 @@ package sentinel.gameplay.world
 				{
 					var groupable:IGroupable = being as IGroupable;
 					
-					if (!_groups.hasOwnProperty(groupable.groupName))
+					if (!_groups.has(groupable.groupName))
 					{
 						// Create the group.
-						_groups[groupable.groupName] = { };
+						_groups.set(groupable.groupName, { });
 					}
 					
-					if (!_groups[groupable.groupName].hasOwnProperty(groupable.nameInGroup))
+					if (!_groups.get(groupable.groupName).hasOwnProperty(groupable.nameInGroup))
 					{
-						_groups[groupable.groupName][groupable.nameInGroup] = being;
+						_groups.get(groupable.groupName)[groupable.nameInGroup] = being;
 					}
 					else
 					{
@@ -204,7 +207,7 @@ package sentinel.gameplay.world
 			{
 				if (being is IUnique)
 				{
-					delete _unique[(being as IUnique).uniqueName];
+					_unique.del((being as IUnique).uniqueName);
 				}
 				
 				if (being is IGroupable)
@@ -213,7 +216,7 @@ package sentinel.gameplay.world
 					
 					if (_groups.hasOwnProperty(groupable.groupName))
 					{
-						delete _groups[groupable.groupName][groupable.nameInGroup];
+						delete _groups.get(groupable.groupName)[groupable.nameInGroup];
 					}
 				}
 			}
@@ -228,7 +231,7 @@ package sentinel.gameplay.world
 		 */
 		public function getUnique(uniqueName:String):Being
 		{
-			return _unique.prop(uniqueName);
+			return _unique.get(uniqueName);
 		}
 		
 		
@@ -240,7 +243,7 @@ package sentinel.gameplay.world
 		{
 			var result:Vector.<Being> = new <Being>[];
 			
-			for (var nameInGroup:String in _groups.prop(groupName, { }))
+			for (var nameInGroup:String in _groups.get(groupName, { }))
 			{
 				result.push(_groups[groupName][nameInGroup]);
 			}
@@ -256,9 +259,9 @@ package sentinel.gameplay.world
 		 */
 		public function getFromGroup(groupName:String, nameInGroup:String):Being
 		{
-			if (_groups.prop(groupName) !== null && _groups.prop(groupName).hasOwnProperty(nameInGroup))
+			if (_groups.get(groupName) !== null && _groups.get(groupName).hasOwnProperty(nameInGroup))
 			{
-				return _groups.prop(groupName)[nameInGroup];
+				return _groups.get(groupName)[nameInGroup];
 			}
 			
 			return null;

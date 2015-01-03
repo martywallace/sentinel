@@ -85,7 +85,7 @@ package sentinel.gameplay.world
 		
 		public override function load(data:Data):void
 		{
-			for each(var def:Object in data.prop('beings', []))
+			for each(var def:Object in data.get('beings', []))
 			{
 				if (def.hasOwnProperty('type'))
 				{

@@ -179,9 +179,9 @@ package sentinel.gameplay.world
 		 */
 		public override function load(data:Data):void
 		{
-			x = data.prop('x');
-			y = data.prop('y');
-			rotation = data.prop('rotation', 0);
+			x = data.get('x');
+			y = data.get('y');
+			rotation = data.get('rotation', 0);
 		}
 		
 		

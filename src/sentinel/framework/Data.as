@@ -2,15 +2,13 @@ package sentinel.framework
 {
 	
 	import sentinel.framework.util.ObjectUtil;
-	import flash.utils.Proxy;
-	import flash.utils.flash_proxy;
 	
 	
 	/**
 	 * Arbitrary data wrapped in helper methods.
 	 * @author Marty Wallace.
 	 */
-	public final dynamic class Data extends Proxy
+	public class Data
 	{
 		
 		/**
@@ -24,7 +22,6 @@ package sentinel.framework
 		
 		
 		private var _internal:Object;
-		private var _fields:Array;
 		
 		
 		/**
@@ -33,7 +30,7 @@ package sentinel.framework
 		 */
 		public function Data(object:Object = null)
 		{
-			_internal = object === null ? {} : object;
+			_internal = object === null ? { } : object;
 		}
 		
 		
@@ -48,77 +45,44 @@ package sentinel.framework
 		
 		
 		/**
-		 * Attempt to get the value of a property stored in this Data set.
-		 * @param name The property name.
-		 * @param fallback A fallback value to use if the property does not exist.
+		 * Returns true if the field is defined on this object.
+		 * @param field The field to check for.
 		 */
-		public function prop(name:String, fallback:* = null):*
+		public function has(field:String):Boolean
 		{
-			return ObjectUtil.prop(_internal, name, fallback);
+			return _internal.hasOwnProperty(field);
 		}
 		
 		
-		flash_proxy override function getProperty(name:*):*
+		/**
+		 * Get a value.
+		 * @param field The name of the field to get the value of.
+		 * @param fallback Fallback value to use if the field is undefined.
+		 */
+		public function get(field:String, fallback:* = null):*
 		{
-			return prop(name);
+			return has(field) ? _internal[field] : fallback; 
 		}
 		
 		
-		flash_proxy override function setProperty(name:*, value:*):void
+		/**
+		 * Set a value.
+		 * @param field The field to set the value of.
+		 * @param value The value to assign to the target field.
+		 */
+		public function set(field:String, value:*):void
 		{
-			_internal[name] = value;
+			_internal[field] = value;
 		}
 		
 		
-		flash_proxy override function hasProperty(name:*):Boolean
+		/**
+		 * Delete a field.
+		 * @param field The field to delete.
+		 */
+		public function del(field:String):void
 		{
-			return _internal.hasOwnProperty(name);
-		}
-		
-		
-		flash_proxy override function nextNameIndex(index:int):int
-		{
-			if (index === 0)
-			{
-				_fields = [];
-				for (var field:String in _internal)
-				{
-					_fields.push(field);
-				}
-			}
-			
-			if (index < _fields.length + 1)
-			{
-				return index + 1;
-			}
-			else
-			{
-				return 0;
-			}
-		}
-		
-		
-		flash_proxy override function nextName(index:int):String
-		{
-			return _fields[index - 1];
-		}
-		
-		
-		flash_proxy override function nextValue(index:int):*
-		{
-			return _internal[_fields[index - 1]];
-		}
-		
-		
-		flash_proxy override function deleteProperty(name:*):Boolean
-		{
-			if (_internal.hasOwnProperty(name))
-			{
-				delete _internal[name];
-				return true;
-			}
-			
-			return false;
+			delete _internal[field];
 		}
 		
 		

@@ -80,7 +80,7 @@ package sentinel.gameplay.world
 				// Query by type of Being.
 				for each(being in world.__children)
 				{
-					if (being is IQueryable && being is _options.type)
+					if (being is IQueryable && being is _options.get('type'))
 					{
 						result.push(new WorldQueryResult(this, being));
 					}
@@ -94,9 +94,9 @@ package sentinel.gameplay.world
 				
 				switch(_type)
 				{
-					case POINT: engineQueryResults = world.engine.queryPoint(_options.point); break;
-					case LINE: engineQueryResults = world.engine.queryLine(_options.start, _options.end); break;
-					case SHAPE: engineQueryResults = world.engine.queryShape(_options.shape, _options.position); break;
+					case POINT: engineQueryResults = world.engine.queryPoint(_options.get('point')); break;
+					case LINE: engineQueryResults = world.engine.queryLine(_options.get('start'), _options.get('end')); break;
+					case SHAPE: engineQueryResults = world.engine.queryShape(_options.get('shape'), _options.get('position')); break;
 				}
 				
 				for each(var eqr:EngineQueryResult in engineQueryResults)
@@ -109,10 +109,10 @@ package sentinel.gameplay.world
 					}
 				}
 				
-				if (_type === LINE && _options.limit > 0)
+				if (_type === LINE && _options.get('limit') > 0)
 				{
 					// Line query can be limited to first N results.
-					result = result.slice(0, _options.limit);
+					result = result.slice(0, _options.get('limit'));
 				}
 			}
 			
