@@ -5,6 +5,7 @@ package sentinel.gameplay.world
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
+	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
 	import sentinel.framework.Data;
 	import sentinel.framework.util.ObjectUtil;
@@ -14,6 +15,8 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.EngineDef;
 	import sentinel.gameplay.states.GameplayState;
 	import sentinel.gameplay.ui.BaseUI;
+	import sentinel.framework.IServiceable;
+	import sentinel.framework.Service;
 	
 	
 	/**
@@ -21,7 +24,7 @@ package sentinel.gameplay.world
 	 * between those Beings. The World also deals with initializing a physics engine, if required.
 	 * @author Marty Wallace.
 	 */
-	public class BaseWorld extends Thing implements IMouseDataProvider
+	public class BaseWorld extends Thing implements IMouseDataProvider, IServiceable
 	{
 		
 		private var _engine:Engine;
@@ -32,7 +35,7 @@ package sentinel.gameplay.world
 		private var _ticks:uint = 0;
 		private var _unique:Data;
 		private var _groups:Data;
-		private var _services:Object;
+		private var _services:ServiceManager;
 		private var _map:BaseMap;
 		
 		
@@ -54,31 +57,9 @@ package sentinel.gameplay.world
 			
 			_unique = new Data();
 			_groups = new Data();
-			_services = { };
 			
-			for each(var service:WorldService in (defineServices() || new <WorldService>[]))
-			{
-				if (service.name !== null)
-				{
-					if (!_services.hasOwnProperty(service.name))
-					{
-						_services[service.name] = service;
-					}
-					else
-					{
-						throw new Error('WorldService named "' + service.name + '" already exists.');
-					}
-				}
-				else
-				{
-					throw new Error("WorldService must define a name.");
-				}
-			}
-			
-			for (var serviceName:String in _services)
-			{
-				(_services[serviceName] as WorldService).__construct(this);
-			}
+			_services = new ServiceManager(this);
+			_services.setServices(Vector.<Service>(defineServices()));
 			
 			_graphics.addChild(_content);
 		}
@@ -92,6 +73,7 @@ package sentinel.gameplay.world
 			}
 			
 			_graphics.deconstruct();
+			_services.deconstruct();
 			
 			super.deconstruct();
 		}
@@ -135,11 +117,7 @@ package sentinel.gameplay.world
 				if (_engine !== null) _engine.step();
 				if (_map !== null) _map.__update();
 				
-				for(var serviceName:String in _services)
-				{
-					// Update each WorldService item.
-					(_services[serviceName] as WorldService).__update();
-				}
+				_services.update();
 				
 				super.update();
 			}
@@ -302,11 +280,11 @@ package sentinel.gameplay.world
 		
 		/**
 		 * Returns a WorldService with the specified name.
-		 * @param serviceName The name of the WorldService to find.
+		 * @param name The name of the WorldService to find.
 		 */
-		protected function getService(serviceName:String):WorldService
+		protected function getService(name:String):WorldService
 		{
-			return _services[serviceName];
+			return _services.getService(name) as WorldService;
 		}
 		
 		
