@@ -14,6 +14,13 @@ package sentinel.gameplay
 	{
 		
 		/**
+		 * Simultaneously update the x and y values of this object's position.
+		 * @param x The new x value.
+		 * @param y The new y value.
+		 */
+		function moveTo(x:Number, y:Number):void;
+		
+		/**
 		 * The x position of this object.
 		 */
 		function get x():Number;
@@ -37,6 +44,7 @@ package sentinel.gameplay
 		 * use the x and y properties of the <code>IPositionProvider</code> instead.
 		 */
 		function get position():Vector2D;
+		function set position(value:Vector2D):void;
 		
 	}
 	

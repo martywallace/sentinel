@@ -1,7 +1,7 @@
 package sentinel.framework.util
 {
 	
-	import flash.geom.Point;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -33,15 +33,15 @@ package sentinel.framework.util
 		
 		
 		/**
-		 * Returns a Point whose x and y values are randomly assigned within a rectangular area.
+		 * Returns a Vector2D whose x and y values are randomly assigned within a rectangular area.
 		 * @param x X coordinate.
 		 * @param y Y coordinate.
 		 * @param width Rectangle width.
 		 * @param height Rectangle height.
 		 */
-		public static function inRectangle(x:int, y:int, width:int, height:int):Point
+		public static function inRectangle(x:int, y:int, width:int, height:int):Vector2D
 		{
-			return new Point(
+			return new Vector2D(
 				between(x, width),
 				between(y, height)
 			);
@@ -49,16 +49,16 @@ package sentinel.framework.util
 		
 		
 		/**
-		 * Returns a Point whose x and y values are randomly assigned within a circular area.
+		 * Returns a Vector2D whose x and y values are randomly assigned within a circular area.
 		 * @param x Center x position of the circle.
 		 * @param y Center y position of the circle.
 		 * @param radius Circle radius.
 		 */
-		public static function inCircle(x:int, y:int, radius:Number):Point
+		public static function inCircle(x:int, y:int, radius:Number):Vector2D
 		{
 			var ang:Number = getAngle();
 			
-			return new Point(
+			return new Vector2D(
 				x + Math.cos(ang) * radius,
 				y + Math.sin(ang) * radius
 			);
@@ -66,17 +66,17 @@ package sentinel.framework.util
 		
 		
 		/**
-		 * Returns a Point whose x and y values are randomly assigned within a ring.
+		 * Returns a Vector2D whose x and y values are randomly assigned within a ring.
 		 * @param x Center x position of the ring.
 		 * @param y Center y position of the ring.
 		 * @param innerRadius The inner ring radius.
 		 * @param outerRadius The outer ring radius.
 		 */
-		public static function inRing(x:int, y:int, innerRadius:Number, outerRadius:Number):Point
+		public static function inRing(x:int, y:int, innerRadius:Number, outerRadius:Number):Vector2D
 		{
 			var ang:Number = getAngle();
 			
-			return new Point(
+			return new Vector2D(
 				x + Math.cos(ang) * between(innerRadius, outerRadius),
 				y + Math.sin(ang) * between(innerRadius, outerRadius)
 			);

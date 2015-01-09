@@ -346,6 +346,11 @@ package sentinel.gameplay.world
 			return _position;
 		}
 		
+		public function set position(value:Vector2D):void
+		{
+			moveTo(value.x, value.y);
+		}
+		
 		/**
 		 * Get or set the x position of this Being.
 		 * This is an alias for <code>position.x</code> and <code>moveTo(value, y)</code>.

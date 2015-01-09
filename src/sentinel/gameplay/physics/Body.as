@@ -217,6 +217,11 @@ package sentinel.gameplay.physics
 			return _position;
 		}
 		
+		public function set position(value:Vector2D):void
+		{
+			moveTo(value.x, value.y);
+		}
+		
 		
 		public function get atZero():Boolean{ return _position.x === 0 && _position.y === 0 && rotation === 0; }
 		

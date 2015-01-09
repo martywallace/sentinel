@@ -36,7 +36,7 @@ package sentinel.gameplay.world
 		{
 			if (being !== null)
 			{
-				_set(being.position.x, being.position.y, rotation, zoom);
+				position = being.position;
 			}
 			else
 			{
@@ -50,6 +50,12 @@ package sentinel.gameplay.world
 		public function reset():void
 		{
 			_set(0, 0, 0, 1);
+		}
+		
+		
+		public function moveTo(x:Number, y:Number):void
+		{
+			_set(x, y, rotation, zoom);
 		}
 		
 		
@@ -91,6 +97,11 @@ package sentinel.gameplay.world
 			_position.y = y;
 			
 			return _position;
+		}
+		
+		public function set position(value:Vector2D):void
+		{
+			moveTo(value.x, value.y);
 		}
 		
 		public function get rotation():Number { return -_world.graphics.rotation; }

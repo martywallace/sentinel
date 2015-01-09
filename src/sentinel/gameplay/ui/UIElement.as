@@ -113,6 +113,11 @@ package sentinel.gameplay.ui
 			return _position;
 		}
 		
+		public function set position(value:Vector2D):void
+		{
+			moveTo(value.x, value.y);
+		}
+		
 		public function get x():Number{ return position.x; }
 		public function set x(value:Number):void{ moveTo(value, position.y); }
 		
