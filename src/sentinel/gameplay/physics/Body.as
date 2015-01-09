@@ -6,10 +6,15 @@ package sentinel.gameplay.physics
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import sentinel.framework.events.EventDispatcher;
-	import sentinel.framework.Thing;
+	import sentinel.gameplay.IPositionProvider;
+	import sentinel.gameplay.world.Being;
 	
 	
-	public class Body extends EventDispatcher
+	/**
+	 * Represents a physics body, typically attached to a Being.
+	 * @author Marty Wallace.
+	 */
+	public class Body extends EventDispatcher implements IPositionProvider
 	{
 		
 		public static const STATIC:int = b2Body.b2_staticBody;
@@ -27,7 +32,14 @@ package sentinel.gameplay.physics
 		private var _internalForce:Vector2D;
 		
 		
-		public function Body(engine:Engine, body:b2Body, def:b2BodyDef, owner:Thing)
+		/**
+		 * Constructor - internal usage only - do not call this method directly.
+		 * @param engine The Engine creating this Body.
+		 * @param body The internal b2Body.
+		 * @param def The internal b2BodyDef.
+		 * @param owner The Being that owns this Body.
+		 */
+		public function Body(engine:Engine, body:b2Body, def:b2BodyDef, owner:Being)
 		{
 			_base = body;
 			_def = def;
@@ -123,7 +135,7 @@ package sentinel.gameplay.physics
 		internal function get __base():b2Body { return _base; }
 		
 		public function get engine():Engine { return _engine; }
-		public function get owner():Thing{ return _data.owner }
+		public function get owner():Being{ return _data.owner }
 		public function get fixtures():Vector.<Fixture> { return _fixtures; }
 		public function get totalFixtures():int { return _fixtures.length; }
 		
@@ -184,6 +196,13 @@ package sentinel.gameplay.physics
 			_base.SetLinearVelocity(_linearVelocity.__base);
 			_base.SetAwake(true);
 		}
+		
+		
+		public function get x():Number { return _position.x; }
+		public function set x(value:Number):void { _position.x = value; }
+		
+		public function get y():Number { return _position.y; }
+		public function set y(value:Number):void { _position.y = value; }
 		
 		
 		/**

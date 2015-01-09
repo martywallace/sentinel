@@ -1,7 +1,7 @@
 package sentinel.gameplay.physics
 {
 	
-	import sentinel.framework.Thing;
+	import sentinel.gameplay.world.Being;
 	
 	
 	/**
@@ -12,10 +12,10 @@ package sentinel.gameplay.physics
 	{
 		
 		private var _body:Body;
-		private var _owner:Thing;
+		private var _owner:Being;
 		
 		
-		public function BodyData(body:Body, owner:Thing)
+		public function BodyData(body:Body, owner:Being)
 		{
 			_body = body;
 			_owner = owner;
@@ -23,7 +23,7 @@ package sentinel.gameplay.physics
 		
 		
 		public function get body():Body { return _body; }
-		public function get owner():Thing { return _owner; }
+		public function get owner():Being { return _owner; }
 		
 	}
 	

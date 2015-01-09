@@ -11,10 +11,11 @@ package sentinel.gameplay.physics
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.framework.Thing;
+	import sentinel.gameplay.world.Being;
 	
 	
 	/**
-	 * Wrapper for Box2D.Dynamics.b2World.
+	 * The physics engine core.
 	 * @author Marty Wallace.
 	 */
 	public class Engine extends EventDispatcher
@@ -81,12 +82,11 @@ package sentinel.gameplay.physics
 		
 		
 		/**
-		 * Creates a new B2Body within this world.
-		 * @param type The body type. Defaults to B2Body.DYNAMIC.
-		 * @param owner An optional owner of the B2Body.
-		 * @return The new B2Body.
+		 * Creates a new Body within this physics engine.
+		 * @param type The body type.
+		 * @param owner The owner of the resulting Body.
 		 */
-		public function createBody(type:int = 2, owner:Thing = null):Body
+		public function createBody(type:int, owner:Being):Body
 		{
 			var def:b2BodyDef = new b2BodyDef();
 			def.type = type;
@@ -254,12 +254,32 @@ package sentinel.gameplay.physics
 		}
 		
 		
-		internal function get __base():b2World{ return _base; }
+		internal function get __base():b2World { return _base; }
 		
-		public function get sleeps():Boolean{ return _def.sleep; }
+		
+		/**
+		 * Whether or not the engine puts bodies to sleep.
+		 */
+		public function get sleeps():Boolean { return _def.sleep; }
+		
+		/**
+		 * The gravity applies to bodies within the engine.
+		 */
 		public function get gravity():Vector2D { return _def.gravity; }
+		
+		/**
+		 * The Debug instance used by this engine, if any.
+		 */
 		public function get debug():Debug { return _debug; }
+		
+		/**
+		 * Whether or not this engine is in debug mode.
+		 */
 		public function get debugging():Boolean { return _debug !== null; }
+		
+		/**
+		 * The total number of bodies being managed by this engine.
+		 */
 		public function get totalBodies():int { return _base.GetBodyCount(); }
 		
 	}
