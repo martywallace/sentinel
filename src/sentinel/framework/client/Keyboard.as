@@ -9,13 +9,13 @@ package sentinel.framework.client
 	
 	/**
 	 * Dispatched when a key has been pressed on the Keyboard.
-	 * @eventType sentinel.events.KeyboardEvent.KEY_PRESSED
+	 * @eventType sentinel.framework.events.KeyboardEvent.KEY_PRESSED
 	 */
 	[Event(name='keyPressed', type='sentinel.events.KeyboardEvent')]
 	
 	/**
 	 * Dispatched when a key has been released on the Keyboard.
-	 * @eventType sentinel.events.KeyboardEvent.KEY_RELEASED
+	 * @eventType sentinel.framework.events.KeyboardEvent.KEY_RELEASED
 	 */
 	[Event(name='keyReleased', type='sentinel.events.KeyboardEvent')]
 	

@@ -35,6 +35,12 @@ package sentinel.framework.graphics
 		}
 		
 		
+		public function addTo(container:IGraphicsContainer):void
+		{
+			container.addChild(this as DisplayObject);
+		}
+		
+		
 		public function sortChildrenByDepth():void
 		{
 			sortChildren(GraphicsUtil.sortCompareFunction);

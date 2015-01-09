@@ -5,6 +5,7 @@ package sentinel.framework.graphics
 	import sentinel.framework.client.Viewport;
 	import sentinel.framework.util.GraphicsUtil;
 	import starling.text.TextField;
+	import starling.display.DisplayObject;
 	
 	
 	public class TextField extends starling.text.TextField implements IGraphicsContainer
@@ -23,6 +24,12 @@ package sentinel.framework.graphics
 		{
 			removeFromParent();
 			dispose();
+		}
+		
+		
+		public function addTo(container:IGraphicsContainer):void
+		{
+			container.addChild(this as DisplayObject);
 		}
 		
 		

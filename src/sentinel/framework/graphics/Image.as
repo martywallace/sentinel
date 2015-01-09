@@ -3,6 +3,7 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.client.Viewport;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.textures.Texture;
 	
@@ -23,6 +24,12 @@ package sentinel.framework.graphics
 		{
 			removeFromParent();
 			dispose();
+		}
+		
+		
+		public function addTo(container:IGraphicsContainer):void
+		{
+			container.addChild(this as DisplayObject);
 		}
 		
 		

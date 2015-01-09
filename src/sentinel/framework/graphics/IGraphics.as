@@ -16,6 +16,8 @@ package sentinel.framework.graphics
 		function removeFromParent(dispose:Boolean = false):void;
 		function removeEventListeners(type:String = null):void;
 		
+		function addTo(container:IGraphicsContainer):void;
+		
 		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
 		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
 		
