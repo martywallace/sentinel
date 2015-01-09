@@ -9,10 +9,13 @@ package
 	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
-	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.world.Being;
+	import sentinel.gameplay.world.IQueryable;
+	import sentinel.gameplay.world.WorldQueryResult;
+	import sentinel.gameplay.world.Query;
 	
 	
-	public class Bot extends Being
+	public class Bot extends Being implements IQueryable
 	{
 		
 		private var _team:Team;
@@ -78,9 +81,9 @@ package
 			var closest:Bot = null;
 			var closestValue:Number = Number.MAX_VALUE;
 			
-			for each(var being:Being in world.getBeingsByType(Bot))
+			for each(var result:WorldQueryResult in world.query(Query.type(Bot)))
 			{
-				var bot:Bot = being as Bot;
+				var bot:Bot = result.being as Bot;
 				
 				if (bot.team !== team)
 				{

@@ -9,7 +9,7 @@ package
 	import sentinel.gameplay.physics.Fixture;
 	import sentinel.gameplay.physics.FixtureDef;
 	import sentinel.gameplay.physics.Vector2D;
-	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.world.Being;
 	
 	
 	public class Bullet extends Being

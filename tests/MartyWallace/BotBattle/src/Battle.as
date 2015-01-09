@@ -4,8 +4,8 @@ package
 	import flash.geom.Point;
 	import sentinel.framework.util.Random;
 	import sentinel.gameplay.physics.EngineDef;
-	import sentinel.gameplay.scene.World;
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.world.BaseWorld;
+	import sentinel.gameplay.ui.BaseUI;
 	import sentinel.testing.states.TestGameplay;
 	
 	
@@ -14,7 +14,7 @@ package
 		
 		public function Battle()
 		{
-			super(new World(new EngineDef()), new UI());
+			super(new BaseWorld(new EngineDef()), new BaseUI());
 			
 			var teams:int = 4;
 			var bots:int = 12;
