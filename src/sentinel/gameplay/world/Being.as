@@ -16,7 +16,9 @@ package sentinel.gameplay.world
 	/**
 	 * A Being is an object that lives in a World. It can define graphics and a physics body. It
 	 * should be used as the base class for all of your gameplay objects within a World like trees,
-	 * enemies, loot, projectiles, the main hero, etc.
+	 * enemies, loot, projectiles, the main hero, etc. Because a Being is used to describe any
+	 * element that could appear within a World, it can be also used to represent less obvious items
+	 * like health bars and text that is attached to certain positions within the World.
 	 * @author Marty Wallace.
 	 */
 	public class Being extends Thing implements IPositionProvider
@@ -27,7 +29,7 @@ package sentinel.gameplay.world
 		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
 		 * 
-		 * @csharp Change to something more useful like public T Create(...) where T is new, Being.
+		 * @csharp Change to something more useful like public T Create(...) where T : new(), Being.
 		 */
 		public static function create(type:String, save:Data = null):Being
 		{

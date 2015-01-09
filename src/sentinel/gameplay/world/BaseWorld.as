@@ -284,9 +284,9 @@ package sentinel.gameplay.world
 		 * Returns a WorldService with the specified name.
 		 * @param name The name of the WorldService to find.
 		 */
-		protected function getService(name:String):WorldService
+		public function getService(name:String):Service
 		{
-			return _services.getService(name) as WorldService;
+			return _services.getService(name);
 		}
 		
 		

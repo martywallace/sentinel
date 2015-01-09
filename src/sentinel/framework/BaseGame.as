@@ -97,7 +97,7 @@ package sentinel.framework
 		}
 		
 		
-		protected function getService(name:String):Service
+		public function getService(name:String):Service
 		{
 			return _services.getService(name);
 		}

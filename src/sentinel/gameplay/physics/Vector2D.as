@@ -12,6 +12,8 @@ package sentinel.gameplay.physics
 	/**
 	 * A Vector in 2D space.
 	 * @author Marty Wallace.
+	 * 
+	 * @csharp I'll be glad to not have to mess around with Vector2D -> Point -> Vector2D conversions.
 	 */
 	public class Vector2D implements IStorable
 	{
