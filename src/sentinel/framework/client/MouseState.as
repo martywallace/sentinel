@@ -1,8 +1,8 @@
 package sentinel.framework.client
 {
 	
-	import flash.geom.Point;
 	import sentinel.framework.util.StringUtil;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -12,13 +12,13 @@ package sentinel.framework.client
 	public class MouseState
 	{
 		
-		private var _position:Point;
+		private var _position:Vector2D;
 		private var _left:Boolean;
 		private var _right:Boolean;
 		private var _available:Boolean;
 		
 		
-		public function MouseState(position:Point, left:Boolean, right:Boolean, available:Boolean)
+		public function MouseState(position:Vector2D, left:Boolean, right:Boolean, available:Boolean)
 		{
 			_position = position;
 			_left = left;
@@ -40,7 +40,7 @@ package sentinel.framework.client
 		/**
 		 * The position of the mouse pointer relative to the viewport.
 		 */
-		public function get viewportPosition():Point{ return _position; }
+		public function get viewportPosition():Vector2D{ return _position; }
 		
 		/**
 		 * Whether or not the left mouse button is held down.

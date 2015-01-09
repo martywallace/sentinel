@@ -3,7 +3,6 @@ package sentinel.framework.client
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Point;
 	import sentinel.framework.events.MouseEvent;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Service;
@@ -45,12 +44,12 @@ package sentinel.framework.client
 		private var _left:Boolean = false;
 		private var _right:Boolean = false;
 		private var _available:Boolean = false;
-		private var _viewportPosition:Point;
+		private var _viewportPosition:Vector2D;
 		
 		
 		protected override function construct():void
 		{
-			_viewportPosition = new Point();
+			_viewportPosition = new Vector2D();
 			
 			game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, _mouseEventHandler);
 			game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_UP, _mouseEventHandler);
@@ -97,31 +96,30 @@ package sentinel.framework.client
 		 * Returns the current state of the mouse buttons as a <code>MouseState</code> object.
 		 */
 		public function getState():MouseState
-		{
-			var viewportPosition:Point = new Point(game.starling.nativeStage.mouseX, game.starling.nativeStage.mouseY);
-			
-			return new MouseState(viewportPosition, _left, _right, _available);
+		{	
+			return new MouseState(_viewportPosition.clone(), _left, _right, _available);
 		}
 		
 		
 		/**
-		 * TODO: Using Vector2D within the framework package. Needs to be generalised.
 		 * Returns the position of the mouse within a given <code>IMouseDataProvider</code>.
 		 * @param target The mouse data provider to get the mouse position within.
 		 */
 		public function getPositionIn(target:IMouseDataProvider):Vector2D
 		{
-			return Vector2D.fromPoint(target.mouseContainer.globalToLocal(viewportPosition));
+			return Vector2D.fromPoint(target.mouseContainer.globalToLocal(viewportPosition.toPoint()));
 		}
 		
 		
 		/**
 		 * Returns the current position of the mouse relative to the game viewport.
 		 */
-		public function get viewportPosition():Point
+		public function get viewportPosition():Vector2D
 		{
-			_viewportPosition.x = game.starling.nativeStage.mouseX;
-			_viewportPosition.y = game.starling.nativeStage.mouseY;
+			_viewportPosition.set(
+				game.starling.nativeStage.mouseX,
+				game.starling.nativeStage.mouseY
+			);
 			
 			return _viewportPosition;
 		}
