@@ -1,19 +1,20 @@
 package scene
 {
 	
+	import sentinel.framework.Data;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.Image;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.framework.util.Random;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
-	import sentinel.gameplay.scene.Being;
+	import sentinel.gameplay.world.Being;
+	import sentinel.gameplay.world.IQueryable;
 	import starling.events.TouchEvent;
 	
 	
-	public class Block extends Being
+	public class Block extends Being implements IQueryable
 	{
 		
 		private var _size:int = 10;
@@ -27,17 +28,17 @@ package scene
 		}
 		
 		
-		public override function save():Object
+		public override function save():Data
 		{
-			return ObjectUtil.merge(super.save(), { size: _size });
+			return super.save().merge({ size: _size });
 		}
 		
 		
-		public override function load(data:Object):void
+		public override function load(data:Data):void
 		{
 			super.load(data);
 			
-			_size = ObjectUtil.prop(data, 'size', _size);
+			_size = data.get('size', _size);
 		}
 		
 		

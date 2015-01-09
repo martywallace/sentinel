@@ -60,10 +60,10 @@ package sentinel.gameplay.world
 		{
 			super.load(data);
 			
-			_name = data.prop('name');
+			_name = data.get('name');
 			_verticies = new <Vector2D>[];
 
-			for each(var vertex:Object in data.prop('verticies', []))
+			for each(var vertex:Object in data.get('verticies', []))
 			{
 				_verticies.push(new Vector2D(vertex.x, vertex.y));
 			}

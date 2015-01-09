@@ -23,15 +23,15 @@ package sentinel.framework.client
 		}
 		
 		
-		public function save(field:String, data:*):void
+		public function save(field:String, data:Data):void
 		{
-			_data.set(field, data);
+			_data.set(field, data.raw);
 		}
 		
 		
-		public function load(field:String, fallback:* = null):*
+		public function load(field:String, fallback:* = null):Data
 		{
-			return _data.get(field, fallback);
+			return Data.create(_data.get(field, fallback));
 		}
 		
 		

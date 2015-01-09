@@ -5,7 +5,7 @@ package states
 	import scene.SampleMap;
 	import ui.HUD;
 	import sentinel.gameplay.events.WorldEvent;
-	import sentinel.gameplay.scene.Map;
+	import sentinel.gameplay.world.BaseMap;
 	import sentinel.testing.states.TestGameplay;
 	
 	
@@ -13,7 +13,7 @@ package states
 	{
 		
 		private var _cooldown:int = 0;
-		private var _map:Map;
+		private var _map:BaseMap;
 		
 		
 		public function Gameplay()

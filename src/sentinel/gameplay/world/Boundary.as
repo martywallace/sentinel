@@ -53,12 +53,12 @@ package sentinel.gameplay.world
 			
 			var verticies:Vector.<Vector2D> = new <Vector2D>[];
 			
-			for each(var vertex:Object in data.prop('verticies', []))
+			for each(var vertex:Object in data.get('verticies', []))
 			{
 				verticies.push(new Vector2D(vertex.x, vertex.y));
 			}
 			
-			_set(verticies, data.prop('friction', 0.2), data.prop('restitution', 0));
+			_set(verticies, data.get('friction', 0.2), data.get('restitution', 0));
 		}
 		
 		

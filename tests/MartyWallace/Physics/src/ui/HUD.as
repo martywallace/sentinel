@@ -1,10 +1,10 @@
 package ui
 {
 	
-	import sentinel.gameplay.ui.UI;
+	import sentinel.gameplay.ui.BaseUI;
 	
 	
-	public class HUD extends UI
+	public class HUD extends BaseUI
 	{	
 		
 		public function HUD()

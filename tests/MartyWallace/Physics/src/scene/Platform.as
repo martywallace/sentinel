@@ -8,8 +8,8 @@ package scene
 	import sentinel.gameplay.physics.Box;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.FixtureDef;
-	import sentinel.gameplay.scene.Being;
-	import sentinel.gameplay.scene.IUnique;
+	import sentinel.gameplay.world.Being;
+	import sentinel.gameplay.world.IUnique;
 	
 	
 	public class Platform extends Being implements IUnique

@@ -53,8 +53,8 @@ package sentinel.gameplay.physics
 		
 		public function load(data:Data):void
 		{
-			x = data.prop('x', 0);
-			y = data.prop('y', 0);
+			x = data.get('x', 0);
+			y = data.get('y', 0);
 		}
 		
 		

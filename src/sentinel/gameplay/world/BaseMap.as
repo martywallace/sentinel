@@ -74,7 +74,7 @@ package sentinel.gameplay.world
 						// Only save objects who return actual data for save(). This provides the
 						// opportunity to return null from save() on Beings that shouldn't be added
 						// to the save data e.g. particles, effects, bullets, etc.
-						beings.push(data);
+						beings.push(data.raw);
 					}
 				}
 			}

@@ -21,7 +21,7 @@ package sentinel.framework
 		}
 		
 		
-		private var _internal:Object;
+		private var _raw:Object;
 		
 		
 		/**
@@ -30,7 +30,7 @@ package sentinel.framework
 		 */
 		public function Data(object:Object = null)
 		{
-			_internal = object === null ? { } : object;
+			_raw = object === null ? { } : object;
 		}
 		
 		
@@ -40,7 +40,7 @@ package sentinel.framework
 		 */
 		public function merge(data:Object):Data
 		{
-			return create(ObjectUtil.merge(_internal, data is Data ? data.__inernal : data));
+			return create(ObjectUtil.merge(_raw, data is Data ? data.raw : data));
 		}
 		
 		
@@ -50,7 +50,7 @@ package sentinel.framework
 		 */
 		public function has(field:String):Boolean
 		{
-			return _internal.hasOwnProperty(field);
+			return _raw.hasOwnProperty(field);
 		}
 		
 		
@@ -61,7 +61,7 @@ package sentinel.framework
 		 */
 		public function get(field:String, fallback:* = null):*
 		{
-			return has(field) ? _internal[field] : fallback; 
+			return has(field) ? _raw[field] : fallback; 
 		}
 		
 		
@@ -72,7 +72,7 @@ package sentinel.framework
 		 */
 		public function set(field:String, value:*):void
 		{
-			_internal[field] = value;
+			_raw[field] = value;
 		}
 		
 		
@@ -82,11 +82,17 @@ package sentinel.framework
 		 */
 		public function del(field:String):void
 		{
-			delete _internal[field];
+			delete _raw[field];
 		}
 		
 		
-		internal function get __internal():Object { return _internal; }
+		public function toJson():String
+		{
+			return JSON.stringify(_raw);
+		}
+		
+		
+		public function get raw():Object { return _raw; }
 		
 	}
 	

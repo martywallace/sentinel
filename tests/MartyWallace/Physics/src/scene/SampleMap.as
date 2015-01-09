@@ -1,12 +1,13 @@
 package scene
 {
 	
-	import sentinel.gameplay.scene.Being;
-	import sentinel.gameplay.scene.Map;
+	import sentinel.framework.Data;
 	import sentinel.framework.events.KeyboardEvent;
+	import sentinel.gameplay.world.BaseMap;
+	import sentinel.gameplay.world.Being;
 	
 	
-	public class SampleMap extends Map
+	public class SampleMap extends BaseMap
 	{	
 		
 		protected override function construct():void
@@ -40,10 +41,10 @@ package scene
 		
 		private function _keyboard(event:KeyboardEvent):void
 		{
-			world.add(Being.create('scene::Block', {
+			world.add(Being.create('scene::Block', Data.create({
 				x: Math.random() * viewport.width,
 				y: -100
-			}));
+			})));
 		}
 		
 	}

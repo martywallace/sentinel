@@ -26,6 +26,12 @@ package
 			loadState(new Menu());
 		}
 		
+		
+		public override function get identity():String
+		{
+			return 'PhysicsTest';
+		}
+		
 	}
 	
 }

@@ -39,8 +39,8 @@ package sentinel.gameplay.world
 		{
 			super.load(data);
 			
-			_width = data.prop('width', 0);
-			_height = data.prop('height', 0);
+			_width = data.get('width', 0);
+			_height = data.get('height', 0);
 		}
 		
 		

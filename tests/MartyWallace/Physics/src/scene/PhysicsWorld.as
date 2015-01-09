@@ -2,13 +2,15 @@ package scene
 {
 	
 	import sentinel.gameplay.physics.EngineDef;
-	import sentinel.gameplay.scene.Being;
-	import sentinel.gameplay.scene.World;
+	import sentinel.gameplay.world.Being;
+	import sentinel.gameplay.world.BaseWorld;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Vector2D;
+	import sentinel.gameplay.world.Query;
+	import sentinel.gameplay.world.WorldQueryResult;
 	
 	
-	public class PhysicsWorld extends World
+	public class PhysicsWorld extends BaseWorld
 	{	
 		
 		public function PhysicsWorld()
@@ -29,7 +31,21 @@ package scene
 		
 		
 		public function get platform():Platform { return getUnique('platform') as Platform; }
-		public function get blocks():Vector.<Being> { return getBeingsByType(Block); }
+		
+		
+		public function get blocks():Vector.<Being>
+		{
+			var result:Vector.<Being> = new <Being>[];
+			var query:Vector.<WorldQueryResult> = query(Query.type(Block));
+			
+			for each(var r:WorldQueryResult in query)
+			{
+				result.push(r.being);
+			}
+			
+			
+			return result;
+		}
 		
 	}
 	

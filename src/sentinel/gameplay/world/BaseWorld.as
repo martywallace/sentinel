@@ -58,7 +58,7 @@ package sentinel.gameplay.world
 			_groups = new Data();
 			
 			_services = new ServiceManager(this);
-			_services.setServices(Vector.<Service>(defineServices()));
+			_services.setServices(Vector.<Service>(defineServices() || new <Service>[]));
 			
 			_graphics.addChild(_content);
 		}
