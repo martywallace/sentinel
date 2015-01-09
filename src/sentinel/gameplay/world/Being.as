@@ -26,6 +26,8 @@ package sentinel.gameplay.world
 		 * Attempts to create a new Being from save data obtained via <code>Being.save()</code>.
 		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
+		 * 
+		 * @csharp Change to something more useful like public T Create(...) where T is new, Being.
 		 */
 		public static function create(type:String, save:Data = null):Being
 		{

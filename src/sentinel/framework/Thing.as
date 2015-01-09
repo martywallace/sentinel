@@ -284,32 +284,32 @@ package sentinel.framework
 		protected function get game():BaseGame { return BaseGame.getInstance(); }
 		
 		/**
-		 * A reference to the game Viewport class.
+		 * A reference to the game Viewport service.
 		 */
 		protected function get viewport():Viewport { return game.viewport; }
 		
 		/**
-		 * A reference to the game Mouse class.
+		 * A reference to the game Mouse service.
 		 */
 		protected function get mouse():Mouse { return game.mouse; }
 		
 		/**
-		 * A reference to the game Keyboard class.
+		 * A reference to the game Keyboard service.
 		 */
 		protected function get keyboard():Keyboard { return game.keyboard; }
 		
 		/**
-		 * A reference to the game Library class.
+		 * A reference to the game Library service.
 		 */
 		protected function get library():Library { return game.library; }
 		
 		/**
-		 * A reference to the game Audio class.
+		 * A reference to the game Audio service.
 		 */
 		protected function get audio():Audio { return game.audio; }
 		
 		/**
-		 * A reference to the game storage class.
+		 * A reference to the game Storage service.
 		 */
 		protected function get storage():Storage { return game.storage; }
 		

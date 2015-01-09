@@ -109,16 +109,49 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Reference to the current Starling instance.
+		 */
 		public function get starling():Starling { return Starling.current; }
+		
+		/**
+		 * Reference to the current active State.
+		 */
 		public function get state():State { return _state; }
-		public function get keyboard():Keyboard{ return getService('keyboard') as Keyboard; }
+		
+		/**
+		 * Reference to the Keyboard service.
+		 */
+		public function get keyboard():Keyboard { return getService('keyboard') as Keyboard; }
+		
+		/**
+		 * Reference to the Mouse service.
+		 */
 		public function get mouse():Mouse { return getService('mouse') as Mouse; }
+		
+		/**
+		 * Reference to the Library service.
+		 */
 		public function get library():Library { return getService('library') as Library; }
+		
+		/**
+		 * Reference to the Audio service.
+		 */
 		public function get audio():Audio { return getService('audio') as Audio; }
+		
+		/**
+		 * Reference to the Storage service.
+		 */
 		public function get storage():Storage { return getService('storage') as Storage; }
+		
+		/**
+		 * Reference to the Viewport service.
+		 */
 		public override function get viewport():Viewport { return getService('viewport') as Viewport; }
 		
-		
+		/**
+		 * The game identity string.
+		 */
 		public function get identity():String { return null; }
 		
 	}
