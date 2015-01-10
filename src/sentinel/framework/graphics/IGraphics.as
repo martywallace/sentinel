@@ -13,6 +13,7 @@ package sentinel.framework.graphics
 	public interface IGraphics extends IDeconstructs
 	{
 		
+		/*
 		function removeFromParent(dispose:Boolean = false):void;
 		function removeEventListeners(type:String = null):void;
 		
@@ -24,12 +25,7 @@ package sentinel.framework.graphics
 		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
 		
 		function dispose():void;
-		
-		
-		// TODO: Method to swap this IGraphics instance with another.
-		// (Remove this one from its parent and put a new one in the same parent at the same location).
-		// ...
-		
+		*/
 		
 		function get x():Number;
 		function set x(value:Number):void;
