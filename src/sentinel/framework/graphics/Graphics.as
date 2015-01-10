@@ -1,20 +1,28 @@
 package sentinel.framework.graphics
 {
 	
+	import flash.geom.Rectangle;
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.gameplay.physics.Vector2D;
 	import starling.display.DisplayObject;
+	import sentinel.framework.BaseGame;
 	
 	
 	internal class Graphics extends EventDispatcher implements IGraphics
 	{
 		
 		private var _base:DisplayObject;
-		private var _depth:Number = 0;
+		private var _depth:int = 0;
 		
 		
-		public function deconstruct():void
+		public function Graphics(base:DisplayObject)
+		{
+			_base = base;
+		}
+		
+		
+		public override function deconstruct():void
 		{
 			removeEventListeners();
 			
@@ -42,6 +50,9 @@ package sentinel.framework.graphics
 		
 		public function get y():Number { return _base.y; }
 		public function set y(value:Number):void { _base.y = value; }
+		
+		public function get alpha():Number { return _base.alpha; }
+		public function set alpha(value:Number):void { _base.alpha = value; }
 		
 		public function get rotation():Number { return _base.rotation; }
 		public function set rotation(value:Number):void { _base.rotation = value; }
@@ -71,12 +82,26 @@ package sentinel.framework.graphics
 		public function set skewY(value:Number):void { _base.skewY = value; }
 		
 		public function get visible():Boolean { return _base.visible; }
-		public function set visible(value:Number):void { _base.visible = value; }
+		public function set visible(value:Boolean):void { _base.visible = value; }
 		
-		public function get depth():Number { return _depth; }
-		public function set depth(value:Number):void { _depth = value; }
+		public function get interactive():Boolean { return _base.touchable; }
+		public function set interactive(value:Boolean):void { _base.touchable = value; }
 		
-		public function get parent():GraphicsContainer { return null; }
+		public function get blendMode():String { return _base.blendMode; }
+		public function set blendMode(value:String):void { _base.blendMode = value; }
+		
+		public function get name():String { return _base.name; }
+		public function set name(value:String):void { _base.name = value; }
+		
+		public function get depth():int { return _depth; }
+		public function set depth(value:int):void { _depth = value; }
+		
+		public function get parent():GraphicsContainer { return _base.owner.parent; }
+		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
+		
+		public function get hasVisibleArea():Boolean { return _base.hasVisibleArea; }
+		public function get bounds():Rectangle { return _base.bounds; }
+		public function get atZero():Boolean { return _base.x === 0 && _base.y === 0 && _base.rotation === 0; }
 		
 		internal function get __base():DisplayObject { return _base; }
 		

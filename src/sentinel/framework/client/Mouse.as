@@ -107,7 +107,7 @@ package sentinel.framework.client
 		 */
 		public function getPositionIn(target:IMouseDataProvider):Vector2D
 		{
-			return Vector2D.fromPoint(target.mouseContainer.globalToLocal(viewportPosition.toPoint()));
+			return target.mouseContainer.globalToLocal(viewportPosition);
 		}
 		
 		

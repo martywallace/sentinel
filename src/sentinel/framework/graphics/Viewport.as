@@ -1,4 +1,4 @@
-package sentinel.framework.client
+package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.Service;

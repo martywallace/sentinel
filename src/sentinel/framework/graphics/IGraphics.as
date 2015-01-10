@@ -1,31 +1,16 @@
 package sentinel.framework.graphics
 {
 	
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import sentinel.framework.client.Viewport;
 	import sentinel.framework.IDeconstructs;
-	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
-	import starling.display.Stage;
+	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	public interface IGraphics extends IDeconstructs
 	{
 		
-		/*
-		function removeFromParent(dispose:Boolean = false):void;
-		function removeEventListeners(type:String = null):void;
-		
-		function addTo(container:IGraphicsContainer):void;
-		
-		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
-		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
-		
-		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
-		
-		function dispose():void;
-		*/
+		function localToGlobal(local:Vector2D):Vector2D;
+		function globalToLocal(global:Vector2D):Vector2D;
 		
 		function get x():Number;
 		function set x(value:Number):void;
@@ -61,9 +46,6 @@ package sentinel.framework.graphics
 		function get scaleY():Number;
 		function set scaleY(value:Number):void;
 		
-		function get touchable():Boolean;
-		function set touchable(value:Boolean):void;
-		
 		function get blendMode():String;
 		function set blendMode(value:String):void;
 		
@@ -76,12 +58,9 @@ package sentinel.framework.graphics
 		function get hasVisibleArea():Boolean;
 		function get atZero():Boolean;
 		function get bounds():Rectangle;
-		
-		function get parent():DisplayObjectContainer;
-		function get base():DisplayObject;
-		function get root():DisplayObject;
-		function get stage():Stage;
 		function get viewport():Viewport;
+		
+		function get parent():GraphicsContainer;
 		
 	}
 	

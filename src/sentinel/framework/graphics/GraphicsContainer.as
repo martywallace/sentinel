@@ -1,8 +1,21 @@
 package sentinel.framework.graphics
 {
 	
-	public class GraphicsContainer extends Graphics
+	import starling.display.DisplayObject;
+	
+	
+	internal class GraphicsContainer extends Graphics
 	{
+		
+		private var _autoSort:Boolean;
+		
+		
+		public function GraphicsContainer(base:DisplayObject, autoSort:Boolean = false)
+		{
+			_autoSort = autoSort;
+			super(base);
+		}
+		
 		
 		public function addChild(graphics:Graphics):Graphics
 		{

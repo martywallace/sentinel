@@ -2,7 +2,7 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.BaseGame;
-	import sentinel.framework.client.Viewport;
+	import sentinel.framework.graphics.Viewport;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Vector2D;
 	

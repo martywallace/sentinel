@@ -4,7 +4,7 @@ package sentinel.framework
 	import flash.media.Sound;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.sound.Sound;
-	import starling.textures.Texture;
+	import sentinel.framework.graphics.Texture;
 	import starling.textures.TextureAtlas;
 	
 	

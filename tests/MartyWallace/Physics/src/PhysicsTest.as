@@ -2,9 +2,7 @@ package
 {
 	
 	import sentinel.testing.TestGame;
-	import starling.textures.Texture;
-	import sentinel.framework.Library;
-	import starling.textures.TextureAtlas;
+	import sentinel.framework.graphics.Texture;
 	import states.Menu;
 	
 	
