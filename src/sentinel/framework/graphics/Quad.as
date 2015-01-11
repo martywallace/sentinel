@@ -3,20 +3,19 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Viewport;
-	import starling.display.Image;
-	import starling.textures.Texture;
+	import starling.display.Quad;
 	
 	
-	public class Image extends starling.display.Image implements IGraphics
+	public class Quad extends starling.display.Quad implements IGraphics
 	{
 		
 		private var _extender:Extender;
 		
 		
-		public function Image(texture:Texture)
+		public function Quad(width:Number, height:Number, color:uint = 0, premultipliedAlpha:Boolean = true)
 		{
 			_extender = new Extender(this);
-			super(texture);
+			super(width, height, color, premultipliedAlpha);
 		}
 		
 		
@@ -38,8 +37,6 @@ package sentinel.framework.graphics
 		public function set depth(value:int):void { _extender.__depth = value; }
 		
 		public function get atZero():Boolean { return _extender.__atZero; }
-		
 	}
-	
 	
 }

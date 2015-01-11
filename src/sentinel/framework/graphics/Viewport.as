@@ -21,24 +21,10 @@ package sentinel.framework.graphics
 		}
 		
 		
-		/**
-		 * The viewport width, in pixels.
-		 */
 		public function get width():int { return game.starling.backBufferWidth; }
-		
-		/**
-		 * The viewport height, in pixels.
-		 */
 		public function get height():int { return game.starling.backBufferHeight; }
-		
-		/**
-		 * The center point along the x and y axis within the viewport.
-		 */
 		public function get center():Vector2D { return _center; }
 		
-		/**
-		 * The service name.
-		 */
 		public override function get name():String { return 'viewport'; }
 		
 	}

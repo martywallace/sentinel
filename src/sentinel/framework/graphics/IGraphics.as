@@ -1,16 +1,42 @@
 package sentinel.framework.graphics
 {
 	
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.IDeconstructs;
 	import sentinel.gameplay.physics.Vector2D;
+	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
+	import starling.display.Stage;
 	
 	
 	public interface IGraphics extends IDeconstructs
 	{
 		
-		function localToGlobal(local:Vector2D):Vector2D;
-		function globalToLocal(global:Vector2D):Vector2D;
+		function removeFromParent(dispose:Boolean = false):void;
+		function removeEventListeners(type:String = null):void;
+		
+		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
+		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
+		
+		function addTo(target:IGraphicsContainer):void;
+		
+		/**
+		 * TODO
+		function toLocalVector(global:Vector2D):Vector2D;
+		function toGlobalVector(local:Vector2D):Vector2D;
+		*/
+		
+		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
+		
+		function dispose():void;
+		
+		
+		// TODO: Method to swap this IGraphics instance with another.
+		// (Remove this one from its parent and put a new one in the same parent at the same location).
+		// ...
+		
 		
 		function get x():Number;
 		function set x(value:Number):void;
@@ -46,6 +72,9 @@ package sentinel.framework.graphics
 		function get scaleY():Number;
 		function set scaleY(value:Number):void;
 		
+		function get touchable():Boolean;
+		function set touchable(value:Boolean):void;
+		
 		function get blendMode():String;
 		function set blendMode(value:String):void;
 		
@@ -58,9 +87,12 @@ package sentinel.framework.graphics
 		function get hasVisibleArea():Boolean;
 		function get atZero():Boolean;
 		function get bounds():Rectangle;
-		function get viewport():Viewport;
 		
-		function get parent():GraphicsContainer;
+		function get parent():DisplayObjectContainer;
+		function get base():DisplayObject;
+		function get root():DisplayObject;
+		function get stage():Stage;
+		function get viewport():Viewport;
 		
 	}
 	

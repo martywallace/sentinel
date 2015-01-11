@@ -3,32 +3,26 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Viewport;
-	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.textures.Texture;
 	
 	
-	public class Image extends starling.display.Image implements IGraphics
+	public class MovieClip extends starling.display.MovieClip implements IGraphics
 	{
 		
 		private var _extender:Extender;
 		
 		
-		public function Image(texture:Texture)
+		public function MovieClip(textures:Vector.<Texture>, fps:int = 1)
 		{
 			_extender = new Extender(this);
-			super(texture);
+			super(textures, fps);
 		}
 		
 		
 		public function deconstruct():void
 		{
 			_extender.deconstruct();
-		}
-		
-		
-		public function addTo(target:IGraphicsContainer):void
-		{
-			_extender.__addTo(target);
 		}
 		
 		
@@ -40,6 +34,5 @@ package sentinel.framework.graphics
 		public function get atZero():Boolean { return _extender.__atZero; }
 		
 	}
-	
 	
 }
