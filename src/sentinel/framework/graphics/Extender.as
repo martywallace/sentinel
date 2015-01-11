@@ -3,6 +3,7 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.IDeconstructs;
+	import sentinel.gameplay.physics.Vector2D;
 	import starling.display.DisplayObject;
 	
 	
@@ -64,6 +65,18 @@ package sentinel.framework.graphics
 		internal function __addTo(target:IGraphicsContainer):void
 		{
 			target.addChild(_owner as DisplayObject);
+		}
+		
+		
+		internal function __toGlobalVector(local:Vector2D):Vector2D
+		{
+			return Vector2D.fromPoint(_owner.localToGlobal(local.toPoint()));
+		}
+		
+		
+		internal function __toLocalVector(global:Vector2D):Vector2D
+		{
+			return Vector2D.fromPoint(_owner.globalToLocal(global.toPoint()));
 		}
 		
 		

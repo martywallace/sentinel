@@ -20,22 +20,14 @@ package sentinel.framework.graphics
 		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
 		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
 		
-		function addTo(target:IGraphicsContainer):void;
-		
-		/**
-		 * TODO
-		function toLocalVector(global:Vector2D):Vector2D;
 		function toGlobalVector(local:Vector2D):Vector2D;
-		*/
+		function toLocalVector(global:Vector2D):Vector2D;
+		
+		function addTo(target:IGraphicsContainer):void;
 		
 		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
 		
 		function dispose():void;
-		
-		
-		// TODO: Method to swap this IGraphics instance with another.
-		// (Remove this one from its parent and put a new one in the same parent at the same location).
-		// ...
 		
 		
 		function get x():Number;

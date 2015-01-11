@@ -1,9 +1,8 @@
 package sentinel.framework.graphics
 {
 	
-	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Viewport;
-	import sentinel.framework.util.GraphicsUtil;
+	import sentinel.gameplay.physics.Vector2D;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	
@@ -53,6 +52,11 @@ package sentinel.framework.graphics
 		{
 			_extender.__addTo(target);
 		}
+		
+		
+		public function toGlobalVector(local:Vector2D):Vector2D { return _extender.__toGlobalVector(local); }
+		
+		public function toLocalVector(global:Vector2D):Vector2D { return _extender.__toLocalVector(global); }
 		
 		
 		public function get viewport():Viewport { return _extender.__viewport; }

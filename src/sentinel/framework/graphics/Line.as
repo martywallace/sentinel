@@ -1,7 +1,6 @@
 package sentinel.framework.graphics 
 {
 	
-	import flash.geom.Point;
 	import sentinel.gameplay.physics.Vector2D;
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
@@ -10,9 +9,9 @@ package sentinel.framework.graphics
 	public class Line extends Quad
 	{
 		
-		public function Line(start:Point, end:Point, thickness:Number = 1, color:uint = 0xFFFFFF, premultipliedAlpha:Boolean = true)
+		public function Line(start:Vector2D, end:Vector2D, thickness:Number = 1, color:uint = 0xFFFFFF, premultipliedAlpha:Boolean = true)
 		{
-			var vec:Vector2D = Vector2D.fromPoint(end.subtract(start));
+			var vec:Vector2D = end.subtract(start);
 			
 			super(vec.length, thickness, color, premultipliedAlpha);
 			
