@@ -26,6 +26,12 @@ package sentinel.framework.graphics
 		}
 		
 		
+		public function addTo(target:IGraphicsContainer):void
+		{
+			_extender.__addTo(target);
+		}
+		
+		
 		public function toGlobalVector(local:Vector2D):Vector2D { return _extender.__toGlobalVector(local); }
 		
 		public function toLocalVector(global:Vector2D):Vector2D { return _extender.__toLocalVector(global); }

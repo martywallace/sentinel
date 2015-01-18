@@ -41,10 +41,10 @@ package sentinel.framework.graphics
 		
 		public override function addChild(child:DisplayObject):DisplayObject
 		{
-			var child:DisplayObject = _extender.__prepareAddChild(child);
-			if (child !== null) super.addChild(child);
+			var prepared:DisplayObject = _extender.__prepareAddChild(child);
+			if (prepared !== null) super.addChild(prepared);
 			
-			return child;
+			return prepared;
 		}
 		
 		
