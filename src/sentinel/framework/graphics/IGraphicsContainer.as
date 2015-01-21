@@ -7,7 +7,6 @@ package sentinel.framework.graphics
 	public interface IGraphicsContainer extends IGraphics
 	{
 		
-		function sortChildren(compareFunction:Function):void;
 		function sortChildrenByDepth():void;
 		
 		function addChild(child:DisplayObject):DisplayObject;

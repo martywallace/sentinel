@@ -37,11 +37,13 @@ package sentinel.framework
 		
 		internal function __construct():void
 		{
-			_services = new ServiceManager(this);
-			
-			// Define all required services.
-			_services.setServices((new <Service>[
-				new Viewport(), new Library(), new Mouse(), new Keyboard(), new Audio(), new Storage()
+			_services = new ServiceManager(this, (new <Service>[
+				new Viewport(),
+				new Library(),
+				new Mouse(),
+				new Keyboard(),
+				new Audio(),
+				new Storage()
 			]).concat(defineServices() || new <Service>[]));
 			
 			// Initialize user game construction code.

@@ -1,7 +1,7 @@
 package sentinel.framework.util
 {
 	
-	import sentinel.gameplay.physics.Vector2D;
+	import starling.geom.Point;
 	
 	
 	/**
@@ -39,12 +39,9 @@ package sentinel.framework.util
 		 * @param width Rectangle width.
 		 * @param height Rectangle height.
 		 */
-		public static function inRectangle(x:int, y:int, width:int, height:int):Vector2D
+		public static function inRectangle(x:int, y:int, width:int, height:int):Point
 		{
-			return new Vector2D(
-				between(x, width),
-				between(y, height)
-			);
+			return new Point(between(x, width), between(y, height));
 		}
 		
 		
@@ -54,14 +51,10 @@ package sentinel.framework.util
 		 * @param y Center y position of the circle.
 		 * @param radius Circle radius.
 		 */
-		public static function inCircle(x:int, y:int, radius:Number):Vector2D
+		public static function inCircle(x:int, y:int, radius:Number):Point
 		{
 			var ang:Number = getAngle();
-			
-			return new Vector2D(
-				x + Math.cos(ang) * radius,
-				y + Math.sin(ang) * radius
-			);
+			return new Point(x + Math.cos(ang) * radius, y + Math.sin(ang) * radius);
 		}
 		
 		
@@ -72,14 +65,10 @@ package sentinel.framework.util
 		 * @param innerRadius The inner ring radius.
 		 * @param outerRadius The outer ring radius.
 		 */
-		public static function inRing(x:int, y:int, innerRadius:Number, outerRadius:Number):Vector2D
+		public static function inRing(x:int, y:int, innerRadius:Number, outerRadius:Number):Point
 		{
 			var ang:Number = getAngle();
-			
-			return new Vector2D(
-				x + Math.cos(ang) * between(innerRadius, outerRadius),
-				y + Math.sin(ang) * between(innerRadius, outerRadius)
-			);
+			return new Point(x + Math.cos(ang) * between(innerRadius, outerRadius), y + Math.sin(ang) * between(innerRadius, outerRadius));
 		}
 		
 		

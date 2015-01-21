@@ -3,10 +3,10 @@ package sentinel.framework.client
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import starling.geom.Point;
 	import sentinel.framework.events.MouseEvent;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Service;
+	import starling.geom.Point;
 	
 	
 	/**

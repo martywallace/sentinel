@@ -16,34 +16,11 @@ package sentinel.framework
 		 * Constructor.
 		 * @param serviceable The object to be serviced.
 		 */
-		public function ServiceManager(serviceable:IServiceable)
+		public function ServiceManager(serviceable:IServiceable, services:Vector.<Service>)
 		{
 			_serviceable = serviceable;
 			_services = { };
-		}
-		
-		
-		/**
-		 * Deconstruct this ServiceManager and all of the Services it manages.
-		 */
-		public function deconstruct():void
-		{
-			for (var serviceName:String in _services)
-			{
-				(_services[serviceName] as Service).deconstruct();
-			}
 			
-			_services = null;
-			_serviceable = null;
-		}
-		
-		
-		/**
-		 * Defines the list of services to use.
-		 * @param services The list of services.
-		 */
-		public function setServices(services:Vector.<Service>):void
-		{
 			for each(var service:Service in services)
 			{
 				if (service.name !== null)
@@ -68,6 +45,21 @@ package sentinel.framework
 			{
 				(_services[serviceName] as Service).__construct(_serviceable);
 			}
+		}
+		
+		
+		/**
+		 * Deconstruct this ServiceManager and all of the Services it manages.
+		 */
+		public function deconstruct():void
+		{
+			for (var serviceName:String in _services)
+			{
+				(_services[serviceName] as Service).deconstruct();
+			}
+			
+			_services = null;
+			_serviceable = null;
 		}
 		
 		
