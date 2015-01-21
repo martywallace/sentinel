@@ -2,8 +2,6 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.gameplay.physics.EngineQueryResult;
-	import sentinel.gameplay.physics.Fixture;
-	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**

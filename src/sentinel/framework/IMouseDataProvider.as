@@ -1,9 +1,7 @@
 package sentinel.framework
 {
 	
-	import sentinel.framework.client.Mouse;
 	import sentinel.framework.graphics.IGraphics;
-	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
