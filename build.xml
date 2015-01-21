@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project name="Sentinel" basedir="" default="build">
+	<property environment="env" />
+	
+	<property name="FLEX_HOME" value="${env.FLEX_HOME}" />
+	
+	<property name="dir.bin" value="bin" />
+	<property name="dir.src" value="src" />
+	<property name="dir.libs" value="libs" />
+	<property name="dir.temp" value="temp" />
+	
+	<echo message="Using Flex SDK at '${FLEX_HOME}'." />
+	
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<target name="build" depends="compc,asdoc,merge,clean" />
+	
+	<!-- Compile the SWC. -->
+	<target name="compc">
+		<compc output="${dir.bin}/${ant.project.name}.swc">
+			<include-sources dir="${dir.src}" includes="*" />
+			<include-libraries dir='${dir.libs}' includes="*.swc" append='true' />
+		</compc>
+	</target>
+	
+	<!-- Generate the ASDoc from source. -->
+	<target name="asdoc">
+		<asdoc output="${dir.temp}" lenient="true" failonerror="true" keep-xml="true" skip-xsl="true" fork="true">
+			<doc-sources path-element="${dir.src}" />
+			<compiler.source-path path-element="${dir.src}" />
+			<external-library-path dir='${dir.libs}' append='true'>
+				<include name="*.swc" />
+			</external-library-path>
+		</asdoc>
+	</target>
+	
+	<!-- Merge the ASDoc with the compiled SWC. -->
+	<target name="merge">
+		<zip destfile="${dir.bin}/${ant.project.name}.swc" update="true">
+			<zipfileset dir="${dir.temp}/tempdita" prefix="docs">
+				<include name="*.*" />
+				<exclude name="ASDoc_Config.xml" />
+				<exclude name="overviews.xml" />
+			</zipfileset>
+		</zip>
+	</target>
+	
+	<!-- Clean up. -->
+	<target name="clean">
+		<delete dir="${dir.temp}" failonerror="false" includeemptydirs="true" />
+	</target>
+</project>
