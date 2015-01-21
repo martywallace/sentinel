@@ -6,6 +6,7 @@ package sentinel.gameplay.ui
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.world.BaseWorld;
+	import starling.display.DisplayObject;
 	
 	
 	public class UIElement extends Thing implements IPositionProvider
@@ -52,7 +53,7 @@ package sentinel.gameplay.ui
 				if (_graphics !== null)
 				{
 					// Add the graphics to the UI graphics container.
-					_graphics.addTo((ui as BaseUI).graphics);
+					(ui as BaseUI).graphics.addChild(_graphics as DisplayObject);
 				}
 				
 				added(ui as BaseUI);

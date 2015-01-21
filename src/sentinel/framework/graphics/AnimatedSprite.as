@@ -2,17 +2,16 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.BaseGame;
-	import starling.display.Sprite;
+	import starling.display.MovieClip;
+	import starling.textures.Texture;
 	
 	
-	public class Sprite extends starling.display.Sprite implements IGraphicsContainer
+	public class AnimatedSprite extends MovieClip implements IGraphics
 	{
 		
-		public function Sprite(autoSort:Boolean = false)
+		public function AnimatedSprite(texture:Vector.<Texture>, fps:int = 12)
 		{
-			super();
-			
-			super.autoSort = autoSort;
+			super(textures, fps);
 		}
 		
 		

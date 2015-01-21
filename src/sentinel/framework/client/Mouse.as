@@ -3,10 +3,10 @@ package sentinel.framework.client
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import starling.geom.Point;
 	import sentinel.framework.events.MouseEvent;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Service;
-	import sentinel.gameplay.physics.Vector2D;
 	
 	
 	/**
@@ -44,12 +44,12 @@ package sentinel.framework.client
 		private var _left:Boolean = false;
 		private var _right:Boolean = false;
 		private var _available:Boolean = false;
-		private var _viewportPosition:Vector2D;
+		private var _viewportPosition:Point;
 		
 		
 		protected override function construct():void
 		{
-			_viewportPosition = new Vector2D();
+			_viewportPosition = new Point();
 			
 			game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, _mouseEventHandler);
 			game.starling.nativeStage.addEventListener(flash.events.MouseEvent.MOUSE_UP, _mouseEventHandler);
@@ -105,18 +105,18 @@ package sentinel.framework.client
 		 * Returns the position of the mouse within a given <code>IMouseDataProvider</code>.
 		 * @param target The mouse data provider to get the mouse position within.
 		 */
-		public function getPositionIn(target:IMouseDataProvider):Vector2D
+		public function getPositionIn(target:IMouseDataProvider):Point
 		{
-			return target.mouseContainer.toLocalVector(viewportPosition);
+			return target.mouseContainer.globalToLocal(viewportPosition);
 		}
 		
 		
 		/**
 		 * Returns the current position of the mouse relative to the game viewport.
 		 */
-		public function get viewportPosition():Vector2D
+		public function get viewportPosition():Point
 		{
-			_viewportPosition.set(
+			_viewportPosition.setTo(
 				game.starling.nativeStage.mouseX,
 				game.starling.nativeStage.mouseY
 			);

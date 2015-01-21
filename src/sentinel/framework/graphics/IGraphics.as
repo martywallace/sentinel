@@ -1,14 +1,13 @@
 package sentinel.framework.graphics
 {
 	
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.IDeconstructs;
-	import sentinel.gameplay.physics.Vector2D;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
+	import starling.geom.Point;
 	
 	
 	public interface IGraphics extends IDeconstructs
@@ -19,11 +18,6 @@ package sentinel.framework.graphics
 		
 		function globalToLocal(globalPoint:Point, resultPoint:Point = null):Point;
 		function localToGlobal(localPoint:Point, resultPoint:Point = null):Point;
-		
-		function toGlobalVector(local:Vector2D):Vector2D;
-		function toLocalVector(global:Vector2D):Vector2D;
-		
-		function addTo(target:IGraphicsContainer):void;
 		
 		function alignPivot(hAligh:String = 'center', valign:String = 'center'):void;
 		

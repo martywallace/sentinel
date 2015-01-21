@@ -3,9 +3,9 @@ package sentinel.framework
 	
 	import flash.media.Sound;
 	import sentinel.framework.graphics.Image;
+	import sentinel.framework.graphics.Sheet;
 	import sentinel.framework.sound.Sound;
 	import starling.textures.Texture;
-	import sentinel.framework.graphics.TextureAtlas;
 	
 	
 	/**
@@ -16,7 +16,7 @@ package sentinel.framework
 	{
 		
 		private static const TEXTURES:String = 'textures';
-		private static const ATLASES:String = 'atlases';
+		private static const SHEETS:String = 'sheets';
 		private static const SOUNDS:String = 'sounds';
 		
 		
@@ -62,9 +62,9 @@ package sentinel.framework
 		}
 		
 		
-		public function addAtlas(name:String, atlas:TextureAtlas):void
+		public function addSheet(name:String, sheet:Sheet):void
 		{
-			_add(ATLASES, name, atlas);
+			_add(SHEETS, name, sheet);
 		}
 		
 		
@@ -80,21 +80,15 @@ package sentinel.framework
 		}
 		
 		
-		public function getTextureFromAtlas(atlasName:String, region:String):Texture
+		public function getTextureFromAtlas(sheetName:String, regionName:String):Texture
 		{
-			return getAtlas(atlasName).getTexture(region);
+			return getSheet(sheetName).getTexture(regionName);
 		}
 		
 		
-		public function getTexturesFromAtlas(atlasName:String, prefix:String = ''):Vector.<Texture>
+		public function getSheet(name:String):Sheet
 		{
-			return getAtlas(atlasName).getTextures(prefix);
-		}
-		
-		
-		public function getAtlas(name:String):TextureAtlas
-		{
-			return _find(ATLASES, name) as TextureAtlas;
+			return _find(SHEETS, name) as Sheet;
 		}
 		
 		
@@ -104,9 +98,9 @@ package sentinel.framework
 		}
 		
 		
-		public function getImageFromAtlas(atlasName:String, region:String):Image
+		public function getImageFromAtlas(sheetName:String, regionName:String):Image
 		{
-			return new Image(getTextureFromAtlas(atlasName, region));
+			return new Image(getTextureFromAtlas(sheetName, regionName));
 		}
 		
 		

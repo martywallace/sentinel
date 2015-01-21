@@ -9,6 +9,11 @@ Sentinel is broken down into three top level packages;
 * `testing` - Provides a small collection of classes to get up an running with temporary code (e.g. placeholder menus) as well as some debugging oriented additions including the [`TestGameplay`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/testing/states/TestGameplay.as) class - allowing full control of the [`Camera`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Camera.as) using the arrow keys.
 
 
+### Starling.
+
+It is important to note that a slightly modified ([my own fork](https://github.com/MartyWallace/Starling-Framework)) of Starling is used in Sentinel.
+
+
 ### Quickstart.
 
 If you're desperate to get up and running now, the classes of interest to get started are:
