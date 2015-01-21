@@ -3,7 +3,6 @@ package sentinel.gameplay.physics
 	
 	import Box2D.Collision.b2AABB;
 	import Box2D.Dynamics.b2Fixture;
-	import Box2D.Dynamics.Contacts.b2Contact;
 	
 	
 	public class Fixture

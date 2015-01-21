@@ -25,7 +25,7 @@
 	
 	<!-- Generate the ASDoc from source. -->
 	<target name="asdoc">
-		<asdoc output="${dir.temp}" lenient="true" failonerror="true" keep-xml="true" skip-xsl="true" fork="true">
+		<asdoc output="${dir.temp}" lenient="false" failonerror="true" keep-xml="true" skip-xsl="true" fork="true">
 			<doc-sources path-element="${dir.src}" />
 			<compiler.source-path path-element="${dir.src}" />
 			<external-library-path dir='${dir.libs}' append='true'>
