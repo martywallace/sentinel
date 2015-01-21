@@ -233,7 +233,7 @@ package sentinel.gameplay.physics
 		
 		/**
 		 * Iterate over the list of bodies contained within this physics world and returns them as a
-		 * Vector.<Body> list.
+		 * Vector&lt;Body&gt;.
 		 */
 		public function get bodies():Vector.<Body>
 		{

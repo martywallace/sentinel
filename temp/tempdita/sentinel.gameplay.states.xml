@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="sentinel.gameplay.states"><apiName>sentinel.gameplay.states</apiName><apiDetail/><apiClassifier id="sentinel.gameplay.states:GameplayState"><apiName>GameplayState</apiName><shortdesc>
+	 The GameplayState is the base class for your gameplay logic.</shortdesc><prolog><author>Marty Wallace.
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>sentinel.framework:State</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 The GameplayState is the base class for your gameplay logic. It is responsible for initializing
+	 a World and a UI, as well as bridging the two.
+	 </apiDesc></apiClassifierDetail><apiConstructor id="sentinel.gameplay.states:GameplayState:GameplayState"><apiName>GameplayState</apiName><shortdesc>
+		 Constructor.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>world</apiItemName><apiOperationClassifier>sentinel.gameplay.world:BaseWorld</apiOperationClassifier><apiDesc>The World to initialize the GameplayState with.
+		 </apiDesc></apiParam><apiParam><apiItemName>ui</apiItemName><apiOperationClassifier>sentinel.gameplay.ui:BaseUI</apiOperationClassifier><apiDesc>The UI to initialize the GameplayState with.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Constructor.
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="sentinel.gameplay.states:GameplayState:deconstruct"><apiName>deconstruct</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="sentinel.gameplay.states:GameplayState:ui:get"><apiName>ui</apiName><shortdesc>
+		 The UI used by this GameplayState.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>sentinel.gameplay.ui:BaseUI</apiValueClassifier></apiValueDef><apiDesc>
+		 The UI used by this GameplayState.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="sentinel.gameplay.states:GameplayState:world:get"><apiName>world</apiName><shortdesc>
+		 The World used by this GameplayState.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>sentinel.gameplay.world:BaseWorld</apiValueClassifier></apiValueDef><apiDesc>
+		 The World used by this GameplayState.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

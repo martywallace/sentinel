@@ -12,7 +12,7 @@ package sentinel.framework.util
 	{
 		
 		/**
-		 * Attempts to convert an input list type (array, Vector.<T>) to a Vector.<IStorable> list.
+		 * Attempts to convert an input list type (array, Vector.&lt;T&gt;) to a Vector.&lt;IStorable&gt; list.
 		 * @param input The input list.
 		 */
 		public static function toStorables(input:*):Vector.<IStorable>

@@ -1,0 +1,6 @@
+Text for description in sentinel.gameplay.physics:Engine/bodies/get is not valid.
+org.xml.sax.SAXParseException: The element type "Body" must be terminated by the matching end-tag "</Body>".
+
+Text for description in sentinel.framework.util:StorageUtil/toStorables is not valid.
+org.xml.sax.SAXParseException: The element type "IStorable" must be terminated by the matching end-tag "</IStorable>".
+

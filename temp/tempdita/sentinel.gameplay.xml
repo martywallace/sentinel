@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="sentinel.gameplay"><apiName>sentinel.gameplay</apiName><apiDetail/><apiClassifier id="sentinel.gameplay:IPositionProvider"><apiName>IPositionProvider</apiName><shortdesc>
+	 A contract defining an object that is able to provide its position.</shortdesc><prolog><author>Marty Wallace.
+	 </author><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 A contract defining an object that is able to provide its position. The meaning of an object's
+	 position is defined by the object itself. Most likely, the position of an object describes
+	 the position of graphics representing it.
+	 </apiDesc></apiClassifierDetail><apiOperation id="sentinel.gameplay:IPositionProvider:sentinel.gameplay:IPositionProvider:moveTo"><apiName>moveTo</apiName><shortdesc>
+		 Simultaneously update the x and y values of this object's position.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>x</apiItemName><apiType value="Number"/><apiDesc>The new x value.
+		 </apiDesc></apiParam><apiParam><apiItemName>y</apiItemName><apiType value="Number"/><apiDesc>The new y value.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Simultaneously update the x and y values of this object's position.
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="sentinel.gameplay:IPositionProvider:sentinel.gameplay:IPositionProvider:position:get"><apiName>position</apiName><shortdesc>
+		 The position of this object as a Vector2D instance.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>sentinel.gameplay.physics:Vector2D</apiValueClassifier></apiValueDef><apiDesc>
+		 The position of this object as a <codeph>Vector2D</codeph> instance. It is very unlikely that
+		 modifying the x and y values of this instance directly will provide the desired results;
+		 use the x and y properties of the <codeph>IPositionProvider</codeph> instead.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="sentinel.gameplay:IPositionProvider:sentinel.gameplay:IPositionProvider:rotation:get"><apiName>rotation</apiName><shortdesc>
+		 The rotation of this object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The rotation of this object.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="sentinel.gameplay:IPositionProvider:sentinel.gameplay:IPositionProvider:x:get"><apiName>x</apiName><shortdesc>
+		 The x position of this object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The x position of this object.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="sentinel.gameplay:IPositionProvider:sentinel.gameplay:IPositionProvider:y:get"><apiName>y</apiName><shortdesc>
+		 The y position of this object.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The y position of this object.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>
