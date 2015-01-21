@@ -9,7 +9,7 @@ package sentinel.framework.graphics
 	public class AnimatedSprite extends MovieClip implements IGraphics
 	{
 		
-		public function AnimatedSprite(texture:Vector.<Texture>, fps:int = 12)
+		public function AnimatedSprite(textures:Vector.<Texture>, fps:int = 12)
 		{
 			super(textures, fps);
 		}
