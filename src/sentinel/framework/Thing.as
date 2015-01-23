@@ -17,7 +17,7 @@ package sentinel.framework
 	 * Things are also able to be added to parent Things and contain their own children Things.
 	 * @author Marty Wallace.
 	 */
-	public class Thing extends EventDispatcher implements IDeconstructs, IStorable
+	public class Thing extends EventDispatcher implements IDeconstructs, IStorable, IGameServiceProvider
 	{
 		
 		private var _id:uint = 0;
@@ -80,6 +80,10 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * @private
+		 * Internal alias for <code>update()</code>.
+		 */
 		internal function __update():void
 		{
 			update();
@@ -113,13 +117,14 @@ package sentinel.framework
 			}
 			
 			_children.push(thing);
-			thing.__added(this);
+			thing.__addedT(this);
 			
 			return thing;
 		}
 		
 		
 		/**
+		 * @private
 		 * Internal alias for <code>addT()</code>.
 		 */
 		internal function __addT(thing:Thing):Thing
@@ -162,7 +167,7 @@ package sentinel.framework
 					}
 					
 					
-					thing.__removed(this);
+					thing.__removedT(this);
 					
 					if (destroy) thing.deconstruct();
 				}
@@ -173,6 +178,7 @@ package sentinel.framework
 		
 		
 		/**
+		 * @private
 		 * Internal alias for <code>removeT()</code>.
 		 */
 		internal function __removeT(thing:Thing, destroy:Boolean = false):Thing
@@ -226,7 +232,11 @@ package sentinel.framework
 		}
 		
 		
-		internal function __added(to:Thing):void
+		/**
+		 * @private
+		 * Internal alias for <code>addedT()</code>.
+		 */
+		internal function __addedT(to:Thing):void
 		{
 			_parent = to;
 			_dispatchEvent(ThingEvent.ADDED);
@@ -245,7 +255,11 @@ package sentinel.framework
 		}
 		
 		
-		internal function __removed(from:Thing):void
+		/**
+		 * @private
+		 * Internal alias for <code>removedT()</code>.
+		 */
+		internal function __removedT(from:Thing):void
 		{
 			_parent = null;
 			_dispatchEvent(ThingEvent.REMOVED);
@@ -285,32 +299,32 @@ package sentinel.framework
 		/**
 		 * A reference to the game Viewport service.
 		 */
-		protected function get viewport():Viewport { return game.viewport; }
+		public function get viewport():Viewport { return game.viewport; }
 		
 		/**
 		 * A reference to the game Mouse service.
 		 */
-		protected function get mouse():Mouse { return game.mouse; }
+		public function get mouse():Mouse { return game.mouse; }
 		
 		/**
 		 * A reference to the game Keyboard service.
 		 */
-		protected function get keyboard():Keyboard { return game.keyboard; }
+		public function get keyboard():Keyboard { return game.keyboard; }
 		
 		/**
 		 * A reference to the game Library service.
 		 */
-		protected function get library():Library { return game.library; }
+		public function get library():Library { return game.library; }
 		
 		/**
 		 * A reference to the game Audio service.
 		 */
-		protected function get audio():Audio { return game.audio; }
+		public function get audio():Audio { return game.audio; }
 		
 		/**
 		 * A reference to the game Storage service.
 		 */
-		protected function get storage():Storage { return game.storage; }
+		public function get storage():Storage { return game.storage; }
 		
 		/**
 		 * The parent Thing, if this Thing has one.

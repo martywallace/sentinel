@@ -14,27 +14,15 @@ Sentinel is broken down into three top level packages;
 It is important to note that a slightly modified ([my own fork](https://github.com/MartyWallace/Starling-Framework)) of Starling is used in Sentinel.
 
 
-### Quickstart.
-
-If you're desperate to get up and running now, the classes of interest to get started are:
-
-* [`Core`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/framework/Core.as) - Use this as the base class for your document class. You can look at the [DAZ example here](https://github.com/MartyWallace/DAZ3Sentinel/blob/master/src/daz/Main.as).
-* [`BaseGame`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/framework/BaseGame.as) - Use this as the base class for your game class, passed to the constructor of `Core`. The [DAZ example of that is here](https://github.com/MartyWallace/DAZ3Sentinel/blob/master/src/daz/Game.as).
-
-
-### Website.
-
-I am attempting to maintain [the website](http://sentinel.martywallace.com) as I progress, though I do not recommend referring to the reference section of the website for the time being.
+### Resources.
+ 
+* Visit the [official website](http://sentinel.martywallace.com).
+* [Learn](http://sentinel.martywallace.com/learn) how to use Sentinel.
+* Keep updated via the [Blog](http://sentinel.martywallace.com/blog).
+* Read the [class reference](http://sentinel.martywallace.com/reference).
+* Track my thoughts and possible additions on [Trello](https://trello.com/b/MJgDRGyH/sentinel).
 
 
 ### Companion Project.
 
 I am remaking an old ActionScript 2 game using Sentinel, which [you can view here](https://github.com/MartyWallace/DAZ3Sentinel). It should give a rough idea of how to use the framework until I have a thorough walkthrough set up on the website.
-
-
-
-### Progress Updates, Thoughts, Issues, etc.
-
-* [Blog](http://sentinel.martywallace.com/blog)
-* [Trello](https://trello.com/b/MJgDRGyH/sentinel)
-* [GitHub](https://github.com/MartyWallace/Sentinel/issues)

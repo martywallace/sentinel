@@ -189,9 +189,18 @@ package sentinel.gameplay.world
 						return null;
 					}
 				}
+				
+				//
 			}
 			
-			return addT(being) as Being;
+			var being:Being = addT(being) as Being;
+			
+			if (being !== null)
+			{
+				_dispatchEvent(WorldEvent.BEING_ADDED, being);
+			}
+			
+			return being;
 		}
 		
 		
@@ -220,7 +229,14 @@ package sentinel.gameplay.world
 				}
 			}
 			
-			return removeT(being, destroy) as Being;
+			var being:Being = removeT(being, destroy) as Being;
+			
+			if (being !== null)
+			{
+				_dispatchEvent(WorldEvent.BEING_REMOVED, being);
+			}
+			
+			return being;
 		}
 		
 		
@@ -312,6 +328,15 @@ package sentinel.gameplay.world
 		protected function removed(from:GameplayState):void
 		{
 			//
+		}
+		
+		
+		private function _dispatchEvent(type:String, being:Being = null):void
+		{
+			if (hasEventListener(type))
+			{
+				dispatchEvent(new WorldEvent(type, being));
+			}
 		}
 		
 		

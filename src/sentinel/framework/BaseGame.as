@@ -18,7 +18,7 @@ package sentinel.framework
 	 * and the starting state.
 	 * @author Marty Wallace.
 	 */
-	public class BaseGame extends Sprite implements IServiceable
+	public class BaseGame extends Sprite implements IServiceable, IGameServiceProvider
 	{
 		
 		/**
