@@ -2,6 +2,7 @@ package sentinel.framework
 {
 	
 	import flash.utils.getQualifiedClassName;
+	
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
@@ -10,6 +11,31 @@ package sentinel.framework
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.sound.Audio;
 	import sentinel.framework.util.StringUtil;
+	
+	
+	/**
+	 * Dispatched when this Being is deconstructed.
+	 * @eventType sentinel.framework.events.ThingEvent.DECONSTRUCTED
+	 */
+	[Event(name = 'deconstructed', type = 'sentinel.events.ThingEvent')]
+	
+	/**
+	 * Dispatched when this Being is updated.
+	 * @eventType sentinel.framework.events.ThingEvent.UPDATED
+	 */
+	[Event(name = 'updated', type = 'sentinel.events.ThingEvent')]
+	
+	/**
+	 * Dispatched when this Being is added to a parent Thing.
+	 * @eventType sentinel.framework.events.ThingEvent.ADDED
+	 */
+	[Event(name = 'added', type = 'sentinel.events.ThingEvent')]
+	
+	/**
+	 * Dispatched when this Being is removed from a parent Thing.
+	 * @eventType sentinel.framework.events.ThingEvent.REMOVED
+	 */
+	[Event(name = 'removed', type = 'sentinel.events.ThingEvent')]
 	
 	
 	/**

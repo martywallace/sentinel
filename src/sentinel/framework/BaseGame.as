@@ -35,6 +35,9 @@ package sentinel.framework
 		private var _nextId:uint = 1;
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __construct():void
 		{
 			_services = new ServiceManager(this, (new <Service>[
@@ -105,6 +108,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __getNextId():uint
 		{
 			return _nextId++;

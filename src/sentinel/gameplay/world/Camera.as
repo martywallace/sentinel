@@ -31,6 +31,8 @@ package sentinel.gameplay.world
 		/**
 		 * Move the camera ontop of a Being within the World.
 		 * @param being The Being to look at.
+		 * 
+		 * @csharp Overloading will let us do things like lookAt(being), lookAt(vector).
 		 */
 		public function lookAt(being:Being):void
 		{
@@ -47,12 +49,20 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * Reset the position, zoom and rotation of the camera.
+		 */
 		public function reset():void
 		{
 			_set(0, 0, 0, 1);
 		}
 		
 		
+		/**
+		 * Move the Camera to the specified coordinates within the World.
+		 * @param x The new x coordinate.
+		 * @param y The new y coordinate.
+		 */
 		public function moveTo(x:Number, y:Number):void
 		{
 			_set(x, y, rotation, zoom);
@@ -83,14 +93,26 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * A reference to the game Viewport service.
+		 */
 		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
 		
+		/**
+		 * The position of the camera within the world along the x axis.
+		 */
 		public function get x():Number { return -_world.__content.x; }
 		public function set x(value:Number):void{ _set(value, y, rotation, zoom); }
 		
+		/**
+		 * The position of the camera within the world along the y axis.
+		 */
 		public function get y():Number { return -_world.__content.y; }
 		public function set y(value:Number):void{ _set(x, value, rotation, zoom); }
 		
+		/**
+		 * The position of the camera represented as a Vector2D instance.
+		 */
 		public function get position():Vector2D
 		{
 			_position.x = x;
@@ -104,12 +126,21 @@ package sentinel.gameplay.world
 			moveTo(value.x, value.y);
 		}
 		
+		/**
+		 * The camera rotation.
+		 */
 		public function get rotation():Number { return -_world.graphics.rotation; }
 		public function set rotation(value:Number):void { _set(x, y, value, zoom); }
 		
+		/**
+		 * The camera zoom.
+		 */
 		public function get zoom():Number { return _world.graphics.scaleX; }
 		public function set zoom(value:Number):void{ _set(x, y, rotation, value); }
 		
+		/**
+		 * The camera offset along the x axis, added to the <code>x</code> value.
+		 */
 		public function get offsetX():Number { return _offsetX; }
 		
 		public function set offsetX(value:Number):void
@@ -118,6 +149,9 @@ package sentinel.gameplay.world
 			_set(x, y, rotation, zoom);
 		}
 		
+		/**
+		 * The camera offset along the y axis, added to the <code>y</code> value.
+		 */
 		public function get offsetY():Number { return _offsetY; }
 		
 		public function set offsetY(value:Number):void

@@ -2,7 +2,7 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.Service;
-	import sentinel.gameplay.physics.Vector2D;
+	import starling.geom.Point;
 	
 	
 	/**
@@ -12,18 +12,29 @@ package sentinel.framework.graphics
 	public class Viewport extends Service
 	{
 		
-		private var _center:Vector2D;
+		private var _center:Point;
 		
 		
 		protected override function construct():void
 		{
-			_center = new Vector2D(width / 2, height / 2);
+			_center = new Point(width / 2, height / 2);
 		}
 		
 		
+		/**
+		 * The viewport width.
+		 */
 		public function get width():int { return game.starling.backBufferWidth; }
+		
+		/**
+		 * The viewport height.
+		 */
 		public function get height():int { return game.starling.backBufferHeight; }
-		public function get center():Vector2D { return _center; }
+		
+		/**
+		 * A point representing the center of the viewport along both the x and y axis.
+		 */
+		public function get center():Point { return _center; }
 		
 		public override function get name():String { return 'viewport'; }
 		

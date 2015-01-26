@@ -14,6 +14,9 @@ package sentinel.framework
 		private var _serviceable:IServiceable;
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __construct(serviceable:IServiceable):void
 		{
 			_serviceable = serviceable;
@@ -27,6 +30,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __update():void
 		{
 			update();

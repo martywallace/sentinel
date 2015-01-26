@@ -11,6 +11,9 @@ package sentinel.gameplay.world
 	public class WorldService extends Service
 	{
 		
+		/**
+		 * A reference to the world being serviced by this WorldService.
+		 */
 		protected function get world():BaseWorld { return serviceable as BaseWorld; }
 		
 	}

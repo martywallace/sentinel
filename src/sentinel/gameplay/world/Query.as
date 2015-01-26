@@ -7,6 +7,11 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Vector2D;
 	
 	
+	/**
+	 * A Query is used to find a collection of Beings implementing IQueryable who meet a certain
+	 * criteria within a world, using the <code>BaseWorld.query()</code> method.
+	 * @author Marty Wallace.
+	 */
 	public class Query
 	{
 		
@@ -17,30 +22,53 @@ package sentinel.gameplay.world
 		public static const SHAPE:String = 'shape';
 		
 		
+		/**
+		 * Find all Beings.
+		 */
 		public static function all():Query
 		{
 			return new Query(ALL);
 		}
 		
 		
+		/**
+		 * Find Beings who are of a specified type.
+		 * @param type The type to check for.
+		 */
 		public static function type(type:Class):Query
 		{
 			return new Query(TYPE, { type: type });
 		}
 		
 		
+		/**
+		 * Find Beings who have a physics body overlapping a given point within the World.
+		 * @param point The Vector2D point.
+		 */
 		public static function point(point:Vector2D):Query
 		{
 			return new Query(POINT, { point: point });
 		}
 		
 		
+		/**
+		 * Find Beings who have a physics body overlapping a line cast through the world. The result
+		 * list will be sorted from nearest to furthest from the start point.
+		 * @param start The line start position.
+		 * @param end The line end position.
+		 * @param limit An optional limit on the amount of Beings returned.
+		 */
 		public static function line(start:Vector2D, end:Vector2D, limit:int = 0):Query
 		{
 			return new Query(LINE, { start: start, end: end, limit: limit });
 		}
 		
 		
+		/**
+		 * Find Beings who have a physics body that overlaps a given shape within the world.
+		 * @param shape The shape to use.
+		 * @param position The position of the shape.
+		 */
 		public static function shape(shape:Shape, position:Vector2D):Query
 		{
 			return new Query(SHAPE, { shape: shape, position: position });
@@ -51,6 +79,11 @@ package sentinel.gameplay.world
 		private var _options:Data;
 		
 		
+		/**
+		 * Constructor. Use the static <code>Query.&lt;type&gt;()</code> methods instead.
+		 * @param type The query type.
+		 * @param options The options and their values for the type of query being performed.
+		 */
 		public function Query(type:String, options:Object = null)
 		{
 			_type = type;
@@ -58,6 +91,9 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __execute(world:BaseWorld):Vector.<WorldQueryResult>
 		{
 			var being:Being;

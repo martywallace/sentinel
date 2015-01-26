@@ -4,6 +4,10 @@ package sentinel.framework.events
 	import sentinel.framework.client.Keyboard;
 	
 	
+	/**
+	 * Describes an event dispatched by the user's keyboard.
+	 * @author Marty Wallace.
+	 */
 	public class KeyboardEvent extends Event
 	{
 		

@@ -193,14 +193,14 @@ package sentinel.gameplay.world
 				//
 			}
 			
-			var being:Being = addT(being) as Being;
+			var result:Being = addT(being) as Being;
 			
-			if (being !== null)
+			if (result !== null)
 			{
-				_dispatchEvent(WorldEvent.BEING_ADDED, being);
+				_dispatchEvent(WorldEvent.BEING_ADDED, result);
 			}
 			
-			return being;
+			return result;
 		}
 		
 		
@@ -229,14 +229,14 @@ package sentinel.gameplay.world
 				}
 			}
 			
-			var being:Being = removeT(being, destroy) as Being;
+			var result:Being = removeT(being, destroy) as Being;
 			
-			if (being !== null)
+			if (result !== null)
 			{
-				_dispatchEvent(WorldEvent.BEING_REMOVED, being);
+				_dispatchEvent(WorldEvent.BEING_REMOVED, result);
 			}
 			
-			return being;
+			return result;
 		}
 		
 		
@@ -305,6 +305,9 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		protected final override function addedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) removed(thing as GameplayState);
@@ -318,6 +321,9 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		protected final override function removedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) removed(thing as GameplayState);
@@ -340,15 +346,49 @@ package sentinel.gameplay.world
 		}
 		
 		
+		/**
+		 * A reference to the UI managed by the GameplayState managing this world.
+		 */
 		public function get ui():BaseUI { return (parent as GameplayState).ui }
+		
+		/**
+		 * The Engine managing physics within this world.
+		 */
 		public function get engine():Engine { return _engine; }
+		
+		/**
+		 * The graphics container representing this world.
+		 */
 		public function get graphics():IGraphicsContainer { return _graphics; }
+		
+		/**
+		 * The container used to determine the position of the user's mouse within this world.
+		 */
 		public function get mouseContainer():IGraphics{ return _content; }
+		
+		/**
+		 * The camera used to determine the viewable area of this world.
+		 */
 		public function get camera():Camera { return _camera; }
+		
+		/**
+		 * How many update calls have been made by this world since its construction.
+		 */
 		public function get ticks():uint { return _ticks; }
+		
+		/**
+		 * The total number of Beings within this world.
+		 */
 		public function get totalBeings():int { return children.length; }
+		
+		/**
+		 * The map currently loaded by this world.
+		 */
 		public function get map():BaseMap { return _map; }
 		
+		/**
+		 * Whether or not the world is currently frozen (paused).
+		 */
 		public function get frozen():Boolean { return _frozen; }
 		
 		public function set frozen(value:Boolean):void
@@ -357,7 +397,14 @@ package sentinel.gameplay.world
 			dispatchEvent(new WorldEvent(value ? WorldEvent.FREEZE : WorldEvent.UNFREEZE));
 		}
 		
+		/**
+		 * @private
+		 */
 		internal function get __content():Sprite { return _content; }
+		
+		/**
+		 * @private
+		 */
 		internal function get __children():Vector.<Thing> { return children; }
 		
 	}
