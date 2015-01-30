@@ -12,6 +12,12 @@ package sentinel.framework.events
 		public static const ADDED:String = 'added';
 		public static const REMOVED:String = 'removed';
 		
+		/**
+		 * TODO
+		 */
+		public static const BECAME_PARENT:String = 'becameParent';
+		public static const BECAME_ANCESTOR:String = 'becameAncestor';
+		
 		
 		public function ThingEvent(type:String)
 		{

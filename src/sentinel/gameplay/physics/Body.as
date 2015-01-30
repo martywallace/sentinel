@@ -132,6 +132,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function get __base():b2Body { return _base; }
 		
 		public function get engine():Engine { return _engine; }

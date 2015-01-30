@@ -19,6 +19,8 @@ package sentinel.gameplay.ui
 		
 		public function UIElement()
 		{
+			super();
+			
 			_position = new Vector2D();
 		}
 		

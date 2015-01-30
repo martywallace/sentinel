@@ -40,6 +40,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function get __base():b2Fixture{ return _base; }
 		
 		public function get body():Body{ return (_base.GetBody().GetUserData() as BodyData).body; }

@@ -19,6 +19,8 @@ package sentinel.testing.ui
 		
 		public function TestMenuButton(text:String, clickHandler:Function)
 		{
+			super();
+			
 			_text = text;
 			_clickHandler = clickHandler;
 			

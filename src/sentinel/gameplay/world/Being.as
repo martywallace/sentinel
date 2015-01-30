@@ -69,6 +69,8 @@ package sentinel.gameplay.world
 		 */
 		public function Being()
 		{
+			super();
+			
 			_position = new Vector2D();
 		}
 		

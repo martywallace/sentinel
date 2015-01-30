@@ -46,11 +46,36 @@ package sentinel.framework
 	public class Thing extends EventDispatcher implements IDeconstructs, IStorable, IGameServiceProvider
 	{
 		
+		/**
+		 * Backing fields.
+		 */
 		private var _id:uint = 0;
 		private var _parent:Thing;
 		private var _children:Vector.<Thing> = new <Thing>[];
 		
 		
+		/**
+		 * Caching.
+		 */
+		private var _cacheChildren:Vector.<Thing>;
+		private var _cacheAncestors:Vector.<Thing>;
+		private var _cacheDescendants:Vector.<Thing>;
+		
+		
+		/**
+		 * Constructor.
+		 */
+		public function Thing()
+		{
+			// Allocate an ID when constructed.
+			// Could be forgotten without a super() call in an extending class.
+			_id = id;
+		}
+		
+		
+		/**
+		 * A string representation of this instance of Thing.
+		 */
 		public function toString():String
 		{
 			return StringUtil.toDebugString(['type', 'id'], [className, id]);
@@ -66,7 +91,7 @@ package sentinel.framework
 			removeFromParent();
 			
 			_children.length = 0;
-			_dispatchEvent(ThingEvent.DECONSTRUCTED);
+			__dispatchEvent(ThingEvent.DECONSTRUCTED);
 			
 			super.deconstruct();
 		}
@@ -102,7 +127,7 @@ package sentinel.framework
 				thing.__update();
 			}
 			
-			_dispatchEvent(ThingEvent.UPDATED);
+			__dispatchEvent(ThingEvent.UPDATED);
 		}
 		
 		
@@ -127,7 +152,13 @@ package sentinel.framework
 			
 			if (thing === this)
 			{
-				// Cannot add Things to themselves.
+				throw new Error('You cannot add a Thing to itself.');
+				return null;
+			}
+			
+			if (isDescendantOf(thing))
+			{
+				throw new Error('You cannot add a Thing one of its ancestors.');
 				return null;
 			}
 			
@@ -144,6 +175,8 @@ package sentinel.framework
 			
 			_children.push(thing);
 			thing.__addedT(this);
+			
+			_resetCaches();
 			
 			return thing;
 		}
@@ -198,6 +231,8 @@ package sentinel.framework
 					if (destroy) thing.deconstruct();
 				}
 			}
+			
+			_resetCaches();
 			
 			return thing;
 		}
@@ -265,7 +300,7 @@ package sentinel.framework
 		internal function __addedT(to:Thing):void
 		{
 			_parent = to;
-			_dispatchEvent(ThingEvent.ADDED);
+			__dispatchEvent(ThingEvent.ADDED);
 			
 			addedT(to);
 		}
@@ -288,18 +323,72 @@ package sentinel.framework
 		internal function __removedT(from:Thing):void
 		{
 			_parent = null;
-			_dispatchEvent(ThingEvent.REMOVED);
+			__dispatchEvent(ThingEvent.REMOVED);
 			
 			removedT(from);
 		}
 		
 		
-		private function _dispatchEvent(type:String):void
+		/**
+		 * Determine whether this Thing is the child of a target Thing.
+		 * @param thing The target Thing.
+		 */
+		public function isChildOf(thing:Thing):Boolean
+		{
+			return parent === thing;
+		}
+		
+		
+		/**
+		 * Determine whether this Thing is the parent of the target Thing.
+		 * @param thing The target Thing.
+		 */
+		public function isParentOf(thing:Thing):Boolean
+		{
+			return thing.parent === this;
+		}
+		
+		
+		/**
+		 * Determine whether this Thing is an ancestor of the target Thing.
+		 * @param thing The target Thing.
+		 */
+		public function isAncestorOf(thing:Thing):Boolean
+		{
+			return thing.ancestors.indexOf(this) >= 0;
+		}
+		
+		
+		/**
+		 * Determine whether this Thing is a descendant of the target Thing.
+		 * @param thing The target Thing.
+		 */
+		public function isDescendantOf(thing:Thing):Boolean
+		{
+			return thing.descendants.indexOf(this) >= 0;
+		}
+		
+		
+		/**
+		 * @private
+		 */
+		internal function __dispatchEvent(type:String):void
 		{
 			if (hasEventListener(type))
 			{
 				dispatchEvent(new ThingEvent(type));
 			}
+		}
+		
+		
+		/**
+		 * Reset the relationship caches.
+		 */
+		private function _resetCaches():void
+		{
+			_cacheChildren = null;
+			_cacheAncestors = null;
+			_cacheDescendants = null;
 		}
 		
 		
@@ -355,13 +444,75 @@ package sentinel.framework
 		/**
 		 * The parent Thing, if this Thing has one.
 		 */
-		protected function get parent():Thing { return _parent; }
+		public function get parent():Thing { return _parent; }
 		
 		/**
 		 * Returns the list of child Things.
-		 * This is the <em>actual list</em> - be very careful what you do with it.
 		 */
-		protected function get children():Vector.<Thing> { return _children; }
+		public function get children():Vector.<Thing>
+		{
+			if(_cacheChildren === null)
+			{
+				_cacheChildren = _children.slice();
+			}
+			
+			return _cacheChildren;
+		}
+		
+		/**
+		 * Returns the list of ancestor Things.
+		 */
+		public function get ancestors():Vector.<Thing>
+		{
+			if(_cacheAncestors === null)
+			{
+				_cacheAncestors = new <Thing>[];
+				
+				if(_parent !== null)
+				{
+					var p:Thing = _parent;
+					while(p !== null)
+					{
+						_cacheAncestors.push(p);
+						p = p.parent;
+					}
+				}
+			}
+			
+			return _cacheAncestors;
+		}
+		
+		/**
+		 * Returns the list of descendant Things.
+		 */
+		public function get descendants():Vector.<Thing>
+		{
+			if(_cacheDescendants === null)
+			{
+				_cacheDescendants = _descendants;
+			}
+			
+			return _cacheDescendants;
+		}
+		
+		/**
+		 * Provides the meat for the <code>descendants</code> getter.
+		 */
+		private function get _descendants():Vector.<Thing>
+		{
+			var result:Vector.<Thing> = new <Thing>[];
+			
+			for each(var thing:Thing in _children)
+			{
+				result.push(thing);
+				for each(var descendant:Thing in thing.descendants)
+				{
+					result.push(descendant);
+				}
+			}
+			
+			return result;
+		}
 		
 	}
 	

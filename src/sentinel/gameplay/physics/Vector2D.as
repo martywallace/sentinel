@@ -4,8 +4,6 @@ package sentinel.gameplay.physics
 	import Box2D.Common.Math.b2Vec2;
 	import starling.geom.Point;
 	import sentinel.framework.IStorable;
-	import sentinel.framework.util.StringUtil;
-	import sentinel.framework.util.ObjectUtil;
 	import sentinel.framework.Data;
 	
 	
@@ -38,6 +36,11 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 * Creates a Sentinel <code>Vector2D</code> from a Box2D <code>b2Vec2</code>.
+		 * @param base The source b2Vec2.
+		 */
 		internal static function __fromBase(base:b2Vec2):Vector2D
 		{
 			return new Vector2D(base.x * Engine.scale, base.y * Engine.scale);
@@ -105,6 +108,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function get __base():b2Vec2 { return _base; }
 		
 		

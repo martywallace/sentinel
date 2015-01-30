@@ -19,6 +19,8 @@ package sentinel.framework
 		
 		public function State()
 		{
+			super();
+			
 			_graphics = new Sprite();
 			_graphics.addChild(new Quad(viewport.width, viewport.height, backgroundColor));
 		}

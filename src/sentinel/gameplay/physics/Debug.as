@@ -78,7 +78,14 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function get __base():b2DebugDraw { return _base; }
+		
+		/**
+		 * @private
+		 */
 		internal function get __color():b2Color{ return _color; }
 		
 		

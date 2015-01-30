@@ -201,6 +201,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function __destroyBody(body:Body):void
 		{
 			if(_destroyed.indexOf(body) < 0) _destroyed.push(body);

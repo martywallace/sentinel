@@ -26,6 +26,9 @@ package sentinel.gameplay.physics
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		internal function get __base():b2Shape{ return _base; }
 		
 	}
