@@ -135,18 +135,6 @@ package sentinel.gameplay.world
 		
 		
 		/**
-		 * Register the list of classes extending Being that are used by this game. This allows
-		 * <code>Being.create()</code> to function correctly.
-		 */
-		protected function registerBeingTypes():Vector.<Class>
-		{
-			return new <Class>[
-				Boundary, BoundaryBox, Region
-			];
-		}
-		
-		
-		/**
 		 * Adds a Being to this World.
 		 * @param being The Being to add.
 		 */
