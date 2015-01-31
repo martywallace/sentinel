@@ -2,14 +2,19 @@ package sentinel.gameplay.world
 {
 	
 	import flash.utils.getDefinitionByName;
+	
 	import sentinel.framework.Data;
-	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.IServiceable;
+	import sentinel.framework.Service;
+	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.ui.BaseUI;
+	
 	import starling.display.DisplayObject;
 	
 	
@@ -21,7 +26,7 @@ package sentinel.gameplay.world
 	 * like health bars and text that is attached to certain positions within the World.
 	 * @author Marty Wallace.
 	 */
-	public class Being extends Thing implements IPositionProvider
+	public class Being extends Thing implements IPositionProvider, IServiceable
 	{
 		
 		/**
@@ -62,6 +67,7 @@ package sentinel.gameplay.world
 		private var _body:Body;
 		private var _position:Vector2D;
 		private var _rotation:Number = 0;
+		private var _services:ServiceManager;
 		
 		
 		/**
@@ -72,6 +78,13 @@ package sentinel.gameplay.world
 			super();
 			
 			_position = new Vector2D();
+			
+			var services:Vector.<BeingService> = defineServices();
+			
+			if(services !== null && services.length > 0)
+			{
+				_services = new ServiceManager(this, Vector.<Service>(services));
+			}
 		}
 		
 		
@@ -305,6 +318,25 @@ package sentinel.gameplay.world
 		protected function defineBody(engine:Engine):Body
 		{
 			return null;
+		}
+		
+		
+		/**
+		 * Defines the list of services that will be used by this Being.
+		 */
+		protected function defineServices():Vector.<BeingService>
+		{
+			return null;
+		}
+		
+		
+		/**
+		 * Returns a Service attached to this Being.
+		 * @param name The name of the Service to get.
+		 */
+		public function getService(name:String):Service
+		{
+			return _services.getService(name);
 		}
 		
 		

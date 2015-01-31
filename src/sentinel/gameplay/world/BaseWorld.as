@@ -2,14 +2,14 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Data;
-	import sentinel.framework.graphics.IGraphics;
-	import sentinel.framework.graphics.IGraphicsContainer;
-	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.IServiceable;
 	import sentinel.framework.Service;
 	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
+	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.graphics.IGraphicsContainer;
+	import sentinel.framework.graphics.Sprite;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
@@ -57,7 +57,12 @@ package sentinel.gameplay.world
 			_unique = new Data();
 			_groups = new Data();
 			
-			_services = new ServiceManager(this, Vector.<Service>(defineServices() || new <Service>[]));
+			var services:Vector.<WorldService> = defineServices();
+			
+			if(services !== null && services.length > 0)
+			{
+				_services = new ServiceManager(this, Vector.<Service>(services));
+			}
 			
 			_graphics.addChild(_content);
 		}
@@ -289,7 +294,12 @@ package sentinel.gameplay.world
 		 */
 		public function getService(name:String):Service
 		{
-			return _services.getService(name);
+			if(_services !== null)
+			{
+				return _services.getService(name);
+			}
+			
+			return null;
 		}
 		
 		
