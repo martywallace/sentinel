@@ -53,7 +53,7 @@ package sentinel.framework
 		/**
 		 * A reference to the core game object.
 		 */
-		public function get game():BaseGame { return BaseGame.getInstance(); }
+		protected function get game():BaseGame { return BaseGame.getInstance(); }
 		
 		/**
 		 * Returns the name of this service.
