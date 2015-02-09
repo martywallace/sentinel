@@ -10,6 +10,7 @@ package sentinel.gameplay.physics
 		
 		private var _start:Vector2D;
 		private var _end:Vector2D;
+		private var _vertices:Vector.<Vector2D>;
 		
 		
 		public function Edge(start:Vector2D, end:Vector2D)
@@ -27,6 +28,21 @@ package sentinel.gameplay.physics
 			base.SetAsEdge(_start.__base, _end.__base);
 			
 			return base;
+		}
+		
+		
+		public function get start():Vector2D { return _start; }
+		public function get end():Vector2D { return _end; }
+		
+		
+		public override function get vertices():Vector.<Vector2D>
+		{
+			if(_vertices === null)
+			{
+				_vertices = new <Vector2D>[_start, _end];
+			}
+			
+			return _vertices;
 		}
 		
 	}

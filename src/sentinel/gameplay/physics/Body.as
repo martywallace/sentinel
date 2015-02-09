@@ -5,6 +5,7 @@ package sentinel.gameplay.physics
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+	
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.world.Being;
@@ -92,7 +93,7 @@ package sentinel.gameplay.physics
 			}
 			
 			var nativeFixture:b2Fixture = _base.CreateFixture(nativeFixtureDef);
-			var fixture:Fixture = new Fixture(nativeFixture);
+			var fixture:Fixture = new Fixture(nativeFixture, shape);
 			
 			_fixtures.push(fixture);
 			
@@ -133,6 +134,28 @@ package sentinel.gameplay.physics
 		
 		
 		/**
+		 * Determine whether any of the fixtures attached to this Body overlap any of the fixtures
+		 * attached to a target Body.
+		 * @param body The target body to test against.
+		 */
+		public function overlaps(body:Body):Boolean
+		{
+			for each(var local:Fixture in _fixtures)
+			{
+				for each(var external:Fixture in body.fixtures)
+				{
+					if(local.overlaps(external))
+					{
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		}
+		
+		
+		/**
 		 * @private
 		 */
 		internal function get __base():b2Body { return _base; }
@@ -141,6 +164,24 @@ package sentinel.gameplay.physics
 		public function get owner():Being{ return _data.owner }
 		public function get fixtures():Vector.<Fixture> { return _fixtures; }
 		public function get totalFixtures():int { return _fixtures.length; }
+		
+		/**
+		 * Returns a list of all vertices across all fixtures attached to this Body.
+		 */
+		public function get vertices():Vector.<Vector2D>
+		{
+			var result:Vector.<Vector2D> = new <Vector2D>[];
+			
+			for each(var fixture:Fixture in _fixtures)
+			{
+				if(fixture.vertices !== null)
+				{
+					result = result.concat(fixture.vertices);
+				}
+			}
+			
+			return result;
+		}
 		
 		public function get awake():Boolean{ return _base.IsAwake(); }
 		public function set awake(value:Boolean):void{ _base.SetAwake(value); }

@@ -29,7 +29,13 @@ package sentinel.gameplay.physics
 		/**
 		 * @private
 		 */
-		internal function get __base():b2Shape{ return _base; }
+		internal function get __base():b2Shape { return _base; }
+		
+		/**
+		 * Returns a list of vertices used to define this Shape.
+		 * This method returns null if the shape is a type with no vertices (e.g. a Circle).
+		 */
+		public function get vertices():Vector.<Vector2D> { return null; }
 		
 	}
 	

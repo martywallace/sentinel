@@ -8,33 +8,33 @@ package sentinel.gameplay.physics
 	public class Polygon extends Shape
 	{
 		
-		private var _verticies:Vector.<Vector2D>;
+		private var _vertices:Vector.<Vector2D>;
 		
 		
 		public function Polygon(verticies:Vector.<Vector2D>)
 		{
-			_verticies = verticies.slice();
+			_vertices = verticies.slice();
 			super();
 		}
 		
 		
 		protected override function defineBase():b2Shape
 		{
-			var nativeVerticies:Array = [];
+			var nativeVertices:Array = [];
 			
-			for each(var vertex:Vector2D in _verticies)
+			for each(var vertex:Vector2D in _vertices)
 			{
-				nativeVerticies.push(vertex.__base);
+				nativeVertices.push(vertex.__base);
 			}
 			
 			var base:b2PolygonShape = new b2PolygonShape();
-			base.SetAsArray(nativeVerticies);
+			base.SetAsArray(nativeVertices);
 			
 			return base;
 		}
 		
 		
-		public function get verticies():Vector.<Vector2D>{ return _verticies; }
+		public override function get vertices():Vector.<Vector2D>{ return _vertices; }
 		
 	}
 	
