@@ -1,44 +1,28 @@
 package sentinel.gameplay.physics
 {
 	
-	import Box2D.Collision.Shapes.b2PolygonShape;
-	import Box2D.Collision.Shapes.b2Shape;
-	
-	
 	/**
-	 * A box shape.
+	 * A box shape; this is a helper for a Polygon with four vertices.
 	 * @author Marty Wallace.
 	 */
-	public class Box extends Shape
+	public class Box extends Polygon
 	{
 		
 		private var _width:Number;
 		private var _height:Number;
-		private var _x:int;
-		private var _y:int;
-		private var _rotation:Number;
 		
 		
-		public function Box(width:int, height:int, x:int = 0, y:int = 0, rotation:Number = 0):void
+		public function Box(width:int, height:int)
 		{
 			_width = width;
 			_height = height;
-			_x = x;
-			_y = y;
-			_rotation = rotation;
 			
-			super();
-		}
-		
-		
-		protected override function defineBase():b2Shape
-		{
-			var base:b2PolygonShape = new b2PolygonShape();
-			var center:Vector2D = new Vector2D(_x, _y);
-			
-			base.SetAsOrientedBox((_width / 2) / Engine.scale, (_height / 2) / Engine.scale, center.__base, _rotation);
-			
-			return base;
+			super(new <Vector2D>[
+				new Vector2D(-width / 2, -height / 2),
+				new Vector2D(width / 2, -height / 2),
+				new Vector2D(width / 2, height / 2),
+				new Vector2D(-width / 2, height / 2)
+			]);
 		}
 		
 	}
