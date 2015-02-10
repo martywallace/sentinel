@@ -99,7 +99,6 @@ package sentinel.gameplay.world
 			var wqr:WorldQueryResult;
 			var pool:Vector.<WorldQueryResult> = _getQueryablePool(world);
 			
-			var ix:int = 0;
 			for each(var block:QueryBlock in _blocks)
 			{
 				var reducedPool:Vector.<WorldQueryResult> = new <WorldQueryResult>[];
