@@ -13,12 +13,12 @@ package sentinel.gameplay.world
 	public class WorldQueryResult extends EngineQueryResult
 	{
 		
-		private var _query:Query;
+		private var _query:WorldQuery;
 		private var _being:Being;
 		private var _engineQueryResult:EngineQueryResult;
 		
 		
-		public function WorldQueryResult(query:Query, being:Being, engineQueryResult:EngineQueryResult = null)
+		public function WorldQueryResult(query:WorldQuery, being:Being, engineQueryResult:EngineQueryResult = null)
 		{
 			_query = query;
 			_being = being;
@@ -40,7 +40,7 @@ package sentinel.gameplay.world
 		/**
 		 * A reference to the Query that provided this result.
 		 */
-		public function get query():Query { return _query; }
+		public function get query():WorldQuery { return _query; }
 		
 		/**
 		 * The Being stored within this result.

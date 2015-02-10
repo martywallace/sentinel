@@ -13,8 +13,18 @@ package sentinel.gameplay.world
 	 * criteria within a world, using the <code>BaseWorld.query()</code> method.
 	 * @author Marty Wallace.
 	 */
-	public class Query
+	public class WorldQuery
 	{
+		
+		/**
+		 * Alias for <code>new Query()</code>. Aids with single-line chained query construction e.g.
+		 * <code>Query.create().line(...).type(...).limit(...)</code>.
+		 */
+		public static function create():WorldQuery
+		{
+			return new WorldQuery();
+		}
+		
 		
 		private var _blocks:Vector.<QueryBlock>;
 		
@@ -22,7 +32,7 @@ package sentinel.gameplay.world
 		/**
 		 * Constructor.
 		 */
-		public function Query()
+		public function WorldQuery()
 		{
 			_blocks = new <QueryBlock>[];
 		}
@@ -32,7 +42,7 @@ package sentinel.gameplay.world
 		 * Find Beings who are one of the specified types.
 		 * @param types The types to check for.
 		 */
-		public function type(types:Vector.<Class>):Query
+		public function type(types:Vector.<Class>):WorldQuery
 		{
 			_blocks.push(new QueryBlock(QueryBlock.TYPE, { types: types }));
 			return this;
@@ -43,7 +53,7 @@ package sentinel.gameplay.world
 		 * Find Beings who have a physics body overlapping a given point within the World.
 		 * @param point The Vector2D point.
 		 */
-		public function point(point:Vector2D):Query
+		public function point(point:Vector2D):WorldQuery
 		{
 			_blocks.push(new QueryBlock(QueryBlock.POINT, { point: point }));
 			return this;
@@ -56,7 +66,7 @@ package sentinel.gameplay.world
 		 * @param start The line start position.
 		 * @param end The line end position.
 		 */
-		public function line(start:Vector2D, end:Vector2D):Query
+		public function line(start:Vector2D, end:Vector2D):WorldQuery
 		{
 			_blocks.push(new QueryBlock(QueryBlock.LINE, { start: start, end: end }));
 			return this;
@@ -68,7 +78,7 @@ package sentinel.gameplay.world
 		 * @param shape The shape to use.
 		 * @param position The position of the shape.
 		 */
-		public function shape(shape:Shape, position:Vector2D):Query
+		public function shape(shape:Shape, position:Vector2D):WorldQuery
 		{
 			_blocks.push(new QueryBlock(QueryBlock.SHAPE, { shape: shape, position: position }));
 			return this;
@@ -80,7 +90,7 @@ package sentinel.gameplay.world
 		 * to get the nearest results.
 		 * @param limit The limit.
 		 */
-		public function limit(limit:int):Query
+		public function limit(limit:int):WorldQuery
 		{
 			_blocks.push(new QueryBlock(QueryBlock.LIMIT, { limit: limit }));
 			return this;
@@ -88,16 +98,19 @@ package sentinel.gameplay.world
 		
 		
 		/**
-		 * TODO: Fun fact: If you use a non-physics query after a physics query, you will lose the
-		 * useful information about intersection points etc. Should think of a way to correct that.
-		 * I guess we could sort the QueryBlocks before we begin to make sure physics queries are at
-		 * the end.
 		 * @private
 		 */
 		internal function __execute(world:BaseWorld):Vector.<WorldQueryResult>
 		{
 			var wqr:WorldQueryResult;
 			var pool:Vector.<WorldQueryResult> = _getQueryablePool(world);
+			
+			// Sort blocks by type precedence.
+			_blocks.sort(function(a:QueryBlock, b:QueryBlock):int
+			{
+				return a.__type === b.__type ? 0 : (a.__type < b.__type ? -1 : 1);
+				
+			});
 			
 			for each(var block:QueryBlock in _blocks)
 			{

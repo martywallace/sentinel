@@ -280,7 +280,7 @@ package sentinel.gameplay.world
 		 * about the query made.
 		 * @param query The query to use.
 		 */
-		public function query(query:Query):Vector.<WorldQueryResult>
+		public function query(query:WorldQuery):Vector.<WorldQueryResult>
 		{
 			return query.__execute(this);
 		}
