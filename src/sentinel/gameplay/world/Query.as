@@ -2,6 +2,7 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Data;
+	import sentinel.framework.Thing;
 	import sentinel.gameplay.physics.EngineQueryResult;
 	import sentinel.gameplay.physics.Shape;
 	import sentinel.gameplay.physics.Vector2D;
@@ -15,29 +16,26 @@ package sentinel.gameplay.world
 	public class Query
 	{
 		
-		public static const ALL:String = 'all';
-		public static const TYPE:String = 'type';
-		public static const POINT:String = 'point';
-		public static const LINE:String = 'line';
-		public static const SHAPE:String = 'shape';
+		private var _blocks:Vector.<QueryBlock>;
 		
 		
 		/**
-		 * Find all Beings.
+		 * Constructor.
 		 */
-		public static function all():Query
+		public function Query()
 		{
-			return new Query(ALL);
+			_blocks = new <QueryBlock>[];
 		}
 		
 		
 		/**
-		 * Find Beings who are of a specified type.
-		 * @param type The type to check for.
+		 * Find Beings who are one of the specified types.
+		 * @param types The types to check for.
 		 */
-		public static function type(type:Class):Query
+		public function type(types:Vector.<Class>):Query
 		{
-			return new Query(TYPE, { type: type });
+			_blocks.push(new QueryBlock(QueryBlock.TYPE, { types: types }));
+			return this;
 		}
 		
 		
@@ -45,9 +43,10 @@ package sentinel.gameplay.world
 		 * Find Beings who have a physics body overlapping a given point within the World.
 		 * @param point The Vector2D point.
 		 */
-		public static function point(point:Vector2D):Query
+		public function point(point:Vector2D):Query
 		{
-			return new Query(POINT, { point: point });
+			_blocks.push(new QueryBlock(QueryBlock.POINT, { point: point }));
+			return this;
 		}
 		
 		
@@ -56,11 +55,11 @@ package sentinel.gameplay.world
 		 * list will be sorted from nearest to furthest from the start point.
 		 * @param start The line start position.
 		 * @param end The line end position.
-		 * @param limit An optional limit on the amount of Beings returned.
 		 */
-		public static function line(start:Vector2D, end:Vector2D, limit:int = 0):Query
+		public function line(start:Vector2D, end:Vector2D):Query
 		{
-			return new Query(LINE, { start: start, end: end, limit: limit });
+			_blocks.push(new QueryBlock(QueryBlock.LINE, { start: start, end: end }));
+			return this;
 		}
 		
 		
@@ -69,103 +68,111 @@ package sentinel.gameplay.world
 		 * @param shape The shape to use.
 		 * @param position The position of the shape.
 		 */
-		public static function shape(shape:Shape, position:Vector2D):Query
+		public function shape(shape:Shape, position:Vector2D):Query
 		{
-			return new Query(SHAPE, { shape: shape, position: position });
+			_blocks.push(new QueryBlock(QueryBlock.SHAPE, { shape: shape, position: position }));
+			return this;
 		}
 		
 		
-		private var _type:String;
-		private var _options:Data;
+		/**
+		 * Reduce the current query pool to the specified limit; usually only used after a line query
+		 * to get the nearest results.
+		 * @param limit The limit.
+		 */
+		public function limit(limit:int):Query
+		{
+			_blocks.push(new QueryBlock(QueryBlock.LIMIT, { limit: limit }));
+			return this;
+		}
 		
 		
 		/**
-		 * Constructor. Use the static <code>Query.&lt;type&gt;()</code> methods instead.
-		 * @param type The query type.
-		 * @param options The options and their values for the type of query being performed.
+		 * TODO: Fun fact: If you use a non-physics query after a physics query, you will lose the
+		 * useful information about intersection points etc. Should think of a way to correct that.
+		 * I guess we could sort the QueryBlocks before we begin to make sure physics queries are at
+		 * the end.
+		 * @private
 		 */
-		public function Query(type:String, options:Object = null)
+		internal function __execute(world:BaseWorld):Vector.<WorldQueryResult>
 		{
-			_type = type;
-			_options = Data.create(options);
+			var wqr:WorldQueryResult;
+			var pool:Vector.<WorldQueryResult> = _getQueryablePool(world);
+			
+			var ix:int = 0;
+			for each(var block:QueryBlock in _blocks)
+			{
+				var reducedPool:Vector.<WorldQueryResult> = new <WorldQueryResult>[];
+				
+				if (block.__type === QueryBlock.TYPE)
+				{
+					// Only allow the specified types.
+					for each(wqr in pool)
+					{
+						for each(var t:Class in block.__options.get('types'))
+						{
+							if (wqr.being is t)
+							{
+								reducedPool.push(new WorldQueryResult(this, wqr.being));
+								break;
+							}
+						}
+					}
+				}
+				else if (block.__type === QueryBlock.LIMIT)
+				{
+					// Reduce the pool to the specified limit.
+					reducedPool = pool.slice(0, block.__options.get('limit'));
+				}
+				else
+				{
+					// Queries handed over to the physics engine first.
+					var eqrs:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
+					
+					switch(block.__type)
+					{
+						case QueryBlock.POINT: eqrs = world.engine.queryPoint(block.__options.get('point')); break;
+						case QueryBlock.LINE: eqrs = world.engine.queryLine(block.__options.get('start'), block.__options.get('end')); break;
+						case QueryBlock.SHAPE: eqrs = world.engine.queryShape(block.__options.get('shape'), block.__options.get('position')); break;
+					}
+					
+					for each(var eqr:EngineQueryResult in eqrs)
+					{
+						for each(wqr in pool)
+						{
+							if (eqr.fixture.body.owner === wqr.being)
+							{
+								reducedPool.push(new WorldQueryResult(this, eqr.fixture.body.owner, eqr));
+								break;
+							}
+						}
+					}
+				}
+				
+				pool = reducedPool;
+			}
+			
+			return pool;
 		}
 		
 		
 		/**
 		 * @private
 		 */
-		internal function __execute(world:BaseWorld):Vector.<WorldQueryResult>
+		private function _getQueryablePool(world:BaseWorld):Vector.<WorldQueryResult>
 		{
-			var being:Being;
 			var result:Vector.<WorldQueryResult> = new <WorldQueryResult>[];
 			
-			if (_type === ALL)
+			for each(var being:Thing in world.__children)
 			{
-				// Return all Beings in the world.
-				for each(being in world.__children)
+				if (being is IQueryable)
 				{
-					if (being is IQueryable)
-					{
-						result.push(new WorldQueryResult(this, being));
-					}
+					result.push(new WorldQueryResult(this, being as Being));
 				}
 			}
-			
-			else if (_type === TYPE)
-			{
-				// Query by type of Being.
-				for each(being in world.__children)
-				{
-					if (being is IQueryable && being is _options.get('type'))
-					{
-						result.push(new WorldQueryResult(this, being));
-					}
-				}
-			}
-			
-			else
-			{
-				// Physics engine related queries.
-				var engineQueryResults:Vector.<EngineQueryResult> = new <EngineQueryResult>[];
-				
-				switch(_type)
-				{
-					case POINT: engineQueryResults = world.engine.queryPoint(_options.get('point')); break;
-					case LINE: engineQueryResults = world.engine.queryLine(_options.get('start'), _options.get('end')); break;
-					case SHAPE: engineQueryResults = world.engine.queryShape(_options.get('shape'), _options.get('position')); break;
-				}
-				
-				for each(var eqr:EngineQueryResult in engineQueryResults)
-				{
-					if (eqr.fixture.body.owner !== null &&
-						eqr.fixture.body.owner is Being &&
-						eqr.fixture.body.owner is IQueryable)
-					{
-						result.push(new WorldQueryResult(this, eqr.fixture.body.owner as Being, eqr));
-					}
-				}
-				
-				if (_type === LINE && _options.get('limit') > 0)
-				{
-					// Line query can be limited to first N results.
-					result = result.slice(0, _options.get('limit'));
-				}
-			}
-			
 			
 			return result;
 		}
-		
-		
-		/**
-		 * Returns the type of query that was made.
-		 */
-		public function get type():String { return _type; }
-		
-		/**
-		 * Returns the options associated with the query.
-		 */
-		public function get options():Data { return _options; }
 		
 	}
 	

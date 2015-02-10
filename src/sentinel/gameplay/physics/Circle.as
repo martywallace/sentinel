@@ -24,6 +24,9 @@ package sentinel.gameplay.physics
 			return new b2CircleShape(_radius / Engine.scale);
 		}
 		
+		
+		public function get radius():Number { return _radius; }
+		
 	}
 	
 }

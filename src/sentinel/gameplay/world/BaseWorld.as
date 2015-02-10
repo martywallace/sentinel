@@ -182,8 +182,6 @@ package sentinel.gameplay.world
 						return null;
 					}
 				}
-				
-				//
 			}
 			
 			var result:Being = addT(being) as Being;

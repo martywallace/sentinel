@@ -2,6 +2,7 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.gameplay.physics.EngineQueryResult;
+	import sentinel.framework.util.StringUtil;
 	
 	
 	/**
@@ -27,6 +28,12 @@ package sentinel.gameplay.world
 			{
 				super(engineQueryResult.fixture, engineQueryResult.point, engineQueryResult.point2);
 			}
+		}
+		
+		
+		public function toString():String
+		{
+			return StringUtil.toDebugString(['being'], [being]);
 		}
 		
 		
