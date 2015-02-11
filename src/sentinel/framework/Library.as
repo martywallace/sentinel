@@ -4,7 +4,7 @@ package sentinel.framework
 	import flash.media.Sound;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.graphics.Sheet;
-	import sentinel.framework.sound.Sound;
+	import sentinel.framework.audio.Sound;
 	import starling.textures.Texture;
 	
 	
@@ -17,7 +17,7 @@ package sentinel.framework
 		
 		private static const TEXTURES:String = 'textures';
 		private static const SHEETS:String = 'sheets';
-		private static const SOUNDS:String = 'sounds';
+		private static const AUDIO:String = 'audio';
 		
 		
 		private var _content:Object = { };
@@ -68,9 +68,9 @@ package sentinel.framework
 		}
 		
 		
-		public function addSound(name:String, sound:flash.media.Sound):void
+		public function addAudio(name:String, audio:flash.media.Sound):void
 		{
-			_add(SOUNDS, name, sound);
+			_add(AUDIO, name, audio);
 		}
 		
 		
@@ -104,9 +104,9 @@ package sentinel.framework
 		}
 		
 		
-		public function getSound(name:String):sentinel.framework.sound.Sound
+		public function getAudio(name:String):sentinel.framework.audio.Sound
 		{
-			return new sentinel.framework.sound.Sound(_find(SOUNDS, name) as flash.media.Sound);
+			return new sentinel.framework.audio.Sound(_find(AUDIO, name) as flash.media.Sound);
 		}
 		
 		

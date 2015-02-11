@@ -1,4 +1,4 @@
-package sentinel.framework.sound
+package sentinel.framework.audio
 {
 	
 	import flash.media.Sound;

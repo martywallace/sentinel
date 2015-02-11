@@ -1,11 +1,11 @@
 package sentinel.framework
 {
 	
-	import sentinel.framework.graphics.Viewport;
-	import sentinel.framework.client.Mouse;
+	import sentinel.framework.audio.Audio;
 	import sentinel.framework.client.Keyboard;
-	import sentinel.framework.sound.Audio;
+	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
+	import sentinel.framework.graphics.Viewport;
 	
 	
 	/**

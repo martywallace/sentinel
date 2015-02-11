@@ -8,8 +8,10 @@ package sentinel.framework
 	public class ServiceManager implements IDeconstructs
 	{
 		
+		private var _constructed:Boolean = false;
 		private var _serviceable:IServiceable;
-		private var _services:Object;
+		private var _services:Vector.<Service>;
+		private var _servicesMap:Object;
 		
 		
 		/**
@@ -19,15 +21,16 @@ package sentinel.framework
 		public function ServiceManager(serviceable:IServiceable, services:Vector.<Service>)
 		{
 			_serviceable = serviceable;
-			_services = { };
+			_services = services;
+			_servicesMap = { };
 			
 			for each(var service:Service in services)
 			{
 				if (service.name !== null)
 				{
-					if (!_services.hasOwnProperty(service.name))
+					if (!_servicesMap.hasOwnProperty(service.name))
 					{
-						_services[service.name] = service;
+						_servicesMap[service.name] = service;
 					}
 					else
 					{
@@ -39,11 +42,23 @@ package sentinel.framework
 					throw new Error("Services must define a name.");
 				}
 			}
-			
-			// Initialize Services after they have all been added to the manager.
-			for (var serviceName:String in _services)
+		}
+		
+		
+		/**
+		 * Construct all of the Services added to this ServiceManager.
+		 */
+		public function construct():void
+		{
+			if (!_constructed)
 			{
-				(_services[serviceName] as Service).__construct(_serviceable);
+				// Initialize Services after they have all been added to the manager.
+				for each(var service:Service in _services)
+				{
+					service.__construct(_serviceable);
+				}
+				
+				_constructed = true;
 			}
 		}
 		
@@ -53,13 +68,14 @@ package sentinel.framework
 		 */
 		public function deconstruct():void
 		{
-			for (var serviceName:String in _services)
+			for each(var service:Service in _services)
 			{
-				(_services[serviceName] as Service).deconstruct();
+				service.deconstruct();
 			}
 			
-			_services = null;
 			_serviceable = null;
+			_services = null;
+			_servicesMap = null;
 		}
 		
 		
@@ -68,9 +84,9 @@ package sentinel.framework
 		 */
 		public function update():void
 		{
-			for (var serviceName:String in _services)
+			for each(var service:Service in _services)
 			{
-				(_services[serviceName] as Service).__update();
+				service.__update();
 			}
 		}
 		
@@ -81,7 +97,7 @@ package sentinel.framework
 		 */
 		public function getService(name:String):Service
 		{
-			return _services.hasOwnProperty(name) ? _services[name] : null;
+			return _servicesMap.hasOwnProperty(name) ? _servicesMap[name] : null;
 		}
 		
 	}

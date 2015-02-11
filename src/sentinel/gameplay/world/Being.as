@@ -2,19 +2,17 @@ package sentinel.gameplay.world
 {
 	
 	import flash.utils.getDefinitionByName;
-	
 	import sentinel.framework.Data;
+	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.IServiceable;
 	import sentinel.framework.Service;
 	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
-	import sentinel.framework.graphics.IGraphics;
 	import sentinel.gameplay.IPositionProvider;
 	import sentinel.gameplay.physics.Body;
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.ui.BaseUI;
-	
 	import starling.display.DisplayObject;
 	
 	
@@ -84,6 +82,7 @@ package sentinel.gameplay.world
 			if(services !== null && services.length > 0)
 			{
 				_services = new ServiceManager(this, Vector.<Service>(services));
+				_services.construct();
 			}
 		}
 		
@@ -96,6 +95,7 @@ package sentinel.gameplay.world
 		{
 			if (_graphics !== null) _graphics.deconstruct();
 			if (_body !== null) _body.deconstruct();
+			if (_services !== null) _services.deconstruct();
 			
 			super.deconstruct();
 		}
@@ -104,6 +104,8 @@ package sentinel.gameplay.world
 		protected override function update():void
 		{
 			alignGraphics();
+			
+			if (_services !== null) _services.update();
 			
 			super.update();
 		}

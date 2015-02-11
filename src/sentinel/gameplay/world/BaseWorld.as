@@ -2,14 +2,14 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Data;
+	import sentinel.framework.graphics.IGraphics;
+	import sentinel.framework.graphics.IGraphicsContainer;
+	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.IServiceable;
 	import sentinel.framework.Service;
 	import sentinel.framework.ServiceManager;
 	import sentinel.framework.Thing;
-	import sentinel.framework.graphics.IGraphics;
-	import sentinel.framework.graphics.IGraphicsContainer;
-	import sentinel.framework.graphics.Sprite;
 	import sentinel.gameplay.events.WorldEvent;
 	import sentinel.gameplay.physics.Debug;
 	import sentinel.gameplay.physics.Engine;
@@ -62,6 +62,7 @@ package sentinel.gameplay.world
 			if(services !== null && services.length > 0)
 			{
 				_services = new ServiceManager(this, Vector.<Service>(services));
+				_services.construct();
 			}
 			
 			_graphics.addChild(_content);
@@ -73,13 +74,10 @@ package sentinel.gameplay.world
 		 */
 		public override function deconstruct():void
 		{
-			if (_engine !== null)
-			{
-				_engine.deconstruct();
-			}
+			if (_engine !== null) _engine.deconstruct();
+			if (_services !== null) _services.deconstruct();
 			
 			_graphics.deconstruct();
-			_services.deconstruct();
 			
 			super.deconstruct();
 		}
@@ -122,8 +120,7 @@ package sentinel.gameplay.world
 				
 				if (_engine !== null) _engine.step();
 				if (_map !== null) _map.__update();
-				
-				_services.update();
+				if (_services !== null) _services.update();
 				
 				super.update();
 			}

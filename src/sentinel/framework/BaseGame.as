@@ -1,12 +1,12 @@
 package sentinel.framework
 {
 	
+	import sentinel.framework.audio.Audio;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
-	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.graphics.Sprite;
-	import sentinel.framework.sound.Audio;
+	import sentinel.framework.graphics.Viewport;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
@@ -48,6 +48,8 @@ package sentinel.framework
 				new Audio(),
 				new Storage()
 			]).concat(defineServices() || new <Service>[]));
+			
+			_services.construct();
 			
 			// Initialize user game construction code.
 			construct();
