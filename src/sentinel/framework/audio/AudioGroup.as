@@ -3,6 +3,7 @@ package sentinel.framework.audio
 	
 	import flash.media.SoundTransform;
 	import sentinel.framework.Library;
+	import sentinel.framework.events.SoundEvent;
 	import sentinel.framework.util.NumberUtil;
 	
 	
@@ -10,12 +11,13 @@ package sentinel.framework.audio
 	 * A group of sounds that can be played (e.g. effects, music).
 	 * @author Marty Wallace.
 	 */
-	public class AudioGroup
+	internal class AudioGroup
 	{
 		
 		private var _audio:Audio;
 		private var _library:Library;
 		private var _transform:SoundTransform;
+		private var _sounds:Vector.<Sound>;
 		
 		
 		public function AudioGroup(audio:Audio, library:Library)
@@ -23,25 +25,38 @@ package sentinel.framework.audio
 			_audio = audio;
 			_library = library;
 			_transform = new SoundTransform();
+			_sounds = new <Sound>[];
 		}
 		
 		
 		/**
-		 * Plays and returns a Sound loaded into the game library.
-		 * @param asset The name of the asset within the game library.
-		 * @param volume The volume level for the sound - this is multiplied by the volume level of
-		 * the AudioGroup playing the sound.
-		 * @param pan The left-to-right panning of the sound - this is multiplied by the pan level
-		 * of the AudioGroup playing the sound.
-		 * @param start The initial position of the sound, in milliseconds.
-		 * @param loop Whether or not the sound should loop.
+		 * @private
 		 */
-		public function play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Sound
+		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Sound
 		{
 			var sound:Sound = _library.getAudio(asset);
+			
+			sound.addEventListener(SoundEvent.COMPLETE, _soundComplete);
 			sound.__play(volume * this.volume, pan * this.pan, start, loop);
 			
+			_sounds.push(sound);
+			
 			return sound;
+		}
+		
+		
+		private function _soundComplete(event:SoundEvent):void
+		{
+			trace('done');
+			// Note: event.sound.removeEventListener(...) not nescessary because its deconstruct()
+			// takes care of that for us.
+			var index:int = _sounds.indexOf(event.sound);
+			
+			if (index >= 0)
+			{
+				_sounds.splice(index, 1);
+				trace("TEST: " + index);
+			}
 		}
 		
 		
@@ -56,6 +71,11 @@ package sentinel.framework.audio
 		 */
 		public function get pan():Number { return _transform.pan; }
 		public function set pan(value:Number):void { _transform.pan = NumberUtil.clamp(value, -1, 1); }
+		
+		/**
+		 * Returns a list of all the current playing Sounds.
+		 */
+		public function get sounds():Vector.<Sound> { return _sounds; }
 		
 	}
 	

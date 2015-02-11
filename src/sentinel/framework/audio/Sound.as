@@ -1,16 +1,19 @@
 package sentinel.framework.audio
 {
 	
+	import flash.events.Event;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.media.SoundTransform;
+	import sentinel.framework.events.EventDispatcher;
+	import sentinel.framework.events.SoundEvent;
 	
 	
 	/**
 	 * A Sound managed by the Audio component.
 	 * @author Marty Wallace.
 	 */
-	public class Sound
+	public class Sound extends EventDispatcher
 	{
 		
 		private var _base:flash.media.Sound;
@@ -24,17 +27,51 @@ package sentinel.framework.audio
 		}
 		
 		
+		public override function deconstruct():void
+		{
+			// TODO: Does anything need to be done here?
+			// ...
+			
+			super.deconstruct();
+		}
+		
+		
 		internal function __play(volume:Number = 1, panning:Number = 0, startTime:Number = 0, loop:Boolean = false):void
 		{
 			_transform = new SoundTransform(volume, panning);
 			_channel = _base.play(startTime, loop ? 999 : 0, _transform);
+			
+			// TODO:
+			// Probably listening for the wrong thing here, no internet at the moment to look it up.
+			_base.addEventListener(Event.COMPLETE, _complete);
 		}
 		
 		
 		public function stop():void
 		{
 			_channel.stop();
+			_dispatchEvent(SoundEvent.STOPPED);
 		}
+		
+		
+		private function _complete(event:Event):void
+		{
+			trace('inner');
+			(event.target as flash.media.Sound).removeEventListener(Event.COMPLETE, _complete);
+			_dispatchEvent(SoundEvent.COMPLETE);
+		}
+		
+		
+		private function _dispatchEvent(type:String):void
+		{
+			if (hasEventListener(type))
+			{
+				dispatchEvent(new SoundEvent(type));
+			}
+		}
+		
+		
+		internal function get __base():flash.media.Sound { return _base; }
 		
 		
 		public function get volume():Number { return _transform.volume; }
