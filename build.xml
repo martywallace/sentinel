@@ -7,7 +7,7 @@
 	<property name="dir.bin" value="bin" />
 	<property name="dir.src" value="src" />
 	<property name="dir.libs" value="libs" />
-	<property name="dir.temp" value="temp" />
+	<property name="dir.docs" value="docs" />
 	
 	<echo message="Using Flex SDK at '${FLEX_HOME}'." />
 	
@@ -25,7 +25,7 @@
 	
 	<!-- Generate the ASDoc from source. -->
 	<target name="asdoc">
-		<asdoc output="${dir.temp}" lenient="false" failonerror="true" keep-xml="true" skip-xsl="false" fork="true">
+		<asdoc output="${dir.docs}" lenient="false" failonerror="true" keep-xml="true" skip-xsl="false" fork="true">
 			<doc-sources path-element="${dir.src}" />
 			<compiler.source-path path-element="${dir.src}" />
 			<external-library-path dir='${dir.libs}' append='true'>
@@ -37,16 +37,11 @@
 	<!-- Merge the ASDoc with the compiled SWC. -->
 	<target name="merge">
 		<zip destfile="${dir.bin}/${ant.project.name}.swc" update="true">
-			<zipfileset dir="${dir.temp}/tempdita" prefix="docs">
+			<zipfileset dir="${dir.docs}/tempdita" prefix="docs">
 				<include name="*.*" />
 				<exclude name="ASDoc_Config.xml" />
 				<exclude name="overviews.xml" />
 			</zipfileset>
 		</zip>
-	</target>
-	
-	<!-- Clean up. -->
-	<target name="clean">
-		<delete dir="${dir.temp}" failonerror="false" includeemptydirs="true" />
 	</target>
 </project>
