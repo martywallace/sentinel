@@ -39,11 +39,9 @@ package sentinel.framework.audio
 		internal function __play(volume:Number = 1, panning:Number = 0, startTime:Number = 0, loop:Boolean = false):void
 		{
 			_transform = new SoundTransform(volume, panning);
-			_channel = _base.play(startTime, loop ? 999 : 0, _transform);
 			
-			// TODO:
-			// Probably listening for the wrong thing here, no internet at the moment to look it up.
-			_base.addEventListener(Event.COMPLETE, _complete);
+			_channel = _base.play(startTime, loop ? 999 : 0, _transform);
+			_channel.addEventListener(Event.SOUND_COMPLETE, _complete);
 		}
 		
 		
@@ -56,8 +54,7 @@ package sentinel.framework.audio
 		
 		private function _complete(event:Event):void
 		{
-			trace('inner');
-			(event.target as flash.media.Sound).removeEventListener(Event.COMPLETE, _complete);
+			(event.target as SoundChannel).removeEventListener(Event.COMPLETE, _complete);
 			_dispatchEvent(SoundEvent.COMPLETE);
 		}
 		

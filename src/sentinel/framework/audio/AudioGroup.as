@@ -47,7 +47,6 @@ package sentinel.framework.audio
 		
 		private function _soundComplete(event:SoundEvent):void
 		{
-			trace('done');
 			// Note: event.sound.removeEventListener(...) not nescessary because its deconstruct()
 			// takes care of that for us.
 			var index:int = _sounds.indexOf(event.sound);
@@ -55,7 +54,6 @@ package sentinel.framework.audio
 			if (index >= 0)
 			{
 				_sounds.splice(index, 1);
-				trace("TEST: " + index);
 			}
 		}
 		
