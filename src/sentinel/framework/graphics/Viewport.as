@@ -1,8 +1,8 @@
 package sentinel.framework.graphics
 {
 	
+	import flash.geom.Point;
 	import sentinel.framework.Service;
-	import starling.geom.Point;
 	
 	
 	/**
@@ -35,6 +35,7 @@ package sentinel.framework.graphics
 		 * A point representing the center of the viewport along both the x and y axis.
 		 */
 		public function get center():Point { return _center; }
+		
 		
 		public override function get name():String { return 'viewport'; }
 		

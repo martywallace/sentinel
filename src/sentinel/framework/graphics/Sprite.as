@@ -3,16 +3,20 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import starling.display.Sprite;
+	import sentinel.framework.util.GraphicsUtil;
 	
 	
 	public class Sprite extends starling.display.Sprite implements IGraphicsContainer
 	{
 		
+		private var _depth:int = 0;
+		private var _autoSort:Boolean = false;
+		
+		
 		public function Sprite(autoSort:Boolean = false)
 		{
 			super();
-			
-			super.autoSort = autoSort;
+			_autoSort = autoSort;
 		}
 		
 		
@@ -22,6 +26,28 @@ package sentinel.framework.graphics
 		}
 		
 		
+		public function sortChildrenByDepth():void
+		{
+			GraphicsUtil.sortChildrenByDepth(this);
+		}
+		
+		
+		public function get depth():int { return _depth; }
+		
+		public function set depth(value:int):void
+		{
+			_depth = value;
+			
+			if (parent && (parent as IGraphicsContainer).autoSort)
+			{
+				(parent as IGraphicsContainer).sortChildrenByDepth();
+			}
+		}
+		
+		public function get autoSort():Boolean { return _autoSort; }
+		public function set autoSort(value:Boolean):void { _autoSort = value; }
+		
+		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }
 		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
 		
 	}

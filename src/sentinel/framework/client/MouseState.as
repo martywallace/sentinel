@@ -1,8 +1,8 @@
 package sentinel.framework.client
 {
 	
+	import flash.geom.Point;
 	import sentinel.framework.util.StringUtil;
-	import starling.geom.Point;
 	
 	
 	/**

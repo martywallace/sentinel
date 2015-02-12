@@ -1,15 +1,17 @@
 package
 {
 	
-	import sentinel.framework.Core;
+	import flash.display.Sprite;
+	import sentinel.framework.geom.Point;
 	
 	
-	public class Main extends Core
+	public class Main extends Sprite
 	{
 		
 		public function Main()
 		{
-			super(Test);
+			var point:Point = new Point();
+			trace(point.x);
 		}
 		
 	}

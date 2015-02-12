@@ -1,7 +1,7 @@
 package sentinel.framework.graphics
 {
 	
-	import starling.geom.Point;
+	import flash.geom.Point;
 	
 	
 	public class Line extends Quad
@@ -15,7 +15,7 @@ package sentinel.framework.graphics
 			
 			x = start.x;
 			y = start.y;
-			rotation = line.angle;
+			rotation = Math.atan2(end.y - start.y, end.x - start.x);
 		}
 		
 	}

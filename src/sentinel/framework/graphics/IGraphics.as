@@ -1,13 +1,13 @@
 package sentinel.framework.graphics
 {
 	
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.IDeconstructs;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
-	import starling.geom.Point;
 	
 	
 	public interface IGraphics extends IDeconstructs

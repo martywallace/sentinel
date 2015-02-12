@@ -1,7 +1,7 @@
 package sentinel.framework.util
 {
 	
-	import starling.geom.Point;
+	import flash.geom.Point;
 	
 	
 	/**
