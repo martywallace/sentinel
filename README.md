@@ -9,9 +9,13 @@ Sentinel is broken down into three top level packages;
 * `testing` - Provides a small collection of classes to get up an running with temporary code (e.g. placeholder menus) as well as some debugging oriented additions including the [`TestGameplay`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/testing/states/TestGameplay.as) class - allowing full control of the [`Camera`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Camera.as) using the arrow keys.
 
 
-### Starling.
+### Dependencies.
 
-It is important to note that a slightly modified ([my own fork](https://github.com/MartyWallace/Starling-Framework)) of Starling is used in Sentinel.
+Sentinel has several dependencies - these are already rolled up into the build (Sentinel.swc) but listed here for reference:
+
+* [Starling](http://gamua.com/starling/)
+* [Starling-Extension-Graphics](https://github.com/StarlingGraphics/Starling-Extension-Graphics)
+* [Box2D](http://www.box2dflash.org/)
 
 
 ### Resources.
@@ -25,4 +29,29 @@ It is important to note that a slightly modified ([my own fork](https://github.c
 
 ### Companion Project.
 
-I am remaking an old ActionScript 2 game using Sentinel, which [you can view here](https://github.com/MartyWallace/DAZ3Sentinel). It should give a rough idea of how to use the framework until I have a thorough walkthrough set up on the website.
+I am remaking an old ActionScript 2 game using Sentinel, which [you can view here](https://github.com/MartyWallace/DAZ3Sentinel). It should give a rough idea of how to use the framework until I have a thorough walkthrough set up on [the website](http://sentinel.martywallace.com).
+
+
+### License.
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Marty Wallace
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
