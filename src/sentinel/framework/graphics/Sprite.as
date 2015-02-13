@@ -2,6 +2,7 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.BaseGame;
+	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import sentinel.framework.util.GraphicsUtil;
 	
@@ -23,6 +24,17 @@ package sentinel.framework.graphics
 		public function deconstruct():void
 		{
 			removeFromParent(true);
+		}
+		
+		
+		public override function addChild(child:DisplayObject):DisplayObject
+		{
+			if (_autoSort)
+			{
+				sortChildrenByDepth();
+			}
+			
+			return super.addChild(child);
 		}
 		
 		

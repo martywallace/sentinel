@@ -5,6 +5,7 @@ package sentinel.framework
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
+	import sentinel.framework.graphics.Quad;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.graphics.Viewport;
 	import starling.core.Starling;
@@ -31,6 +32,7 @@ package sentinel.framework
 		
 		
 		private var _state:State;
+		private var _solidBackground:Quad;
 		private var _services:ServiceManager;
 		private var _nextId:uint = 1;
 		
@@ -50,6 +52,9 @@ package sentinel.framework
 			]).concat(defineServices() || new <Service>[]));
 			
 			_services.construct();
+			
+			_solidBackground = new Quad(viewport.width, viewport.height, 0xFFFFFF);
+			addChild(_solidBackground);
 			
 			// Initialize user game construction code.
 			construct();
@@ -77,6 +82,8 @@ package sentinel.framework
 			}
 			
 			_state = state;
+			_solidBackground.color = _state.__backgroundColor;
+			
 			addChild(_state.graphics as DisplayObject);
 		}
 		
