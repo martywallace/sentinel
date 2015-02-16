@@ -3,7 +3,6 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import starling.display.Image;
-	import starling.textures.Texture;
 	
 	
 	public class Image extends starling.display.Image implements IGraphics
@@ -14,7 +13,7 @@ package sentinel.framework.graphics
 		
 		public function Image(texture:Texture)
 		{
-			super(texture);
+			super(texture.__base);
 		}
 		
 		

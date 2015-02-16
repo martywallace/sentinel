@@ -2,10 +2,11 @@ package sentinel.framework
 {
 	
 	import flash.media.Sound;
+	import sentinel.framework.audio.Sound;
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.graphics.Image;
 	import sentinel.framework.graphics.Sheet;
-	import sentinel.framework.audio.Sound;
-	import starling.textures.Texture;
+	import sentinel.framework.graphics.Texture;
 	
 	
 	/**
@@ -15,72 +16,72 @@ package sentinel.framework
 	public class Library extends Service
 	{
 		
-		private static const TEXTURES:String = 'textures';
-		private static const SHEETS:String = 'sheets';
-		private static const AUDIO:String = 'audio';
+		public static const AUDIO:String = 'audio';
+		public static const TEXTURE:String = 'texture';
+		public static const SHEET:String = 'sheet';
 		
 		
-		private var _content:Object = { };
+		private var _assets:Object = { };
 		
 		
-		private function _add(category:String, name:String, resource:*):void
+		public function registerAssets(assets:Object):void
 		{
-			if (!_has(category, name))
+			for (var assetName:String in assets)
 			{
-				if (!_content.hasOwnProperty(category)) _content[category] = { };
-				_content[category][name] = resource;
+				if ((assets[assetName] is ILibraryAsset))
+				{
+					var asset:ILibraryAsset = assets[assetName] as ILibraryAsset;
+					
+					if (!_has(asset.assetType, assetName))
+					{
+						if (!_assets.hasOwnProperty(asset.assetType)) _assets[asset.assetType] = { };
+						_assets[asset.assetType][assetName] = asset;
+					}
+					else
+					{
+						throw FrameworkError.compile('Library asset {{ name }} of type {{ type }} already exists.', {
+							name: assetName,
+							type: asset.assetType
+						});
+					}
+				}
+				else
+				{
+					throw FrameworkError.compile('The object provided to Library.registerAssets() can only contain ILibraryAssets.');
+				}
+			}
+		}
+		
+		
+		private function _has(type:String, name:String):Boolean
+		{
+			return _assets.hasOwnProperty(type) && _assets[type].hasOwnProperty(name);
+		}
+		
+		
+		private function _find(type:String, name:String):ILibraryAsset
+		{
+			if (_has(type, name))
+			{
+				return _assets[type][name];
 			}
 			else
 			{
-				throw new Error('Library resource "' + name + '" under category "' + category + '" already exists.');
+				throw FrameworkError.compile('The library asset {{ name }} of type {{ type }} does not exist.', {
+					name: name,
+					type: type
+				});
 			}
-		}
-		
-		
-		private function _has(category:String, name:String):Boolean
-		{
-			return _content.hasOwnProperty(category) && _content[category].hasOwnProperty(name);
-		}
-		
-		
-		private function _find(category:String, name:String):*
-		{
-			if (_has(category, name))
-			{
-				return _content[category][name];
-			}
-			else
-			{
-				throw new Error('Library resource "' + name + '" under category "' + category + '" does not exist.');
-			}
-		}
-		
-		
-		public function addTexture(name:String, texture:Texture):void
-		{
-			_add(TEXTURES, name, texture);
-		}
-		
-		
-		public function addSheet(name:String, sheet:Sheet):void
-		{
-			_add(SHEETS, name, sheet);
-		}
-		
-		
-		public function addAudio(name:String, audio:flash.media.Sound):void
-		{
-			_add(AUDIO, name, audio);
 		}
 		
 		
 		public function getTexture(name:String):Texture
 		{
-			return _find(TEXTURES, name) as Texture;
+			return _find(TEXTURE, name) as Texture;
 		}
 		
 		
-		public function getTextureFromAtlas(sheetName:String, regionName:String):Texture
+		public function getTextureFromSheet(sheetName:String, regionName:String):Texture
 		{
 			return getSheet(sheetName).getTexture(regionName);
 		}
@@ -88,7 +89,7 @@ package sentinel.framework
 		
 		public function getSheet(name:String):Sheet
 		{
-			return _find(SHEETS, name) as Sheet;
+			return _find(SHEET, name) as Sheet;
 		}
 		
 		
@@ -98,9 +99,9 @@ package sentinel.framework
 		}
 		
 		
-		public function getImageFromAtlas(sheetName:String, regionName:String):Image
+		public function getImageFromSheet(sheetName:String, regionName:String):Image
 		{
-			return new Image(getTextureFromAtlas(sheetName, regionName));
+			return new Image(getTextureFromSheet(sheetName, regionName));
 		}
 		
 		

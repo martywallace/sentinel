@@ -1,19 +1,21 @@
 package sentinel.framework.graphics
 {
 	
-	import starling.textures.Texture;
+	import sentinel.framework.ILibraryAsset;
+	import sentinel.framework.Library;
 	import starling.textures.TextureAtlas;
+	import starling.textures.Texture;
 	
 	
-	public class Sheet
+	public class Sheet implements ILibraryAsset
 	{
 		
 		private var _base:TextureAtlas;
 		
 		
-		public function Sheet(texture:Texture, regions:Object)
+		public function Sheet(texture:sentinel.framework.graphics.Texture, regions:Object)
 		{
-			_base = new TextureAtlas(texture);
+			_base = new TextureAtlas(texture.__base);
 			
 			for (var regionName:String in regions)
 			{
@@ -22,19 +24,29 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function getTexture(name:String):Texture
+		public function getTexture(name:String):sentinel.framework.graphics.Texture
 		{
-			return _base.getTexture(name);
+			return new sentinel.framework.graphics.Texture(_base.getTexture(name));
 		}
 		
 		
-		public function getTextures(prefix:String):Vector.<Texture>
+		public function getTextures(prefix:String):Vector.<sentinel.framework.graphics.Texture>
 		{
-			return _base.getTextures(prefix);
+			var result:Vector.<sentinel.framework.graphics.Texture> = new <sentinel.framework.graphics.Texture>[];
+			
+			for each(var t:starling.textures.Texture in _base.getTextures(prefix))
+			{
+				result.push(new sentinel.framework.graphics.Texture(t));
+			}
+			
+			return result;
 		}
 		
 		
 		internal function get __base():TextureAtlas { return _base; }
+		
+		
+		public function get assetType():String { return Library.SHEET; }
 		
 	}
 	

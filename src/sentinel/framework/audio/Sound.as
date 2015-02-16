@@ -7,13 +7,15 @@ package sentinel.framework.audio
 	import flash.media.SoundTransform;
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.events.SoundEvent;
+	import sentinel.framework.ILibraryAsset;
+	import sentinel.framework.Library;
 	
 	
 	/**
 	 * A Sound managed by the Audio component.
 	 * @author Marty Wallace.
 	 */
-	public class Sound extends EventDispatcher
+	public class Sound extends EventDispatcher implements ILibraryAsset
 	{
 		
 		private var _base:flash.media.Sound;
@@ -88,6 +90,8 @@ package sentinel.framework.audio
 		}
 		
 		public function get position():Number { return _channel.position; }
+		
+		public function get assetType():String { return Library.AUDIO; }
 		
 	}
 	
