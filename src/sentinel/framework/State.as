@@ -36,8 +36,6 @@ package sentinel.framework
 		
 		
 		/**
-		 * TODO: Make this change the color of a single Quad already placed by the BaseGame vs creating
-		 * a new one here.
 		 * Provides a solid background color for this State.
 		 */
 		protected function get backgroundColor():uint { return 0xFFFFFF; }

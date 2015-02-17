@@ -19,13 +19,18 @@ package sentinel.framework.audio
 	{
 		
 		private var _base:SoundChannel;
+		private var _group:AudioGroup;
 		private var _sound:Sound;
 		private var _transform:SoundTransform;
 		
 		
-		public function Channel(base:SoundChannel, sound:Sound, transform:SoundTransform)
+		/**
+		 * Internal - use <code>audio.{sfx|music}.play(...)</code> instead.
+		 */
+		public function Channel(base:SoundChannel, group:AudioGroup, sound:Sound, transform:SoundTransform)
 		{
 			_base = base;
+			_group = group;
 			_sound = sound;
 			_transform = transform;
 			
@@ -42,6 +47,9 @@ package sentinel.framework.audio
 		}
 		
 		
+		/**
+		 * Stops the sound being played through this Channel.
+		 */
 		public function stop():void
 		{
 			_base.stop();
@@ -76,23 +84,41 @@ package sentinel.framework.audio
 		internal function get __transform():SoundTransform { return _transform; }
 		
 		
+		/**
+		 * The volume level of this Channel in the range 0 to 1. Note that the volume of this Channel
+		 * is multiplied by the volume of the AudioGroup responsible for producing it.
+		 */
 		public function get volume():Number { return _transform.volume; }
 		public function set volume(value:Number):void
 		{
-			_transform.volume = NumberUtil.clamp(value, 0, 1);
+			_transform.volume = NumberUtil.clamp(value, 0, 1) * _group.volume;
 			_base.soundTransform = _transform;
 		}
 		
-		
+		/**
+		 * The left-to-right panning of this Channel in the range -1 to 1. Note that the panning of
+		 * this Channel is multiplied by the panning of the AudioGroup responsible for producing it.
+		 */
 		public function get pan():Number { return _transform.pan; }
 		public function set pan(value:Number):void
 		{
-			_transform.pan = NumberUtil.clamp(value, -1, 1);
+			_transform.pan = NumberUtil.clamp(value, -1, 1) * _group.pan;
 			_base.soundTransform = _transform;
 		}
 		
+		/**
+		 * The AudioGroup responsible for producing this Channel.
+		 */
+		public function get group():AudioGroup { return _group; }
 		
+		/**
+		 * The Sound asset being played through this Channel.
+		 */
 		public function get sound():Sound { return _sound; }
+		
+		/**
+		 * The current playhead position of the Channel, in milliseconds.
+		 */
 		public function get position():Number { return _base.position; }
 		
 	}

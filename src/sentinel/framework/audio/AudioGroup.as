@@ -30,12 +30,27 @@ package sentinel.framework.audio
 		
 		
 		/**
+		 * Stops all active Channels that were played through this group. Reference to those Channels
+		 * via <code>channels</code> will be discarded.
+		 */
+		public function stopAll():void
+		{
+			for each(var channel:Channel in _channels)
+			{
+				channel.stop();
+			}
+			
+			_channels = new <Channel>[];
+		}
+		
+		
+		/**
 		 * @private
 		 */
 		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Channel
 		{
 			var sound:Sound = _library.getSound(asset);
-			var channel:Channel = sound.__play(volume * _transform.volume, pan * _transform.pan, start, loop);
+			var channel:Channel = sound.__play(this, volume * _transform.volume, pan * _transform.pan, start, loop);
 			
 			channel.addEventListener(ChannelEvent.COMPLETE, _channelComplete);
 			_channels.push(channel);
@@ -54,8 +69,6 @@ package sentinel.framework.audio
 			{
 				_channels.splice(index, 1);
 			}
-			
-			trace(_channels);
 		}
 		
 		

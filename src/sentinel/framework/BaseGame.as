@@ -73,18 +73,42 @@ package sentinel.framework
 		/**
 		 * Loads a new State. Unloads the current state, if one is set.
 		 * @param state The new State to load.
+		 * @param stopMusic Whether or not to stop the current playing music. If the new state defines
+		 * its own background track, it will override the music regardless of it being stopped or not.
 		 */
-		public function loadState(state:State):void
+		public function loadState(state:State, stopMusic:Boolean = true):void
+		{
+			unloadState(stopMusic);
+			
+			_state = state;
+			_solidBackground.color = _state.__backgroundColor;
+			
+			if (_state.__backgroundMusic !== null)
+			{
+				// Play background music attached to the state.
+				audio.music.play(_state.__backgroundMusic);
+			}
+			
+			addChild(_state.graphics as DisplayObject);
+		}
+		
+		
+		/**
+		 * Unloads the current active state, if one exists. This method is automatically called at
+		 * the beginning of <code>loadState()</code>.
+		 * @param stopMusic Whether or not to stop the current playing music.
+		 */
+		public function unloadState(stopMusic:Boolean = true):void
 		{
 			if (_state !== null)
 			{
 				_state.deconstruct();
 			}
 			
-			_state = state;
-			_solidBackground.color = _state.__backgroundColor;
-			
-			addChild(_state.graphics as DisplayObject);
+			if (stopMusic)
+			{
+				audio.music.stopAll();
+			}
 		}
 		
 		
