@@ -17,22 +17,22 @@ package sentinel.framework.audio
 		private var _base:flash.media.Sound;
 		
 		
-		public function Sound(asset:flash.media.Sound)
+		public function Sound(base:flash.media.Sound)
 		{
-			_base = asset;
+			_base = base;
 		}
 		
 		
 		internal function __play(volume:Number = 1, panning:Number = 0, startTime:Number = 0, loop:Boolean = false):Channel
 		{
 			var transform:SoundTransform = new SoundTransform(volume, panning);
-			return new Channel(_base.play(startTime, loop ? 999 : 0, transform), transform);
+			return new Channel(_base.play(startTime, loop ? 999 : 0, transform), this, transform);
 		}
 		
 		
 		internal function get __base():flash.media.Sound { return _base; }
 		
-		public function get assetType():String { return Library.AUDIO; }
+		public function get type():String { return Library.SOUND; }
 		
 	}
 	

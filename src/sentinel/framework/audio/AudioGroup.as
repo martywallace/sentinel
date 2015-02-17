@@ -34,7 +34,7 @@ package sentinel.framework.audio
 		 */
 		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Channel
 		{
-			var sound:Sound = _library.getAudio(asset);
+			var sound:Sound = _library.getSound(asset);
 			var channel:Channel = sound.__play(volume * _transform.volume, pan * _transform.pan, start, loop);
 			
 			channel.addEventListener(ChannelEvent.COMPLETE, _channelComplete);
@@ -54,6 +54,8 @@ package sentinel.framework.audio
 			{
 				_channels.splice(index, 1);
 			}
+			
+			trace(_channels);
 		}
 		
 		

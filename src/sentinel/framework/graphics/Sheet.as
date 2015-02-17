@@ -46,7 +46,7 @@ package sentinel.framework.graphics
 		internal function get __base():TextureAtlas { return _base; }
 		
 		
-		public function get assetType():String { return Library.SHEET; }
+		public function get type():String { return Library.SHEET; }
 		
 	}
 	

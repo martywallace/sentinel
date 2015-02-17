@@ -4,6 +4,13 @@ package sentinel.framework.audio
 	import sentinel.framework.Library;
 	
 	
+	/**
+	 * The AudioGroup responsible for playing background music within your game. Background music can
+	 * be more easily defined by overriding the <code>backgroundMusic</code> getter on your active
+	 * State instance, however this class may be needed to manage multiple instances of background
+	 * music for a single state.
+	 * @author Marty Wallace.
+	 */
 	public class MusicGroup extends AudioGroup
 	{
 		
@@ -20,8 +27,9 @@ package sentinel.framework.audio
 		{
 			if (_current !== null)
 			{
-				// Don't let a MusicGroup play two things at the same time.
-				_current.stop();
+				// Don't let a MusicGroup play two things at the same time. Note that deconstructing
+				// a channel stops it.
+				_current.deconstruct();
 			}
 			
 			_current = __play(asset, volume, pan, start, loop);

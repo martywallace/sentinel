@@ -54,7 +54,7 @@ package sentinel.framework.graphics
 		internal function get __base():starling.textures.Texture { return _base; }
 		
 		
-		public function get assetType():String { return Library.TEXTURE; }
+		public function get type():String { return Library.TEXTURE; }
 		
 	}
 	

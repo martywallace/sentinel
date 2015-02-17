@@ -1,7 +1,6 @@
 package sentinel.framework
 {
 	
-	import flash.media.Sound;
 	import sentinel.framework.audio.Sound;
 	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.graphics.Image;
@@ -16,7 +15,7 @@ package sentinel.framework
 	public class Library extends Service
 	{
 		
-		public static const AUDIO:String = 'audio';
+		public static const SOUND:String = 'sound';
 		public static const TEXTURE:String = 'texture';
 		public static const SHEET:String = 'sheet';
 		
@@ -24,6 +23,11 @@ package sentinel.framework
 		private var _assets:Object = { };
 		
 		
+		/**
+		 * Registers a collection of library assets for use in your game.
+		 * @param assets An object whose keys are the names used to reference the assets via the
+		 * Library service later and whose values are instances of ILibraryAsset.
+		 */
 		public function registerAssets(assets:Object):void
 		{
 			for (var assetName:String in assets)
@@ -32,16 +36,16 @@ package sentinel.framework
 				{
 					var asset:ILibraryAsset = assets[assetName] as ILibraryAsset;
 					
-					if (!_has(asset.assetType, assetName))
+					if (!has(asset.type, assetName))
 					{
-						if (!_assets.hasOwnProperty(asset.assetType)) _assets[asset.assetType] = { };
-						_assets[asset.assetType][assetName] = asset;
+						if (!_assets.hasOwnProperty(asset.type)) _assets[asset.type] = { };
+						_assets[asset.type][assetName] = asset;
 					}
 					else
 					{
 						throw FrameworkError.compile('Library asset {{ name }} of type {{ type }} already exists.', {
 							name: assetName,
-							type: asset.assetType
+							type: asset.type
 						});
 					}
 				}
@@ -53,17 +57,27 @@ package sentinel.framework
 		}
 		
 		
-		private function _has(type:String, name:String):Boolean
+		/**
+		 * Determine whether the Library contains an asset with the specified name and type.
+		 * @param type The type of asset, defined by <code>ILibraryAsset.type</code>.
+		 * @param name The name assigned to the asset during <code>Library.registerAssets()</code>.
+		 */
+		public function has(type:String, name:String):Boolean
 		{
 			return _assets.hasOwnProperty(type) && _assets[type].hasOwnProperty(name);
 		}
 		
 		
-		private function _find(type:String, name:String):ILibraryAsset
+		/**
+		 * Finds a library assets based on the specified name and type.
+		 * @param type The type of asset to find, defined by <code>ILibraryAsset.type</code>.
+		 * @param name The name assigned to the asset during <code>Library.registerAssets()</code>.
+		 */
+		public function find(type:String, name:String):ILibraryAsset
 		{
-			if (_has(type, name))
+			if (has(type, name))
 			{
-				return _assets[type][name];
+				return _assets[type][name] as ILibraryAsset;
 			}
 			else
 			{
@@ -77,7 +91,7 @@ package sentinel.framework
 		
 		public function getTexture(name:String):Texture
 		{
-			return _find(TEXTURE, name) as Texture;
+			return find(TEXTURE, name) as Texture;
 		}
 		
 		
@@ -89,7 +103,7 @@ package sentinel.framework
 		
 		public function getSheet(name:String):Sheet
 		{
-			return _find(SHEET, name) as Sheet;
+			return find(SHEET, name) as Sheet;
 		}
 		
 		
@@ -105,9 +119,9 @@ package sentinel.framework
 		}
 		
 		
-		public function getAudio(name:String):sentinel.framework.audio.Sound
+		public function getSound(name:String):Sound
 		{
-			return new sentinel.framework.audio.Sound(_find(AUDIO, name) as flash.media.Sound);
+			return find(SOUND, name) as Sound;
 		}
 		
 		

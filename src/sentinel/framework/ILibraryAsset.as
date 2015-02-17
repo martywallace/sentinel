@@ -9,9 +9,9 @@ package sentinel.framework
 	{
 		
 		/**
-		 * Describes the type of asset (e.g. texture, audio).
+		 * Describes the type of asset (e.g. texture, sound).
 		 */
-		function get assetType():String;
+		function get type():String;
 		
 	}
 	

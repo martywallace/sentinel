@@ -2,6 +2,7 @@ package sentinel.framework.events
 {
 	
 	import sentinel.framework.audio.Channel;
+	import sentinel.framework.audio.Sound;
 	
 	
 	public class ChannelEvent extends Event
@@ -18,6 +19,7 @@ package sentinel.framework.events
 		
 		
 		public function get channel():Channel { return target as Channel; }
+		public function get sound():Sound { return channel.sound; }
 		
 	}
 
