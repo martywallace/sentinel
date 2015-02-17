@@ -2,8 +2,8 @@ package sentinel.framework.audio
 {
 	
 	import flash.media.SoundTransform;
+	import sentinel.framework.events.ChannelEvent;
 	import sentinel.framework.Library;
-	import sentinel.framework.events.SoundEvent;
 	import sentinel.framework.util.NumberUtil;
 	
 	
@@ -17,7 +17,7 @@ package sentinel.framework.audio
 		private var _audio:Audio;
 		private var _library:Library;
 		private var _transform:SoundTransform;
-		private var _sounds:Vector.<Sound>;
+		private var _channels:Vector.<Channel>;
 		
 		
 		public function AudioGroup(audio:Audio, library:Library)
@@ -25,35 +25,34 @@ package sentinel.framework.audio
 			_audio = audio;
 			_library = library;
 			_transform = new SoundTransform();
-			_sounds = new <Sound>[];
+			_channels = new <Channel>[];
 		}
 		
 		
 		/**
 		 * @private
 		 */
-		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Sound
+		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Channel
 		{
 			var sound:Sound = _library.getAudio(asset);
+			var channel:Channel = sound.__play(volume * _transform.volume, pan * _transform.pan, start, loop);
 			
-			sound.addEventListener(SoundEvent.COMPLETE, _soundComplete);
-			sound.__play(volume * this.volume, pan * this.pan, start, loop);
+			channel.addEventListener(ChannelEvent.COMPLETE, _channelComplete);
+			_channels.push(channel);
 			
-			_sounds.push(sound);
-			
-			return sound;
+			return channel;
 		}
 		
 		
-		private function _soundComplete(event:SoundEvent):void
+		private function _channelComplete(event:ChannelEvent):void
 		{
 			// Note: event.sound.removeEventListener(...) not nescessary because its deconstruct()
 			// takes care of that for us.
-			var index:int = _sounds.indexOf(event.sound);
+			var index:int = _channels.indexOf(event.channel);
 			
 			if (index >= 0)
 			{
-				_sounds.splice(index, 1);
+				_channels.splice(index, 1);
 			}
 		}
 		
@@ -71,9 +70,9 @@ package sentinel.framework.audio
 		public function set pan(value:Number):void { _transform.pan = NumberUtil.clamp(value, -1, 1); }
 		
 		/**
-		 * Returns a list of all the current playing Sounds.
+		 * Returns a list of all the current playing sound channels.
 		 */
-		public function get sounds():Vector.<Sound> { return _sounds; }
+		public function get channels():Vector.<Channel> { return _channels; }
 		
 	}
 	

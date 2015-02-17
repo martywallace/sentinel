@@ -7,7 +7,7 @@ package sentinel.framework.audio
 	public class MusicGroup extends AudioGroup
 	{
 		
-		private var _current:Sound;
+		private var _current:Channel;
 		
 		
 		public function MusicGroup(audio:Audio, library:Library)
@@ -32,7 +32,7 @@ package sentinel.framework.audio
 		// ...
 		
 		
-		public function get current():Sound { return _current; }
+		public function get current():Channel { return _current; }
 		
 	}
 	

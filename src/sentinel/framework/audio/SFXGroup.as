@@ -13,7 +13,7 @@ package sentinel.framework.audio
 		}
 		
 		
-		public function play(asset:String, volume:Number = 1, pan:Number = 0):Sound
+		public function play(asset:String, volume:Number = 1, pan:Number = 0):Channel
 		{
 			return __play(asset, volume, pan);
 		}
