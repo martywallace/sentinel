@@ -1,7 +1,6 @@
 package sentinel.framework.audio
 {
 	
-	import flash.media.SoundTransform;
 	import sentinel.framework.events.ChannelEvent;
 	import sentinel.framework.Library;
 	import sentinel.framework.util.NumberUtil;
@@ -16,7 +15,8 @@ package sentinel.framework.audio
 		
 		private var _audio:Audio;
 		private var _library:Library;
-		private var _transform:SoundTransform;
+		private var _volume:Number = 1;
+		private var _pan:Number = 0;
 		private var _channels:Vector.<Channel>;
 		
 		
@@ -24,7 +24,6 @@ package sentinel.framework.audio
 		{
 			_audio = audio;
 			_library = library;
-			_transform = new SoundTransform();
 			_channels = new <Channel>[];
 		}
 		
@@ -50,7 +49,9 @@ package sentinel.framework.audio
 		internal function __play(asset:String, volume:Number = 1, pan:Number = 0, start:Number = 0, loop:Boolean = false):Channel
 		{
 			var sound:Sound = _library.getSound(asset);
-			var channel:Channel = sound.__play(this, volume * _transform.volume, pan * _transform.pan, start, loop);
+			var channel:Channel = sound.__play(this, volume * _volume, pan * _pan, start, loop);
+			
+			trace(volume * _volume);
 			
 			channel.addEventListener(ChannelEvent.COMPLETE, _channelComplete);
 			_channels.push(channel);
@@ -75,14 +76,20 @@ package sentinel.framework.audio
 		/**
 		 * The volume level of sounds played through this group. The volume is between 0 and 1.
 		 */
-		public function get volume():Number { return _transform.volume; }
-		public function set volume(value:Number):void { _transform.volume = NumberUtil.clamp(value, 0, 1); }
+		public function get volume():Number { return _volume; }
+		public function set volume(value:Number):void
+		{
+			_volume = NumberUtil.clamp(value, 0, 1);
+		}
 		
 		/**
 		 * The left-to-right panning of the sound. The pan is between -1 for full left and 1 for full right. 
 		 */
-		public function get pan():Number { return _transform.pan; }
-		public function set pan(value:Number):void { _transform.pan = NumberUtil.clamp(value, -1, 1); }
+		public function get pan():Number { return _pan; }
+		public function set pan(value:Number):void
+		{
+			_pan = NumberUtil.clamp(value, -1, 1);
+		}
 		
 		/**
 		 * Returns a list of all the current playing sound channels.

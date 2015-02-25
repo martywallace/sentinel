@@ -18,6 +18,12 @@ package sentinel.framework.audio
 		}
 		
 		
+		/**
+		 * Plays a sound effect.
+		 * @param asset The name of the asset to play.
+		 * @param volume The sound volume.
+		 * @param pan The left to right panning of the sound.
+		 */
 		public function play(asset:String, volume:Number = 1, pan:Number = 0):Channel
 		{
 			return __play(asset, volume, pan);

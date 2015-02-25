@@ -22,6 +22,8 @@ package sentinel.framework.audio
 		private var _group:AudioGroup;
 		private var _sound:Sound;
 		private var _transform:SoundTransform;
+		private var _baseVolume:Number;
+		private var _basePan:Number;
 		
 		
 		/**
@@ -34,6 +36,10 @@ package sentinel.framework.audio
 			_sound = sound;
 			_transform = transform;
 			
+			_baseVolume = transform.volume;
+			_basePan = transform.pan;
+			
+			_base.soundTransform = transform;
 			_base.addEventListener(Event.SOUND_COMPLETE, _complete);
 		}
 		
@@ -88,23 +94,36 @@ package sentinel.framework.audio
 		 * The volume level of this Channel in the range 0 to 1. Note that the volume of this Channel
 		 * is multiplied by the volume of the AudioGroup responsible for producing it.
 		 */
-		public function get volume():Number { return _transform.volume; }
+		public function get volume():Number { return _baseVolume; }
 		public function set volume(value:Number):void
 		{
-			_transform.volume = NumberUtil.clamp(value, 0, 1) * _group.volume;
+			_baseVolume = NumberUtil.clamp(value, 0, 1);
+			_transform.volume = _baseVolume * _group.volume;
 			_base.soundTransform = _transform;
 		}
+		
+		/**
+		 * The volume level after applying the volume level of the associated AudioGroup.
+		 */
+		public function get realVolume():Number { return _transform.volume; }
 		
 		/**
 		 * The left-to-right panning of this Channel in the range -1 to 1. Note that the panning of
 		 * this Channel is multiplied by the panning of the AudioGroup responsible for producing it.
 		 */
-		public function get pan():Number { return _transform.pan; }
+		public function get pan():Number { return _basePan; }
 		public function set pan(value:Number):void
 		{
-			_transform.pan = NumberUtil.clamp(value, -1, 1) * _group.pan;
+			_basePan = NumberUtil.clamp(value, -1, 1);
+			_transform.pan = _basePan * _group.pan;
 			_base.soundTransform = _transform;
 		}
+		
+		/**
+		 * The left-to-right panning after applying the left-to-right panning of the associated
+		 * AudioGroup.
+		 */
+		public function get realPan():Number { return _transform.pan; }
 		
 		/**
 		 * The AudioGroup responsible for producing this Channel.
