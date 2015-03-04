@@ -45,7 +45,7 @@ package sentinel.gameplay.world
 			catch (error:ReferenceError)
 			{
 				throw FrameworkError.compile('Type {{ type }} could not be loaded. You may need to manually reference this type in your project.', {
-					type: className
+					type: type
 				});
 				
 				return null;

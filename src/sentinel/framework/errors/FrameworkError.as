@@ -23,13 +23,15 @@ package sentinel.framework.errors
 				}
 			}
 			
-			return new FrameworkError(message, 1);
+			return new FrameworkError(message, 0);
 		}
 		
 		
 		public function FrameworkError(message:String, id:int)
 		{
 			super(message, id);
+			
+			name = 'SentinelFrameworkError';
 		}
 		
 	}
