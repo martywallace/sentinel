@@ -2,6 +2,7 @@ package sentinel.gameplay.world
 {
 	
 	import sentinel.framework.Data;
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
@@ -154,7 +155,10 @@ package sentinel.gameplay.world
 					}
 					else
 					{
-						throw new Error('Unique Being conflict using uniqueName "' + unique.uniqueName + '".');
+						throw FrameworkError.compile('A unique Being with the uniqueName {{ uniqueName }} already exists in the target world.', {
+							uniqueName: unique.uniqueName
+						});
+						
 						return null;
 					}
 				}
@@ -175,7 +179,11 @@ package sentinel.gameplay.world
 					}
 					else
 					{
-						throw new Error('Groupable Being conflict in group "' + groupable.groupName + '" using nameInGroup "' + groupable.nameInGroup + '".');
+						throw FrameworkError.compile('A groupable being with the nameInGroup value {{ nameInGroup }} belonging to {{ groupName }} already exists in the target world.', {
+							nameInGroup: groupable.nameInGroup,
+							groupName: groupable.groupName
+						});
+						
 						return null;
 					}
 				}
@@ -304,7 +312,7 @@ package sentinel.gameplay.world
 		protected final override function addedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) removed(thing as GameplayState);
-			else throw new Error("World can only be added to GameplayState.");
+			else throw FrameworkError.compile('World can only be added to GameplayState.');
 		}
 		
 		
@@ -320,7 +328,7 @@ package sentinel.gameplay.world
 		protected final override function removedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) removed(thing as GameplayState);
-			else throw new Error("World can only be removed from GameplayState.");
+			else throw FrameworkError.compile('World can only be removed from GameplayState.');
 		}
 		
 		

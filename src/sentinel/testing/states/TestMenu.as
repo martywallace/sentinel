@@ -1,6 +1,7 @@
 package sentinel.testing.states
 {
 	
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.State;
 	import sentinel.testing.ui.TestMenuButton;
 	
@@ -48,7 +49,7 @@ package sentinel.testing.states
 				}
 			}
 			
-			else throw new Error("Buttons have already been defined for this TestMenu.");
+			else throw FrameworkError.compile('Buttons have already been defined for this TestMenu.');
 		}
 		
 	}

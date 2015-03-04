@@ -1,6 +1,9 @@
 package sentinel.framework
 {
 	
+	import sentinel.framework.errors.FrameworkError;
+	
+	
 	/**
 	 * Manages the relationship between a collection of Services and an IServiceable.
 	 * @author Marty Wallace.
@@ -34,12 +37,14 @@ package sentinel.framework
 					}
 					else
 					{
-						throw new Error('Service named "' + service.name + '" already exists.');
+						throw FrameworkError.compile('Service named {{ service }} already exists.', {
+							service: service.name
+						});
 					}
 				}
 				else
 				{
-					throw new Error("Services must define a name.");
+					throw FrameworkError.compile('Services must have a name.');
 				}
 			}
 		}

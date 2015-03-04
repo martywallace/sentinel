@@ -3,6 +3,7 @@ package sentinel.gameplay.world
 	
 	import flash.utils.getDefinitionByName;
 	import sentinel.framework.Data;
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.IServiceable;
 	import sentinel.framework.Service;
@@ -31,8 +32,6 @@ package sentinel.gameplay.world
 		 * Attempts to create a new Being from save data obtained via <code>Being.save()</code>.
 		 * @param type The type of object to try and create, as a fully qualified class name.
 		 * @param data The save data.
-		 * 
-		 * @csharp Change to something more useful like public T Create(...) where T : new(), Being.
 		 */
 		public static function create(type:String, save:Data = null):Being
 		{
@@ -45,7 +44,10 @@ package sentinel.gameplay.world
 			}
 			catch (error:ReferenceError)
 			{
-				throw new Error('Type "' + type + '" could not be loaded. You may need to manually reference this type in your project.');
+				throw FrameworkError.compile('Type {{ type }} could not be loaded. You may need to manually reference this type in your project.', {
+					type: className
+				});
+				
 				return null;
 			}
 			
@@ -269,7 +271,7 @@ package sentinel.gameplay.world
 			}
 			else
 			{
-				throw new Error("Instances of Being can only be added to a World.");
+				throw FrameworkError.compile('Instances of Being can only be added to a World.');
 			}
 		}
 		
@@ -291,7 +293,7 @@ package sentinel.gameplay.world
 			}
 			else
 			{
-				throw new Error("Instances of Being can only be removed from a World.");
+				throw FrameworkError.compile('Instances of Being can only be removed from a World.');
 			}
 		}
 		

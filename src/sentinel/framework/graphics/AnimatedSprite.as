@@ -2,8 +2,9 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.BaseGame;
-	import starling.display.MovieClip;
+	import sentinel.framework.graphics.Texture;
 	import starling.textures.Texture;
+	import starling.display.MovieClip;
 	
 	
 	public class AnimatedSprite extends MovieClip implements IGraphics
@@ -12,9 +13,16 @@ package sentinel.framework.graphics
 		private var _depth:int = 0;
 		
 		
-		public function AnimatedSprite(textures:Vector.<Texture>, fps:int = 12)
+		public function AnimatedSprite(textures:Vector.<sentinel.framework.graphics.Texture>, fps:int = 12)
 		{
-			super(textures, fps);
+			var native:Vector.<starling.textures.Texture> = new <starling.textures.Texture>[];
+			
+			for each(var texture:sentinel.framework.graphics.Texture in textures)
+			{
+				native.push(texture.__base);
+			}
+			
+			super(native, fps);
 		}
 		
 		

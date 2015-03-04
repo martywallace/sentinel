@@ -22,12 +22,21 @@ package sentinel.gameplay.util
 		public static const SOUTH_WEST:String = 'sw';
 		
 		
+		/**
+		 * Converts a compass direction to a Vector2D representing the direction.
+		 * @param direction The compass direction e.g. <code>Compass.NORTH</code>.
+		 * @param length The length of the result Vector2D.
+		 */
 		public static function toVector(direction:String, length:Number = 1):Vector2D
 		{
 			return Vector2D.inDirection(toAngle(direction), length);
 		}
 		
 		
+		/**
+		 * Converts a compass direction to its angle in radians.
+		 * @param direction The compass direction e.g. <code>Compass.NORTH</code>.
+		 */
 		public static function toAngle(direction:String):Number
 		{
 			var ei:Number = Math.PI / 4;

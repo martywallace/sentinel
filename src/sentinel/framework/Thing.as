@@ -6,6 +6,7 @@ package sentinel.framework
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.events.ThingEvent;
 	import sentinel.framework.graphics.Viewport;
@@ -151,13 +152,13 @@ package sentinel.framework
 			
 			if (thing === this)
 			{
-				throw new Error('You cannot add a Thing to itself.');
+				throw FrameworkError.compile('You cannot add a Thing to itself.');
 				return null;
 			}
 			
 			if (isDescendantOf(thing))
 			{
-				throw new Error('You cannot add a Thing one of its ancestors.');
+				throw FrameworkError.compile('You cannot add a Thing one of its ancestors.');
 				return null;
 			}
 			

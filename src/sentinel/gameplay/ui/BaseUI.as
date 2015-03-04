@@ -1,13 +1,14 @@
 package sentinel.gameplay.ui
 {
 	
+	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.graphics.IGraphics;
 	import sentinel.framework.graphics.IGraphicsContainer;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.IMouseDataProvider;
 	import sentinel.framework.Thing;
-	import sentinel.gameplay.world.BaseWorld;
 	import sentinel.gameplay.states.GameplayState;
+	import sentinel.gameplay.world.BaseWorld;
 	
 	
 	/**
@@ -50,7 +51,7 @@ package sentinel.gameplay.ui
 		protected final override function addedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) added(thing as GameplayState);
-			else throw new Error("UI can only be added to GameplayState.");
+			else throw FrameworkError.compile('UI can only be added to GameplayState.');
 		}
 		
 		
@@ -63,7 +64,7 @@ package sentinel.gameplay.ui
 		protected final override function removedT(thing:Thing):void
 		{
 			if ((thing is GameplayState)) removed(thing as GameplayState);
-			else throw new Error("UI can only be removed from GameplayState.");
+			else throw FrameworkError.compile('UI can only be removed from GameplayState.');
 		}
 		
 		

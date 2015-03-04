@@ -51,8 +51,6 @@ package sentinel.framework.audio
 			var sound:Sound = _library.getSound(asset);
 			var channel:Channel = sound.__play(this, volume * _volume, pan * _pan, start, loop);
 			
-			trace(volume * _volume);
-			
 			channel.addEventListener(ChannelEvent.COMPLETE, _channelComplete);
 			_channels.push(channel);
 			
@@ -83,7 +81,8 @@ package sentinel.framework.audio
 		}
 		
 		/**
-		 * The left-to-right panning of the sound. The pan is between -1 for full left and 1 for full right. 
+		 * The left-to-right panning of the sound. The pan is between -1 for full left and 1 for
+		 * full right. 
 		 */
 		public function get pan():Number { return _pan; }
 		public function set pan(value:Number):void

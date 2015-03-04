@@ -4,6 +4,7 @@ package sentinel.framework
 	import flash.display.Sprite;
 	import starling.core.Starling;
 	import starling.events.Event;
+	import sentinel.framework.errors.FrameworkError;
 	
 	
 	/**
@@ -46,12 +47,12 @@ package sentinel.framework
 				}
 				else
 				{
-					throw new Error("Your Game must define an identity.");
+					throw FrameworkError.compile('Your game must define an identity.');
 				}
 			}
 			else
 			{
-				throw new Error("The class provided to Core() must extend sentinel.base.Game.");
+				throw FrameworkError.compile('The class provided to Core() must extend sentinel.framework.BaseGame.');
 			}
 		}
 		
