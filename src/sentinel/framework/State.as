@@ -32,6 +32,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * The graphics container representing this State visually.
+		 */
 		public function get graphics():IGraphicsContainer { return _graphics; }
 		
 		
