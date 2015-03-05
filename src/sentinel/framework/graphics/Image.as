@@ -22,7 +22,7 @@ package sentinel.framework.graphics
 		{
 			if(parent !== null)
 			{
-				parent.addChild(image)
+				parent.addChild(image);
 				image.x = x;
 				image.y = y;
 				image.rotation = rotation;
