@@ -1,6 +1,3 @@
-# The tests are mostly noise and poorly maintained.
-tests/
-
 # The documentation is already hosted and the user is able to generate
 # it using the build.xml if needed anyway.
 docs/
