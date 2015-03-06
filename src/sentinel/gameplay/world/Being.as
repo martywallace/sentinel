@@ -14,7 +14,6 @@ package sentinel.gameplay.world
 	import sentinel.gameplay.physics.Engine;
 	import sentinel.gameplay.physics.Vector2D;
 	import sentinel.gameplay.ui.BaseUI;
-	import starling.display.DisplayObject;
 	
 	
 	/**
@@ -231,7 +230,7 @@ package sentinel.gameplay.world
 				if (_graphics !== null)
 				{
 					// Add the graphics to the World's graphics container.
-					(world as BaseWorld).__content.addChild(_graphics as DisplayObject);
+					_graphics.addTo((world as BaseWorld).__content);
 					
 					if (!_graphics.atZero)
 					{

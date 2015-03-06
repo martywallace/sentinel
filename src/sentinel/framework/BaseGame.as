@@ -10,7 +10,6 @@ package sentinel.framework
 	import sentinel.framework.graphics.Viewport;
 	import starling.animation.Juggler;
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
 	
 	
@@ -90,7 +89,7 @@ package sentinel.framework
 				audio.music.play(_state.__backgroundMusic);
 			}
 			
-			addChild(_state.graphics as DisplayObject);
+			_state.graphics.addTo(this);
 		}
 		
 		
