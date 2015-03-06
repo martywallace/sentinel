@@ -30,7 +30,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function getTextures(prefix:String):Vector.<sentinel.framework.graphics.Texture>
+		public function getTextures(prefix:String = ''):Vector.<sentinel.framework.graphics.Texture>
 		{
 			var result:Vector.<sentinel.framework.graphics.Texture> = new <sentinel.framework.graphics.Texture>[];
 			

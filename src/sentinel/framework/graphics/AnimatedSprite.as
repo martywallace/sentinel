@@ -3,6 +3,7 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Texture;
+	import starling.animation.Juggler;
 	import starling.display.DisplayObjectContainer;
 	import starling.textures.Texture;
 	import starling.display.MovieClip;
@@ -23,6 +24,8 @@ package sentinel.framework.graphics
 				native.push(texture.__base);
 			}
 			
+			juggler.add(this);
+			
 			super(native, fps);
 		}
 		
@@ -35,6 +38,7 @@ package sentinel.framework.graphics
 		
 		public function deconstruct():void
 		{
+			juggler.remove(this);
 			removeFromParent(true);
 		}
 		
@@ -53,6 +57,7 @@ package sentinel.framework.graphics
 		
 		public function get atZero():Boolean { return x === 0 && y === 0 && rotation === 0; }
 		public function get viewport():Viewport { return BaseGame.getInstance().viewport; }
+		public function get juggler():Juggler { return BaseGame.getInstance().juggler; }
 		
 	}
 	

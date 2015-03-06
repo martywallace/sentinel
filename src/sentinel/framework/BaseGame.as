@@ -8,6 +8,7 @@ package sentinel.framework
 	import sentinel.framework.graphics.Quad;
 	import sentinel.framework.graphics.Sprite;
 	import sentinel.framework.graphics.Viewport;
+	import starling.animation.Juggler;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
@@ -158,6 +159,11 @@ package sentinel.framework
 		 * Reference to the current Starling instance.
 		 */
 		public function get starling():Starling { return Starling.current; }
+		
+		/**
+		 * Reference to the current Starling Juggler instance.
+		 */
+		public function get juggler():Juggler { return starling.juggler; }
 		
 		/**
 		 * Reference to the current active State.

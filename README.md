@@ -34,14 +34,14 @@ I am remaking an old ActionScript 2 game using Sentinel, which [you can view her
 ## History.
 
 * 0.0.1-alpha
-	* General framework structure
-	* Box2D integration + wrappers
-	* Starling integration + wrappers
-	* Asset library
-	* Audio management + playback
-	* Game world + camera + beings
-	* Small test suite
+	* General framework structure.
+	* Box2D integration + wrappers.
+	* Starling integration + wrappers.
+	* Asset library.
+	* Audio management + playback.
+	* Game world + camera + beings.
+	* Small test suite.
 
 ## License.
 
-[The MIT License](http://opensource.org/licenses/MIT).
+[The MIT License](https://github.com/MartyWallace/Sentinel/blob/master/LICENSE).
