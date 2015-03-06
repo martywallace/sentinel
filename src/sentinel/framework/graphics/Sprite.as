@@ -3,7 +3,6 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
 	import sentinel.framework.util.GraphicsUtil;
 	
@@ -22,7 +21,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function addTo(target:DisplayObjectContainer):void
+		public function addTo(target:IGraphicsContainer):void
 		{
 			target.addChild(this);
 		}

@@ -4,7 +4,6 @@ package sentinel.framework.graphics
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.util.GraphicsUtil;
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.text.TextField;
 	
 	
@@ -21,7 +20,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function addTo(target:DisplayObjectContainer):void
+		public function addTo(target:IGraphicsContainer):void
 		{
 			target.addChild(this);
 		}

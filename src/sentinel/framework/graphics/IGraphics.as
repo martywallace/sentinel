@@ -19,7 +19,7 @@ package sentinel.framework.graphics
 		 * to cast.
 		 * @param target The target parent.
 		 */
-		function addTo(target:DisplayObjectContainer):void;
+		function addTo(target:IGraphicsContainer):void;
 		
 		function removeFromParent(dispose:Boolean = false):void;
 		function removeEventListeners(type:String = null):void;

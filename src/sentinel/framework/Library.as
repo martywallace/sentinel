@@ -89,36 +89,62 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Returns a single Texture stored in the Libarry.
+		 * @param name The name associated with the Texture.
+		 */
 		public function getTexture(name:String):Texture
 		{
 			return find(TEXTURE, name) as Texture;
 		}
 		
 		
+		/**
+		 * Returns a single Texture within a Sheet stored in the Library.
+		 * @param sheetName The name associated with the Sheet.
+		 * @param regionName The name associated with the subtexture within the Sheet.
+		 */
 		public function getTextureFromSheet(sheetName:String, regionName:String):Texture
 		{
 			return getSheet(sheetName).getTexture(regionName);
 		}
 		
 		
+		/**
+		 * Returns a single Sheet stored in the Library.
+		 * @param name The name associated with the Sheet.
+		 */
 		public function getSheet(name:String):Sheet
 		{
 			return find(SHEET, name) as Sheet;
 		}
 		
 		
+		/**
+		 * Returns a single Image whose Texture is stored within the Library.
+		 * @param textureName The name associated with the Texture to be used by the result Image.
+		 */
 		public function getImage(textureName:String):Image
 		{
 			return new Image(getTexture(textureName));
 		}
 		
 		
+		/**
+		 * Returns a single Image whose Texture is stored within a Sheet stored within the Library.
+		 * @param sheetName The name associated with the Sheet.
+		 * @param regionName The name associated with the subtexture within the Sheet.
+		 */
 		public function getImageFromSheet(sheetName:String, regionName:String):Image
 		{
 			return new Image(getTextureFromSheet(sheetName, regionName));
 		}
 		
 		
+		/**
+		 * Returns a single Sound stored within the Library.
+		 * @param name The name associated with the Sound.
+		 */
 		public function getSound(name:String):Sound
 		{
 			return find(SOUND, name) as Sound;

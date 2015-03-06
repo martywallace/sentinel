@@ -4,9 +4,8 @@ package sentinel.framework.graphics
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Texture;
 	import starling.animation.Juggler;
-	import starling.display.DisplayObjectContainer;
-	import starling.textures.Texture;
 	import starling.display.MovieClip;
+	import starling.textures.Texture;
 	
 	
 	public class AnimatedSprite extends MovieClip implements IGraphics
@@ -30,7 +29,7 @@ package sentinel.framework.graphics
 		}
 		
 		
-		public function addTo(target:DisplayObjectContainer):void
+		public function addTo(target:IGraphicsContainer):void
 		{
 			target.addChild(this);
 		}
