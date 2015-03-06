@@ -129,6 +129,10 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * Defines a collection of Services that this game will use, combined with the default service
+		 * list described by an <code>IGameServiceProvider</code>.
+		 */
 		protected function defineServices():Vector.<Service>
 		{
 			return null;

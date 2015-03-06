@@ -3,6 +3,7 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.graphics.Texture;
+	import starling.display.DisplayObjectContainer;
 	import starling.textures.Texture;
 	import starling.display.MovieClip;
 	
@@ -23,6 +24,12 @@ package sentinel.framework.graphics
 			}
 			
 			super(native, fps);
+		}
+		
+		
+		public function addTo(target:DisplayObjectContainer):void
+		{
+			target.addChild(this);
 		}
 		
 		

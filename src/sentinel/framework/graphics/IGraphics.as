@@ -13,6 +13,14 @@ package sentinel.framework.graphics
 	public interface IGraphics extends IDeconstructs
 	{
 		
+		/**
+		 * Adds this graphics object to a target parent. This is a shorthand version of using
+		 * <code>parent.addChild(this as starling.display.DisplayObject)</code>, removing the need
+		 * to cast.
+		 * @param target The target parent.
+		 */
+		function addTo(target:DisplayObjectContainer):void;
+		
 		function removeFromParent(dispose:Boolean = false):void;
 		function removeEventListeners(type:String = null):void;
 		

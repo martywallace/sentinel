@@ -4,6 +4,7 @@ package sentinel.framework.graphics
 	import flash.geom.Point;
 	
 	
+	// TODO: Replace this with line drawn by Starling-Extension-Graphics library.
 	public class Line extends Quad
 	{
 		

@@ -2,6 +2,7 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.BaseGame;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
 	
 	
@@ -14,6 +15,12 @@ package sentinel.framework.graphics
 		public function Image(texture:Texture)
 		{
 			super(texture.__base);
+		}
+		
+		
+		public function addTo(target:DisplayObjectContainer):void
+		{
+			target.addChild(this);
 		}
 		
 		

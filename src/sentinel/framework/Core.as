@@ -34,6 +34,9 @@ package sentinel.framework
 		}
 		
 		
+		/**
+		 * @private
+		 */
 		private function _rootCreated(event:Event):void
 		{
 			if (_starling.root is BaseGame)

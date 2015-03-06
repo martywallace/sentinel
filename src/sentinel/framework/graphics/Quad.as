@@ -2,6 +2,7 @@ package sentinel.framework.graphics
 {
 	
 	import sentinel.framework.BaseGame;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	
 	
@@ -14,6 +15,12 @@ package sentinel.framework.graphics
 		public function Quad(width:Number, height:Number, color:uint, premultipliedAlpha:Boolean = true)
 		{
 			super(width, height, color, premultipliedAlpha);
+		}
+		
+		
+		public function addTo(target:DisplayObjectContainer):void
+		{
+			target.addChild(this);
 		}
 		
 		

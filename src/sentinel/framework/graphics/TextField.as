@@ -4,6 +4,7 @@ package sentinel.framework.graphics
 	import sentinel.framework.BaseGame;
 	import sentinel.framework.util.GraphicsUtil;
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.text.TextField;
 	
 	
@@ -17,6 +18,12 @@ package sentinel.framework.graphics
 		public function TextField(width:Number, height:Number, text:String, fontName:String = 'Verdana', fontSize:int = 12, color:uint = 0x000000, bold:Boolean = false)
 		{
 			super(width, height, text, fontName, fontSize, color, bold);
+		}
+		
+		
+		public function addTo(target:DisplayObjectContainer):void
+		{
+			target.addChild(this);
 		}
 		
 		

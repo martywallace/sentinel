@@ -3,6 +3,7 @@ package sentinel.framework.graphics
 	
 	import sentinel.framework.BaseGame;
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
 	import sentinel.framework.util.GraphicsUtil;
 	
@@ -18,6 +19,12 @@ package sentinel.framework.graphics
 		{
 			super();
 			_autoSort = autoSort;
+		}
+		
+		
+		public function addTo(target:DisplayObjectContainer):void
+		{
+			target.addChild(this);
 		}
 		
 		
