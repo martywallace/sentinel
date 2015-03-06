@@ -19,6 +19,7 @@ package sentinel.gameplay.world
 		private var _offsetX:Number = 0;
 		private var _offsetY:Number = 0;
 		private var _position:Vector2D;
+		private var _snap:Boolean = false;
 		
 		
 		public function Camera(world:BaseWorld)
@@ -71,6 +72,12 @@ package sentinel.gameplay.world
 		
 		private function _set(x:Number, y:Number, rotation:Number, zoom:Number):void
 		{
+			if (_snap)
+			{
+				x = Math.round(x);
+				y = Math.round(y);
+			}
+			
 			_world.graphics.x = viewport.width / 2 + _offsetX;
 			_world.graphics.y = viewport.height / 2 + _offsetY;
 			_world.graphics.rotation = -rotation;
@@ -142,7 +149,6 @@ package sentinel.gameplay.world
 		 * The camera offset along the x axis, added to the <code>x</code> value.
 		 */
 		public function get offsetX():Number { return _offsetX; }
-		
 		public function set offsetX(value:Number):void
 		{
 			_offsetX = value;
@@ -153,11 +159,27 @@ package sentinel.gameplay.world
 		 * The camera offset along the y axis, added to the <code>y</code> value.
 		 */
 		public function get offsetY():Number { return _offsetY; }
-		
 		public function set offsetY(value:Number):void
 		{
 			_offsetY = value;
 			_set(x, y, rotation, zoom);
+		}
+		
+		/**
+		 * Whether or not the camera should snap to whole-pixels. Snapping to whole pixels may
+		 * produce a slightly choppier appearance when moving the camera, but may supress rendering
+		 * anomalies.
+		 */
+		public function get snap():Boolean { return _snap; }
+		public function set snap(value:Boolean):void
+		{
+			_snap = value;
+			
+			if(_snap)
+			{
+				// Force the camera to apply snapping.
+				_set(x, y, rotation, zoom);
+			}
 		}
 		
 	}
