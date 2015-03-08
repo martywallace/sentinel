@@ -134,6 +134,19 @@ package sentinel.gameplay.physics
 		
 		
 		/**
+		 * Applies a force to this Body.
+		 * @param force The force to apply.
+		 * @param point The point within the Engine to apply the force at. If left null, the point
+		 * will be the center of this Body.
+		 */
+		public function applyForce(force:Vector2D, point:Vector2D = null):void
+		{
+			_base.SetAwake(true);
+			_base.ApplyForce(force.__base, point === null ? _position.__base : point.__base);
+		}
+		
+		
+		/**
 		 * Determine whether any of the fixtures attached to this Body overlap any of the fixtures
 		 * attached to a target Body.
 		 * @param body The target body to test against.
