@@ -1,4 +1,4 @@
-# Sentinel Game Framework
+# Sentinel Game Framework.
 
 A modern ActionScript 3 game framework built on Starling, using Box2D for physics. The aim of Sentinel is to provide a consistent development experience by wrapping the Starling and Box2D libraries in Sentinel 'middleware' classes. These classes maintain their conventions and semantics across the framework, providing the highest level of readability and understanding possible.
 
@@ -7,13 +7,6 @@ Sentinel is broken down into three top level packages;
 * `framework` - Contains foundation classes used by the entire framework.
 * `gameplay` - Contains classes specific to actual gameplay such as the game [`BaseWorld`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/BaseWorld.as) and its [`Beings`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Being.as).
 * `testing` - Provides a small collection of classes to get up an running with temporary code (e.g. placeholder menus) as well as some debugging oriented additions including the [`TestGameplay`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/testing/states/TestGameplay.as) class - allowing full control of the [`Camera`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Camera.as) using the arrow keys.
-
-## Dependencies.
-
-Sentinel has several dependencies - these are already rolled up into the build ([Sentinel.swc](https://github.com/MartyWallace/Sentinel/tree/master/bin)) but listed here for reference:
-
-* [Starling](http://gamua.com/starling/)
-* [Box2D](http://www.box2dflash.org/)
 
 ## Resources.
 

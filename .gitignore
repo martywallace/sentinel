@@ -10,3 +10,6 @@ Sentinel.as3proj
 .project
 .flexLibProperties
 .actionScriptProperties
+
+# Attach binaries to tags instead of keeping in the project tree.
+bin/
