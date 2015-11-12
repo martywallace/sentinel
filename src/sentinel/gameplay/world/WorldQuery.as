@@ -1,7 +1,6 @@
 package sentinel.gameplay.world
 {
 	
-	import sentinel.framework.Data;
 	import sentinel.framework.Thing;
 	import sentinel.gameplay.physics.EngineQueryResult;
 	import sentinel.gameplay.physics.Shape;
