@@ -11,10 +11,21 @@ package sentinel.framework {
 	 * @author Marty Wallace
 	 */
 	public class Base extends Sprite {
+		
+		private static var _instance:Base;
+		
+		/**
+		 * A static reference to the Base class.
+		 */
+		public static function get instance():Base {
+			return _instance;
+		}
 
 		private var _starling:Starling;
 
 		public function Base() {
+			_instance = this;
+			
 			_starling = new Starling(View, stage);
 			
 			_starling.showStats = debug;

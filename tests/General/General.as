@@ -4,7 +4,8 @@ package {
 	public class General extends Base {
 		
 		protected override function construct():void {
-			trace(view, view.width, view.height);
+			var bundle:Bundle = new Bundle();
+			// ...
 		}
 		
 		protected override function update():void {
