@@ -1,6 +1,12 @@
+# General.
+.DS_Store
+
 # The documentation is already hosted and the user is able to generate
 # it using the build.xml if needed anyway.
 docs/
+
+# Attach binaries to tags instead of keeping in the project tree.
+bin/
 
 # FlashDevelop
 Sentinel.as3proj
@@ -10,6 +16,3 @@ Sentinel.as3proj
 .project
 .flexLibProperties
 .actionScriptProperties
-
-# Attach binaries to tags instead of keeping in the project tree.
-bin/
