@@ -46,9 +46,9 @@ package sentinel.framework {
 		}
 		
 		/**
-		 * Get a unique number. This number begins at 1 when the game begins and increments each time
-		 * this function is called, meaning it is guaranteed to be unique each time it is used for
-		 * a single game session.
+		 * Get a unique number. This number begins at 1 when the game begins and increments each
+		 * time this function is called, meaning it is guaranteed to be unique each time it is used
+		 * for a single game session.
 		 */
 		public function getUniqueId():uint {
 			return _nextId++;

@@ -8,6 +8,10 @@ Sentinel is broken down into three top level packages;
 * `gameplay` - Contains classes specific to actual gameplay such as the game [`BaseWorld`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/BaseWorld.as) and its [`Beings`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Being.as).
 * `testing` - Provides a small collection of classes to get up an running with temporary code (e.g. placeholder menus) as well as some debugging oriented additions including the [`TestGameplay`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/testing/states/TestGameplay.as) class - allowing full control of the [`Camera`](https://github.com/MartyWallace/Sentinel/blob/master/src/sentinel/gameplay/world/Camera.as) using the arrow keys.
 
+## Stability.
+
+Please be sure to use a [release](https://github.com/MartyWallace/Sentinel/releases) from the releases section rather than downloading the master branch - the project is currently under heavy construction.
+
 ## Resources.
 
 * Visit the [official website](http://sentinel.martywallace.com).
