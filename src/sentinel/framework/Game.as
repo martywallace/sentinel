@@ -33,11 +33,17 @@ package sentinel.framework {
 		 */
 		public function Game() {
 			_instance = this;
-			_starling = new Starling(Viewport, stage);
 			
-			_starling.showStats = debug;
-			_starling.antiAliasing = NumberUtil.clamp(antiAliasing, 0, 16);
+			_starling = new Starling(Viewport, stage);
+			_starling.antiAliasing = NumberUtil.clamp(settings.antiAliasing, 0, 16);
 			_starling.addEventListener(Event.ROOT_CREATED, _rootCreated);
+			
+			if (settings.debug) {
+				_starling.showStats = true;
+				
+				// TODO: Might want to enable some other useful development items here.
+				// ...
+			}
 		}
 		
 		/**
@@ -76,7 +82,7 @@ package sentinel.framework {
 			
 			_state = null;
 			
-			viewport.backgroundColor = Viewport.DEFAULT_BACKGROUND_COLOR;
+			viewport.backgroundColor = settings.backgroundColor;
 		}
 		
 		/**
@@ -113,14 +119,9 @@ package sentinel.framework {
 		public function get viewport():Viewport { return _starling.root as Viewport; }
 		
 		/**
-		 * The anti-aliasing level to use when drawing Starling graphics.
+		 * The game settings.
 		 */
-		public function get antiAliasing():int { return 0; }
-		
-		/**
-		 * Whether or not the game is in debug mode.
-		 */
-		public function get debug():Boolean { return false; }
+		public function get settings():GameSettings { return new GameSettings(); }
 		
 	}
 

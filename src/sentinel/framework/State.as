@@ -1,7 +1,6 @@
 package sentinel.framework {
 	
 	import starling.display.Sprite;
-	import sentinel.framework.graphics.Viewport;
 	
 	/**
 	 * A State is used to define a game state e.g. the main menu, settings screen, game over screen,
@@ -44,7 +43,7 @@ package sentinel.framework {
 		/**
 		 * Provides a solid background color for this State.
 		 */
-		public function get backgroundColor():uint { return Viewport.DEFAULT_BACKGROUND_COLOR; }
+		public function get backgroundColor():uint { return game.settings.backgroundColor; }
 		
 	}
 	

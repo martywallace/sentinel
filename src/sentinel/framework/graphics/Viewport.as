@@ -10,6 +10,7 @@ package sentinel.framework.graphics {
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.ResizeEvent;
+	import sentinel.framework.Game;
 	
 	/**
 	 * The game viewport, where all graphics are contained.
@@ -17,11 +18,6 @@ package sentinel.framework.graphics {
 	 * @author Marty Wallace.
 	 */
 	public class Viewport extends Sprite {
-		
-		/**
-		 * The default viewport background color.
-		 */
-		public static const DEFAULT_BACKGROUND_COLOR:uint = 0xFFFFFF;
 		
 		private var _background:Quad;
 		
@@ -33,7 +29,7 @@ package sentinel.framework.graphics {
 			
 			Starling.current.stage.addEventListener(ResizeEvent.RESIZE, _resize);
 			
-			_background = addChild(new Quad(width, height, DEFAULT_BACKGROUND_COLOR)) as Quad;
+			_background = addChild(new Quad(width, height, Game.getInstance().settings.backgroundColor)) as Quad;
 		}
 		
 		private function _resize(event:ResizeEvent):void {

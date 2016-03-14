@@ -1,12 +1,13 @@
 package {
 	
 	import sentinel.framework.Game;
+	import sentinel.framework.GameSettings;
 	
 	public class V2Main extends Game {
 		
 		protected override function construct():void {
 			// Set up game here.
-			loadState(new GameState());
+			// loadState(new GameState());
 		}
 		
 		protected override function update():void {
@@ -14,8 +15,15 @@ package {
 			// ...
 		}
 		
-		public override function get antiAliasing():int { return 0; }
-		public override function get debug():Boolean { return true; }
+		public override function get settings():GameSettings {
+			var settings:GameSettings = new GameSettings();
+			
+			settings.debug = true;
+			settings.backgroundColor = 0x004477;
+			settings.antiAliasing = 4;
+			
+			return settings;
+		}
 		
 	}
 	
