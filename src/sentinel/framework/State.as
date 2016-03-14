@@ -41,12 +41,7 @@ package sentinel.framework
 		/**
 		 * Provides a solid background color for this State.
 		 */
-		protected function get backgroundColor():uint { return 0xFFFFFF; }
-		
-		/**
-		 * @private
-		 */
-		internal function get __backgroundColor():uint { return backgroundColor; }
+		public function get backgroundColor():uint { return 0xFFFFFF; }
 		
 		/**
 		 * Provides background music for this State.
