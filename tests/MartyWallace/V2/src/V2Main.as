@@ -7,7 +7,7 @@ package {
 		
 		protected override function construct():void {
 			// Set up game here.
-			// loadState(new GameState());
+			loadState(new GameState());
 		}
 		
 		protected override function update():void {

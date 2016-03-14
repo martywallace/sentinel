@@ -1,3 +1,6 @@
+# Typical nuances.
+.DS_Store
+
 # The documentation is already hosted and the user is able to generate
 # it using the build.xml if needed anyway.
 docs/
