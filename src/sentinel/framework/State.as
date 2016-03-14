@@ -1,57 +1,45 @@
-package sentinel.framework
-{
+package sentinel.framework {
 	
-	import sentinel.framework.graphics.IGraphicsContainer;
-	import sentinel.framework.graphics.Sprite;
-	
+	import starling.display.Sprite;
+	import sentinel.framework.graphics.Viewport;
 	
 	/**
 	 * A State is used to define a game state e.g. the main menu, settings screen, game over screen,
 	 * the gameplay itself, etc.
-	 * @author Marty Wallace.
+	 * 
+	 * @author Marty Wallace
 	 */
-	public class State extends Thing
-	{
+	public class State {
 		
-		private var _graphics:IGraphicsContainer;
+		private var _graphics:Sprite;
 		
-		
-		public function State()
-		{
-			super();
-			
+		public function State() {
 			_graphics = new Sprite();
 		}
 		
-		
-		public override function deconstruct():void
-		{
-			_graphics.deconstruct();
-			
-			super.deconstruct();
+		public function deconstruct():void {
+			if (_graphics) {
+				_graphics.removeFromParent(true);
+			}
 		}
 		
+		public function update():void {
+			//
+		}
+		
+		internal function __update():void {
+			update();
+		}
 		
 		/**
 		 * The graphics container representing this State visually.
 		 */
-		public function get graphics():IGraphicsContainer { return _graphics; }
-		
+		public function get graphics():Sprite { return _graphics; }
 		
 		/**
 		 * Provides a solid background color for this State.
 		 */
-		public function get backgroundColor():uint { return 0xFFFFFF; }
-		
-		/**
-		 * Provides background music for this State.
-		 */
-		protected function get backgroundMusic():String { return null; }
-		
-		/**
-		 * @private
-		 */
-		internal function get __backgroundMusic():String { return backgroundMusic; }
+		public function get backgroundColor():uint { return Viewport.DEFAULT_BACKGROUND_COLOR; }
 		
 	}
 	

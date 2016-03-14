@@ -30,12 +30,8 @@ package sentinel.framework {
 		
 		/**
 		 * Constructor.
-		 * 
-		 * @param antiAliasing The anti-aliasing level used in rendering Starling graphics. This
-		 * value should be between 0 and 16.
-		 * @param debug Whether or not to show the Starling debug box.
 		 */
-		public function Base(antiAliasing:int = 0, debug:Boolean = false) {
+		public function Base() {
 			_instance = this;
 			
 			_starling = new Starling(Viewport, stage);
@@ -62,10 +58,7 @@ package sentinel.framework {
 			unloadState();
 			
 			if (_state.graphics !== null) {
-				if (_state.backgroundColor !== null) {
-					viewport.backgroundColor = _state.backgroundColor;
-				}
-				
+				viewport.backgroundColor = _state.backgroundColor;
 				viewport.addChild(_state.graphics);
 			}
 		}
@@ -82,7 +75,16 @@ package sentinel.framework {
 			viewport.backgroundColor = Viewport.DEFAULT_BACKGROUND_COLOR;
 		}
 		
+		/**
+		 * Called when Starling and the inbuild game components are finished being set up. Overridde
+		 * this method to use as your game constructor.
+		 */
 		protected function construct():void { }
+		
+		/**
+		 * Called every frame during the lifetime of the game. Override this method to use as your
+		 * game update entrypoint.
+		 */
 		protected function update():void { }
 		
 		private function _rootCreated(event:Event):void {
@@ -105,6 +107,16 @@ package sentinel.framework {
 		 * The game viewport.
 		 */
 		public function get viewport():Viewport { return _starling.root as Viewport; }
+		
+		/**
+		 * The anti-aliasing level to use when drawing Starling graphics.
+		 */
+		public function get antiAliasing():int { return 0; }
+		
+		/**
+		 * Whether or not the game is in debug mode.
+		 */
+		public function get debug():Boolean { return false; }
 		
 	}
 
