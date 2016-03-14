@@ -1,5 +1,3 @@
-// TODO: Handle viewport resize.
-
 package sentinel.framework.graphics {
 	
 	import flash.display.Stage;
@@ -33,7 +31,12 @@ package sentinel.framework.graphics {
 		}
 		
 		private function _resize(event:ResizeEvent):void {
+			// TODO: Make sure this is the right way to do this.
+			
 			Starling.current.viewPort = new Rectangle(0, 0, event.width, event.height);
+			
+			_background.width = event.width;
+			_background.height = event.height;
 		}
 		
 		/**
