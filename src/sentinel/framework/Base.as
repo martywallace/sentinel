@@ -33,7 +33,6 @@ package sentinel.framework {
 		 */
 		public function Base() {
 			_instance = this;
-			
 			_starling = new Starling(Viewport, stage);
 			
 			_starling.showStats = debug;
