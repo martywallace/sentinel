@@ -9,7 +9,7 @@ package sentinel.framework {
 	 * 
 	 * @author Marty Wallace
 	 */
-	public class State {
+	public class State implements IGameProvider {
 		
 		private var _graphics:Sprite;
 		
@@ -30,6 +30,11 @@ package sentinel.framework {
 		internal function __update():void {
 			update();
 		}
+		
+		/**
+		 * A reference to the main game class.
+		 */
+		public function get game():Game { return Game.getInstance(); }
 		
 		/**
 		 * The graphics container representing this State visually.

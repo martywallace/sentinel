@@ -8,19 +8,19 @@ package sentinel.framework {
 	import starling.events.Event;
 	
 	/**
-	 * The base is extended by your document class. It initializes the Starling display tree,
+	 * The game is extended by your document class. It initializes the Starling display tree,
 	 * inbuilt game components, update loop and various other crucial framework components.
 	 * 
 	 * @author Marty Wallace
 	 */
-	public class Base extends Sprite {
+	public class Game extends Sprite {
 		
-		private static var _instance:Base;
+		private static var _instance:Game;
 		
 		/**
 		 * Fetch a static reference to the game document class.
 		 */
-		public static function getInstance():Base {
+		public static function getInstance():Game {
 			return _instance;
 		}
 		
@@ -31,7 +31,7 @@ package sentinel.framework {
 		/**
 		 * Constructor.
 		 */
-		public function Base() {
+		public function Game() {
 			_instance = this;
 			_starling = new Starling(Viewport, stage);
 			
@@ -56,10 +56,13 @@ package sentinel.framework {
 		public function loadState(state:State):void {
 			unloadState();
 			
-			if (_state.graphics !== null) {
-				viewport.backgroundColor = _state.backgroundColor;
-				viewport.addChild(_state.graphics);
+			_state = state;
+			
+			if (state.graphics !== null) {
+				viewport.addChild(state.graphics);
 			}
+			
+			viewport.backgroundColor = state.backgroundColor;
 		}
 		
 		/**
@@ -70,6 +73,8 @@ package sentinel.framework {
 			if (_state !== null) {
 				_state.deconstruct();
 			}
+			
+			_state = null;
 			
 			viewport.backgroundColor = Viewport.DEFAULT_BACKGROUND_COLOR;
 		}

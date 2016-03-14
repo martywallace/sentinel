@@ -1,12 +1,12 @@
 package {
 	
-	import sentinel.framework.Base;
+	import sentinel.framework.Game;
 	
-	public class V2Main extends Base {
+	public class V2Main extends Game {
 		
 		protected override function construct():void {
 			// Set up game here.
-			// ...
+			loadState(new GameState());
 		}
 		
 		protected override function update():void {
