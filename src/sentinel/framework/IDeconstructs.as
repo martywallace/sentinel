@@ -1,14 +1,16 @@
-package sentinel.framework
-{
+package sentinel.framework {
 	
 	/**
-	 * A contract for an object defining a deconstructor - code used to aid in correct garbage
-	 * collection.
-	 * @author Marty Wallace.
+	 * An object with a deconstructor.
+	 * 
+	 * @author Marty Wallace
 	 */
-	public interface IDeconstructs
-	{
+	public interface IDeconstructs {
 		
+		/**
+		 * Deconstruct this object. Calling this method should represent the end of the lifetime of
+		 * the object.
+		 */
 		function deconstruct():void;
 		
 	}

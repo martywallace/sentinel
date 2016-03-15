@@ -8,6 +8,8 @@ package {
 		protected override function construct():void {
 			// Set up game here.
 			loadState(new GameState());
+			
+			trace(settings);
 		}
 		
 		protected override function update():void {
@@ -17,10 +19,7 @@ package {
 		
 		public override function get settings():GameSettings {
 			var settings:GameSettings = new GameSettings();
-			
 			settings.debug = true;
-			settings.backgroundColor = 0x004477;
-			settings.antiAliasing = 4;
 			
 			return settings;
 		}

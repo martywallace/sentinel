@@ -3,7 +3,6 @@ package sentinel.framework {
 	import flash.display.Sprite;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.State;
-	import sentinel.framework.util.NumberUtil;
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -97,10 +96,18 @@ package sentinel.framework {
 		 */
 		protected function update():void { }
 		
+		/**
+		 * Defines custom game services to be bound to the core game class.
+		 */
+		protected function defineServices():void { }
+		
 		private function _rootCreated(event:Event):void {
 			_starling.root.addEventListener(Event.ENTER_FRAME, _update);
 			_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
 			_starling.start();
+			
+			// TODO: Bind services.
+			// ...
 			
 			construct();
 		}
@@ -122,6 +129,11 @@ package sentinel.framework {
 		 * The game settings.
 		 */
 		public function get settings():GameSettings { return new GameSettings(); }
+		
+		/**
+		 * The active game state.
+		 */
+		public function get state():State { return _state; }
 		
 	}
 
