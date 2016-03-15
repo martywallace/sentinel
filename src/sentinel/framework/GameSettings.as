@@ -1,6 +1,7 @@
 package sentinel.framework {
 	
 	import sentinel.framework.util.NumberUtil;
+	import sentinel.framework.util.StringUtil;
 	
 	/**
 	 * Defines initial game settings. Changing settings once the game is running does not have any
@@ -15,7 +16,7 @@ package sentinel.framework {
 		private var _antiAliasing:uint = 0;
 		
 		public function toString():String {
-			return '[debug=' + debug + ', backgroundColor=' + backgroundColor + ', antiAliasing=' + antiAliasing + ']';
+			return StringUtil.toDebugString(['debug', 'backgroundColor', 'antiAliasing'], [debug, backgroundColor, antiAliasing]);
 		}
 		
 		/**

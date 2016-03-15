@@ -4,11 +4,11 @@ package sentinel.framework.graphics {
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.geom.Rectangle;
+	import sentinel.framework.Game;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.ResizeEvent;
-	import sentinel.framework.Game;
 	
 	/**
 	 * The game viewport, where all graphics are contained.

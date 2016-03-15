@@ -35,7 +35,7 @@ package sentinel.framework {
 			_instance = this;
 			
 			_starling = new Starling(Viewport, stage);
-			_starling.antiAliasing = NumberUtil.clamp(settings.antiAliasing, 0, 16);
+			_starling.antiAliasing = settings.antiAliasing;
 			_starling.addEventListener(Event.ROOT_CREATED, _rootCreated);
 			
 			if (settings.debug) {

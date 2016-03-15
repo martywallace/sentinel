@@ -8,32 +8,23 @@ package sentinel.framework {
 	 * 
 	 * @author Marty Wallace
 	 */
-	public class State implements IGameProvider {
+	public class State extends Thing implements IGameProvider {
 		
 		private var _graphics:Sprite;
 		
 		public function State() {
+			super();
+			
 			_graphics = new Sprite();
 		}
 		
-		public function deconstruct():void {
+		public override function deconstruct():void {
 			if (_graphics) {
 				_graphics.removeFromParent(true);
 			}
+			
+			super.deconstruct();
 		}
-		
-		public function update():void {
-			//
-		}
-		
-		internal function __update():void {
-			update();
-		}
-		
-		/**
-		 * A reference to the main game class.
-		 */
-		public function get game():Game { return Game.getInstance(); }
 		
 		/**
 		 * The graphics container representing this State visually.
