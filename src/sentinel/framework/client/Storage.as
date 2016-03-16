@@ -1,6 +1,7 @@
 package sentinel.framework.client {
 	
 	import flash.net.SharedObject;
+	
 	import sentinel.framework.errors.FrameworkError;
 	
 	/**
@@ -10,12 +11,18 @@ package sentinel.framework.client {
 	 */
 	public class Storage {
 		
+		public static const DEFAULT_SLOT:uint = 0;
+		
 		private var _so:SharedObject;
 		private var _collection:String;
-		private var _block:uint = 1;
+		private var _slot:uint = DEFAULT_SLOT;
 		
 		public function toString():String {
-			return JSON.stringify(_so.data);
+			if (collection !== null) {
+				return JSON.stringify(_so.data);
+			} else {
+				return JSON.stringify({ });
+			}
 		}
 		
 		/**
@@ -26,7 +33,7 @@ package sentinel.framework.client {
 		 */
 		public function save(name:String, data:*):void {
 			if (collection !== null) {
-				_slot[name] = data;
+				_data[name] = data;
 			} else {
 				throw FrameworkError.compile('You cannot save or load data without defining a collection first.');
 			}
@@ -40,14 +47,31 @@ package sentinel.framework.client {
 		 */
 		public function load(name:String, fallback:* = null):* {
 			if (collection !== null) {
-				if (_slot.hasOwnProperty(name)) {
-					return _slot[name];
+				if (_data.hasOwnProperty(name)) {
+					return _data[name];
 				}
 			} else {
 				throw FrameworkError.compile('You cannot save or load data without defining a collection first.');
 			}
 				
 			return fallback;
+		}
+		
+		/**
+		 * Clear saved data.
+		 * 
+		 * @param collection The collection to clear. If not specified, all data from all
+		 * collections is cleared.
+		 * @param slot The block within the collection to clear.
+		 */
+		public function clear(collection:String = null, slot:uint = DEFAULT_SLOT):void {
+			if (collection !== null) {
+				if (_so.data.hasOwnProperty(collection)) {
+					delete _so.data[collection][slot];
+				}
+			} else {
+				_so.clear();
+			}
 		}
 		
 		/** The current collection name. */
@@ -58,20 +82,20 @@ package sentinel.framework.client {
 			_so = SharedObject.getLocal(_collection);
 		}
 		
-		/** The current block number. */
-		public function get block():uint { return _block; }
-		public function set block(value:uint):void { _block = value; }
+		/** The current slot number. */
+		public function get slot():uint { return _slot; }
+		public function set slot(value:uint):void { _slot = value; }
 		
-		private function get _slot():Object {
+		private function get _data():Object {
 			if (!_so.data.hasOwnProperty(collection)) {
 				_so.data[collection] = { };
 			}
 			
-			if (!_so.data[collection].hasOwnProperty(block)) {
-				_so.data[collection][block] = { };
+			if (!_so.data[collection].hasOwnProperty(slot)) {
+				_so.data[collection][slot] = { };
 			}
 			
-			return _so.data[collection][block];
+			return _so.data[collection][slot];
 		}
 		
 	}
