@@ -1,84 +1,78 @@
-package sentinel.framework.client
-{
+package sentinel.framework.client {
 	
 	import flash.net.SharedObject;
-	import sentinel.framework.Service;
-	import sentinel.framework.Data;
-	
+	import sentinel.framework.errors.FrameworkError;
 	
 	/**
-	 * Local storage via SharedObject.
-	 * @author Marty Wallace.
+	 * The storage class assists with saving and loading data via Shared Objects.
+	 * 
+	 * @author Marty Wallace
 	 */
-	public class Storage extends Service
-	{
+	public class Storage {
 		
-		private var _block:uint = 1;
 		private var _so:SharedObject;
+		private var _collection:String;
+		private var _block:uint = 1;
 		
-		
-		protected override function construct():void
-		{
-			_so = SharedObject.getLocal(game.identity.replace(/[^\w\/]/, ''));
+		public function toString():String {
+			return JSON.stringify(_so.data);
 		}
-		
 		
 		/**
-		 * Save data into the current active block.
-		 * @param field The field to assign the data to within the block.
-		 * @param data The data to assign.
+		 * Save some data to the current collection block.
+		 * 
+		 * @param name Name to store data against.
+		 * @param data The data.
 		 */
-		public function save(field:String, data:Data):void
-		{
-			_data.set(field, data.raw);
+		public function save(name:String, data:*):void {
+			if (collection !== null) {
+				_slot[name] = data;
+			} else {
+				throw FrameworkError.compile('You cannot save or load data without defining a collection first.');
+			}
 		}
-		
 		
 		/**
-		 * Load data from the current active block.
-		 * @param field The field to load data from within the block.
-		 * @param fallback Fallback data to use if the field was not defined on the block.
+		 * Load some data from the current collection block.
+		 * 
+		 * @param name The name of the data to load.
+		 * @param fallback A fallback value to use if the data was not found.
 		 */
-		public function load(field:String, fallback:* = null):Data
-		{
-			var data:Object = _data.get(field, fallback);			
-			return data !== null ? Data.create(data) : null;
+		public function load(name:String, fallback:* = null):* {
+			if (collection !== null) {
+				if (_slot.hasOwnProperty(name)) {
+					return _slot[name];
+				}
+			} else {
+				throw FrameworkError.compile('You cannot save or load data without defining a collection first.');
+			}
+				
+			return fallback;
 		}
 		
+		/** The current collection name. */
+		public function get collection():String { return _collection; }
 		
-		/**
-		 * Empty the current block.
-		 */
-		public function empty():void
-		{
-			_so.data[blockName] = { };
+		public function set collection(value:String):void {
+			_collection = value.replace(/[^\w]+/, '');
+			_so = SharedObject.getLocal(_collection);
 		}
 		
-		
-		private function get _data():Data
-		{
-			if (!_so.data.hasOwnProperty(blockName)) _so.data[blockName] = new Data();
-			if (!(_so.data[blockName] is Data)) _so.data[blockName] = Data.create(_so.data[blockName]);
-			
-			return _so.data[blockName];
-		}
-		
-		
-		/**
-		 * The current block number.
-		 */
+		/** The current block number. */
 		public function get block():uint { return _block; }
 		public function set block(value:uint):void { _block = value; }
 		
-		/**
-		 * The name associated with the current block.
-		 */
-		public function get blockName():String { return '_block' + block; }
-		
-		/**
-		 * The service name.
-		 */
-		public override function get name():String { return 'storage'; }
+		private function get _slot():Object {
+			if (!_so.data.hasOwnProperty(collection)) {
+				_so.data[collection] = { };
+			}
+			
+			if (!_so.data[collection].hasOwnProperty(block)) {
+				_so.data[collection][block] = { };
+			}
+			
+			return _so.data[collection][block];
+		}
 		
 	}
 	

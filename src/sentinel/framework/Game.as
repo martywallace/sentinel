@@ -3,6 +3,7 @@ package sentinel.framework {
 	import flash.display.Sprite;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
+	import sentinel.framework.client.Storage;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.State;
 	import starling.core.Starling;
@@ -31,6 +32,7 @@ package sentinel.framework {
 		
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
+		private var _storage:Storage;
 		
 		/**
 		 * Constructor.
@@ -114,6 +116,7 @@ package sentinel.framework {
 			// TODO: Bind services.
 			_keyboard = new Keyboard();
 			_mouse = new Mouse();
+			_storage = new Storage();
 			
 			construct();
 		}
@@ -140,6 +143,9 @@ package sentinel.framework {
 		
 		/** The game mouse manager. */
 		public function get mouse():Mouse { return _mouse; }
+		
+		/** The game storage. */
+		public function get storage():Storage { return _storage; }
 		
 	}
 
