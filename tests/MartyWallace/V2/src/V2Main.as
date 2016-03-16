@@ -2,19 +2,18 @@ package {
 	
 	import sentinel.framework.Game;
 	import sentinel.framework.GameSettings;
+	import sentinel.framework.client.Keyboard;
 	
 	public class V2Main extends Game {
 		
 		protected override function construct():void {
-			// Set up game here.
 			loadState(new GameState());
-			
-			trace(settings);
 		}
 		
 		protected override function update():void {
-			// Update game here.
-			// ...
+			if (keyboard.getState().isDown(Keyboard.A)) {
+				trace('a held down');
+			}
 		}
 		
 		public override function get settings():GameSettings {

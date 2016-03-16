@@ -1,11 +1,10 @@
-package sentinel.framework.client
-{
+package sentinel.framework.client {
 	
 	import flash.events.KeyboardEvent;
-	import sentinel.framework.Service;
+	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.events.KeyboardEvent;
 	import sentinel.framework.util.ObjectUtil;
-	
+	import starling.core.Starling;
 	
 	/**
 	 * Dispatched when a key has been pressed on the Keyboard.
@@ -19,14 +18,13 @@ package sentinel.framework.client
 	 */
 	[Event(name='keyReleased', type='sentinel.events.KeyboardEvent')]
 	
-	
 	/**
 	 * The Keyboard class provides access to the current state of the user's keyboard. It also
 	 * provides useful constants for ASCII values.
-	 * @author Marty Wallace.
+	 * 
+	 * @author Marty Wallace
 	 */
-	public class Keyboard extends Service
-	{
+	public class Keyboard extends EventDispatcher {
 		
 		public static const NUM_0:uint = 48;
 		public static const NUM_1:uint = 49;
@@ -38,7 +36,6 @@ package sentinel.framework.client
 		public static const NUM_7:uint = 55;
 		public static const NUM_8:uint = 56;
 		public static const NUM_9:uint = 57;
-		
 		public static const F1:uint = 112;
 		public static const F2:uint = 113;
 		public static const F3:uint = 114;
@@ -53,7 +50,6 @@ package sentinel.framework.client
 		public static const F13:uint = 124;
 		public static const F14:uint = 125;
 		public static const F15:uint = 126;
-		
 		public static const A:uint = 65;
 		public static const B:uint = 66;
 		public static const C:uint = 67;
@@ -80,7 +76,6 @@ package sentinel.framework.client
 		public static const X:uint = 88;
 		public static const Y:uint = 89;
 		public static const Z:uint = 90;
-		
 		public static const SEMICOLON:uint = 186;
 		public static const PLUS:uint = 187;
 		public static const DASH:uint = 189;
@@ -110,48 +105,33 @@ package sentinel.framework.client
 		public static const UP_ARROW:uint = 38;
 		public static const DOWN_ARROW:uint = 40;
 		
-		
 		private var _keys:Object = { };
 		
-		
-		protected override function construct():void
-		{ 
-			game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
-			game.starling.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
+		public function Keyboard():void {
+			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, _keyboard);
+			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_UP, _keyboard);
 		}
 		
-		
-		private function _keyboard(event:flash.events.KeyboardEvent):void
-		{
-			if(event.type === flash.events.KeyboardEvent.KEY_DOWN)
-			{
-				if (!_keys.hasOwnProperty(event.keyCode))
-				{
-					_keys[event.keyCode] = true;
+		private function _keyboard(event:flash.events.KeyboardEvent):void {
+			if(event.type === flash.events.KeyboardEvent.KEY_DOWN) {
+				if (!_keys.hasOwnProperty(event.keyCode)) {
+					_keys[event.keyCode] = new Date();
 					dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_PRESSED, event.keyCode));
 				}
-			}
-			else
-			{
-				if (_keys.hasOwnProperty(event.keyCode))
-				{
+			} else {
+				if (_keys.hasOwnProperty(event.keyCode)) {
 					delete _keys[event.keyCode];
 					dispatchEvent(new sentinel.framework.events.KeyboardEvent(sentinel.framework.events.KeyboardEvent.KEY_RELEASED, event.keyCode));
 				}
 			}
 		}
 		
-		
 		/**
 		 * Gets the current keyboard state as a <code>KeyboardState</code> object.
 		 */
-		public function getState():KeyboardState
-		{
+		public function getState():KeyboardState {
 			return new KeyboardState(ObjectUtil.shallowCopy(_keys));
 		}
-		
-		
-		public override function get name():String { return 'keyboard'; }
 		
 	}
 	

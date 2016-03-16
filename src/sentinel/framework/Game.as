@@ -1,6 +1,7 @@
 package sentinel.framework {
 	
 	import flash.display.Sprite;
+	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.State;
 	import starling.core.Starling;
@@ -26,6 +27,8 @@ package sentinel.framework {
 		private var _starling:Starling;
 		private var _state:State;
 		private var _nextId:uint = 0;
+		
+		private var _keyboard:Keyboard;
 		
 		/**
 		 * Constructor.
@@ -107,7 +110,7 @@ package sentinel.framework {
 			_starling.start();
 			
 			// TODO: Bind services.
-			// ...
+			_keyboard = new Keyboard();
 			
 			construct();
 		}
@@ -134,6 +137,8 @@ package sentinel.framework {
 		 * The active game state.
 		 */
 		public function get state():State { return _state; }
+		
+		public function get keyboard():Keyboard { return _keyboard; }
 		
 	}
 
