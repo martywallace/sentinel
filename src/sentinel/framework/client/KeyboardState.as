@@ -58,9 +58,7 @@ package sentinel.framework.client {
 			return total >= x;
 		}
 		
-		/**
-		 * The total number of keys being held down.
-		 */
+		/** The total number of keys being held down. */
 		public function get keysDown():int{ return ObjectUtil.countProperties(_keys); }
 		
 	}

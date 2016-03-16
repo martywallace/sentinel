@@ -12,7 +12,7 @@ package {
 		
 		protected override function update():void {
 			if (keyboard.getState().isDown(Keyboard.A)) {
-				trace('a held down');
+				trace(mouse.getState());
 			}
 		}
 		

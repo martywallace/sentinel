@@ -276,9 +276,7 @@ package sentinel.framework {
 			}
 		}
 		
-		/**
-		 * A unique ID number assigned to this Thing by the core Game class.
-		 */
+		/** A unique ID number assigned to this Thing by the core Game class. */
 		public function get id():uint {
 			if (_id === 0) {
 				_id = game.getUniqueId();
@@ -287,26 +285,16 @@ package sentinel.framework {
 			return _id;
 		}
 		
-		/**
-		 * The parent Thing, if this Thing has one.
-		 */
+		/** The parent Thing, if this Thing has one. */
 		public function get parent():Thing { return _parent; }
 		
-		/**
-		 * Returns the list of child Things.
-		 */
-		public function get children():Vector.<Thing> {
-			return _children;
-		}
+		/** Returns the list of child Things. */
+		public function get children():Vector.<Thing> { return _children; }
 		
-		/**
-		 * The full class name of this Thing.
-		 */
+		/** The full class name of this Thing. */
 		public function get className():String { return getQualifiedClassName(this); }
 		
-		/**
-		 * A reference to the core Game class.
-		 */
+		/** A reference to the core Game class. */
 		public function get game():Game { return Game.getInstance(); }
 		
 	}

@@ -2,6 +2,7 @@ package sentinel.framework {
 	
 	import flash.display.Sprite;
 	import sentinel.framework.client.Keyboard;
+	import sentinel.framework.client.Mouse;
 	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.State;
 	import starling.core.Starling;
@@ -29,6 +30,7 @@ package sentinel.framework {
 		private var _nextId:uint = 0;
 		
 		private var _keyboard:Keyboard;
+		private var _mouse:Mouse;
 		
 		/**
 		 * Constructor.
@@ -111,6 +113,7 @@ package sentinel.framework {
 			
 			// TODO: Bind services.
 			_keyboard = new Keyboard();
+			_mouse = new Mouse();
 			
 			construct();
 		}
@@ -123,22 +126,20 @@ package sentinel.framework {
 			}
 		}
 		
-		/**
-		 * The game viewport.
-		 */
+		/** The game viewport. */
 		public function get viewport():Viewport { return _starling.root as Viewport; }
 		
-		/**
-		 * The game settings.
-		 */
+		/** The game settings. */
 		public function get settings():GameSettings { return new GameSettings(); }
 		
-		/**
-		 * The active game state.
-		 */
+		/** The active game state. */
 		public function get state():State { return _state; }
 		
+		/** The game keyboard manager. */
 		public function get keyboard():Keyboard { return _keyboard; }
+		
+		/** The game mouse manager. */
+		public function get mouse():Mouse { return _mouse; }
 		
 	}
 

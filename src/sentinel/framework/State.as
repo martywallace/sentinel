@@ -26,14 +26,10 @@ package sentinel.framework {
 			super.deconstruct();
 		}
 		
-		/**
-		 * The graphics container representing this State visually.
-		 */
+		/** The graphics container representing this State visually. */
 		public function get graphics():Sprite { return _graphics; }
 		
-		/**
-		 * Provides a solid background color for this State.
-		 */
+		/** Provides a solid background color for this State. */
 		public function get backgroundColor():uint { return game.settings.backgroundColor; }
 		
 	}

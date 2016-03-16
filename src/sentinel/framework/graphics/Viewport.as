@@ -5,7 +5,9 @@ package sentinel.framework.graphics {
 	import flash.display.StageScaleMode;
 	import flash.geom.Rectangle;
 	import sentinel.framework.Game;
+	import sentinel.framework.IMouseDataProvider;
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.ResizeEvent;
@@ -15,7 +17,7 @@ package sentinel.framework.graphics {
 	 * 
 	 * @author Marty Wallace.
 	 */
-	public class Viewport extends Sprite {
+	public class Viewport extends Sprite implements IMouseDataProvider {
 		
 		private var _background:Quad;
 		
@@ -39,24 +41,19 @@ package sentinel.framework.graphics {
 			_background.height = event.height;
 		}
 		
-		/**
-		 * The viewport width.
-		 */
+		/** The container that mouse coordinates provided are relative to. */
+		public function get mouseContainer():DisplayObject { return this; }
+		
+		/** The viewport width. */
 		public override function get width():Number { return Starling.current.backBufferWidth; }
 		
-		/**
-		 * The viewport height.
-		 */
+		/** The viewport height. */
 		public override function get height():Number { return Starling.current.backBufferHeight; }
 		
-		/**
-		 * The native Flash stage.
-		 */
+		/** The native Flash stage. */
 		public function get nativeDisplay():Stage { return Starling.current.nativeStage; }
 		
-		/**
-		 * The viewport background color.
-		 */
+		/** The viewport background color. */
 		public function get backgroundColor():uint { return _background.color; }
 		public function set backgroundColor(value:uint):void { _background.color = value; }
 		
