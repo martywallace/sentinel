@@ -7,6 +7,9 @@ package {
 	public class V2Main extends Game {
 		
 		protected override function construct():void {
+			library.store('assets', new Assets());
+			trace(library.getBundle('assets').getBitmapData('sprite.png'));
+			
 			loadState(new GameState());
 		}
 		

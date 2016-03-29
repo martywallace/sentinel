@@ -1,14 +1,9 @@
 package sentinel.framework {
 	
 	import flash.utils.getQualifiedClassName;
-	import sentinel.framework.audio.Audio;
-	import sentinel.framework.client.Keyboard;
-	import sentinel.framework.client.Mouse;
-	import sentinel.framework.client.Storage;
 	import sentinel.framework.errors.FrameworkError;
 	import sentinel.framework.events.EventDispatcher;
 	import sentinel.framework.events.ThingEvent;
-	import sentinel.framework.graphics.Viewport;
 	import sentinel.framework.util.StringUtil;
 	
 	/**
@@ -78,16 +73,17 @@ package sentinel.framework {
 		/**
 		 * Saves a simple representation of this Thing as an Object.
 		 */
-		public function save():Data {
-			return Data.create({ type: className });
+		public function save():Object {
+			return { type: className };
 		}
 		
 		/**
 		 * Loads some save data obtained via <code>Thing.save()</code> and attempt to apply it to
 		 * this Thing.
+		 * 
 		 * @param data The data to load.
 		 */
-		public function load(data:Data):void { }
+		public function load(data:Object):void { }
 		
 		/**
 		 * Update this Thing and its descendants.
@@ -102,7 +98,9 @@ package sentinel.framework {
 		
 		/**
 		 * Add a child Thing to this Thing.
+		 * 
 		 * @param thing The Thing to add.
+		 * 
 		 * @return The Thing that was added.
 		 */
 		protected function addT(thing:Thing):Thing {
@@ -130,8 +128,10 @@ package sentinel.framework {
 		
 		/**
 		 * Remove a child Thing from this Thing.
+		 * 
 		 * @param thing The Thing to remove.
 		 * @param destroy Whether to also <code>deconstruct()</code> the target Thing.
+		 * 
 		 * @return The Thing that was removed.
 		 */
 		protected function removeT(thing:Thing, destroy:Boolean = false):Thing {
@@ -165,6 +165,7 @@ package sentinel.framework {
 		
 		/**
 		 * Remove this Thing from its parent, if it has one.
+		 * 
 		 * @param destroy Whether to also <code>deconstruct()</code> this Thing.
 		 */
 		public function removeFromParent(destroy:Boolean = false):void {
@@ -174,6 +175,7 @@ package sentinel.framework {
 		
 		/**
 		 * Remove all children from this Thing.
+		 * 
 		 * @param destroy Whether to also <code>deconstruct()</code> all removed Things.
 		 */
 		public function removeAll(destroy:Boolean = false):void {
@@ -184,6 +186,7 @@ package sentinel.framework {
 		
 		/**
 		 * Returns a child Thing at a given index.
+		 * 
 		 * @param index The index to check.
 		 */
 		public function getChildAt(index:int):Thing {
@@ -193,12 +196,14 @@ package sentinel.framework {
 		
 		/**
 		 * Called when this Thing is added to another Thing.
+		 * 
 		 * @param to The Thing this Thing was added to.
 		 */
 		protected function addedT(to:Thing):void { }
 		
 		/**
 		 * Called when this Thing is removed from another Thing.
+		 * 
 		 * @param from The Thing this Thing was removed from.
 		 */
 		protected function removedT(from:Thing):void { }

@@ -1,11 +1,13 @@
 package sentinel.framework {
 	
 	import flash.display.Sprite;
+	
+	import sentinel.framework.State;
 	import sentinel.framework.client.Keyboard;
 	import sentinel.framework.client.Mouse;
 	import sentinel.framework.client.Storage;
 	import sentinel.framework.graphics.Viewport;
-	import sentinel.framework.State;
+	
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -33,6 +35,7 @@ package sentinel.framework {
 		private var _keyboard:Keyboard;
 		private var _mouse:Mouse;
 		private var _storage:Storage;
+		private var _library:Library;
 		
 		/**
 		 * Constructor.
@@ -113,10 +116,10 @@ package sentinel.framework {
 			_starling.removeEventListener(Event.ROOT_CREATED, _rootCreated);
 			_starling.start();
 			
-			// TODO: Bind services.
 			_keyboard = new Keyboard();
 			_mouse = new Mouse();
 			_storage = new Storage();
+			_library = new Library();
 			
 			construct();
 		}
@@ -146,6 +149,9 @@ package sentinel.framework {
 		
 		/** The game storage. */
 		public function get storage():Storage { return _storage; }
+		
+		/** The game asset library. */
+		public function get library():Library { return _library; }
 		
 	}
 

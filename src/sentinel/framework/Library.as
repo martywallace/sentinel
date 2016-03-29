@@ -1,157 +1,27 @@
-package sentinel.framework
-{
+package sentinel.framework {
 	
-	import sentinel.framework.audio.Sound;
 	import sentinel.framework.errors.FrameworkError;
-	import sentinel.framework.graphics.Image;
-	import sentinel.framework.graphics.Sheet;
-	import sentinel.framework.graphics.Texture;
-	
 	
 	/**
 	 * The Library manages game assets e.g. textures, sprite sheets and sound.
-	 * @author Marty Wallace.
+	 * 
+	 * @author Marty Wallace
 	 */
-	public class Library extends Service
-	{
+	public class Library {
 		
-		public static const SOUND:String = 'sound';
-		public static const TEXTURE:String = 'texture';
-		public static const SHEET:String = 'sheet';
+		private var _bundles:Object = { };
 		
-		
-		private var _assets:Object = { };
-		
-		
-		/**
-		 * Registers a collection of library assets for use in your game.
-		 * @param assets An object whose keys are the names used to reference the assets via the
-		 * Library service later and whose values are instances of ILibraryAsset.
-		 */
-		public function registerAssets(assets:Object):void
-		{
-			for (var assetName:String in assets)
-			{
-				if ((assets[assetName] is ILibraryAsset))
-				{
-					var asset:ILibraryAsset = assets[assetName] as ILibraryAsset;
-					
-					if (!has(asset.type, assetName))
-					{
-						if (!_assets.hasOwnProperty(asset.type)) _assets[asset.type] = { };
-						_assets[asset.type][assetName] = asset;
-					}
-					else
-					{
-						throw FrameworkError.compile('Library asset {{ name }} of type {{ type }} already exists.', {
-							name: assetName,
-							type: asset.type
-						});
-					}
-				}
-				else
-				{
-					throw FrameworkError.compile('The object provided to Library.registerAssets() can only contain ILibraryAssets.');
-				}
+		public function store(name:String, bundle:LibraryBundle):void {
+			if (!_bundles.hasOwnProperty(name)) {
+				_bundles[name] = bundle;
+			} else {
+				throw FrameworkError.compile('A bundle named {{ bundle }} already exists.', { bundle: name });
 			}
 		}
 		
-		
-		/**
-		 * Determine whether the Library contains an asset with the specified name and type.
-		 * @param type The type of asset, defined by <code>ILibraryAsset.type</code>.
-		 * @param name The name assigned to the asset during <code>Library.registerAssets()</code>.
-		 */
-		public function has(type:String, name:String):Boolean
-		{
-			return _assets.hasOwnProperty(type) && _assets[type].hasOwnProperty(name);
+		public function getBundle(name:String):LibraryBundle {
+			return _bundles.hasOwnProperty(name) ? _bundles[name] : null;
 		}
-		
-		
-		/**
-		 * Finds a library assets based on the specified name and type.
-		 * @param type The type of asset to find, defined by <code>ILibraryAsset.type</code>.
-		 * @param name The name assigned to the asset during <code>Library.registerAssets()</code>.
-		 */
-		public function find(type:String, name:String):ILibraryAsset
-		{
-			if (has(type, name))
-			{
-				return _assets[type][name] as ILibraryAsset;
-			}
-			else
-			{
-				throw FrameworkError.compile('The library asset {{ name }} of type {{ type }} does not exist.', {
-					name: name,
-					type: type
-				});
-			}
-		}
-		
-		
-		/**
-		 * Returns a single Texture stored in the Libarry.
-		 * @param name The name associated with the Texture.
-		 */
-		public function getTexture(name:String):Texture
-		{
-			return find(TEXTURE, name) as Texture;
-		}
-		
-		
-		/**
-		 * Returns a single Texture within a Sheet stored in the Library.
-		 * @param sheetName The name associated with the Sheet.
-		 * @param regionName The name associated with the subtexture within the Sheet.
-		 */
-		public function getTextureFromSheet(sheetName:String, regionName:String):Texture
-		{
-			return getSheet(sheetName).getTexture(regionName);
-		}
-		
-		
-		/**
-		 * Returns a single Sheet stored in the Library.
-		 * @param name The name associated with the Sheet.
-		 */
-		public function getSheet(name:String):Sheet
-		{
-			return find(SHEET, name) as Sheet;
-		}
-		
-		
-		/**
-		 * Returns a single Image whose Texture is stored within the Library.
-		 * @param textureName The name associated with the Texture to be used by the result Image.
-		 */
-		public function getImage(textureName:String):Image
-		{
-			return new Image(getTexture(textureName));
-		}
-		
-		
-		/**
-		 * Returns a single Image whose Texture is stored within a Sheet stored within the Library.
-		 * @param sheetName The name associated with the Sheet.
-		 * @param regionName The name associated with the subtexture within the Sheet.
-		 */
-		public function getImageFromSheet(sheetName:String, regionName:String):Image
-		{
-			return new Image(getTextureFromSheet(sheetName, regionName));
-		}
-		
-		
-		/**
-		 * Returns a single Sound stored within the Library.
-		 * @param name The name associated with the Sound.
-		 */
-		public function getSound(name:String):Sound
-		{
-			return find(SOUND, name) as Sound;
-		}
-		
-		
-		public override function get name():String { return 'library'; }
 		
 	}
 	
