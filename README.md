@@ -1,5 +1,7 @@
 # Sentinel Game Framework.
 
+> Note: This project is no longer maintained due to the usage of Flash and ActionScript being now void.
+
 A modern ActionScript 3 game framework built on Starling, using Box2D for physics. The aim of Sentinel is to provide a consistent development experience by wrapping the Starling and Box2D libraries in Sentinel 'middleware' classes. These classes maintain their conventions and semantics across the framework, providing the highest level of readability and understanding possible.
 
 Sentinel is broken down into three top level packages;
